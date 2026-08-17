@@ -8,6 +8,8 @@ class PaperResponse(BaseModel):
     project_id: str
     status: str
     page_count: Optional[int]
+    chunking_status: str
+    chunk_count: int
     uploaded_at: datetime
 
 class ProcessPaperResponse(BaseModel):

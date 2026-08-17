@@ -21,6 +21,17 @@ class Settings:
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
 
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
+    
+    CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", 700))
+    CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", 100))
+    
+    def __init__(self):
+        if self.CHUNK_SIZE <= 0:
+            raise ValueError("CHUNK_SIZE must be greater than 0")
+        if self.CHUNK_OVERLAP < 0:
+            raise ValueError("CHUNK_OVERLAP must be non-negative")
+        if self.CHUNK_OVERLAP >= self.CHUNK_SIZE:
+            raise ValueError("CHUNK_OVERLAP must be strictly less than CHUNK_SIZE")
 
 # Instantiate settings to be used throughout the app
 settings = Settings()

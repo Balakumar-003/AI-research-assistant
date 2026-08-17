@@ -5,10 +5,11 @@ A production-ready Enterprise AI Research Assistant. This system will eventually
 
 This milestone (Milestone 4) implements PDF Uploads & Document Management backed by MongoDB.
 
-## Features Implemented in Milestones 3-5
+## Features Implemented in Milestones 3-6
 - **Milestone 3**: Project management, creation, update, delete, and user ownership authorization.
 - **Milestone 4**: PDF upload, storage in `backend/uploads`, paper metadata modeling in MongoDB, listing/deleting papers with strict ownership checks.
 - **Milestone 5**: PDF text extraction using PyMuPDF, tracking paper processing status (`uploaded` -> `processing` -> `processed`), minimal safe text cleaning, and page-aware text storage in a `document_pages` MongoDB collection. Includes pagination support for viewing extracted content.
+- **Milestone 6**: Intelligent text chunking utilizing LangChain's `RecursiveCharacterTextSplitter`. Extracts chunks that span specific text offsets and correctly associates them to original source pages (`page_start`, `page_end`). Results are stored sequentially into `document_chunks` collection.
 
 ## Folder Structure
 ```text

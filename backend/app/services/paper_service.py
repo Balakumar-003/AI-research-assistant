@@ -109,5 +109,6 @@ def delete_paper(db: Database, paper_id: str, user_id: str) -> dict:
     # Delete from DB
     db.papers.delete_one({"_id": paper_obj_id})
     db.document_pages.delete_many({"paper_id": paper_id})
+    db.document_chunks.delete_many({"paper_id": paper_id})
     
     return {"message": "Paper deleted successfully"}

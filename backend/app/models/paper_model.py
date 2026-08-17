@@ -13,5 +13,7 @@ def create_paper_document(filename: str, file_path: str, project_id: str, user_i
         "user_id": user_id,
         "status": "uploaded",
         "page_count": None,
+        "chunking_status": "not_started",
+        "chunk_count": 0,
         "uploaded_at": now
     }

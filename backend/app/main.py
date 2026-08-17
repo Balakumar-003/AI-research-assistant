@@ -28,6 +28,8 @@ from app.api import projects
 app.include_router(projects.router, tags=["Projects"])
 from app.api import papers
 app.include_router(papers.router, tags=["Papers"])
+from app.api import chunks
+app.include_router(chunks.router, tags=["Chunks"])
 
 @app.get("/")
 async def root():
