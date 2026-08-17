@@ -3,7 +3,11 @@
 ## Project Overview
 A production-ready Enterprise AI Research Assistant. This system will eventually support PDF parsing, Retrieval-Augmented Generation (RAG), AI Chat, and literature reviews.
 
-This milestone (Milestone 2) implements a robust Authentication foundation backed by MongoDB.
+This milestone (Milestone 4) implements PDF Uploads & Document Management backed by MongoDB.
+
+## Features Implemented in Milestone 3 & 4
+- **Milestone 3**: Project management, creation, update, delete, and user ownership authorization.
+- **Milestone 4**: PDF upload, storage in `backend/uploads`, paper metadata modeling in MongoDB, listing/deleting papers with strict ownership checks.
 
 ## Folder Structure
 ```text
@@ -54,23 +58,40 @@ uvicorn app.main:app --reload
 
 This project uses JWT (JSON Web Tokens) for secure authentication. Passwords are hashed using bcrypt.
 
-### API Endpoints
+### Auth Endpoints
 - `POST /auth/register`: Registers a new user.
 - `POST /auth/login`: Authenticates user credentials (email & password) and returns a JWT.
 - `GET /users/me`: Protected endpoint. Requires a valid JWT to return the current user's profile.
 - `GET /health`: Public endpoint to check system health.
 
+### Project Endpoints
+All project endpoints require authentication via JWT.
+- `POST /projects`: Create a new project. 
+  Example request: `{"name": "NLP Research", "description": "Research on transformers"}`
+- `GET /projects`: List all projects for the authenticated user.
+- `GET /projects/{project_id}`: Get a specific project.
+- `PUT /projects/{project_id}`: Update a specific project's name or description.
+- `DELETE /projects/{project_id}`: Soft delete a project.
+
 ## Testing with Swagger UI
 Once the server is running, navigate to the Swagger Documentation at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-**How to test the Auth Flow:**
-1. **Register:** Find the `POST /auth/register` endpoint, click "Try it out", and provide your name, email, and password. Execute.
-2. **Login:** Find the `POST /auth/login` endpoint, provide the same email and password. Execute and copy the `access_token` string from the response.
-3. **Authorize:** Scroll to the top of Swagger UI and click the **Authorize** button. Paste your copied token (or let Swagger auto-fill if configured) and click Authorize.
-4. **Call Protected Route:** Find the `GET /users/me` endpoint. Click "Try it out" and execute. Because you authorized Swagger, it will attach the token to the request and successfully return your profile data!
+**How to test the Auth & Project Flow:**
+1. **Register:** Call `POST /auth/register`.
+2. **Login:** Call `POST /auth/login` and copy the `access_token`.
+3. **Authorize:** Click the **Authorize** button in Swagger UI and paste your token.
+4. **Create Project:** Call `POST /projects` to create a new research project.
+5. **List Projects:** Call `GET /projects` to verify your project was created.
 
-## Future Milestones
+## Testing with Automated Script
+A python script `backend/test_projects.py` is provided to run automated tests against the APIs.
+Run it using:
+```bash
+python test_projects.py
+```
+
+## Future Milestones (Milestone 4)
 - Vector Database & Embeddings Setup
 - PDF Upload and Parsing
-- LangChain / LangGraph Integration
-- Frontend integration with React/Vite
+- Text Chunking
+- Frontend Integration (React Dashboard for Projects)

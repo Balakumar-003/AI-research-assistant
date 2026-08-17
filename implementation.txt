@@ -1,512 +1,73 @@
-You are a Senior Backend Engineer and AI Software Architect.
+You are a Senior Backend Engineer and Full-Stack Software Architect.
 
-We are building a production-ready AI Research Assistant.
+We are continuing development of the AI Research Assistant.
 
-Milestone 1 (Project Setup) has already been completed.
+Milestones 1, 2, and 3 have already been completed.
 
-DO NOT modify the existing project architecture.
+Milestone 1:
+- Project setup
+- FastAPI
+- React
+- Environment configuration
+- Modular architecture
 
-Implement ONLY Milestone 2.
+Milestone 2:
+- MongoDB
+- User registration
+- Login
+- Password hashing
+- JWT authentication
+- Current-user dependency
+- Protected routes
 
-===========================================================
-PROJECT OVERVIEW
-===========================================================
+Milestone 3:
+- Research project/workspace management
+- Create project
+- List projects
+- Get project
+- Update project
+- Delete project
+- Project ownership/authorization
 
-The AI Research Assistant will eventually include:
+Now implement ONLY:
 
-- Authentication
-- Research Projects
-- PDF Upload
-- PDF Parsing
-- Embeddings
-- Vector Database
-- RAG
-- AI Agents
-- Literature Review
-- Research Paper Comparison
-- Chat History
+MILESTONE 4 — PDF UPLOAD & DOCUMENT MANAGEMENT
 
-For this milestone, ONLY implement Authentication and MongoDB integration.
+Do not implement PDF text extraction, chunking, embeddings, vector databases, RAG, LangChain, LangGraph, LLMs, or AI agents yet.
 
-No AI features should be implemented.
+============================================================
+1. OBJECTIVE
+============================================================
 
-===========================================================
-GOALS
-===========================================================
+Allow authenticated users to upload PDF research papers into a research project.
 
-Build a secure authentication system using FastAPI and MongoDB.
+The system must:
 
-Users must be able to:
+1. Authenticate the user.
+2. Verify that the user owns the project.
+3. Accept a PDF file.
+4. Validate the file.
+5. Store the PDF safely.
+6. Create a paper metadata record in MongoDB.
+7. Allow users to list papers in their project.
+8. Allow users to view paper metadata.
+9. Allow users to delete their own papers.
+10. Prevent users from accessing another user's papers.
 
-✓ Register
+The final workflow should be:
 
-✓ Login
-
-✓ Receive JWT Token
-
-✓ Access protected endpoints
-
-✓ Logout (client-side token removal only)
-
-Passwords must NEVER be stored in plain text.
-
-===========================================================
-TECH STACK
-===========================================================
-
-Backend:
-Python
+User
+ ↓
+React
+ ↓
 FastAPI
-MongoDB
-PyMongo
-
-Authentication:
-JWT
-Passlib (bcrypt)
-
-Validation:
-Pydantic
-
-===========================================================
-PROJECT STRUCTURE
-===========================================================
-
-Follow this architecture.
-
-backend/
-
-app/
-
-    api/
-        auth.py
-
-    core/
-        config.py
-        security.py
-        dependencies.py
-
-    database/
-        mongodb.py
-
-    models/
-        user_model.py
-
-    schemas/
-        auth_schema.py
-        user_schema.py
-
-    services/
-        auth_service.py
-
-    utils/
-
-Do NOT create unnecessary folders.
-
-===========================================================
-MONGODB
-===========================================================
-
-Create a MongoDB connection module.
-
-Read connection string from .env
-
-MONGODB_URI
-
-DATABASE_NAME
-
-Collection:
-
-users
-
-===========================================================
-USER MODEL
-===========================================================
-
-Each user document must contain
-
-_id
-
-name
-
-email
-
-password (hashed)
-
-created_at
-
-updated_at
-
-is_active
-
-role
-
-Example
-
-{
-"name":"John",
-"email":"john@gmail.com",
-"password":"hashed_password",
-"is_active":true,
-"role":"user",
-"created_at":"...",
-"updated_at":"..."
-}
-
-===========================================================
-PASSWORD HASHING
-===========================================================
-
-Use bcrypt.
-
-Never store raw passwords.
-
-Provide
-
-hash_password()
-
-verify_password()
-
-===========================================================
-JWT
-===========================================================
-
-Generate JWT Access Tokens.
-
-Store
-
-sub = user email
-
-exp = expiration
-
-Read
-
-SECRET_KEY
-
-ALGORITHM
-
-ACCESS_TOKEN_EXPIRE_MINUTES
-
-from .env
-
-===========================================================
-SCHEMAS
-===========================================================
-
-RegisterRequest
-
-name
-
-email
-
-password
-
-LoginRequest
-
-email
-
-password
-
-UserResponse
-
-id
-
-name
-
-email
-
-role
-
-TokenResponse
-
-access_token
-
-token_type
-
-===========================================================
-SERVICE LAYER
-===========================================================
-
-Move business logic into services.
-
-Do NOT write database logic inside routes.
-
-Implement
-
-register_user()
-
-authenticate_user()
-
-create_access_token()
-
-get_current_user()
-
-===========================================================
-API ENDPOINTS
-===========================================================
-
-POST /auth/register
-
-Register new user.
-
-Validation
-
-Email unique
-
-Password minimum 8 chars
-
-Return
-
-{
-"message":"User registered successfully"
-}
-
------------------------------------------------------------
-
-POST /auth/login
-
-Input
-
-email
-
-password
-
-If valid
-
-Return
-
-{
-"access_token":"...",
-"token_type":"bearer"
-}
-
------------------------------------------------------------
-
-GET /users/me
-
-Protected Route
-
-Read JWT
-
-Return logged in user
-
------------------------------------------------------------
-
-GET /health
-
-Return
-
-{
-"status":"healthy"
-}
-
-===========================================================
-FASTAPI DEPENDENCIES
-===========================================================
-
-Use Depends()
-
-Use OAuth2PasswordBearer
-
-Create reusable authentication dependency.
-
-===========================================================
-ERROR HANDLING
-===========================================================
-
-Return proper HTTP status codes.
-
-400
-
-Email already exists
-
-401
-
-Invalid credentials
-
-403
-
-Unauthorized
-
-404
-
-User not found
-
-500
-
-Internal Server Error
-
-===========================================================
-VALIDATION
-===========================================================
-
-Email validation
-
-Password minimum length
-
-Required fields
-
-Trim spaces
-
-Reject empty values
-
-===========================================================
-SECURITY
-===========================================================
-
-Never expose password.
-
-Never return hashed password.
-
-Protect /users/me
-
-Use JWT Authorization Header
-
-Authorization:
-
-Bearer <token>
-
-===========================================================
-CODE QUALITY
-===========================================================
-
-Follow PEP8
-
-Type hints everywhere
-
-Docstrings
-
-Proper exception handling
-
-Small reusable functions
-
-Business logic separated from routes
-
-No duplicate code
-
-===========================================================
-SWAGGER
-===========================================================
-
-Swagger should show
-
-POST Register
-
-POST Login
-
-GET Me
-
-GET Health
-
-===========================================================
-README
-===========================================================
-
-Update README.
-
-Add
-
-Authentication Flow
-
-MongoDB Setup
-
-Environment Variables
-
-Running Server
-
-API Endpoints
-
-===========================================================
-ENV
-===========================================================
-
-Create .env.example
-
-APP_NAME=
-
-HOST=
-
-PORT=
-
-MONGODB_URI=
-
-DATABASE_NAME=
-
-SECRET_KEY=
-
-ALGORITHM=
-
-ACCESS_TOKEN_EXPIRE_MINUTES=
-
-===========================================================
-TESTING
-===========================================================
-
-Explain how to test using Swagger.
-
-Show
-
-Register
-
-↓
-
-Login
-
-↓
-
-Copy Token
-
-↓
-
-Authorize
-
-↓
-
-Call /users/me
-
-===========================================================
-OUTPUT FORMAT
-===========================================================
-
-1. Explain architecture decisions.
-
-2. Generate every file completely.
-
-3. Explain each file.
-
-4. Explain authentication flow.
-
-5. Explain JWT generation.
-
-6. Explain MongoDB connection.
-
-7. Explain password hashing.
-
-8. Explain how to run.
-
-9. Explain how to test.
-
-Do NOT implement
-
-PDF Upload
-
-LangChain
-
-LangGraph
-
-RAG
-
-Embeddings
-
-Vector Database
-
-AI Agents
-
-Literature Review
-
-Comparison
-
-Chat
-
-Only Authentication and MongoDB.
-
-Use production-level coding standards.
+ ↓
+JWT Authentication
+ ↓
+Project Ownership Check
+ ↓
+PDF Validation
+ ↓
+File Storage
+ ↓
+MongoDB Paper Metadata

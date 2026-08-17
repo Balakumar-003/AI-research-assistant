@@ -24,6 +24,10 @@ app = FastAPI(
 
 # Include Routers
 app.include_router(auth.router, tags=["Authentication"])
+from app.api import projects
+app.include_router(projects.router, tags=["Projects"])
+from app.api import papers
+app.include_router(papers.router, tags=["Papers"])
 
 @app.get("/")
 async def root():

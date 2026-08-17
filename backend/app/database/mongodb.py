@@ -16,6 +16,10 @@ def connect_to_mongo():
     try:
         db_instance.client = MongoClient(settings.MONGODB_URI)
         db_instance.db = db_instance.client[settings.DATABASE_NAME]
+        
+        # Create indexes
+        db_instance.db.projects.create_index([("user_id", 1)])
+        
         logger.info(f"Connected to MongoDB database: {settings.DATABASE_NAME}")
     except Exception as e:
         logger.error(f"Could not connect to MongoDB: {e}")
