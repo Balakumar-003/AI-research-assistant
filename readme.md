@@ -5,9 +5,10 @@ A production-ready Enterprise AI Research Assistant. This system will eventually
 
 This milestone (Milestone 4) implements PDF Uploads & Document Management backed by MongoDB.
 
-## Features Implemented in Milestone 3 & 4
+## Features Implemented in Milestones 3-5
 - **Milestone 3**: Project management, creation, update, delete, and user ownership authorization.
 - **Milestone 4**: PDF upload, storage in `backend/uploads`, paper metadata modeling in MongoDB, listing/deleting papers with strict ownership checks.
+- **Milestone 5**: PDF text extraction using PyMuPDF, tracking paper processing status (`uploaded` -> `processing` -> `processed`), minimal safe text cleaning, and page-aware text storage in a `document_pages` MongoDB collection. Includes pagination support for viewing extracted content.
 
 ## Folder Structure
 ```text
@@ -72,6 +73,11 @@ All project endpoints require authentication via JWT.
 - `GET /projects/{project_id}`: Get a specific project.
 - `PUT /projects/{project_id}`: Update a specific project's name or description.
 - `DELETE /projects/{project_id}`: Soft delete a project.
+
+### Document Processing Endpoints
+- `POST /papers/{paper_id}/process`: Extracts text from the uploaded PDF using PyMuPDF and stores page-aware metadata.
+- `GET /papers/{paper_id}/processing-status`: Returns the current extraction status (`uploaded`, `processing`, `processed`, `failed`).
+- `GET /papers/{paper_id}/content?page=1&limit=10`: Returns the paginated extracted text from the document.
 
 ## Testing with Swagger UI
 Once the server is running, navigate to the Swagger Documentation at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).

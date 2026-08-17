@@ -53,3 +53,41 @@ def delete_paper(
     Delete a paper and its associated file.
     """
     return paper_service.delete_paper(db, paper_id, current_user["_id"])
+
+from app.services import document_service
+from app.schemas.paper_schema import ProcessPaperResponse, ProcessingStatusResponse, PaginatedContentResponse
+
+@router.post("/papers/{paper_id}/process", response_model=ProcessPaperResponse)
+def process_paper(
+    paper_id: str,
+    db: Database = Depends(get_database),
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
+    """
+    Extract text from a PDF paper.
+    """
+    return document_service.process_pdf(db, paper_id, current_user["_id"])
+
+@router.get("/papers/{paper_id}/processing-status", response_model=ProcessingStatusResponse)
+def get_paper_processing_status(
+    paper_id: str,
+    db: Database = Depends(get_database),
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
+    """
+    Get the processing status of a paper.
+    """
+    return document_service.get_processing_status(db, paper_id, current_user["_id"])
+
+@router.get("/papers/{paper_id}/content", response_model=PaginatedContentResponse)
+def get_paper_content(
+    paper_id: str,
+    page: int = 1,
+    limit: int = 10,
+    db: Database = Depends(get_database),
+    current_user: Dict[str, Any] = Depends(get_current_user)
+):
+    """
+    Get the extracted paginated text of a paper.
+    """
+    return document_service.get_paper_content(db, paper_id, current_user["_id"], page, limit)

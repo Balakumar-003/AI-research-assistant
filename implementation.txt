@@ -1,73 +1,1833 @@
-You are a Senior Backend Engineer and Full-Stack Software Architect.
+You are a Senior AI Engineer, RAG Engineer, Backend Engineer,
+and Software Architect.
 
-We are continuing development of the AI Research Assistant.
+We are continuing development of an AI Research Assistant.
 
-Milestones 1, 2, and 3 have already been completed.
+The project is being developed milestone by milestone.
 
-Milestone 1:
-- Project setup
-- FastAPI
-- React
+============================================================
+PROJECT OVERVIEW
+============================================================
+
+The AI Research Assistant allows researchers to:
+
+- Upload research papers
+- Process PDF documents
+- Search research papers
+- Ask questions about papers
+- Retrieve relevant sections
+- Summarize papers
+- Compare papers
+- Generate literature reviews
+- Answer questions with citations
+
+The eventual architecture will be:
+
+User
+ ↓
+React Frontend
+ ↓
+FastAPI Backend
+ ↓
+Authentication
+ ↓
+Research Projects
+ ↓
+PDF Upload
+ ↓
+PDF Text Extraction
+ ↓
+Text Chunking
+ ↓
+Embeddings
+ ↓
+Vector Database
+ ↓
+Retriever
+ ↓
+RAG
+ ↓
+LLM
+ ↓
+Answer + Citations
+
+============================================================
+PREVIOUS MILESTONES
+============================================================
+
+Milestone 1 — Project Setup
+STATUS: COMPLETED
+
+Implemented:
+- FastAPI backend
+- React frontend
+- Project structure
 - Environment configuration
-- Modular architecture
+- Git configuration
 
-Milestone 2:
-- MongoDB
+
+Milestone 2 — Authentication
+STATUS: COMPLETED
+
+Implemented:
 - User registration
 - Login
 - Password hashing
 - JWT authentication
-- Current-user dependency
-- Protected routes
+- Current user dependency
+- Protected APIs
+- MongoDB
 
-Milestone 3:
-- Research project/workspace management
+
+Milestone 3 — Research Project Management
+STATUS: COMPLETED
+
+Implemented:
 - Create project
 - List projects
 - Get project
 - Update project
 - Delete project
-- Project ownership/authorization
+- Project ownership
+- Authorization
 
-Now implement ONLY:
 
-MILESTONE 4 — PDF UPLOAD & DOCUMENT MANAGEMENT
+Milestone 4 — PDF Upload & Document Management
+STATUS: COMPLETED
 
-Do not implement PDF text extraction, chunking, embeddings, vector databases, RAG, LangChain, LangGraph, LLMs, or AI agents yet.
+Implemented:
+- PDF upload
+- PDF validation
+- File size validation
+- Secure file storage
+- Paper metadata
+- Paper listing
+- Paper retrieval
+- Paper deletion
+- User ownership validation
+
+
+Milestone 5 — PDF Text Extraction & Document Processing
+STATUS: COMPLETED
+
+Implemented:
+- PyMuPDF
+- PDF text extraction
+- Page-level text extraction
+- Page numbers
+- Basic text cleaning
+- PDF metadata extraction
+- Processing status
+- Extracted document storage
+- Processing APIs
+- Ownership validation
+
+The output from Milestone 5 is page-aware extracted text.
+
+Example:
+
+{
+    "paper_id": "paper123",
+    "page_number": 1,
+    "text": "Attention Is All You Need..."
+}
+
+{
+    "paper_id": "paper123",
+    "page_number": 2,
+    "text": "The Transformer architecture..."
+}
 
 ============================================================
-1. OBJECTIVE
+CURRENT MILESTONE
 ============================================================
 
-Allow authenticated users to upload PDF research papers into a research project.
+Implement:
 
-The system must:
+MILESTONE 6 — INTELLIGENT TEXT CHUNKING
 
-1. Authenticate the user.
-2. Verify that the user owns the project.
-3. Accept a PDF file.
-4. Validate the file.
-5. Store the PDF safely.
-6. Create a paper metadata record in MongoDB.
-7. Allow users to list papers in their project.
-8. Allow users to view paper metadata.
-9. Allow users to delete their own papers.
-10. Prevent users from accessing another user's papers.
+The goal is to transform page-level extracted text into
+meaningful, retrieval-friendly chunks.
 
-The final workflow should be:
+Input:
 
-User
+PDF
  ↓
-React
+Milestone 5
  ↓
-FastAPI
+Page-level extracted text
+
+Output:
+
+Chunk 1
+Chunk 2
+Chunk 3
+...
+Chunk N
+
+Every chunk MUST preserve useful metadata.
+
+============================================================
+IMPORTANT
+============================================================
+
+This milestone is ONLY for chunking.
+
+DO NOT implement:
+
+- Embeddings
+- Sentence Transformers
+- FAISS
+- ChromaDB
+- Pinecone
+- Weaviate
+- Vector search
+- RAG
+- Retrieval
+- LLM
+- OpenAI
+- Llama
+- Gemini
+- AI agents
+- Question answering
+- Summarization
+- Paper comparison
+- Literature review
+
+Those belong to future milestones.
+
+============================================================
+TECH STACK
+============================================================
+
+Use the existing project stack.
+
+Backend:
+
+- Python
+- FastAPI
+- MongoDB
+- Pydantic
+- JWT authentication
+
+Document processing:
+
+- PyMuPDF from Milestone 5
+
+Chunking:
+
+- LangChain
+- LangChain text splitters
+
+Recommended package:
+
+langchain-text-splitters
+
+Use the current LangChain package structure rather than
+deprecated imports.
+
+Frontend:
+
+- React
+- Existing frontend architecture
+
+Development:
+
+- Git
+- GitHub
+
+Do not introduce unnecessary frameworks.
+
+============================================================
+1. FIRST INSPECT THE EXISTING PROJECT
+============================================================
+
+Before modifying anything:
+
+Inspect the complete existing project.
+
+Understand:
+
+- Backend folder structure
+- FastAPI application
+- MongoDB connection
+- Authentication
+- JWT
+- Current-user dependency
+- Project model
+- Project service
+- Paper model
+- Paper service
+- Document extraction implementation
+- Extracted page storage
+- Existing API routes
+- Existing schemas
+- Existing frontend
+- Existing API service
+- requirements.txt
+- .env configuration
+
+DO NOT rewrite working Milestones 1–5.
+
+Reuse existing functionality.
+
+Do not create duplicate:
+
+- MongoDB connections
+- Authentication
+- JWT logic
+- Project ownership logic
+- Paper ownership logic
+- PDF extraction logic
+
+============================================================
+2. CHUNKING OBJECTIVE
+============================================================
+
+Convert:
+
+Page-level extracted text
+
+into:
+
+Meaningful chunks.
+
+Example input:
+
+Page 1:
+"The Transformer architecture is based entirely on
+attention mechanisms..."
+
+Page 2:
+"The encoder is composed of six identical layers..."
+
+Output:
+
+Chunk 1:
+"The Transformer architecture is based entirely on
+attention mechanisms..."
+
+Chunk 2:
+"The encoder is composed of six identical layers..."
+
+Each chunk should preserve:
+
+- paper_id
+- project_id
+- user_id
+- chunk_index
+- page_start
+- page_end
+- text
+
+============================================================
+3. WHY CHUNKING IS NEEDED
+============================================================
+
+Do NOT simply concatenate the entire research paper and
+store it as one chunk.
+
+A 30-page research paper may contain thousands of tokens.
+
+Embedding an entire paper as one vector would reduce retrieval
+precision.
+
+Instead:
+
+Full Paper
  ↓
-JWT Authentication
+Smaller meaningful chunks
  ↓
-Project Ownership Check
+Each chunk later becomes an embedding
  ↓
-PDF Validation
+Vector database
  ↓
-File Storage
+Semantic retrieval
+
+Chunking therefore directly affects future RAG quality.
+
+============================================================
+4. CHUNKING STRATEGY
+============================================================
+
+Implement a configurable recursive chunking strategy.
+
+Use:
+
+RecursiveCharacterTextSplitter
+
+from:
+
+langchain_text_splitters
+
+Do not hardcode the chunk size in the service.
+
+Configuration should come from environment variables.
+
+Recommended initial values:
+
+CHUNK_SIZE=700
+CHUNK_OVERLAP=100
+
+These are starting values and must be easy to change.
+
+Do NOT claim that 700/100 is universally optimal.
+
+We will evaluate and tune these values later.
+
+============================================================
+5. WHY RECURSIVE CHARACTER SPLITTER
+============================================================
+
+Use RecursiveCharacterTextSplitter because it attempts to
+split text at increasingly smaller boundaries.
+
+Conceptually:
+
+Paragraph
  ↓
-MongoDB Paper Metadata
+Sentence
+ ↓
+Words
+ ↓
+Characters
+
+It tries to keep meaningful text together before making
+smaller splits.
+
+The goal is to avoid arbitrary cutting whenever possible.
+
+============================================================
+6. SEPARATORS
+============================================================
+
+Configure separators appropriately for research papers.
+
+Prefer a hierarchy similar to:
+
+1. Paragraph boundaries
+2. Line boundaries
+3. Sentence-like boundaries
+4. Word boundaries
+5. Character boundaries
+
+Do not use an unnecessarily complex custom parser.
+
+The implementation should remain maintainable.
+
+If LangChain's default separators are sufficient, use them.
+
+If customization is necessary, explain why.
+
+============================================================
+7. TOKEN VS CHARACTER CHUNK SIZE
+============================================================
+
+IMPORTANT:
+
+LangChain's RecursiveCharacterTextSplitter primarily uses
+character length unless configured differently.
+
+Do NOT incorrectly claim:
+
+CHUNK_SIZE=700 means exactly 700 tokens.
+
+Instead, clearly document that the initial configuration is
+character-based unless a token-aware splitter is deliberately
+implemented.
+
+If the existing project already has a tokenizer that can be
+safely reused, evaluate whether token-based chunking provides
+a meaningful advantage.
+
+For this milestone:
+
+Start with RecursiveCharacterTextSplitter.
+
+Keep the architecture flexible enough to change the strategy
+later.
+
+============================================================
+8. CHUNK OVERLAP
+============================================================
+
+Implement:
+
+CHUNK_OVERLAP=100
+
+The overlap helps preserve context between neighboring chunks.
+
+Conceptually:
+
+Chunk 1:
+A B C D E F G
+
+Chunk 2:
+F G H I J K L
+
+F and G provide contextual overlap.
+
+Do not use excessive overlap.
+
+Overlap must always be smaller than chunk size.
+
+Validate configuration:
+
+chunk_overlap < chunk_size
+
+If invalid:
+
+fail configuration validation with a clear error.
+
+============================================================
+9. PAGE BOUNDARY PRESERVATION
+============================================================
+
+This is CRITICAL.
+
+Do not lose page information.
+
+The chunking pipeline must preserve:
+
+page_start
+page_end
+
+Example:
+
+Chunk 1:
+
+{
+    "page_start": 1,
+    "page_end": 1
+}
+
+Chunk 2:
+
+{
+    "page_start": 1,
+    "page_end": 2
+}
+
+A chunk may span multiple pages.
+
+Therefore do not assume:
+
+one chunk = one page.
+
+The correct relationship is:
+
+Paper
+ ↓
+Pages
+ ↓
+Chunks
+
+A chunk may reference one or multiple pages.
+
+============================================================
+10. CHUNK METADATA
+============================================================
+
+Every chunk must contain at least:
+
+{
+    "_id": "...",
+
+    "chunk_id": "...",
+
+    "paper_id": "...",
+
+    "project_id": "...",
+
+    "user_id": "...",
+
+    "chunk_index": 0,
+
+    "text": "...",
+
+    "page_start": 1,
+
+    "page_end": 1,
+
+    "created_at": "...",
+
+    "updated_at": "..."
+}
+
+Optional metadata:
+
+{
+    "section": null
+}
+
+Do not invent section names.
+
+Section detection can be added later if required.
+
+============================================================
+11. CHUNK INDEX
+============================================================
+
+Chunk indexing must be deterministic.
+
+Example:
+
+chunk_index:
+
+0
+1
+2
+3
+...
+
+Do not use random chunk indexes.
+
+The chunk_id itself can be UUID/ObjectId.
+
+But chunk_index should represent the ordering of chunks
+within a paper.
+
+Example:
+
+Paper A:
+
+chunk_index = 0
+chunk_index = 1
+chunk_index = 2
+...
+
+============================================================
+12. CHUNK ORDER
+============================================================
+
+Chunks must preserve document order.
+
+For example:
+
+Page 1
+ ↓
+Page 2
+ ↓
+Page 3
+
+must become:
+
+Chunk 0
+ ↓
+Chunk 1
+ ↓
+Chunk 2
+
+Do not sort chunks alphabetically.
+
+Do not randomly reorder chunks.
+
+============================================================
+13. PAGE-AWARE CHUNKING
+============================================================
+
+Do NOT blindly process every page independently.
+
+Bad approach:
+
+Page 1 → chunks
+Page 2 → chunks
+Page 3 → chunks
+
+This can cause poor context when a paragraph continues across
+pages.
+
+Instead, construct the source text in document order while
+retaining page boundary information.
+
+Then create chunks.
+
+After generating each chunk, determine which source pages
+contributed to that chunk.
+
+Store:
+
+page_start
+page_end
+
+If exact page attribution becomes technically difficult,
+implement a deterministic mapping based on character offsets.
+
+Do not guess page numbers.
+
+============================================================
+14. CHARACTER OFFSET MAPPING
+============================================================
+
+Prefer maintaining source offsets.
+
+Example source:
+
+Page 1:
+
+characters 0–5000
+
+Page 2:
+
+characters 5001–10000
+
+Page 3:
+
+characters 10001–15000
+
+After chunking:
+
+Chunk 0:
+
+characters 0–700
+
+→ page_start = 1
+→ page_end = 1
+
+Chunk 1:
+
+characters 600–1300
+
+→ page_start = 1
+→ page_end = 1
+
+Chunk 10:
+
+characters 4900–5600
+
+→ page_start = 1
+→ page_end = 2
+
+This provides reliable page attribution.
+
+Implement the simplest reliable approach compatible with
+the existing Milestone 5 data model.
+
+============================================================
+15. TEXT CLEANING BEFORE CHUNKING
+============================================================
+
+Use the cleaned text produced by Milestone 5.
+
+Do not duplicate the entire PDF cleaning pipeline.
+
+If additional chunk-specific normalization is necessary,
+keep it minimal.
+
+Do NOT:
+
+- Summarize
+- Rewrite
+- Remove technical terminology
+- Remove citations
+- Modify scientific meaning
+- Remove equations arbitrarily
+
+Chunking must preserve source content.
+
+============================================================
+16. EMPTY CONTENT
+============================================================
+
+If a page has no text:
+
+Do not create an empty chunk.
+
+If the entire document has no extractable text:
+
+Return a meaningful error/status such as:
+
+"No text available for chunking. OCR may be required."
+
+Do not crash the API.
+
+============================================================
+17. VERY SMALL DOCUMENT
+============================================================
+
+If the document contains less than CHUNK_SIZE:
+
+Create exactly one chunk.
+
+Example:
+
+Document:
+
+300 characters
+
+CHUNK_SIZE:
+
+700
+
+Result:
+
+1 chunk.
+
+Do not create unnecessary chunks.
+
+============================================================
+18. LARGE DOCUMENT
+============================================================
+
+For large papers:
+
+Example:
+
+50-page research paper
+
+Expected:
+
+many chunks.
+
+Do not load unnecessary duplicate copies of the entire
+document into memory.
+
+Use the most appropriate implementation based on the existing
+data model.
+
+If the extracted pages are already stored in MongoDB, retrieve
+them in page order.
+
+============================================================
+19. DATABASE COLLECTION
+============================================================
+
+Create:
+
+document_chunks
+
+unless an equivalent collection already exists.
+
+Each record:
+
+{
+    "_id": "...",
+
+    "chunk_id": "...",
+
+    "paper_id": "...",
+
+    "project_id": "...",
+
+    "user_id": "...",
+
+    "chunk_index": 0,
+
+    "text": "...",
+
+    "page_start": 1,
+
+    "page_end": 1,
+
+    "created_at": "...",
+
+    "updated_at": "..."
+}
+
+============================================================
+20. DATABASE INDEXES
+============================================================
+
+Create appropriate indexes.
+
+At minimum consider:
+
+paper_id
+
+project_id
+
+user_id
+
+For efficient retrieval:
+
+(user_id, paper_id)
+
+and/or:
+
+(paper_id, chunk_index)
+
+A compound index on:
+
+paper_id + chunk_index
+
+is particularly useful for retrieving chunks in order.
+
+Do not create unnecessary indexes.
+
+============================================================
+21. REPROCESSING / IDEMPOTENCY
+============================================================
+
+This is critical.
+
+If the user calls:
+
+POST /papers/{paper_id}/chunks
+
+twice:
+
+DO NOT create duplicate chunks.
+
+Choose a consistent strategy.
+
+Recommended:
+
+1. Delete existing chunks for that paper.
+2. Re-run chunking.
+3. Insert new chunks.
+4. Update chunking status.
+
+This ensures the database reflects the current extraction.
+
+However, perform this safely so that a failed reprocessing operation
+does not unnecessarily destroy the previous successful result.
+
+If a transactional strategy is practical, use it.
+
+Otherwise implement a safe replace strategy and explain it.
+
+============================================================
+22. CHUNKING STATUS
+============================================================
+
+Introduce chunking states.
+
+Possible:
+
+not_started
+chunking
+completed
+failed
+
+Example:
+
+Document:
+
+{
+    "chunking_status": "completed",
+    "chunk_count": 42
+}
+
+If failure:
+
+{
+    "chunking_status": "failed",
+    "error_message": "..."
+}
+
+Do not expose stack traces to users.
+
+============================================================
+23. PAPER PROCESSING PIPELINE
+============================================================
+
+The overall paper pipeline becomes:
+
+uploaded
+   ↓
+text extraction
+   ↓
+processed
+   ↓
+chunking
+   ↓
+chunked
+
+Conceptually:
+
+Paper
+ ↓
+PDF
+ ↓
+Text Extraction
+ ↓
+Page Text
+ ↓
+Chunking
+ ↓
+Document Chunks
+ ↓
+NEXT:
+Embeddings
+
+============================================================
+24. SERVICE ARCHITECTURE
+============================================================
+
+Do not put all logic inside the API route.
+
+Suggested structure:
+
+services/
+    document_service.py
+    chunk_service.py
+
+utils/
+    chunk_utils.py
+
+api/
+    papers.py
+    chunks.py
+
+schemas/
+    chunk_schema.py
+
+models/
+    chunk_model.py
+
+Adapt this to the existing project structure.
+
+Do not create unnecessary files.
+
+Architecture:
+
+API
+ ↓
+Chunk Service
+ ↓
+Document Service
+ ↓
+MongoDB
+ ↓
+LangChain Text Splitter
+
+============================================================
+25. CHUNK SERVICE
+============================================================
+
+Implement functionality such as:
+
+create_chunks_for_paper()
+
+get_paper_chunks()
+
+get_chunk()
+
+delete_paper_chunks()
+
+get_chunk_count()
+
+verify_chunk_ownership()
+
+Names may be adjusted to match the existing architecture.
+
+Keep responsibilities separated.
+
+============================================================
+26. CHUNKING CONFIGURATION
+============================================================
+
+Add environment variables:
+
+CHUNK_SIZE=700
+CHUNK_OVERLAP=100
+
+Optional:
+
+CHUNKING_STRATEGY=recursive_character
+
+Do not hardcode values inside the business logic.
+
+Create a configuration object using the project's existing
+configuration approach.
+
+============================================================
+27. CONFIGURATION VALIDATION
+============================================================
+
+Validate:
+
+CHUNK_SIZE > 0
+
+CHUNK_OVERLAP >= 0
+
+CHUNK_OVERLAP < CHUNK_SIZE
+
+If invalid:
+
+application should fail clearly during configuration
+validation rather than failing later during chunking.
+
+============================================================
+28. LANGCHAIN USAGE
+============================================================
+
+Use LangChain specifically for the text splitting mechanism.
+
+Recommended:
+
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+Example conceptual usage:
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=CHUNK_SIZE,
+    chunk_overlap=CHUNK_OVERLAP
+)
+
+Do not expose this code directly in the API route.
+
+Wrap it in a service/helper.
+
+IMPORTANT:
+
+Do not use LangChain's full document/RAG chain yet.
+
+Only use the text splitter functionality.
+
+============================================================
+29. DOCUMENT OBJECTS
+============================================================
+
+If useful, represent source content internally as LangChain
+Document objects.
+
+For example:
+
+Document(
+    page_content="...",
+    metadata={
+        "paper_id": "...",
+        "page_number": 1
+    }
+)
+
+However, do not depend unnecessarily on LangChain abstractions.
+
+The database representation should remain application-owned.
+
+============================================================
+30. CHUNK METADATA FROM LANGCHAIN
+============================================================
+
+If LangChain creates split documents, ensure original metadata
+is preserved.
+
+For example:
+
+Original:
+
+{
+    "paper_id": "123",
+    "page_number": 4
+}
+
+must remain available after splitting.
+
+Do not lose:
+
+- paper_id
+- project_id
+- user_id
+- page information
+
+============================================================
+31. API ENDPOINT
+============================================================
+
+Create:
+
+POST /papers/{paper_id}/chunks
+
+Authentication required.
+
+Workflow:
+
+1. Authenticate user.
+2. Find paper.
+3. Verify paper ownership.
+4. Verify text extraction completed.
+5. Retrieve extracted text/pages.
+6. Validate that text exists.
+7. Update chunking status to "chunking".
+8. Build ordered source text.
+9. Preserve page offsets.
+10. Initialize LangChain splitter.
+11. Split text.
+12. Determine page_start/page_end for each chunk.
+13. Create chunk metadata.
+14. Store chunks in MongoDB.
+15. Update status to "completed".
+16. Return chunk statistics.
+
+Response:
+
+{
+    "message": "Paper chunked successfully",
+    "paper_id": "...",
+    "chunk_count": 42,
+    "chunk_size": 700,
+    "chunk_overlap": 100,
+    "status": "completed"
+}
+
+============================================================
+32. GET CHUNKS
+============================================================
+
+Create:
+
+GET /papers/{paper_id}/chunks
+
+Authentication required.
+
+Verify ownership.
+
+Return:
+
+{
+    "paper_id": "...",
+    "total": 42,
+    "chunks": [
+        {
+            "chunk_id": "...",
+            "chunk_index": 0,
+            "page_start": 1,
+            "page_end": 1,
+            "text": "..."
+        }
+    ]
+}
+
+============================================================
+33. PAGINATION
+============================================================
+
+Do not return hundreds/thousands of chunks unnecessarily.
+
+Support:
+
+GET /papers/{paper_id}/chunks?page=1&limit=20
+
+or an equivalent pagination system.
+
+Maximum limit should be configurable or safely bounded.
+
+============================================================
+34. GET SINGLE CHUNK
+============================================================
+
+Create:
+
+GET /chunks/{chunk_id}
+
+Authentication required.
+
+Verify:
+
+chunk.user_id == current_user.id
+
+Return:
+
+{
+    "chunk_id": "...",
+    "paper_id": "...",
+    "chunk_index": 12,
+    "page_start": 4,
+    "page_end": 5,
+    "text": "..."
+}
+
+============================================================
+35. DELETE CHUNKS
+============================================================
+
+Create:
+
+DELETE /papers/{paper_id}/chunks
+
+Authentication required.
+
+Verify ownership.
+
+Delete chunks associated with the paper.
+
+This will be useful for reprocessing.
+
+============================================================
+36. SECURITY
+============================================================
+
+Every chunk endpoint must enforce ownership.
+
+User A must NOT be able to:
+
+- retrieve User B's chunks
+- retrieve User B's chunk by ID
+- delete User B's chunks
+- process User B's paper
+
+Never trust:
+
+user_id
+
+from the request body.
+
+Always derive the current user from JWT.
+
+============================================================
+37. FRONTEND
+============================================================
+
+Extend the existing research project UI.
+
+A paper should show:
+
+----------------------------------------
+
+Attention Is All You Need
+
+Status:
+✓ Text Extracted
+
+Chunks:
+Not Generated
+
+[Generate Chunks]
+
+----------------------------------------
+
+After processing:
+
+----------------------------------------
+
+Attention Is All You Need
+
+Pages: 15
+
+Chunks: 42
+
+Chunking Status:
+✓ Completed
+
+[View Chunks]
+
+----------------------------------------
+
+============================================================
+38. CHUNK VIEWER
+============================================================
+
+Create a simple chunk viewer.
+
+Example:
+
+Chunk #0
+Pages 1–1
+
+"The Transformer architecture..."
+
+----------------------------------------
+
+Chunk #1
+Pages 1–2
+
+"The encoder consists..."
+
+----------------------------------------
+
+Chunk #2
+Pages 2–2
+
+"The decoder..."
+
+The viewer is primarily for debugging and verification.
+
+Do not create a complicated UI.
+
+============================================================
+39. FRONTEND LOADING STATES
+============================================================
+
+When chunking:
+
+Show:
+
+"Generating chunks..."
+
+Disable duplicate requests while processing.
+
+After success:
+
+"42 chunks generated."
+
+After failure:
+
+"Chunking failed. Please retry."
+
+============================================================
+40. FRONTEND API FUNCTIONS
+============================================================
+
+Reuse the existing API architecture.
+
+Create functions such as:
+
+generateChunks()
+
+getPaperChunks()
+
+getChunk()
+
+deletePaperChunks()
+
+Do not create a second authentication mechanism.
+
+============================================================
+41. TESTING
+============================================================
+
+Testing is essential.
+
+Do not wait until the entire RAG pipeline is built.
+
+Test Milestone 6 independently.
+
+============================================================
+42. UNIT TESTS
+============================================================
+
+Test:
+
+1. Empty text
+2. Very small document
+3. Exactly chunk_size text
+4. Larger than chunk_size
+5. Chunk overlap
+6. Multiple pages
+7. Chunk ordering
+8. Metadata preservation
+9. Page_start
+10. Page_end
+11. Chunk index
+12. Invalid configuration
+13. Invalid overlap
+14. Duplicate processing
+15. Text containing newlines
+16. Text containing technical terms
+17. Text containing citations
+18. Text containing punctuation
+
+============================================================
+43. API TESTS
+============================================================
+
+Test:
+
+1. POST /papers/{paper_id}/chunks
+2. GET /papers/{paper_id}/chunks
+3. GET /chunks/{chunk_id}
+4. DELETE /papers/{paper_id}/chunks
+
+Verify:
+
+- Authentication
+- Authorization
+- Correct responses
+- Error handling
+- Database consistency
+
+============================================================
+44. SECURITY TESTS
+============================================================
+
+Create two users:
+
+User A
+User B
+
+User A:
+
+- uploads paper
+- processes paper
+- creates chunks
+
+User B attempts:
+
+GET User A's chunks
+
+GET User A's chunk_id
+
+DELETE User A's chunks
+
+POST chunk generation on User A's paper
+
+Expected:
+
+All unauthorized operations fail.
+
+============================================================
+45. CHUNK QUALITY TEST
+============================================================
+
+Use a real research paper.
+
+Verify:
+
+- chunks are readable
+- sentences are not unnecessarily destroyed
+- paragraphs are reasonably preserved
+- overlap exists
+- page metadata is correct
+- chunks remain in document order
+
+Do not only test using:
+
+"hello world hello world"
+
+Use a real research paper.
+
+============================================================
+46. CHUNK STATISTICS
+============================================================
+
+Return useful statistics.
+
+Example:
+
+{
+    "paper_id": "...",
+    "page_count": 15,
+    "chunk_count": 42,
+    "chunk_size": 700,
+    "chunk_overlap": 100,
+    "average_chunk_length": 645,
+    "min_chunk_length": 120,
+    "max_chunk_length": 700
+}
+
+Use character length if the splitter is character-based.
+
+Do NOT call these values "token counts" unless a tokenizer
+was actually used.
+
+============================================================
+47. CHUNK QUALITY VALIDATION
+============================================================
+
+After generating chunks, validate:
+
+- No empty chunks
+- No duplicate chunk indexes
+- Correct ordering
+- Valid paper_id
+- Valid project_id
+- Valid user_id
+- page_start <= page_end
+- chunk_index is sequential
+- text is non-empty
+
+If validation fails:
+
+do not mark the process as completed.
+
+============================================================
+48. DATABASE CONSISTENCY
+============================================================
+
+Consider:
+
+Chunking starts
+ ↓
+Existing chunks
+ ↓
+New chunk generation
+ ↓
+Database insertion fails
+
+Do not leave the system claiming:
+
+chunking_status = completed
+
+when chunks are incomplete.
+
+Use a safe strategy.
+
+If practical:
+
+- generate chunks first
+- validate chunks
+- replace existing chunks
+- update status only after successful insertion
+
+============================================================
+49. LOGGING
+============================================================
+
+Log:
+
+- Chunking started
+- Paper ID
+- Number of source pages
+- Number of generated chunks
+- Chunking duration
+- Chunking failure
+
+Do NOT log the entire extracted paper.
+
+Do NOT log:
+
+- passwords
+- JWT tokens
+- sensitive information
+
+============================================================
+50. PERFORMANCE
+============================================================
+
+Consider large papers.
+
+Avoid:
+
+- unnecessary duplicate text copies
+- repeated database queries
+- repeated chunk generation
+- loading unrelated papers
+
+Retrieve only the selected paper's extracted content.
+
+Use pagination when returning chunks.
+
+============================================================
+51. DATABASE INDEXES
+============================================================
+
+Ensure useful indexes exist.
+
+Recommended:
+
+{
+    "paper_id": 1,
+    "chunk_index": 1
+}
+
+Also consider:
+
+{
+    "user_id": 1,
+    "paper_id": 1
+}
+
+Do not create excessive indexes.
+
+============================================================
+52. README
+============================================================
+
+Update README with:
+
+Milestone 6 — Intelligent Text Chunking
+
+Document:
+
+1. Why chunking is required
+2. Chunking strategy
+3. Why RecursiveCharacterTextSplitter
+4. Chunk size
+5. Chunk overlap
+6. Page metadata
+7. Database structure
+8. API endpoints
+9. Configuration
+10. Testing
+11. Known limitations
+12. How this prepares the system for embeddings
+
+============================================================
+53. ENVIRONMENT VARIABLES
+============================================================
+
+Update .env.example:
+
+CHUNK_SIZE=700
+CHUNK_OVERLAP=100
+CHUNKING_STRATEGY=recursive_character
+
+Do not commit real .env values.
+
+============================================================
+54. REQUIREMENTS
+============================================================
+
+Update requirements.txt.
+
+Add the correct current LangChain text splitter package.
+
+Prefer:
+
+langchain-text-splitters
+
+Do not install the entire LangChain ecosystem unless another
+existing milestone requires it.
+
+Avoid unnecessary dependencies.
+
+============================================================
+55. BACKWARD COMPATIBILITY
+============================================================
+
+Do not break:
+
+- authentication
+- project management
+- paper upload
+- PDF extraction
+- existing APIs
+
+Existing Milestone 1–5 functionality must continue to work.
+
+============================================================
+56. FINAL MANUAL TEST
+============================================================
+
+Perform this complete workflow:
+
+1. Register/login.
+
+2. Create research project.
+
+3. Upload a research paper.
+
+4. Process PDF.
+
+Expected:
+
+Text extraction completed.
+
+5. Generate chunks.
+
+Expected:
+
+Chunking completed.
+
+6. Retrieve chunks.
+
+Verify:
+
+Chunk 0
+Chunk 1
+Chunk 2
+...
+
+7. Verify page metadata.
+
+8. Verify chunk overlap.
+
+9. Verify chunk count.
+
+10. Verify MongoDB.
+
+11. Refresh frontend.
+
+12. Verify chunking status remains completed.
+
+============================================================
+57. FINAL VALIDATION
+============================================================
+
+Milestone 6 is complete only when:
+
+Backend:
+
+✓ Chunking service works
+✓ LangChain splitter works
+✓ Configuration works
+✓ Chunk size configurable
+✓ Overlap configurable
+✓ Page metadata preserved
+✓ Chunk indexes correct
+✓ Chunks stored in MongoDB
+✓ Duplicate chunks prevented
+✓ APIs work
+✓ Authentication works
+✓ Authorization works
+✓ Error handling works
+
+Frontend:
+
+✓ Generate chunks button works
+✓ Loading state works
+✓ Success state works
+✓ Failure state works
+✓ Chunk count displayed
+✓ Chunk viewer works
+
+Data:
+
+✓ No empty chunks
+✓ Correct ordering
+✓ Correct metadata
+✓ Correct page references
+✓ No duplicate chunks
+
+============================================================
+58. DO NOT MOVE TO EMBEDDINGS YET
+============================================================
+
+IMPORTANT:
+
+After Milestone 6 is complete, STOP.
+
+Do NOT implement:
+
+- Embedding generation
+- Sentence Transformers
+- OpenAI embeddings
+- Hugging Face embeddings
+- FAISS
+- ChromaDB
+- Vector search
+
+Those belong to Milestone 7 and Milestone 8.
+
+============================================================
+59. FINAL REPORT
+============================================================
+
+After implementation provide a detailed report:
+
+1. Files created
+2. Files modified
+3. Architecture changes
+4. LangChain package used
+5. Chunking strategy
+6. Chunk size
+7. Chunk overlap
+8. Why those values were selected
+9. How page metadata is preserved
+10. Database schema
+11. Database indexes
+12. API endpoints
+13. Frontend changes
+14. Security implementation
+15. Reprocessing strategy
+16. Testing performed
+17. Test results
+18. Sample chunk output
+19. Sample MongoDB document
+20. Known limitations
+21. Performance considerations
+22. How this prepares the system for embeddings
+23. Recommended Git commit
+
+Recommended commit:
+
+git add .
+git commit -m "feat: add intelligent document chunking"
+
+Do NOT push to GitHub automatically.
+
+============================================================
+IMPORTANT FINAL INSTRUCTION
+============================================================
+
+Do not claim Milestone 6 is complete unless the implementation
+has actually been run and tested.
+
+If something from Milestone 5 is incompatible with the chunking
+design, do not blindly rewrite it.
+
+First identify the problem, explain it, and make the smallest
+safe change necessary.
+
+Maintain the existing architecture and coding style.
