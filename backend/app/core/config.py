@@ -25,6 +25,9 @@ class Settings:
     CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", 700))
     CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", 100))
     
+    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+    EMBEDDING_BATCH_SIZE: int = int(os.getenv("EMBEDDING_BATCH_SIZE", 32))
+    
     def __init__(self):
         if self.CHUNK_SIZE <= 0:
             raise ValueError("CHUNK_SIZE must be greater than 0")

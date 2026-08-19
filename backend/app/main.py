@@ -5,10 +5,13 @@ from app.core.config import settings
 from app.database.mongodb import connect_to_mongo, close_mongo_connection
 from app.api import auth
 
+from app.providers.embedding_provider import embedding_provider
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
     connect_to_mongo()
+    embedding_provider.load()
     yield
     # Shutdown
     close_mongo_connection()
@@ -30,6 +33,8 @@ from app.api import papers
 app.include_router(papers.router, tags=["Papers"])
 from app.api import chunks
 app.include_router(chunks.router, tags=["Chunks"])
+from app.api import embeddings
+app.include_router(embeddings.router, tags=["Embeddings"])
 
 @app.get("/")
 async def root():

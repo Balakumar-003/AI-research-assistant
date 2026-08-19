@@ -1,836 +1,1249 @@
-You are a Senior AI Engineer, RAG Engineer, Backend Engineer,
-and Software Architect.
+You are working as a Senior AI Engineer, RAG Engineer, Python Backend Engineer,
+and Software Architect on my existing project:
 
-We are continuing development of an AI Research Assistant.
-
-The project is being developed milestone by milestone.
+PROJECT:
+AI Research Assistant
 
 ============================================================
-PROJECT OVERVIEW
+1. PROJECT OBJECTIVE
 ============================================================
 
-The AI Research Assistant allows researchers to:
+The AI Research Assistant is a full-stack RAG-based research platform.
 
-- Upload research papers
+The application allows users to:
+
+- Register/login
+- Create research projects
+- Upload research papers in PDF format
 - Process PDF documents
-- Search research papers
-- Ask questions about papers
-- Retrieve relevant sections
+- Extract text from PDFs
+- Split extracted text into meaningful chunks
+- Generate embeddings
+- Store embeddings in a vector database
+- Perform semantic search
+- Build a RAG pipeline
+- Ask questions about research papers
+- Generate grounded answers with citations
 - Summarize papers
-- Compare papers
+- Compare multiple papers
 - Generate literature reviews
-- Answer questions with citations
+- Use an AI research agent with tools
 
-The eventual architecture will be:
+The project is being developed milestone-by-milestone.
+
+IMPORTANT:
+
+DO NOT treat this as a new project.
+
+Several milestones have already been implemented.
+
+You MUST inspect the existing codebase before making changes.
+
+Do NOT rewrite completed functionality unnecessarily.
+
+============================================================
+2. CURRENT PROJECT STATUS
+============================================================
+
+Completed:
+
+Milestone 1:
+Project setup
+
+Milestone 2:
+Authentication and user management
+
+Milestone 3:
+Research project management
+
+Milestone 4:
+PDF upload and document management
+
+Milestone 5:
+PDF text extraction using PyMuPDF
+
+Milestone 6:
+Intelligent text chunking
+
+Current milestone:
+
+Milestone 7:
+EMBEDDING GENERATION
+
+Future milestones:
+
+Milestone 8:
+Vector database
+
+Milestone 9:
+Semantic retrieval + RAG
+
+Milestone 10:
+AI Research Agent + Tool Calling
+
+Milestone 11:
+Question Answering + Citations
+
+Milestone 12:
+Paper Summarization
+
+Milestone 13:
+Multi-Paper Comparison
+
+Milestone 14:
+Literature Review Generation
+
+Milestone 15:
+Research Dashboard / History
+
+Milestone 16:
+Evaluation, Optimization and Productionization
+
+============================================================
+3. EXISTING PIPELINE
+============================================================
+
+The current pipeline is:
 
 User
  ↓
-React Frontend
- ↓
-FastAPI Backend
- ↓
 Authentication
  ↓
-Research Projects
+Research Project
  ↓
 PDF Upload
  ↓
-PDF Text Extraction
+PDF Processing
  ↓
-Text Chunking
+PyMuPDF
  ↓
-Embeddings
+Text Extraction
  ↓
-Vector Database
+Text Cleaning
  ↓
-Retriever
+Chunking
  ↓
-RAG
- ↓
-LLM
- ↓
-Answer + Citations
+Stored Document Chunks
+
+Milestone 7 must extend this pipeline:
+
+Stored Chunks
+      ↓
+Embedding Service
+      ↓
+Embedding Model
+      ↓
+Embedding Vectors
+      ↓
+Store embedding metadata / prepare vector records
+
+Do NOT implement the vector database yet.
+
+Do NOT implement RAG yet.
+
+Do NOT implement the AI agent yet.
 
 ============================================================
-PREVIOUS MILESTONES
+4. MILESTONE 7 OBJECTIVE
 ============================================================
 
-Milestone 1 — Project Setup
-STATUS: COMPLETED
+The objective of Milestone 7 is:
 
-Implemented:
-- FastAPI backend
-- React frontend
-- Project structure
-- Environment configuration
-- Git configuration
+Convert every valid document chunk into a numerical vector that
+represents the semantic meaning of the chunk.
 
+For example:
 
-Milestone 2 — Authentication
-STATUS: COMPLETED
+Input chunk:
 
-Implemented:
-- User registration
-- Login
-- Password hashing
-- JWT authentication
-- Current user dependency
-- Protected APIs
-- MongoDB
+"The Transformer architecture uses self-attention mechanisms."
 
+Embedding model:
 
-Milestone 3 — Research Project Management
-STATUS: COMPLETED
+Sentence Transformer
 
-Implemented:
-- Create project
-- List projects
-- Get project
-- Update project
-- Delete project
-- Project ownership
-- Authorization
+Output:
 
+[0.123, -0.431, 0.892, ...]
 
-Milestone 4 — PDF Upload & Document Management
-STATUS: COMPLETED
+The vector is later used for semantic similarity search.
 
-Implemented:
-- PDF upload
-- PDF validation
-- File size validation
-- Secure file storage
-- Paper metadata
-- Paper listing
-- Paper retrieval
-- Paper deletion
-- User ownership validation
+This milestone is the bridge between:
 
+TEXT PROCESSING
 
-Milestone 5 — PDF Text Extraction & Document Processing
-STATUS: COMPLETED
+and
 
-Implemented:
-- PyMuPDF
-- PDF text extraction
-- Page-level text extraction
-- Page numbers
-- Basic text cleaning
-- PDF metadata extraction
-- Processing status
-- Extracted document storage
-- Processing APIs
-- Ownership validation
+VECTOR SEARCH / RAG.
 
-The output from Milestone 5 is page-aware extracted text.
+============================================================
+5. WHY EMBEDDINGS ARE REQUIRED
+============================================================
+
+Traditional keyword search depends heavily on matching exact words.
+
+Example paper text:
+
+"The Transformer architecture uses self-attention."
+
+User question:
+
+"How does the Transformer understand relationships between words?"
+
+The exact words may be different.
+
+Embeddings allow the system to represent both texts in a semantic
+vector space.
+
+Conceptually:
+
+Paper chunk
+    ↓
+Embedding
+    ↓
+Vector
+
+User query
+    ↓
+Embedding
+    ↓
+Query vector
+
+Later:
+
+Query vector
+    ↓
+Vector similarity search
+    ↓
+Relevant chunks
+
+This is the foundation of semantic retrieval.
+
+============================================================
+6. REQUIRED TECHNOLOGY
+============================================================
+
+Use:
+
+Python
+
+Sentence Transformers
+
+PyTorch
+
+FastAPI
+
+Pydantic
+
+MongoDB
+
+Existing project dependencies
+
+Initial embedding model:
+
+sentence-transformers/all-MiniLM-L6-v2
+
+IMPORTANT:
+
+Do not switch to another embedding model unless there is a strong
+technical reason.
+
+If you believe another model is significantly better, explain why
+before changing the architecture.
+
+============================================================
+7. EMBEDDING MODEL REQUIREMENTS
+============================================================
+
+Use:
+
+sentence-transformers/all-MiniLM-L6-v2
+
+The model should be loaded through Sentence Transformers.
+
+Example conceptual usage:
+
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer(
+    "sentence-transformers/all-MiniLM-L6-v2"
+)
+
+Do not blindly assume the embedding dimension.
+
+Programmatically determine it from the loaded model.
+
+For all-MiniLM-L6-v2 it is normally:
+
+384
+
+But the implementation should verify this.
+
+============================================================
+8. IMPORTANT EMBEDDING DESIGN
+============================================================
+
+Create a dedicated embedding service.
+
+Do NOT place model-loading and embedding logic directly inside
+FastAPI route handlers.
+
+Preferred architecture:
+
+API Route
+   ↓
+Embedding Service
+   ↓
+Embedding Provider
+   ↓
+Sentence Transformer Model
+
+Example structure:
+
+app/
+├── api/
+│   └── embedding_routes.py
+│
+├── services/
+│   └── embedding_service.py
+│
+├── providers/
+│   └── embedding_provider.py
+│
+├── models/
+│   └── ...
+│
+├── schemas/
+│   └── ...
+│
+└── ...
+
+BUT:
+
+Do not blindly create this exact structure.
+
+FIRST inspect the existing project's structure and follow its
+existing architectural conventions.
+
+Reuse existing directories and naming patterns whenever possible.
+
+============================================================
+9. MODEL LOADING REQUIREMENTS
+============================================================
+
+The embedding model must NOT be loaded for every request.
+
+BAD:
+
+POST /embeddings
+ ↓
+Load model
+ ↓
+Generate embeddings
+ ↓
+Destroy model
+
+This is inefficient.
+
+Instead:
+
+Application startup
+ ↓
+Load model once
+ ↓
+Keep model available
+ ↓
+Process embedding requests
+
+Use the project's existing application lifecycle pattern.
+
+If the project already uses dependency injection or application
+startup hooks, follow that architecture.
+
+Avoid creating unnecessary global state if the existing project
+has a better dependency-management pattern.
+
+============================================================
+10. EMBEDDING SERVICE RESPONSIBILITIES
+============================================================
+
+Create a reusable embedding service responsible for:
+
+1. Loading/accessing the embedding model
+2. Embedding documents
+3. Embedding batches of chunks
+4. Validating input
+5. Handling empty text
+6. Returning vectors
+7. Returning embedding dimension
+8. Returning model name
+9. Supporting deterministic processing
+10. Handling model errors
+
+The service should expose functionality conceptually similar to:
+
+embed_documents(texts)
+
+embed_query(text)
+
+get_dimension()
+
+get_model_name()
+
+Do not necessarily use these exact method names if the existing
+project architecture suggests better names.
+
+============================================================
+11. DOCUMENT EMBEDDING
+============================================================
+
+Milestone 7 primarily concerns document/chunk embeddings.
+
+Suppose the database contains:
+
+Chunk 0
+Chunk 1
+Chunk 2
+...
+Chunk 41
+
+The system should generate:
+
+Embedding 0
+Embedding 1
+Embedding 2
+...
+Embedding 41
+
+The relationship must remain:
+
+chunk_id → embedding
+
+Do not lose chunk identity.
+
+============================================================
+12. BATCH PROCESSING
+============================================================
+
+Do NOT process thousands of chunks by making a separate model
+inference call for every chunk if batching is supported.
+
+Preferred:
+
+chunks
+ ↓
+batch
+ ↓
+embedding model
+ ↓
+vectors
 
 Example:
 
-{
-    "paper_id": "paper123",
-    "page_number": 1,
-    "text": "Attention Is All You Need..."
-}
+100 chunks
 
-{
-    "paper_id": "paper123",
-    "page_number": 2,
-    "text": "The Transformer architecture..."
-}
+Instead of:
 
-============================================================
-CURRENT MILESTONE
-============================================================
-
-Implement:
-
-MILESTONE 6 — INTELLIGENT TEXT CHUNKING
-
-The goal is to transform page-level extracted text into
-meaningful, retrieval-friendly chunks.
-
-Input:
-
-PDF
- ↓
-Milestone 5
- ↓
-Page-level extracted text
-
-Output:
-
-Chunk 1
-Chunk 2
-Chunk 3
+chunk 1 → model
+chunk 2 → model
+chunk 3 → model
 ...
-Chunk N
 
-Every chunk MUST preserve useful metadata.
+Use batching where practical.
 
-============================================================
-IMPORTANT
-============================================================
+The batch size should be configurable.
 
-This milestone is ONLY for chunking.
+Example environment variable:
 
-DO NOT implement:
+EMBEDDING_BATCH_SIZE=32
 
-- Embeddings
-- Sentence Transformers
-- FAISS
-- ChromaDB
-- Pinecone
-- Weaviate
-- Vector search
-- RAG
-- Retrieval
-- LLM
-- OpenAI
-- Llama
-- Gemini
-- AI agents
-- Question answering
-- Summarization
-- Paper comparison
-- Literature review
+Do not hard-code unnecessary configuration.
 
-Those belong to future milestones.
+If the existing project uses a settings/configuration system,
+integrate with it.
 
 ============================================================
-TECH STACK
+13. EMBEDDING NORMALIZATION
 ============================================================
 
-Use the existing project stack.
+Investigate the appropriate configuration for the selected
+Sentence Transformer model.
 
-Backend:
+For example, Sentence Transformers supports normalization options.
 
-- Python
-- FastAPI
-- MongoDB
-- Pydantic
-- JWT authentication
+Choose a configuration that is appropriate for the future
+similarity-search implementation.
 
-Document processing:
+If you use normalized embeddings, document this decision.
 
-- PyMuPDF from Milestone 5
+Do not make arbitrary changes without understanding their impact.
 
-Chunking:
+The important requirement is:
 
-- LangChain
-- LangChain text splitters
-
-Recommended package:
-
-langchain-text-splitters
-
-Use the current LangChain package structure rather than
-deprecated imports.
-
-Frontend:
-
-- React
-- Existing frontend architecture
-
-Development:
-
-- Git
-- GitHub
-
-Do not introduce unnecessary frameworks.
+The same preprocessing and embedding configuration must be used
+for both document embeddings and future query embeddings.
 
 ============================================================
-1. FIRST INSPECT THE EXISTING PROJECT
+14. DOCUMENT VS QUERY EMBEDDINGS
 ============================================================
 
-Before modifying anything:
+There are two embedding use cases.
 
-Inspect the complete existing project.
+DOCUMENT:
 
-Understand:
+Research chunk
+ ↓
+Embedding model
+ ↓
+Document vector
 
-- Backend folder structure
-- FastAPI application
-- MongoDB connection
-- Authentication
-- JWT
-- Current-user dependency
-- Project model
-- Project service
-- Paper model
-- Paper service
-- Document extraction implementation
-- Extracted page storage
-- Existing API routes
-- Existing schemas
-- Existing frontend
-- Existing API service
-- requirements.txt
-- .env configuration
+QUERY:
 
-DO NOT rewrite working Milestones 1–5.
+User question
+ ↓
+Same embedding model
+ ↓
+Query vector
 
-Reuse existing functionality.
+IMPORTANT:
 
-Do not create duplicate:
+Use the SAME embedding model and compatible configuration for both.
 
-- MongoDB connections
-- Authentication
-- JWT logic
-- Project ownership logic
-- Paper ownership logic
-- PDF extraction logic
+Do not implement a separate query model.
+
+Milestone 7 may implement query embedding support in the service,
+but query retrieval itself belongs to a future milestone.
 
 ============================================================
-2. CHUNKING OBJECTIVE
+15. EMBEDDING METADATA
 ============================================================
 
-Convert:
+Each embedding must be traceable back to the original chunk.
 
-Page-level extracted text
+At minimum, maintain:
 
-into:
-
-Meaningful chunks.
-
-Example input:
-
-Page 1:
-"The Transformer architecture is based entirely on
-attention mechanisms..."
-
-Page 2:
-"The encoder is composed of six identical layers..."
-
-Output:
-
-Chunk 1:
-"The Transformer architecture is based entirely on
-attention mechanisms..."
-
-Chunk 2:
-"The encoder is composed of six identical layers..."
-
-Each chunk should preserve:
-
+- chunk_id
 - paper_id
 - project_id
 - user_id
 - chunk_index
 - page_start
 - page_end
-- text
+- embedding_model
+- embedding_dimension
+- embedding_status
+- created_at
+- updated_at
+
+Reuse existing metadata structures where possible.
+
+Do not duplicate data unnecessarily.
 
 ============================================================
-3. WHY CHUNKING IS NEEDED
+16. DATA LINEAGE
 ============================================================
 
-Do NOT simply concatenate the entire research paper and
-store it as one chunk.
+This project requires strong source traceability.
 
-A 30-page research paper may contain thousands of tokens.
+The future system must be able to trace:
 
-Embedding an entire paper as one vector would reduce retrieval
-precision.
-
-Instead:
-
-Full Paper
+Final Answer
  ↓
-Smaller meaningful chunks
+Retrieved Chunk
  ↓
-Each chunk later becomes an embedding
+Embedding
  ↓
-Vector database
+Chunk
  ↓
-Semantic retrieval
-
-Chunking therefore directly affects future RAG quality.
-
-============================================================
-4. CHUNKING STRATEGY
-============================================================
-
-Implement a configurable recursive chunking strategy.
-
-Use:
-
-RecursiveCharacterTextSplitter
-
-from:
-
-langchain_text_splitters
-
-Do not hardcode the chunk size in the service.
-
-Configuration should come from environment variables.
-
-Recommended initial values:
-
-CHUNK_SIZE=700
-CHUNK_OVERLAP=100
-
-These are starting values and must be easy to change.
-
-Do NOT claim that 700/100 is universally optimal.
-
-We will evaluate and tune these values later.
-
-============================================================
-5. WHY RECURSIVE CHARACTER SPLITTER
-============================================================
-
-Use RecursiveCharacterTextSplitter because it attempts to
-split text at increasingly smaller boundaries.
-
-Conceptually:
-
-Paragraph
+Page
  ↓
-Sentence
+Paper
  ↓
-Words
- ↓
-Characters
+Original PDF
 
-It tries to keep meaningful text together before making
-smaller splits.
+Therefore:
 
-The goal is to avoid arbitrary cutting whenever possible.
+DO NOT lose:
 
-============================================================
-6. SEPARATORS
-============================================================
+paper_id
 
-Configure separators appropriately for research papers.
+chunk_id
 
-Prefer a hierarchy similar to:
+page_start
 
-1. Paragraph boundaries
-2. Line boundaries
-3. Sentence-like boundaries
-4. Word boundaries
-5. Character boundaries
+page_end
 
-Do not use an unnecessarily complex custom parser.
+project_id
 
-The implementation should remain maintainable.
+user_id
 
-If LangChain's default separators are sufficient, use them.
+chunk_index
 
-If customization is necessary, explain why.
+This metadata will later be required for citations.
 
 ============================================================
-7. TOKEN VS CHARACTER CHUNK SIZE
+17. DATABASE DESIGN
 ============================================================
+
+FIRST inspect how Milestone 6 currently stores chunks.
+
+Do NOT create duplicate chunk collections.
+
+Determine whether embeddings should:
+
+Option A:
+
+be stored temporarily alongside chunk records
+
+OR
+
+Option B:
+
+be stored in a dedicated embedding collection
+
+OR
+
+Option C:
+
+be prepared as vector records for Milestone 8.
+
+Choose the approach that best fits the existing architecture.
 
 IMPORTANT:
 
-LangChain's RecursiveCharacterTextSplitter primarily uses
-character length unless configured differently.
+The actual vector database implementation belongs to Milestone 8.
 
-Do NOT incorrectly claim:
+Therefore do not prematurely implement FAISS/Chroma vector search.
 
-CHUNK_SIZE=700 means exactly 700 tokens.
+If storing vectors temporarily in MongoDB is technically reasonable,
+do so only if it aligns with the existing schema and future
+migration plan.
 
-Instead, clearly document that the initial configuration is
-character-based unless a token-aware splitter is deliberately
-implemented.
-
-If the existing project already has a tokenizer that can be
-safely reused, evaluate whether token-based chunking provides
-a meaningful advantage.
-
-For this milestone:
-
-Start with RecursiveCharacterTextSplitter.
-
-Keep the architecture flexible enough to change the strategy
-later.
+Explain your choice.
 
 ============================================================
-8. CHUNK OVERLAP
+18. RECOMMENDED EMBEDDING RECORD
 ============================================================
 
-Implement:
-
-CHUNK_OVERLAP=100
-
-The overlap helps preserve context between neighboring chunks.
-
-Conceptually:
-
-Chunk 1:
-A B C D E F G
-
-Chunk 2:
-F G H I J K L
-
-F and G provide contextual overlap.
-
-Do not use excessive overlap.
-
-Overlap must always be smaller than chunk size.
-
-Validate configuration:
-
-chunk_overlap < chunk_size
-
-If invalid:
-
-fail configuration validation with a clear error.
-
-============================================================
-9. PAGE BOUNDARY PRESERVATION
-============================================================
-
-This is CRITICAL.
-
-Do not lose page information.
-
-The chunking pipeline must preserve:
-
-page_start
-page_end
-
-Example:
-
-Chunk 1:
+If a separate embedding representation is required, a conceptual
+record can look like:
 
 {
-    "page_start": 1,
-    "page_end": 1
-}
-
-Chunk 2:
-
-{
-    "page_start": 1,
-    "page_end": 2
-}
-
-A chunk may span multiple pages.
-
-Therefore do not assume:
-
-one chunk = one page.
-
-The correct relationship is:
-
-Paper
- ↓
-Pages
- ↓
-Chunks
-
-A chunk may reference one or multiple pages.
-
-============================================================
-10. CHUNK METADATA
-============================================================
-
-Every chunk must contain at least:
-
-{
-    "_id": "...",
-
     "chunk_id": "...",
-
     "paper_id": "...",
-
     "project_id": "...",
-
     "user_id": "...",
-
     "chunk_index": 0,
-
-    "text": "...",
-
-    "page_start": 1,
-
-    "page_end": 1,
-
+    "embedding": [...],
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_dimension": 384,
+    "embedding_status": "completed",
     "created_at": "...",
-
     "updated_at": "..."
 }
 
-Optional metadata:
+Do not blindly copy this schema.
+
+Adapt it to the existing MongoDB models and conventions.
+
+============================================================
+19. EMBEDDING STATUS
+============================================================
+
+Introduce or reuse processing status.
+
+Recommended states:
+
+not_started
+
+embedding
+
+completed
+
+failed
+
+Example:
+
+not_started
+    ↓
+embedding
+    ↓
+completed
+
+Failure:
+
+embedding
+    ↓
+failed
+
+The system should not falsely report successful processing.
+
+============================================================
+20. EMBEDDING API
+============================================================
+
+Implement an API to generate embeddings for a paper's chunks.
+
+Preferred conceptual endpoint:
+
+POST /papers/{paper_id}/embeddings
+
+But FIRST inspect existing API naming conventions.
+
+If the project already has:
+
+POST /papers/{paper_id}/chunks
+
+then the embedding endpoint should follow the same style.
+
+The endpoint should:
+
+1. Authenticate user
+2. Retrieve paper
+3. Verify paper ownership
+4. Verify paper belongs to the requested project if applicable
+5. Check that chunking is completed
+6. Retrieve valid chunks
+7. Update embedding status
+8. Generate embeddings
+9. Store embedding data
+10. Update status to completed
+11. Return processing statistics
+
+============================================================
+21. API RESPONSE
+============================================================
+
+A successful response should communicate useful information.
+
+Example:
 
 {
-    "section": null
+    "paper_id": "...",
+    "status": "completed",
+    "embedding_count": 42,
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_dimension": 384
 }
 
-Do not invent section names.
-
-Section detection can be added later if required.
-
-============================================================
-11. CHUNK INDEX
-============================================================
-
-Chunk indexing must be deterministic.
-
-Example:
-
-chunk_index:
-
-0
-1
-2
-3
-...
-
-Do not use random chunk indexes.
-
-The chunk_id itself can be UUID/ObjectId.
-
-But chunk_index should represent the ordering of chunks
-within a paper.
-
-Example:
-
-Paper A:
-
-chunk_index = 0
-chunk_index = 1
-chunk_index = 2
-...
+If the actual project uses a different response convention,
+follow that convention.
 
 ============================================================
-12. CHUNK ORDER
+22. VALIDATION
 ============================================================
 
-Chunks must preserve document order.
+Before generating embeddings, validate:
+
+- User is authenticated
+- User owns the paper
+- Paper exists
+- Paper is a PDF
+- Text extraction succeeded
+- Chunks exist
+- Chunks are not empty
+- Chunking status is completed
+
+If there are zero chunks:
+
+Return a clear error.
+
+Do NOT call the embedding model with an empty list unnecessarily.
+
+============================================================
+23. EMPTY CHUNKS
+============================================================
+
+Do not generate embeddings for:
+
+""
+
+"   "
+
+null
+
+invalid text
+
+Whitespace-only strings
+
+Filter invalid chunks safely.
+
+If a chunk is invalid, the system should either:
+
+- skip it with clear logging
+
+OR
+
+- fail validation according to the project's existing error policy.
+
+Do not silently corrupt data.
+
+============================================================
+24. IDEMPOTENCY
+============================================================
+
+This is very important.
+
+Suppose the user calls:
+
+POST /papers/paper123/embeddings
+
+twice.
+
+The system must NOT blindly create duplicate embeddings.
+
+Implement a safe strategy.
+
+Possible approach:
+
+If embeddings already exist:
+
+Return existing status
+
+OR
+
+support explicit reprocessing.
 
 For example:
 
-Page 1
- ↓
-Page 2
- ↓
-Page 3
+POST /papers/{paper_id}/embeddings
 
-must become:
+could return:
 
-Chunk 0
- ↓
-Chunk 1
- ↓
-Chunk 2
+{
+    "status": "already_completed"
+}
 
-Do not sort chunks alphabetically.
+If reprocessing is needed later, support an explicit mechanism.
 
-Do not randomly reorder chunks.
+Do not create duplicates accidentally.
 
 ============================================================
-13. PAGE-AWARE CHUNKING
+25. PARTIAL FAILURE
 ============================================================
 
-Do NOT blindly process every page independently.
+Consider what happens if:
 
-Bad approach:
+42 chunks exist
 
-Page 1 → chunks
-Page 2 → chunks
-Page 3 → chunks
+and
 
-This can cause poor context when a paragraph continues across
-pages.
+embedding generation succeeds for 30 chunks
 
-Instead, construct the source text in document order while
-retaining page boundary information.
+but fails on chunk 31.
 
-Then create chunks.
+Do not leave the system falsely marked as completed.
 
-After generating each chunk, determine which source pages
-contributed to that chunk.
+The implementation should handle partial failures safely.
 
-Store:
+Possible strategy:
 
-page_start
-page_end
+- Process in batches
+- Track progress
+- Mark failed status
+- Allow retry
+- Avoid duplicate embeddings
+- Log the failure
 
-If exact page attribution becomes technically difficult,
-implement a deterministic mapping based on character offsets.
-
-Do not guess page numbers.
+Choose the approach appropriate for the current project's scale.
 
 ============================================================
-14. CHARACTER OFFSET MAPPING
+26. ERROR HANDLING
 ============================================================
 
-Prefer maintaining source offsets.
+Handle:
 
-Example source:
+- Model loading errors
+- Invalid input
+- Missing chunks
+- Database errors
+- Embedding generation errors
+- Memory errors where practical
+- Unexpected exceptions
 
-Page 1:
+Do not expose internal stack traces to users.
 
-characters 0–5000
+Return useful API errors.
 
-Page 2:
-
-characters 5001–10000
-
-Page 3:
-
-characters 10001–15000
-
-After chunking:
-
-Chunk 0:
-
-characters 0–700
-
-→ page_start = 1
-→ page_end = 1
-
-Chunk 1:
-
-characters 600–1300
-
-→ page_start = 1
-→ page_end = 1
-
-Chunk 10:
-
-characters 4900–5600
-
-→ page_start = 1
-→ page_end = 2
-
-This provides reliable page attribution.
-
-Implement the simplest reliable approach compatible with
-the existing Milestone 5 data model.
+Use the project's existing exception-handling pattern.
 
 ============================================================
-15. TEXT CLEANING BEFORE CHUNKING
+27. LOGGING
 ============================================================
 
-Use the cleaned text produced by Milestone 5.
+Add useful logs.
 
-Do not duplicate the entire PDF cleaning pipeline.
+Examples:
 
-If additional chunk-specific normalization is necessary,
-keep it minimal.
+Embedding started
 
-Do NOT:
+Paper ID
 
-- Summarize
-- Rewrite
-- Remove technical terminology
-- Remove citations
-- Modify scientific meaning
-- Remove equations arbitrarily
+Number of chunks
 
-Chunking must preserve source content.
+Batch size
 
-============================================================
-16. EMPTY CONTENT
-============================================================
+Embedding model
 
-If a page has no text:
+Embedding completed
 
-Do not create an empty chunk.
+Number of embeddings generated
 
-If the entire document has no extractable text:
+Processing duration
 
-Return a meaningful error/status such as:
+Failure reason
 
-"No text available for chunking. OCR may be required."
+Do NOT log:
 
-Do not crash the API.
+- passwords
+- JWT tokens
+- secrets
+- sensitive user information
 
 ============================================================
-17. VERY SMALL DOCUMENT
+28. PERFORMANCE
 ============================================================
 
-If the document contains less than CHUNK_SIZE:
+The system should be designed for reasonable performance.
 
-Create exactly one chunk.
+Requirements:
+
+- Load model once
+- Use batching
+- Avoid repeated database queries
+- Avoid unnecessary serialization
+- Avoid unnecessary duplicate embedding generation
+- Use efficient database operations where possible
+
+Do not prematurely optimize complex infrastructure.
+
+This is still a development-stage project.
+
+============================================================
+29. CONFIGURATION
+============================================================
+
+Use environment variables/configuration for:
+
+EMBEDDING_MODEL
+
+EMBEDDING_BATCH_SIZE
+
+Optional:
+
+EMBEDDING_NORMALIZE
+
+Do not hard-code configuration values throughout the code.
 
 Example:
 
-Document:
+EMBEDDING_MODEL=sentence-transformers/all-MiniLM-L6-v2
 
-300 characters
+EMBEDDING_BATCH_SIZE=32
 
-CHUNK_SIZE:
-
-700
-
-Result:
-
-1 chunk.
-
-Do not create unnecessary chunks.
+The actual configuration system should follow the existing project.
 
 ============================================================
-18. LARGE DOCUMENT
+30. DEPENDENCIES
 ============================================================
 
-For large papers:
+Inspect the current requirements first.
+
+Only add required packages.
+
+Potential dependencies:
+
+sentence-transformers
+
+torch
+
+Do not blindly install multiple unrelated packages.
+
+If LangChain is already used for Milestone 6,
+do not introduce another embedding framework unless necessary.
+
+The core embedding implementation should use Sentence Transformers.
+
+============================================================
+31. SECURITY
+============================================================
+
+Embedding generation must respect existing authorization.
 
 Example:
 
-50-page research paper
+User A owns:
+
+Paper A
+
+User B owns:
+
+Paper B
+
+User A must NOT be able to generate embeddings for Paper B.
+
+Never trust:
+
+user_id
+
+paper ownership
+
+project ownership
+
+from the frontend.
+
+Derive identity from the authenticated JWT.
+
+============================================================
+32. TESTING REQUIREMENTS
+============================================================
+
+Testing is REQUIRED.
+
+Do not consider Milestone 7 complete without testing.
+
+Create/update tests according to the existing project test structure.
+
+At minimum test:
+
+TEST 1:
+Model loads successfully.
+
+TEST 2:
+A normal text produces an embedding.
+
+TEST 3:
+Embedding dimension is correct.
+
+TEST 4:
+Multiple chunks produce the expected number of embeddings.
+
+TEST 5:
+Empty text is handled.
+
+TEST 6:
+Whitespace-only text is handled.
+
+TEST 7:
+Paper with no chunks returns an appropriate error.
+
+TEST 8:
+Unauthenticated request is rejected.
+
+TEST 9:
+User cannot generate embeddings for another user's paper.
+
+TEST 10:
+Repeated embedding request does not create duplicates.
+
+TEST 11:
+Embedding status changes correctly.
+
+TEST 12:
+Failure changes status to failed.
+
+TEST 13:
+Metadata remains associated with the correct chunk.
+
+TEST 14:
+Batch processing works.
+
+============================================================
+33. EMBEDDING QUALITY TEST
+============================================================
+
+Add a basic semantic sanity test.
+
+Use two semantically related sentences:
+
+Example A:
+
+"The Transformer uses self-attention mechanisms."
+
+Example B:
+
+"Self-attention allows the model to capture relationships
+between tokens."
+
+And an unrelated sentence:
+
+Example C:
+
+"Stock prices increased significantly today."
+
+Generate embeddings.
+
+Calculate cosine similarity.
 
 Expected:
 
-many chunks.
+similarity(A, B)
 
-Do not load unnecessary duplicate copies of the entire
-document into memory.
+should generally be higher than:
 
-Use the most appropriate implementation based on the existing
-data model.
+similarity(A, C)
 
-If the extracted pages are already stored in MongoDB, retrieve
-them in page order.
+This is NOT a formal benchmark.
 
-============================================================
-19. DATABASE COLLECTION
-============================================================
+It is only a sanity check that embeddings behave semantically.
 
-Create:
-
-document_chunks
-
-unless an equivalent collection already exists.
-
-Each record:
-
-{
-    "_id": "...",
-
-    "chunk_id": "...",
-
-    "paper_id": "...",
-
-    "project_id": "...",
-
-    "user_id": "...",
-
-    "chunk_index": 0,
-
-    "text": "...",
-
-    "page_start": 1,
-
-    "page_end": 1,
-
-    "created_at": "...",
-
-    "updated_at": "..."
-}
+Do not hard-code fragile exact similarity values.
 
 ============================================================
-20. DATABASE INDEXES
+34. REAL PAPER TEST
 ============================================================
 
-Create appropriate indexes.
+After unit tests, perform an integration test using one actual
+research paper already available in the project.
 
-At minimum consider:
+Example workflow:
+
+Upload PDF
+ ↓
+Extract text
+ ↓
+Chunk document
+ ↓
+Generate embeddings
+
+Verify:
+
+Number of chunks = N
+
+Number of embeddings = N
+
+Every embedding has:
+
+chunk_id
+
+paper_id
+
+page information
+
+model name
+
+dimension
+
+Verify no duplicate embedding records exist.
+
+============================================================
+35. FRONTEND
+============================================================
+
+Inspect the existing React frontend.
+
+If the existing architecture already provides:
+
+Paper processing status
+
+Chunking status
+
+then add embedding status only if appropriate.
+
+Possible UI:
+
+Paper Processing
+
+✓ Uploaded
+
+✓ Text Extracted
+
+✓ Chunked
+
+⏳ Embedding
+
+○ Vector Indexed
+
+Do NOT build the entire RAG interface yet.
+
+Milestone 7 should remain focused.
+
+A simple "Generate Embeddings" action may be added if the existing
+UI architecture supports it.
+
+Do not redesign the frontend unnecessarily.
+
+============================================================
+36. DO NOT IMPLEMENT THESE FEATURES
+============================================================
+
+For this milestone DO NOT implement:
+
+❌ FAISS
+
+❌ ChromaDB
+
+❌ Pinecone
+
+❌ Vector similarity search
+
+❌ RAG
+
+❌ LLM question answering
+
+❌ LangGraph agent
+
+❌ Tool calling
+
+❌ Literature review
+
+❌ Paper comparison
+
+❌ Citation generation
+
+❌ AI chat interface
+
+❌ Complex research dashboard
+
+These belong to future milestones.
+
+============================================================
+37. LANGCHAIN USAGE
+============================================================
+
+LangChain may already be used for chunking.
+
+For embeddings:
+
+Prefer direct Sentence Transformers integration unless there is
+a strong reason to use a LangChain wrapper.
+
+Do NOT introduce LangChain abstraction just for the sake of using
+LangChain.
+
+The important requirement is a clean embedding service.
+
+If you use:
+
+HuggingFaceEmbeddings
+
+or another LangChain embedding wrapper,
+
+explain why it is preferable for the current architecture.
+
+Avoid unnecessary abstraction.
+
+============================================================
+38. FUTURE VECTOR DATABASE COMPATIBILITY
+============================================================
+
+Design embeddings so Milestone 8 can easily consume them.
+
+Future pipeline:
+
+Chunk
+ ↓
+Embedding
+ ↓
+Vector Record
+ ↓
+FAISS / Chroma
+ ↓
+Similarity Search
+
+Therefore each vector must remain associated with:
+
+chunk_id
 
 paper_id
 
@@ -838,996 +1251,429 @@ project_id
 
 user_id
 
-For efficient retrieval:
+page_start
 
-(user_id, paper_id)
+page_end
 
-and/or:
+chunk_index
 
-(paper_id, chunk_index)
-
-A compound index on:
-
-paper_id + chunk_index
-
-is particularly useful for retrieving chunks in order.
-
-Do not create unnecessary indexes.
+This metadata will later be returned with search results.
 
 ============================================================
-21. REPROCESSING / IDEMPOTENCY
+39. FILE STRUCTURE
 ============================================================
 
-This is critical.
+FIRST:
 
-If the user calls:
+Inspect the existing repository.
 
-POST /papers/{paper_id}/chunks
+Identify:
 
-twice:
+- backend root
+- frontend root
+- API directory
+- service directory
+- models
+- schemas
+- database layer
+- authentication
+- chunking implementation
+- tests
+- configuration
 
-DO NOT create duplicate chunks.
+Then determine the smallest set of files that need to be added
+or modified.
 
-Choose a consistent strategy.
+Do not create duplicate architectures.
 
-Recommended:
-
-1. Delete existing chunks for that paper.
-2. Re-run chunking.
-3. Insert new chunks.
-4. Update chunking status.
-
-This ensures the database reflects the current extraction.
-
-However, perform this safely so that a failed reprocessing operation
-does not unnecessarily destroy the previous successful result.
-
-If a transactional strategy is practical, use it.
-
-Otherwise implement a safe replace strategy and explain it.
+Follow existing naming conventions.
 
 ============================================================
-22. CHUNKING STATUS
+40. IMPLEMENTATION PROCESS
 ============================================================
 
-Introduce chunking states.
+Follow this exact process.
 
-Possible:
+PHASE 1 — INSPECTION
 
-not_started
-chunking
-completed
-failed
+Before coding:
+
+1. Inspect repository structure.
+2. Inspect README.
+3. Inspect requirements.
+4. Inspect environment configuration.
+5. Inspect FastAPI entry point.
+6. Inspect authentication.
+7. Inspect MongoDB connection.
+8. Inspect paper model.
+9. Inspect chunk model.
+10. Inspect chunking service.
+11. Inspect chunking API.
+12. Inspect existing tests.
+
+Then summarize your understanding.
+
+DO NOT modify code during this phase.
+
+------------------------------------------------------------
+
+PHASE 2 — ARCHITECTURE DESIGN
+
+Determine:
+
+- Where embedding service belongs
+- Where embedding configuration belongs
+- Where embedding metadata belongs
+- Where API route belongs
+- How model lifecycle should work
+- How status should be stored
+- How idempotency should work
+- How future vector database integration will work
+
+Keep the design consistent with the existing project.
+
+------------------------------------------------------------
+
+PHASE 3 — DEPENDENCIES
+
+Check whether:
+
+sentence-transformers
+
+torch
+
+are already installed.
+
+If missing, add only required dependencies.
+
+Update requirements.txt or the project's dependency manager.
+
+------------------------------------------------------------
+
+PHASE 4 — CONFIGURATION
+
+Add:
+
+EMBEDDING_MODEL
+
+EMBEDDING_BATCH_SIZE
+
+Optional normalization configuration.
+
+Do not commit secrets.
+
+Update .env.example if the project has one.
+
+------------------------------------------------------------
+
+PHASE 5 — EMBEDDING PROVIDER
+
+Implement a clean provider abstraction.
+
+Responsibilities:
+
+- Load model
+- Embed documents
+- Embed query
+- Return dimension
+- Return model name
+
+Keep it testable.
+
+------------------------------------------------------------
+
+PHASE 6 — EMBEDDING SERVICE
+
+Implement service logic.
+
+Responsibilities:
+
+- Retrieve chunks
+- Validate chunks
+- Batch chunks
+- Generate vectors
+- Associate vectors with chunks
+- Store metadata
+- Track status
+- Handle failures
+- Prevent duplicates
+
+------------------------------------------------------------
+
+PHASE 7 — API
+
+Implement the embedding API.
+
+Requirements:
+
+Authentication
+
+Authorization
+
+Validation
+
+Processing
+
+Response
+
+Error handling
+
+------------------------------------------------------------
+
+PHASE 8 — TESTING
+
+Run unit tests.
+
+Run integration tests.
+
+Run semantic sanity test.
+
+Run real PDF test if possible.
+
+Fix all failures.
+
+------------------------------------------------------------
+
+PHASE 9 — DOCUMENTATION
+
+Update:
+
+README
+
+API documentation
+
+Environment variables
+
+Milestone status
+
+Architecture documentation if present
+
+Explain how to generate embeddings.
+
+============================================================
+41. EXPECTED FINAL RESULT
+============================================================
+
+After completing Milestone 7, this should work:
+
+User
+ ↓
+Login
+ ↓
+Create project
+ ↓
+Upload research paper
+ ↓
+Process PDF
+ ↓
+Extract text
+ ↓
+Chunk paper
+ ↓
+Generate embeddings
+ ↓
+Store embedding information
 
 Example:
 
-Document:
+42 chunks
 
-{
-    "chunking_status": "completed",
-    "chunk_count": 42
-}
+↓
 
-If failure:
+42 embeddings
 
-{
-    "chunking_status": "failed",
-    "error_message": "..."
-}
+Each embedding:
 
-Do not expose stack traces to users.
+chunk_id
+paper_id
+project_id
+user_id
+page information
+embedding model
+embedding dimension
+vector
+status
 
 ============================================================
-23. PAPER PROCESSING PIPELINE
+42. ACCEPTANCE CRITERIA
 ============================================================
 
-The overall paper pipeline becomes:
+Milestone 7 is considered COMPLETE only when:
 
-uploaded
-   ↓
-text extraction
-   ↓
-processed
-   ↓
-chunking
-   ↓
-chunked
+[ ] Existing Milestones 1–6 still work.
 
-Conceptually:
+[ ] Sentence Transformers is integrated.
 
-Paper
- ↓
+[ ] all-MiniLM-L6-v2 is loaded correctly.
+
+[ ] Model is not unnecessarily reloaded per request.
+
+[ ] Embedding service exists.
+
+[ ] Embeddings are generated for valid chunks.
+
+[ ] Batch processing works.
+
+[ ] Embedding dimension is validated.
+
+[ ] Document embeddings are traceable to chunk IDs.
+
+[ ] Paper/project/user relationships are preserved.
+
+[ ] Embedding status is tracked.
+
+[ ] Failed processing is handled.
+
+[ ] Duplicate embeddings are prevented.
+
+[ ] Authentication is enforced.
+
+[ ] Authorization is enforced.
+
+[ ] Empty chunks are handled.
+
+[ ] No secrets are committed.
+
+[ ] Unit tests exist.
+
+[ ] Integration tests exist.
+
+[ ] Semantic sanity test exists.
+
+[ ] Real paper test succeeds.
+
+[ ] Documentation is updated.
+
+[ ] Future vector database integration remains straightforward.
+
+[ ] FAISS/Chroma is NOT implemented yet.
+
+[ ] RAG is NOT implemented yet.
+
+[ ] Agent is NOT implemented yet.
+
+============================================================
+43. GIT REQUIREMENT
+============================================================
+
+After implementation:
+
+Check:
+
+git status
+
+Review changes.
+
+Do not commit:
+
+.env
+
+secrets
+
+API keys
+
+large model files
+
+temporary files
+
+cache directories
+
+unnecessary generated files
+
+Provide a recommended commit message:
+
+feat: implement embedding generation pipeline
+
+Do not automatically push to GitHub unless explicitly instructed.
+
+============================================================
+44. FINAL REPORT
+============================================================
+
+After completing the implementation, provide a detailed report:
+
+1. Milestone 7 summary
+
+2. Architecture implemented
+
+3. Files created
+
+4. Files modified
+
+5. Dependencies added
+
+6. Environment variables added
+
+7. API endpoints added
+
+8. Database/schema changes
+
+9. Embedding model details
+
+10. Embedding dimension
+
+11. Batch processing configuration
+
+12. Status handling
+
+13. Idempotency strategy
+
+14. Security/authorization handling
+
+15. Tests added
+
+16. Test results
+
+17. Real PDF test results
+
+18. Known limitations
+
+19. Future improvements
+
+20. Confirmation that Milestones 1–6 were preserved
+
+21. Confirmation that Milestone 8 was NOT implemented
+
+22. Recommended next milestone
+
+============================================================
+45. IMPORTANT FINAL INSTRUCTION
+============================================================
+
+DO NOT START CODING UNTIL YOU HAVE INSPECTED THE EXISTING PROJECT.
+
+First understand the existing implementation.
+
+Do not assume filenames, models, routes, schemas, database collections,
+or folder structures.
+
+Reuse existing components whenever possible.
+
+Do not rewrite working code merely to match your preferred architecture.
+
+Maintain backward compatibility.
+
+Keep Milestone 7 focused only on embedding generation.
+
+The final architecture should be:
+
 PDF
  ↓
-Text Extraction
- ↓
-Page Text
+Extraction
  ↓
 Chunking
  ↓
-Document Chunks
+⭐ Embedding Generation
  ↓
-NEXT:
-Embeddings
-
-============================================================
-24. SERVICE ARCHITECTURE
-============================================================
-
-Do not put all logic inside the API route.
-
-Suggested structure:
-
-services/
-    document_service.py
-    chunk_service.py
-
-utils/
-    chunk_utils.py
-
-api/
-    papers.py
-    chunks.py
-
-schemas/
-    chunk_schema.py
-
-models/
-    chunk_model.py
-
-Adapt this to the existing project structure.
-
-Do not create unnecessary files.
-
-Architecture:
-
-API
+Vector Database      ← Future
  ↓
-Chunk Service
+Semantic Retrieval   ← Future
  ↓
-Document Service
+RAG                  ← Future
  ↓
-MongoDB
+LLM                  ← Future
  ↓
-LangChain Text Splitter
+Research Agent       ← Future
 
-============================================================
-25. CHUNK SERVICE
-============================================================
-
-Implement functionality such as:
-
-create_chunks_for_paper()
-
-get_paper_chunks()
-
-get_chunk()
-
-delete_paper_chunks()
-
-get_chunk_count()
-
-verify_chunk_ownership()
-
-Names may be adjusted to match the existing architecture.
-
-Keep responsibilities separated.
-
-============================================================
-26. CHUNKING CONFIGURATION
-============================================================
-
-Add environment variables:
-
-CHUNK_SIZE=700
-CHUNK_OVERLAP=100
-
-Optional:
-
-CHUNKING_STRATEGY=recursive_character
-
-Do not hardcode values inside the business logic.
-
-Create a configuration object using the project's existing
-configuration approach.
-
-============================================================
-27. CONFIGURATION VALIDATION
-============================================================
-
-Validate:
-
-CHUNK_SIZE > 0
-
-CHUNK_OVERLAP >= 0
-
-CHUNK_OVERLAP < CHUNK_SIZE
-
-If invalid:
-
-application should fail clearly during configuration
-validation rather than failing later during chunking.
-
-============================================================
-28. LANGCHAIN USAGE
-============================================================
-
-Use LangChain specifically for the text splitting mechanism.
-
-Recommended:
-
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-
-Example conceptual usage:
-
-splitter = RecursiveCharacterTextSplitter(
-    chunk_size=CHUNK_SIZE,
-    chunk_overlap=CHUNK_OVERLAP
-)
-
-Do not expose this code directly in the API route.
-
-Wrap it in a service/helper.
-
-IMPORTANT:
-
-Do not use LangChain's full document/RAG chain yet.
-
-Only use the text splitter functionality.
-
-============================================================
-29. DOCUMENT OBJECTS
-============================================================
-
-If useful, represent source content internally as LangChain
-Document objects.
-
-For example:
-
-Document(
-    page_content="...",
-    metadata={
-        "paper_id": "...",
-        "page_number": 1
-    }
-)
-
-However, do not depend unnecessarily on LangChain abstractions.
-
-The database representation should remain application-owned.
-
-============================================================
-30. CHUNK METADATA FROM LANGCHAIN
-============================================================
-
-If LangChain creates split documents, ensure original metadata
-is preserved.
-
-For example:
-
-Original:
-
-{
-    "paper_id": "123",
-    "page_number": 4
-}
-
-must remain available after splitting.
-
-Do not lose:
-
-- paper_id
-- project_id
-- user_id
-- page information
-
-============================================================
-31. API ENDPOINT
-============================================================
-
-Create:
-
-POST /papers/{paper_id}/chunks
-
-Authentication required.
-
-Workflow:
-
-1. Authenticate user.
-2. Find paper.
-3. Verify paper ownership.
-4. Verify text extraction completed.
-5. Retrieve extracted text/pages.
-6. Validate that text exists.
-7. Update chunking status to "chunking".
-8. Build ordered source text.
-9. Preserve page offsets.
-10. Initialize LangChain splitter.
-11. Split text.
-12. Determine page_start/page_end for each chunk.
-13. Create chunk metadata.
-14. Store chunks in MongoDB.
-15. Update status to "completed".
-16. Return chunk statistics.
-
-Response:
-
-{
-    "message": "Paper chunked successfully",
-    "paper_id": "...",
-    "chunk_count": 42,
-    "chunk_size": 700,
-    "chunk_overlap": 100,
-    "status": "completed"
-}
-
-============================================================
-32. GET CHUNKS
-============================================================
-
-Create:
-
-GET /papers/{paper_id}/chunks
-
-Authentication required.
-
-Verify ownership.
-
-Return:
-
-{
-    "paper_id": "...",
-    "total": 42,
-    "chunks": [
-        {
-            "chunk_id": "...",
-            "chunk_index": 0,
-            "page_start": 1,
-            "page_end": 1,
-            "text": "..."
-        }
-    ]
-}
-
-============================================================
-33. PAGINATION
-============================================================
-
-Do not return hundreds/thousands of chunks unnecessarily.
-
-Support:
-
-GET /papers/{paper_id}/chunks?page=1&limit=20
-
-or an equivalent pagination system.
-
-Maximum limit should be configurable or safely bounded.
-
-============================================================
-34. GET SINGLE CHUNK
-============================================================
-
-Create:
-
-GET /chunks/{chunk_id}
-
-Authentication required.
-
-Verify:
-
-chunk.user_id == current_user.id
-
-Return:
-
-{
-    "chunk_id": "...",
-    "paper_id": "...",
-    "chunk_index": 12,
-    "page_start": 4,
-    "page_end": 5,
-    "text": "..."
-}
-
-============================================================
-35. DELETE CHUNKS
-============================================================
-
-Create:
-
-DELETE /papers/{paper_id}/chunks
-
-Authentication required.
-
-Verify ownership.
-
-Delete chunks associated with the paper.
-
-This will be useful for reprocessing.
-
-============================================================
-36. SECURITY
-============================================================
-
-Every chunk endpoint must enforce ownership.
-
-User A must NOT be able to:
-
-- retrieve User B's chunks
-- retrieve User B's chunk by ID
-- delete User B's chunks
-- process User B's paper
-
-Never trust:
-
-user_id
-
-from the request body.
-
-Always derive the current user from JWT.
-
-============================================================
-37. FRONTEND
-============================================================
-
-Extend the existing research project UI.
-
-A paper should show:
-
-----------------------------------------
-
-Attention Is All You Need
-
-Status:
-✓ Text Extracted
-
-Chunks:
-Not Generated
-
-[Generate Chunks]
-
-----------------------------------------
-
-After processing:
-
-----------------------------------------
-
-Attention Is All You Need
-
-Pages: 15
-
-Chunks: 42
-
-Chunking Status:
-✓ Completed
-
-[View Chunks]
-
-----------------------------------------
-
-============================================================
-38. CHUNK VIEWER
-============================================================
-
-Create a simple chunk viewer.
-
-Example:
-
-Chunk #0
-Pages 1–1
-
-"The Transformer architecture..."
-
-----------------------------------------
-
-Chunk #1
-Pages 1–2
-
-"The encoder consists..."
-
-----------------------------------------
-
-Chunk #2
-Pages 2–2
-
-"The decoder..."
-
-The viewer is primarily for debugging and verification.
-
-Do not create a complicated UI.
-
-============================================================
-39. FRONTEND LOADING STATES
-============================================================
-
-When chunking:
-
-Show:
-
-"Generating chunks..."
-
-Disable duplicate requests while processing.
-
-After success:
-
-"42 chunks generated."
-
-After failure:
-
-"Chunking failed. Please retry."
-
-============================================================
-40. FRONTEND API FUNCTIONS
-============================================================
-
-Reuse the existing API architecture.
-
-Create functions such as:
-
-generateChunks()
-
-getPaperChunks()
-
-getChunk()
-
-deletePaperChunks()
-
-Do not create a second authentication mechanism.
-
-============================================================
-41. TESTING
-============================================================
-
-Testing is essential.
-
-Do not wait until the entire RAG pipeline is built.
-
-Test Milestone 6 independently.
-
-============================================================
-42. UNIT TESTS
-============================================================
-
-Test:
-
-1. Empty text
-2. Very small document
-3. Exactly chunk_size text
-4. Larger than chunk_size
-5. Chunk overlap
-6. Multiple pages
-7. Chunk ordering
-8. Metadata preservation
-9. Page_start
-10. Page_end
-11. Chunk index
-12. Invalid configuration
-13. Invalid overlap
-14. Duplicate processing
-15. Text containing newlines
-16. Text containing technical terms
-17. Text containing citations
-18. Text containing punctuation
-
-============================================================
-43. API TESTS
-============================================================
-
-Test:
-
-1. POST /papers/{paper_id}/chunks
-2. GET /papers/{paper_id}/chunks
-3. GET /chunks/{chunk_id}
-4. DELETE /papers/{paper_id}/chunks
-
-Verify:
-
-- Authentication
-- Authorization
-- Correct responses
-- Error handling
-- Database consistency
-
-============================================================
-44. SECURITY TESTS
-============================================================
-
-Create two users:
-
-User A
-User B
-
-User A:
-
-- uploads paper
-- processes paper
-- creates chunks
-
-User B attempts:
-
-GET User A's chunks
-
-GET User A's chunk_id
-
-DELETE User A's chunks
-
-POST chunk generation on User A's paper
-
-Expected:
-
-All unauthorized operations fail.
-
-============================================================
-45. CHUNK QUALITY TEST
-============================================================
-
-Use a real research paper.
-
-Verify:
-
-- chunks are readable
-- sentences are not unnecessarily destroyed
-- paragraphs are reasonably preserved
-- overlap exists
-- page metadata is correct
-- chunks remain in document order
-
-Do not only test using:
-
-"hello world hello world"
-
-Use a real research paper.
-
-============================================================
-46. CHUNK STATISTICS
-============================================================
-
-Return useful statistics.
-
-Example:
-
-{
-    "paper_id": "...",
-    "page_count": 15,
-    "chunk_count": 42,
-    "chunk_size": 700,
-    "chunk_overlap": 100,
-    "average_chunk_length": 645,
-    "min_chunk_length": 120,
-    "max_chunk_length": 700
-}
-
-Use character length if the splitter is character-based.
-
-Do NOT call these values "token counts" unless a tokenizer
-was actually used.
-
-============================================================
-47. CHUNK QUALITY VALIDATION
-============================================================
-
-After generating chunks, validate:
-
-- No empty chunks
-- No duplicate chunk indexes
-- Correct ordering
-- Valid paper_id
-- Valid project_id
-- Valid user_id
-- page_start <= page_end
-- chunk_index is sequential
-- text is non-empty
-
-If validation fails:
-
-do not mark the process as completed.
-
-============================================================
-48. DATABASE CONSISTENCY
-============================================================
-
-Consider:
-
-Chunking starts
- ↓
-Existing chunks
- ↓
-New chunk generation
- ↓
-Database insertion fails
-
-Do not leave the system claiming:
-
-chunking_status = completed
-
-when chunks are incomplete.
-
-Use a safe strategy.
-
-If practical:
-
-- generate chunks first
-- validate chunks
-- replace existing chunks
-- update status only after successful insertion
-
-============================================================
-49. LOGGING
-============================================================
-
-Log:
-
-- Chunking started
-- Paper ID
-- Number of source pages
-- Number of generated chunks
-- Chunking duration
-- Chunking failure
-
-Do NOT log the entire extracted paper.
-
-Do NOT log:
-
-- passwords
-- JWT tokens
-- sensitive information
-
-============================================================
-50. PERFORMANCE
-============================================================
-
-Consider large papers.
-
-Avoid:
-
-- unnecessary duplicate text copies
-- repeated database queries
-- repeated chunk generation
-- loading unrelated papers
-
-Retrieve only the selected paper's extracted content.
-
-Use pagination when returning chunks.
-
-============================================================
-51. DATABASE INDEXES
-============================================================
-
-Ensure useful indexes exist.
-
-Recommended:
-
-{
-    "paper_id": 1,
-    "chunk_index": 1
-}
-
-Also consider:
-
-{
-    "user_id": 1,
-    "paper_id": 1
-}
-
-Do not create excessive indexes.
-
-============================================================
-52. README
-============================================================
-
-Update README with:
-
-Milestone 6 — Intelligent Text Chunking
-
-Document:
-
-1. Why chunking is required
-2. Chunking strategy
-3. Why RecursiveCharacterTextSplitter
-4. Chunk size
-5. Chunk overlap
-6. Page metadata
-7. Database structure
-8. API endpoints
-9. Configuration
-10. Testing
-11. Known limitations
-12. How this prepares the system for embeddings
-
-============================================================
-53. ENVIRONMENT VARIABLES
-============================================================
-
-Update .env.example:
-
-CHUNK_SIZE=700
-CHUNK_OVERLAP=100
-CHUNKING_STRATEGY=recursive_character
-
-Do not commit real .env values.
-
-============================================================
-54. REQUIREMENTS
-============================================================
-
-Update requirements.txt.
-
-Add the correct current LangChain text splitter package.
-
-Prefer:
-
-langchain-text-splitters
-
-Do not install the entire LangChain ecosystem unless another
-existing milestone requires it.
-
-Avoid unnecessary dependencies.
-
-============================================================
-55. BACKWARD COMPATIBILITY
-============================================================
-
-Do not break:
-
-- authentication
-- project management
-- paper upload
-- PDF extraction
-- existing APIs
-
-Existing Milestone 1–5 functionality must continue to work.
-
-============================================================
-56. FINAL MANUAL TEST
-============================================================
-
-Perform this complete workflow:
-
-1. Register/login.
-
-2. Create research project.
-
-3. Upload a research paper.
-
-4. Process PDF.
-
-Expected:
-
-Text extraction completed.
-
-5. Generate chunks.
-
-Expected:
-
-Chunking completed.
-
-6. Retrieve chunks.
-
-Verify:
-
-Chunk 0
-Chunk 1
-Chunk 2
-...
-
-7. Verify page metadata.
-
-8. Verify chunk overlap.
-
-9. Verify chunk count.
-
-10. Verify MongoDB.
-
-11. Refresh frontend.
-
-12. Verify chunking status remains completed.
-
-============================================================
-57. FINAL VALIDATION
-============================================================
-
-Milestone 6 is complete only when:
-
-Backend:
-
-✓ Chunking service works
-✓ LangChain splitter works
-✓ Configuration works
-✓ Chunk size configurable
-✓ Overlap configurable
-✓ Page metadata preserved
-✓ Chunk indexes correct
-✓ Chunks stored in MongoDB
-✓ Duplicate chunks prevented
-✓ APIs work
-✓ Authentication works
-✓ Authorization works
-✓ Error handling works
-
-Frontend:
-
-✓ Generate chunks button works
-✓ Loading state works
-✓ Success state works
-✓ Failure state works
-✓ Chunk count displayed
-✓ Chunk viewer works
-
-Data:
-
-✓ No empty chunks
-✓ Correct ordering
-✓ Correct metadata
-✓ Correct page references
-✓ No duplicate chunks
-
-============================================================
-58. DO NOT MOVE TO EMBEDDINGS YET
-============================================================
-
-IMPORTANT:
-
-After Milestone 6 is complete, STOP.
-
-Do NOT implement:
-
-- Embedding generation
-- Sentence Transformers
-- OpenAI embeddings
-- Hugging Face embeddings
-- FAISS
-- ChromaDB
-- Vector search
-
-Those belong to Milestone 7 and Milestone 8.
-
-============================================================
-59. FINAL REPORT
-============================================================
-
-After implementation provide a detailed report:
-
-1. Files created
-2. Files modified
-3. Architecture changes
-4. LangChain package used
-5. Chunking strategy
-6. Chunk size
-7. Chunk overlap
-8. Why those values were selected
-9. How page metadata is preserved
-10. Database schema
-11. Database indexes
-12. API endpoints
-13. Frontend changes
-14. Security implementation
-15. Reprocessing strategy
-16. Testing performed
-17. Test results
-18. Sample chunk output
-19. Sample MongoDB document
-20. Known limitations
-21. Performance considerations
-22. How this prepares the system for embeddings
-23. Recommended Git commit
-
-Recommended commit:
-
-git add .
-git commit -m "feat: add intelligent document chunking"
-
-Do NOT push to GitHub automatically.
-
-============================================================
-IMPORTANT FINAL INSTRUCTION
-============================================================
-
-Do not claim Milestone 6 is complete unless the implementation
-has actually been run and tested.
-
-If something from Milestone 5 is incompatible with the chunking
-design, do not blindly rewrite it.
-
-First identify the problem, explain it, and make the smallest
-safe change necessary.
-
-Maintain the existing architecture and coding style.
+Start by inspecting the repository and report your findings before
+making implementation changes.
