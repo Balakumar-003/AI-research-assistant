@@ -12,8 +12,13 @@ async def lifespan(app: FastAPI):
     # Startup
     connect_to_mongo()
     embedding_provider.load()
+    
+    # Import here to avoid circular imports during startup
+    from app.services.vector_service import vector_store
+    
     yield
     # Shutdown
+    vector_store.save()
     close_mongo_connection()
 
 app = FastAPI(
@@ -35,6 +40,8 @@ from app.api import chunks
 app.include_router(chunks.router, tags=["Chunks"])
 from app.api import embeddings
 app.include_router(embeddings.router, tags=["Embeddings"])
+from app.api import search_routes
+app.include_router(search_routes.router, tags=["Search"])
 
 @app.get("/")
 async def root():

@@ -111,4 +111,17 @@ def delete_paper(db: Database, paper_id: str, user_id: str) -> dict:
     db.document_pages.delete_many({"paper_id": paper_id})
     db.document_chunks.delete_many({"paper_id": paper_id})
     
+    # Also delete embeddings from MongoDB
+    db.embeddings.delete_many({"paper_id": paper_id})
+    
+    # Delete from FAISS
+    import asyncio
+    from app.services.vector_service import vector_store
+    try:
+        asyncio.run(vector_store.delete_by_paper(paper_id))
+    except Exception as e:
+        # Ignore errors if FAISS fails on delete, just log it
+        import logging
+        logging.getLogger(__name__).warning(f"Failed to delete FAISS embeddings for paper {paper_id}: {str(e)}")
+    
     return {"message": "Paper deleted successfully"}

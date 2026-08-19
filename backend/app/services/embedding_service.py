@@ -91,6 +91,15 @@ def generate_embeddings(db: Database, paper_id: str, user_id: str) -> Dict[str, 
             {"$set": {"embedding_status": "completed"}}
         )
         
+        import asyncio
+        from app.services.vector_service import add_paper_embeddings_to_faiss
+        
+        # Add to FAISS Vector DB
+        try:
+            asyncio.run(add_paper_embeddings_to_faiss(db, paper_id))
+        except Exception as ve:
+            logger.error(f"Error syncing to FAISS for paper {paper_id}: {str(ve)}")
+            
         return {
             "paper_id": paper_id,
             "status": "completed",

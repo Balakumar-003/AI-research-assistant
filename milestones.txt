@@ -10,7 +10,7 @@ Milestone 5  ✅ PDF Text Extraction
        ↓
 Milestone 6 ✅ Text Chunking
        ↓
-Milestone 7 ⏳ Embeddings
+Milestone 7 ✅ Embeddings
        ↓
 Milestone 8 ⏳ Vector Database
        ↓
