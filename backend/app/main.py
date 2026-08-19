@@ -44,6 +44,8 @@ from app.api import search_routes
 app.include_router(search_routes.router, tags=["Search"])
 from app.api import chat_routes
 app.include_router(chat_routes.router, tags=["Chat"])
+from app.api import agent_routes
+app.include_router(agent_routes.router, prefix="/research", tags=["Agent"])
 
 @app.get("/")
 async def root():

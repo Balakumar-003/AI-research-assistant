@@ -47,12 +47,19 @@ class VectorDBService:
             
             return ids.tolist()
 
-    async def search(self, query_embedding: List[float], top_k: int = 5, user_id: Optional[str] = None, paper_id: Optional[str] = None) -> List[dict]:
+    async def search(self, query_embedding: List[float], top_k: int = 5, user_id: Optional[str] = None, paper_id: Optional[str] = None, paper_ids: Optional[List[str]] = None) -> List[dict]:
         vector = np.array([query_embedding], dtype=np.float32)
         vector = self._normalize(vector)
         
+        # Determine all allowed paper IDs
+        allowed_paper_ids = []
+        if paper_id:
+            allowed_paper_ids.append(paper_id)
+        if paper_ids:
+            allowed_paper_ids.extend(paper_ids)
+            
         # Search with a larger k if filtering is requested
-        search_k = top_k * 5 if (user_id or paper_id) else top_k
+        search_k = top_k * 5 if (user_id or allowed_paper_ids) else top_k
         
         # Using IndexIDMap, search returns distances and actual IDs
         distances, indices = self.index.search(vector, search_k)
@@ -67,7 +74,7 @@ class VectorDBService:
             
             if user_id and meta.get("user_id") != user_id:
                 continue
-            if paper_id and meta.get("paper_id") != paper_id:
+            if allowed_paper_ids and meta.get("paper_id") not in allowed_paper_ids:
                 continue
                 
             results.append({
