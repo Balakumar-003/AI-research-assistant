@@ -1,38 +1,32 @@
-# Agent Prompt — Milestone 8: Vector Database (FAISS Integration)
+# Agent Prompt — Milestone 9: RAG Pipeline (Question Answering with Citations)
 
 ## Context
 
-This is the AI Research Assistant project (FastAPI backend, MongoDB, LangChain-based RAG pipeline). The following milestones are already complete:
+This is the AI Research Assistant project (FastAPI backend, MongoDB, FAISS vector store). The following milestones are already complete:
 
-- Milestone 1–2: FastAPI foundation, JWT auth, MongoDB integration
-- Milestone 3–4: Paper upload and storage
-- Milestone 5: PDF text extraction
-- Milestone 6: Text chunking (chunks include `chunk_id`, `paper_id`, `page_number`, `section`, `text`)
-- Milestone 7: Embedding generation (each chunk has a corresponding embedding vector)
+- Milestone 1–4: FastAPI foundation, JWT auth, MongoDB integration, paper upload/storage
+- Milestone 5–6: PDF text extraction, chunking (chunks include `chunk_id`, `paper_id`, `page_number`, `section`, `text`)
+- Milestone 7: Embedding generation
+- Milestone 8: FAISS vector database with `VectorDBService` (`add_embeddings`, `search`, `delete_by_paper`, filtering by `user_id`/`paper_id`)
 
-**This milestone (8) implements the vector database layer using FAISS.**
-
-## Important constraint to understand before building
-
-FAISS only stores vectors and integer IDs — it has no native support for metadata, filtering by user/paper, or persistence beyond raw index files. All of that has to be built around FAISS explicitly. Do not treat FAISS as a drop-in database; treat it as a similarity-search primitive that needs a metadata layer wrapped around it.
+**This milestone (9) builds the core RAG question-answering pipeline: retrieval → prompt construction → LLM call → structured, cited answer, plus chat history persistence.**
 
 ## Goal
 
-Build a `VectorDBService` that:
-1. Stores chunk embeddings in a FAISS index
-2. Maintains a metadata store mapping FAISS internal IDs → chunk metadata (`chunk_id`, `paper_id`, `user_id`, `page_number`, `section`, `text`)
-3. Supports similarity search with optional filtering (by `user_id` and/or `paper_id`)
-4. Persists the index and metadata to disk and reloads on startup
-5. Supports deleting all vectors belonging to a given paper (for when a user deletes an uploaded paper)
+Build a working `POST /chat` endpoint where a user asks a natural-language question about their uploaded paper(s) and receives:
+1. An answer grounded strictly in retrieved paper content (no hallucination from the LLM's general knowledge)
+2. Structured citations (paper name, page, section) tied to specific claims in the answer
+3. Conversation memory within a project/workspace, so follow-up questions with pronouns ("compare **it** with GPT") resolve correctly
+4. An explicit "not found in the provided papers" response when retrieval doesn't support an answer, instead of a guess
 
 ## Design decisions to follow
 
-- **Index type:** Use `IndexFlatIP` (inner product) with L2-normalized vectors, which is equivalent to cosine similarity. Do not use `IndexFlatL2` — cosine similarity is standard for sentence embeddings and this matters for retrieval quality. Wrap it in `IndexIDMap` so we can assign and later remove vectors by explicit integer ID instead of relying on insertion order.
-- **ID strategy:** Generate a unique integer FAISS ID for each chunk (e.g., an auto-incrementing counter persisted alongside the index, or derive from a hash — auto-increment is simpler and preferred). Store the mapping `faiss_id → {chunk_id, paper_id, user_id, page_number, section, text}` in a separate metadata store.
-- **Metadata store:** Use a local JSON or pickle file (e.g., `vector_store/metadata.pkl`) for now, keyed by `faiss_id`. Do NOT put this logic inside MongoDB for this milestone — keep it simple and file-based, matching FAISS's own persistence model. Note in code comments that this could move to MongoDB or Redis later if the app needs multi-instance deployment.
-- **Filtering by user/paper:** Since `IndexFlatIP` doesn't support native metadata filtering, implement search as: (a) run the similarity search with a larger `k` than requested (e.g., `k * 5`), (b) post-filter results using the metadata store by `user_id`/`paper_id`, (c) truncate to the requested `top_k`. Document this tradeoff clearly in a code comment — this is fine at current scale but should move to per-user/per-project FAISS indices or a proper vector DB (Qdrant/Weaviate/pgvector) if the app scales significantly. Do not silently hide this limitation.
-- **Persistence:** Save the FAISS index using `faiss.write_index()` / `faiss.read_index()`. Save metadata using pickle or JSON. Load both on app startup (in the FastAPI lifespan handler) if files exist; otherwise initialize an empty index.
-- **Thread safety:** FAISS index writes are not thread-safe. Use a simple `asyncio.Lock` (or `threading.Lock` if calls are sync) around add/delete operations to prevent race conditions if multiple uploads happen concurrently.
+- **Citation format:** Use structured JSON output from the LLM, not marker-parsing of prose. Force the LLM to return `{answer, citations: [...]}` as JSON. This is more reliable to render in the frontend and reused later by Comparison/Literature Review agents — don't build a prose-marker parser instead.
+- **Grounding enforcement:** The prompt must explicitly instruct the LLM to answer only from provided context and to say so if the context is insufficient. Additionally, add a **pre-LLM guardrail**: if the top retrieved chunk's similarity score is below a configurable threshold (e.g., 0.3 for cosine similarity), skip the LLM call entirely and return a "no relevant content found" response. Do not rely on the LLM alone to self-police low-relevance retrieval.
+- **Chat history:** Store every turn in MongoDB (`chats` collection), scoped to `user_id` + `project_id` (or `paper_id` if no project concept exists yet). Include the last 3–5 turns in the prompt for follow-up context. Do not build a separate memory system — this is just prompt-included history.
+- **Streaming:** Implement the LLM call with streaming (Server-Sent Events) so the frontend can render tokens as they arrive. Support a non-streaming fallback mode via a query param for simpler testing (e.g., `?stream=false`), since streaming complicates citation parsing (citations should arrive as a final structured block after the streamed answer text, not mid-stream).
+- **Token/cost tracking:** Log prompt tokens, completion tokens, and model used for every request. Store this on the chat message document or in a separate `usage_logs` collection — needed for a future cost-tracking/rate-limiting feature and useful for debugging retrieval quality issues.
+- **Model abstraction:** Do not hardcode calls to a single LLM provider's SDK directly in the route handler. Build a thin `LLMService` wrapper so swapping between OpenAI/Llama/Gemini later doesn't require touching the RAG logic.
 
 ## File structure
 
@@ -41,92 +35,125 @@ Create/modify these files:
 ```
 backend/
 ├── rag/
-│   ├── vector_store.py       # VectorDBService class (core FAISS logic)
+│   ├── vector_store.py          # (existing from Milestone 8)
+│   ├── prompt_builder.py        # NEW: constructs the RAG prompt from chunks + history
+│   ├── rag_pipeline.py          # NEW: orchestrates retrieve -> prompt -> LLM -> parse
 ├── services/
-│   ├── vector_service.py     # Higher-level service that ties chunking/embedding output into vector_store
+│   ├── vector_service.py        # (existing)
+│   ├── llm_service.py           # NEW: provider-agnostic LLM call wrapper (streaming + non-streaming)
+│   ├── chat_service.py          # NEW: chat history persistence (save/load turns)
 ├── models/
-│   ├── vector_metadata.py    # Pydantic model for stored metadata entries
-├── config/
-│   ├── settings.py           # Add VECTOR_STORE_PATH, EMBEDDING_DIM to existing settings
+│   ├── chat.py                  # NEW: Pydantic models for chat messages, citations
+├── schemas/
+│   ├── chat_schemas.py          # NEW: request/response schemas for /chat endpoint
 ├── api/
-│   ├── search_routes.py      # New: POST /search endpoint for testing retrieval directly
+│   ├── chat_routes.py           # NEW: POST /chat endpoint
+├── config/
+│   ├── settings.py              # Add LLM_PROVIDER, LLM_MODEL, RETRIEVAL_SCORE_THRESHOLD, CHAT_HISTORY_TURNS
 tests/
-├── test_vector_store.py      # Unit tests
+├── test_rag_pipeline.py         # Unit tests
+├── test_prompt_builder.py       # Unit tests
 ```
 
 ## Required implementation
 
-### 1. `rag/vector_store.py`
+### 1. `rag/prompt_builder.py`
 
-Implement a `VectorDBService` class with these methods:
+Implement `build_rag_prompt(question: str, retrieved_chunks: list[dict], chat_history: list[dict]) -> str` (or return a structured message list if using chat-style APIs):
 
-- `__init__(self, dim: int, index_path: str, metadata_path: str)` — initializes or loads existing index + metadata
-- `add_embeddings(self, embeddings: list[list[float]], metadata_list: list[dict]) -> list[int]` — normalizes vectors, adds to index with new FAISS IDs, stores corresponding metadata, returns assigned FAISS IDs
-- `search(self, query_embedding: list[float], top_k: int = 5, user_id: str = None, paper_id: str = None) -> list[dict]` — normalizes query vector, searches, post-filters by `user_id`/`paper_id` if provided, returns list of `{faiss_id, score, chunk_id, paper_id, page_number, section, text}` sorted by relevance
-- `delete_by_paper(self, paper_id: str) -> int` — removes all vectors belonging to a paper (via `IndexIDMap.remove_ids`), removes corresponding metadata entries, returns count removed. Note: FAISS `IndexFlatIP` supports removal via `IndexIDMap`; confirm this works in the actual FAISS version installed and handle the rebuild-index fallback if the installed version doesn't support `remove_ids` cleanly.
-- `save(self)` — persists index and metadata to disk
-- `load(self)` — loads index and metadata from disk if present
-- `get_stats(self) -> dict` — returns total vector count, index size on disk, for a debug/admin endpoint
+- Format each retrieved chunk with a `[Source N]` label including paper name, page number, and section
+- Include the last `CHAT_HISTORY_TURNS` question/answer pairs before the current question, clearly labeled as prior conversation
+- Instruct the LLM to:
+  - Answer only from the provided context
+  - Explicitly state when context is insufficient rather than guessing
+  - Return output as JSON matching a fixed schema: `{"answer": str, "citations": [{"source_index": int, "paper": str, "page": int, "section": str}]}`
+- Keep the instruction block consistent and testable — this template will be extended (not rewritten) for Summary/Comparison agents later, so keep the grounding/JSON-output instructions in a reusable helper rather than duplicating them inline.
 
-### 2. `services/vector_service.py`
+### 2. `services/llm_service.py`
 
-Higher-level orchestration function(s) that:
-- Take chunk + embedding output from Milestone 6/7 pipeline
-- Call `VectorDBService.add_embeddings()` with properly formatted metadata
-- Are called automatically at the end of the PDF processing pipeline once a paper finishes chunking + embedding
+Implement `LLMService` with:
+- `generate(prompt, stream: bool = False)` — calls the configured provider (start with OpenAI; keep the interface provider-agnostic so Llama/Gemini can be swapped in via config)
+- For streaming: yield tokens/chunks as they arrive (async generator)
+- For non-streaming: return the full completion
+- Return token usage metadata alongside the response (`prompt_tokens`, `completion_tokens`) for logging
+- Handle and surface provider errors cleanly (rate limits, timeouts) rather than letting raw SDK exceptions bubble to the route handler
 
-### 3. `api/search_routes.py`
+### 3. `rag/rag_pipeline.py`
 
-A test endpoint to validate retrieval independent of the full RAG/LLM pipeline:
-- `POST /search` — accepts `{query: str, top_k: int, paper_id: Optional[str]}`, embeds the query using the existing embedding model from Milestone 7, calls `VectorDBService.search()`, returns raw results with scores. This is a debugging/testing endpoint — it should require auth and scope results to the current user's `user_id` automatically (don't let users search other users' papers).
+Implement `run_rag_query(user_id: str, question: str, project_id: str = None, paper_id: str = None, top_k: int = 6) -> dict`:
 
-### 4. Startup/shutdown integration
+1. Embed the question (reuse Milestone 7's embedding model — same model/preprocessing as chunk embeddings)
+2. Retrieve top-k chunks via `VectorDBService.search()`, scoped to `user_id` and optionally `paper_id`/`project_id`
+3. **Guardrail check:** if the top result's similarity score is below `RETRIEVAL_SCORE_THRESHOLD`, skip the LLM call and return `{"answer": "I couldn't find relevant content in your uploaded papers for this question.", "citations": []}` immediately
+4. Load recent chat history via `chat_service`
+5. Build the prompt via `prompt_builder.build_rag_prompt()`
+6. Call `LLMService.generate()`
+7. Parse the JSON response; if parsing fails, retry once with a stricter "return valid JSON only" follow-up instruction before falling back to a graceful error response (never crash the endpoint on malformed LLM output)
+8. Return `{"answer": str, "citations": list[dict], "usage": {...}}`
 
-In `main.py`'s lifespan handler:
-- Initialize `VectorDBService` on startup (load existing index if present)
-- Save index + metadata on shutdown (in addition to saving after every write, as a safety net)
+### 4. `services/chat_service.py`
 
-### 5. Config additions
+- `save_turn(user_id, project_id, question, answer, citations, usage)` — persists to MongoDB `chats` collection
+- `get_recent_history(user_id, project_id, limit=5)` — retrieves last N turns, ordered chronologically, for prompt inclusion
+
+### 5. `models/chat.py` and `schemas/chat_schemas.py`
+
+- `ChatMessage` model: `id, user_id, project_id, question, answer, citations, usage, created_at`
+- Request schema: `ChatRequest { question: str, project_id: Optional[str], paper_id: Optional[str], top_k: Optional[int] = 6 }`
+- Response schema: `ChatResponse { answer: str, citations: List[Citation], usage: UsageInfo }`
+
+### 6. `api/chat_routes.py`
+
+- `POST /chat` — auth-protected. Extracts `user_id` from the JWT dependency (never trust a client-supplied `user_id`). Calls `run_rag_query()`, saves the turn via `chat_service`, returns the response.
+- Support `?stream=true` to return an SSE stream of the answer text, followed by a final event containing the structured citations and usage data once generation completes.
+- `GET /chat/history?project_id=...` — returns paginated chat history for a project, for the frontend chat window.
+
+### 7. Config additions
 
 Add to `.env` / `settings.py`:
-- `VECTOR_STORE_PATH=vector_store/faiss.index`
-- `VECTOR_METADATA_PATH=vector_store/metadata.pkl`
-- `EMBEDDING_DIM=<match your Milestone 7 embedding model's output dimension>`
+- `LLM_PROVIDER=openai` (or `llama`, `gemini`)
+- `LLM_MODEL=gpt-4o-mini` (or equivalent — pick a cost-effective model for development)
+- `RETRIEVAL_SCORE_THRESHOLD=0.3`
+- `CHAT_HISTORY_TURNS=5`
+- `LLM_TEMPERATURE=0.2`
 
 ## Testing requirements
 
-Write `tests/test_vector_store.py` covering:
-1. Adding embeddings and confirming they're retrievable via search
-2. Search returns results ranked by similarity (test with a known-similar and known-dissimilar pair)
-3. Filtering by `paper_id` correctly excludes other papers' chunks
-4. `delete_by_paper` removes vectors and they no longer appear in search results
-5. Index persists correctly across a save/load cycle (create, save, reload in a new instance, confirm search still works)
+Write `tests/test_prompt_builder.py`:
+1. Confirm chunks are correctly formatted with source labels
+2. Confirm chat history is included and correctly ordered
+3. Confirm the JSON-output instruction is present in every generated prompt
+
+Write `tests/test_rag_pipeline.py` (mock the LLM and vector store calls):
+1. Low-similarity retrieval triggers the guardrail and skips the LLM call entirely
+2. A normal query returns a well-formed `{answer, citations}` structure
+3. Malformed LLM JSON output triggers the retry path and doesn't crash the pipeline
+4. Chat history is saved after a successful query and retrievable via `get_recent_history`
 
 ## Manual verification steps (do these after implementation)
 
-1. Upload two different papers through the existing pipeline (Milestones 4–7).
-2. Confirm both get chunked, embedded, and their vectors land in the FAISS index (`get_stats()` should reflect the total chunk count).
-3. Hit `POST /search` with a query relevant to only one of the papers — confirm it returns higher-scored results from the correct paper.
-4. Hit `POST /search` with `paper_id` filter set — confirm results are scoped correctly.
-5. Restart the FastAPI server — confirm the index reloads from disk and search still works without re-uploading.
-6. Delete one paper via the existing delete endpoint — confirm its vectors are removed from search results afterward.
+1. Upload a paper (existing pipeline), ask a direct factual question about it via `POST /chat` — confirm the answer is grounded and citations reference the correct paper/page/section.
+2. Ask a question clearly unrelated to any uploaded paper — confirm you get the "not found" response, not a hallucinated answer.
+3. Ask a question, then ask a follow-up using a pronoun ("compare it with X") — confirm the second answer correctly resolves the reference using chat history.
+4. Test `?stream=true` — confirm tokens arrive incrementally and citations arrive as a final structured block, not broken mid-stream.
+5. Check `GET /chat/history` returns the conversation in order.
+6. Deliberately lower `RETRIEVAL_SCORE_THRESHOLD` to 0 and confirm irrelevant chunks now get sent to the LLM — then restore it, to confirm the guardrail is actually doing something (not just a no-op).
 
 ## Explicitly out of scope for this milestone
 
-- Hybrid search (BM25 + vector) — later milestone
-- Multi-index sharding for scale — only needed if performance becomes an issue
-- Moving metadata store to MongoDB/Redis — only if multi-instance deployment becomes a requirement
-
-Do not implement these now; note them as TODOs in comments if relevant, but keep this milestone scoped to a working single-instance FAISS setup.
+- Router Agent / intent classification — next milestone, this endpoint is direct RAG QA only
+- Summary, Comparison, Literature Review agents — later milestones, but should be able to reuse `prompt_builder` and `llm_service` without rewriting them
+- Rate limiting / per-user quota enforcement — log usage now, enforce limits later
 
 ## Deliverable checklist
 
-- [ ] `VectorDBService` implemented with all methods above
-- [ ] Cosine similarity via normalized `IndexFlatIP` + `IndexIDMap`
-- [ ] Metadata persistence working (JSON/pickle)
-- [ ] Filtering by `user_id` and `paper_id` implemented (post-filter approach, documented)
-- [ ] `delete_by_paper` implemented and tested
-- [ ] `/search` test endpoint added, auth-protected, scoped to current user
-- [ ] Startup/shutdown hooks load/save index correctly
+- [ ] `prompt_builder.py` producing grounded, JSON-structured prompts with history included
+- [ ] `llm_service.py` provider-agnostic, supports streaming and non-streaming, returns usage metadata
+- [ ] `rag_pipeline.py` orchestrating retrieval → guardrail → prompt → LLM → parsed response
+- [ ] Low-relevance guardrail implemented and tested (not just prompted for)
+- [ ] Chat history persisted and included in follow-up prompts
+- [ ] `POST /chat` working with both streaming and non-streaming modes
+- [ ] `GET /chat/history` working
+- [ ] Malformed LLM JSON handled gracefully with a retry, never a crash
 - [ ] Unit tests passing
 - [ ] Manual verification steps completed and confirmed working

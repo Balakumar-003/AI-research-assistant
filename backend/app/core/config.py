@@ -32,6 +32,12 @@ class Settings:
     VECTOR_STORE_PATH: str = os.getenv("VECTOR_STORE_PATH", "vector_store/faiss.index")
     VECTOR_METADATA_PATH: str = os.getenv("VECTOR_METADATA_PATH", "vector_store/metadata.pkl")
     
+    LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "openai")
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "gpt-4o-mini")
+    RETRIEVAL_SCORE_THRESHOLD: float = float(os.getenv("RETRIEVAL_SCORE_THRESHOLD", "0.3"))
+    CHAT_HISTORY_TURNS: int = int(os.getenv("CHAT_HISTORY_TURNS", "5"))
+    LLM_TEMPERATURE: float = float(os.getenv("LLM_TEMPERATURE", "0.2"))
+    
     def __init__(self):
         if self.CHUNK_SIZE <= 0:
             raise ValueError("CHUNK_SIZE must be greater than 0")
