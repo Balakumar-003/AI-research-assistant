@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 # we'll inject user_id via a context variable.
 import contextvars
 from app.services.citation_service import CitationManager
+from app.services.summarization_service import SummarizationService
+from app.services.chunk_service import get_paper_chunks
 
 user_id_ctx: contextvars.ContextVar[str] = contextvars.ContextVar('user_id', default="")
 citation_manager_ctx: contextvars.ContextVar[CitationManager] = contextvars.ContextVar('citation_manager')
@@ -127,4 +129,50 @@ def get_paper_metadata(paper_id: str) -> str:
         return json.dumps({"success": False, "error": str(e)})
 
 
-AGENT_TOOLS = [search_paper, search_multiple_papers, get_paper_metadata]
+@tool
+async def summarize_paper(paper_id: str, summary_type: str = "standard", focus_area: str = "") -> str:
+    """
+    Summarize a specific research paper using Map-Reduce.
+    Use this tool when you need a comprehensive summary of an entire paper, or when asked to summarize specific aspects across the whole paper.
+    Supported summary types: quick, standard, detailed, technical, beginner.
+    
+    Args:
+        paper_id: The ID of the paper.
+        summary_type: The requested format/type of the summary.
+        focus_area: Specific aspects to focus on (e.g., "methodology and experimental results"). Leave empty if no specific focus.
+    """
+    user_id = user_id_ctx.get()
+    logger.info(f"Tool summarize_paper called with paper_id: {paper_id}, type: {summary_type}")
+    
+    from app.database.mongodb import get_db_client
+    from app.core.config import settings
+    
+    client = get_db_client()
+    db = client[settings.MONGODB_DB_NAME]
+    
+    try:
+        chunks_res = get_paper_chunks(db, paper_id, user_id, page=1, limit=100000)
+        if not chunks_res.chunks:
+            return json.dumps({"success": False, "error": "No text chunks found for this paper."})
+            
+        # Convert ChunkResponse back to dicts for SummarizationService
+        chunk_dicts = [
+            {
+                "paper_id": c.paper_id,
+                "chunk_id": c.chunk_id,
+                "page_number": c.page_start,
+                "text": c.text,
+                "score": 1.0  # Not relevant for full summarization but needed for consistency
+            } for c in chunks_res.chunks
+        ]
+        
+        cm = citation_manager_ctx.get()
+        summarizer = SummarizationService(cm)
+        
+        summary = await summarizer.summarize(chunk_dicts, summary_type=summary_type, focus_area=focus_area)
+        return json.dumps({"success": True, "results": summary})
+    except Exception as e:
+        return json.dumps({"success": False, "error": str(e)})
+
+
+AGENT_TOOLS = [search_paper, search_multiple_papers, get_paper_metadata, summarize_paper]

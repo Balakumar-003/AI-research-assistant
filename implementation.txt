@@ -1,41 +1,35 @@
-You are a Senior AI Engineer, RAG Architect, LangGraph Engineer,
-LLM Engineer, Backend Engineer, and AI Evaluation Engineer.
+You are a Senior AI Engineer, LLM Engineer, RAG Architect,
+LangGraph Agent Engineer, Backend Engineer, and AI Evaluation Engineer.
 
-You are continuing development of my existing project:
+You are continuing development of an existing project called:
 
 ============================================================
-PROJECT
-============================================================
-
 AI RESEARCH ASSISTANT
+============================================================
 
-The system allows users to:
+The goal of this project is to build an autonomous AI research
+assistant that can understand research papers, retrieve relevant
+evidence, answer research questions, summarize papers, compare
+papers, generate literature reviews, identify research gaps, and
+provide reliable citations.
 
-- Upload research papers as PDFs
-- Extract text
-- Chunk documents
-- Generate embeddings
-- Store embeddings in a vector database
-- Perform semantic search
-- Use RAG to answer questions
-- Use an autonomous LangGraph agent
-- Dynamically select and execute research tools
-- Generate research answers
+The system must behave like an autonomous research assistant,
+not like a collection of hard-coded if/else rules.
 
 ============================================================
 CURRENT PROJECT STATUS
 ============================================================
 
-The following milestones have already been implemented:
+The following milestones have already been completed:
 
 Milestone 1:
 Project Setup
 
 Milestone 2:
-Authentication
+Authentication & Authorization
 
 Milestone 3:
-Research Project Management
+Research Project / Workspace Management
 
 Milestone 4:
 PDF Upload
@@ -44,7 +38,7 @@ Milestone 5:
 PDF Text Extraction
 
 Milestone 6:
-Text Chunking
+Chunking
 
 Milestone 7:
 Embedding Generation
@@ -56,7 +50,10 @@ Milestone 9:
 RAG Pipeline
 
 Milestone 10:
-Autonomous AI Research Agent + LangGraph + Tool Calling
+Autonomous AI Research Agent using LangGraph + Tool Calling
+
+Milestone 11:
+Citation & Source Grounding System
 
 ============================================================
 CURRENT TASK
@@ -64,930 +61,1037 @@ CURRENT TASK
 
 Implement:
 
-============================================================
-MILESTONE 11 — CITATION & SOURCE GROUNDING SYSTEM
-============================================================
-
-The purpose of this milestone is to make every research-paper-based
-answer traceable to the original source material.
-
-The system should not simply generate:
-
-"The paper uses a Transformer architecture."
-
-It should generate something like:
-
-"The paper uses a Transformer architecture [1]."
-
-And provide:
-
-[1] Research Paper Name
-    Page 3
-    Chunk 17
-
-The user must be able to understand where the information came from.
+MILESTONE 12 — ADVANCED PAPER SUMMARIZATION
+& RESEARCH SYNTHESIS
 
 ============================================================
-1. PRIMARY OBJECTIVE
+1. MAIN OBJECTIVE
 ============================================================
 
-Build a reliable citation and source-grounding system that connects:
+The goal of Milestone 12 is to allow the AI Research Assistant
+to understand and summarize complete research papers using the
+existing:
 
-USER QUESTION
-      ↓
-AUTONOMOUS AGENT
-      ↓
-TOOL CALL
-      ↓
-VECTOR SEARCH
-      ↓
-RETRIEVED CHUNKS
-      ↓
-CHUNK METADATA
-      ↓
-LLM
-      ↓
-GENERATED ANSWER
-      ↓
-CITATION REFERENCES
-      ↓
-CITATION VALIDATION
-      ↓
-FINAL ANSWER + SOURCES
-
-The citation system must be tightly integrated with the existing
-Milestone 9 RAG pipeline and Milestone 10 autonomous agent.
-
-Do NOT create an independent retrieval system.
-
-Reuse the existing:
-
+- PDF processing pipeline
 - chunking system
-- embedding system
+- embeddings
 - vector database
-- retrieval service
-- RAG service
-- LangGraph agent
-- authentication
-- authorization
-- database
+- semantic retrieval
+- RAG pipeline
+- LangGraph autonomous agent
+- tool calling
+- citation/source grounding system
+
+The system must be capable of generating structured,
+evidence-grounded summaries of research papers.
+
+The system must NOT simply send the entire PDF text to the LLM.
+
+It should use an intelligent retrieval and summarization strategy
+that can scale to long research papers.
 
 ============================================================
-2. IMPORTANT PRINCIPLE
+2. USER EXPERIENCE
 ============================================================
 
-The LLM must NOT be trusted to invent citations.
+After Milestone 12, users should be able to ask:
 
-The backend must maintain the relationship:
+1.
+"Summarize this paper."
 
-citation
-   ↓
-retrieved chunk
-   ↓
-paper
-   ↓
-page
-   ↓
-original PDF
+2.
+"Give me a detailed summary of this paper."
 
-The citation must be generated from actual retrieved source metadata.
+3.
+"Give me a beginner-friendly explanation."
 
-Do NOT allow the model to randomly generate:
+4.
+"Explain the methodology."
 
-[1] Page 15
+5.
+"What are the main contributions?"
 
-unless the retrieved source actually corresponds to Page 15.
+6.
+"What dataset was used?"
+
+7.
+"What were the experimental results?"
+
+8.
+"What are the limitations?"
+
+9.
+"What are the key takeaways?"
+
+10.
+"Summarize this paper focusing mainly on the experiments."
+
+11.
+"Explain the paper technically."
+
+12.
+"Explain this research paper in simple terms."
+
+The autonomous agent should understand the user's intent and
+decide what information and tools are necessary.
 
 ============================================================
-3. CURRENT RETRIEVAL DATA
+3. VERY IMPORTANT — AUTONOMOUS BEHAVIOR
 ============================================================
 
-First inspect the existing chunk metadata.
+Do NOT implement the summarization workflow as a simple rule-based
+system such as:
 
-Determine whether each chunk currently contains:
+if "summary" in question:
+    summarize()
 
-- paper_id
+Instead, use the existing LangGraph autonomous agent.
+
+The agent should:
+
+1. Understand the user request.
+2. Determine the type of summary required.
+3. Determine what evidence is necessary.
+4. Decide which tools should be used.
+5. Retrieve relevant evidence.
+6. Determine whether more retrieval is necessary.
+7. Synthesize the evidence.
+8. Validate citations.
+9. Produce the final response.
+
+The agent should be able to decide whether it needs:
+
+- abstract
+- introduction
+- methodology
+- dataset
+- experiments
+- results
+- discussion
+- conclusion
+- limitations
+- contributions
+
+depending on the user's request.
+
+Do not force the agent to retrieve every section for every query.
+
+============================================================
+4. FIRST STEP — INSPECT THE EXISTING PROJECT
+============================================================
+
+DO NOT immediately modify code.
+
+First inspect the entire repository.
+
+Understand:
+
+1. Backend architecture
+2. Frontend architecture
+3. Database architecture
+4. Authentication
+5. PDF upload implementation
+6. PDF extraction
+7. Chunking
+8. Embedding generation
+9. Vector database
+10. Retrieval service
+11. RAG implementation
+12. LangGraph agent
+13. Agent state
+14. Existing tools
+15. Tool result format
+16. Citation system
+17. Citation registry
+18. Citation validation
+19. API endpoints
+20. React UI
+21. Existing tests
+
+Identify exactly where Milestone 12 should integrate.
+
+DO NOT rewrite working components unnecessarily.
+
+============================================================
+5. EXISTING ARCHITECTURE MUST BE REUSED
+============================================================
+
+Reuse existing implementations wherever possible.
+
+For example:
+
+If the project already has:
+
+retrieve_relevant_chunks()
+
+reuse it.
+
+If the project already has:
+
+build_context()
+
+extend it instead of creating another context builder.
+
+If the project already has:
+
+citation_registry
+
+reuse it.
+
+If the project already has:
+
+citation_validator
+
+reuse it.
+
+If the project already has:
+
+LangGraph state
+
+extend it carefully.
+
+Do NOT create duplicate versions of existing functionality.
+
+============================================================
+6. CORE SUMMARIZATION ARCHITECTURE
+============================================================
+
+Implement a scalable summarization workflow.
+
+Recommended conceptual architecture:
+
+Research Paper
+      ↓
+Document Structure
+      ↓
+Chunk Groups
+      ↓
+Evidence Retrieval
+      ↓
+Map Summarization
+      ↓
+Intermediate Summaries
+      ↓
+Reduce / Synthesis
+      ↓
+Citation Validation
+      ↓
+Structured Final Summary
+
+The exact implementation can vary depending on the existing
+architecture.
+
+============================================================
+7. LONG DOCUMENT HANDLING
+============================================================
+
+Do NOT send the entire document directly to the LLM.
+
+Research papers may contain:
+
+- thousands of words
+- tens of thousands of tokens
+- dozens of pages
+
+Use a scalable strategy.
+
+Possible approach:
+
+MAP:
+
+Group related chunks.
+
+For example:
+
+Group 1:
+Chunks 1–5
+
+Group 2:
+Chunks 6–10
+
+Group 3:
+Chunks 11–15
+
+Generate intermediate summaries:
+
+Group 1 → Summary 1
+Group 2 → Summary 2
+Group 3 → Summary 3
+
+Then:
+
+REDUCE:
+
+Summary 1
+Summary 2
+Summary 3
+
+        ↓
+
+Final LLM synthesis
+
+        ↓
+
+Complete summary
+
+Use LangChain summarization utilities where they genuinely help,
+but do not introduce abstractions that make the existing
+architecture unnecessarily complex.
+
+============================================================
+8. SECTION-AWARE SUMMARIZATION
+============================================================
+
+The system should understand document structure when possible.
+
+Possible sections:
+
+- Abstract
+- Introduction
+- Background
+- Related Work
+- Methodology
+- Proposed Method
+- Dataset
+- Experimental Setup
+- Experiments
+- Results
+- Discussion
+- Limitations
+- Conclusion
+- Future Work
+
+Do NOT assume that every paper contains all of these sections.
+
+Different papers use different structures.
+
+If section metadata already exists, reuse it.
+
+If it does not exist, inspect the current chunking/extraction
+pipeline and determine whether section metadata can be added
+without breaking existing functionality.
+
+Do NOT implement fragile section detection based only on hard-coded
+section names.
+
+============================================================
+9. CHUNK METADATA
+============================================================
+
+Every piece of evidence used in summarization should preserve:
+
 - document_id
+- paper_id
 - chunk_id
 - chunk_index
 - page_start
 - page_end
+- section if available
 - text
-- embedding
-- similarity_score
-- project_id
-- user_id
+- similarity score when retrieved
 
-Do not assume the metadata structure.
+Adapt the structure to the existing project.
 
-Inspect the actual implementation first.
-
-If some metadata is missing, modify the existing pipeline carefully.
-
-Do not break Milestones 1–10.
+Do not invent metadata that does not exist.
 
 ============================================================
-4. SOURCE METADATA STANDARD
+10. SUMMARY TYPES
 ============================================================
 
-Every retrieved chunk should have sufficient metadata to identify
-its original location.
+Implement support for multiple summary modes.
 
-Recommended structure:
+At minimum:
 
-{
-    "paper_id": "...",
-    "document_id": "...",
-    "chunk_id": "...",
-    "chunk_index": 42,
-    "page_start": 5,
-    "page_end": 6,
-    "text": "...",
-    "similarity_score": 0.89
-}
+A. QUICK SUMMARY
 
-Adapt this to the existing schema.
+Short summary containing the core idea.
 
-The important requirement is that the source can be traced back
-to the original PDF.
+Example:
 
-============================================================
-5. SOURCE OBJECT
-============================================================
+- Problem
+- Method
+- Result
+- Conclusion
 
-Create a normalized source representation.
+------------------------------------------------------------
 
-For example:
+B. STANDARD SUMMARY
 
-{
-    "source_id": "src_001",
-    "paper_id": "paper_123",
-    "document_id": "doc_123",
-    "chunk_id": "chunk_42",
-    "chunk_index": 42,
-    "page_start": 5,
-    "page_end": 6,
-    "similarity_score": 0.89
-}
+Structured summary with:
 
-Do not duplicate unnecessary information.
+- Overview
+- Problem
+- Methodology
+- Dataset
+- Results
+- Contributions
+- Conclusion
 
-Use a stable internal source identifier.
+------------------------------------------------------------
 
-============================================================
-6. CITATION OBJECT
-============================================================
+C. DETAILED SUMMARY
 
-Create a structured citation model.
+More comprehensive summary containing:
 
-Conceptually:
+- Research problem
+- Motivation
+- Objectives
+- Related work
+- Methodology
+- Architecture
+- Dataset
+- Experimental setup
+- Results
+- Analysis
+- Contributions
+- Limitations
+- Conclusion
+- Key takeaways
 
-{
-    "citation_id": "1",
-    "source_id": "src_001",
-    "paper_id": "paper_123",
-    "document_id": "doc_123",
-    "chunk_id": "chunk_42",
-    "page_start": 5,
-    "page_end": 6
-}
+------------------------------------------------------------
 
-The exact schema should follow the project's existing conventions.
+D. TECHNICAL SUMMARY
 
-Use Pydantic if the backend already uses Pydantic.
+Focus on:
 
-============================================================
-7. CITATION LIFECYCLE
-============================================================
+- Architecture
+- Algorithms
+- Models
+- Mathematical methods
+- Training procedure
+- Hyperparameters
+- Dataset
+- Evaluation metrics
+- Results
 
-The citation must travel through the entire RAG/agent pipeline.
+------------------------------------------------------------
 
-Flow:
+E. BEGINNER SUMMARY
 
-Retriever
-   ↓
-Retrieved Chunk
-   ↓
-Source Metadata
-   ↓
-Agent State
-   ↓
-Context Builder
-   ↓
-LLM
-   ↓
-Citation Mapping
-   ↓
-Citation Validation
-   ↓
-API Response
-   ↓
-React UI
+Explain the paper in simple language.
 
-Do not lose metadata between any of these steps.
+Avoid unnecessary technical jargon.
+
+When technical terms are necessary, explain them.
 
 ============================================================
-8. LANGGRAPH STATE
+11. USER-CONTROLLED SUMMARY
 ============================================================
 
-Inspect the existing Milestone 10 agent state.
+The user may ask:
 
-Extend it if necessary.
+"Summarize this paper focusing on experiments."
 
-Conceptually:
+The agent should prioritize:
 
-ResearchAgentState:
+- Experimental Setup
+- Dataset
+- Evaluation Metrics
+- Results
+- Comparisons
+- Ablation Studies
 
-    question
-    user_id
-    project_id
-    paper_ids
-    messages
-    tool_calls
-    tool_results
-    retrieved_chunks
-    sources
-    citations
-    final_answer
-
-Do not unnecessarily redesign the existing state.
-
-The important requirement is:
-
-The agent must be able to carry source information through
-multiple tool calls.
-
-============================================================
-9. MULTI-TOOL CITATION TRACKING
-============================================================
-
-The agent can perform multiple tool calls.
+It should not waste most of the context summarizing unrelated
+sections.
 
 Example:
 
 User:
-
-"Compare the methodologies of Paper A and Paper B."
+"Summarize this paper focusing on methodology."
 
 Agent:
 
-search_paper(A)
-      ↓
-sources A
+Retrieve:
+- Methodology
+- Architecture
+- Related background
+- Relevant experiments
 
-search_paper(B)
-      ↓
-sources B
+Then synthesize those sections.
 
-The final response should preserve both sets of sources.
+============================================================
+12. AGENT DECISION MAKING
+============================================================
+
+The LangGraph agent should reason at a high level about the task.
+
+Example workflow:
+
+START
+ ↓
+Understand User Intent
+ ↓
+Determine Summary Type
+ ↓
+Determine Required Evidence
+ ↓
+Select Retrieval/Search Tools
+ ↓
+Retrieve Evidence
+ ↓
+Evaluate Evidence Sufficiency
+ ↓
+Retrieve More Evidence if Necessary
+ ↓
+Generate Intermediate Summaries
+ ↓
+Synthesize Final Summary
+ ↓
+Validate Citations
+ ↓
+Format Response
+ ↓
+END
+
+The agent may decide to stop early if sufficient evidence is
+already available.
+
+The agent may retrieve additional evidence when the current
+evidence is insufficient.
+
+Do NOT implement a fixed sequence that always executes every
+possible step.
+
+============================================================
+13. EVIDENCE SUFFICIENCY
+============================================================
+
+The agent should determine whether the retrieved evidence is
+sufficient.
 
 Example:
 
-Answer:
+User:
+"What dataset and evaluation metric did the authors use?"
 
-Paper A uses a CNN architecture [1], while Paper B uses a
-Transformer-based architecture [2].
+Retrieved:
+Dataset information found.
 
-Sources:
+Evaluation metric information missing.
 
-[1] Paper A — Page 4
-[2] Paper B — Page 6
+The agent should retrieve additional evidence instead of
+immediately generating an answer.
 
-Do not overwrite previous sources when another tool is called.
+If the information still cannot be found:
 
-Merge and deduplicate them.
+"The paper does not provide sufficient information about the
+evaluation metric in the retrieved content."
 
-============================================================
-10. SOURCE DEDUPLICATION
-============================================================
-
-If the same chunk is retrieved multiple times:
-
-search result 1 → chunk_42
-search result 2 → chunk_42
-
-Do not produce:
-
-[1] chunk_42
-[2] chunk_42
-
-Instead use one source:
-
-[1] chunk_42
-
-Implement source deduplication based on stable identifiers such as:
-
-document_id + chunk_id
-
-or the appropriate unique key in the existing database.
+Do NOT hallucinate.
 
 ============================================================
-11. CITATION NUMBERING
+14. MAP STAGE
 ============================================================
 
-Citation numbering should be deterministic.
+During the MAP stage:
+
+For each chunk group:
+
+1. Provide the LLM with relevant chunks.
+2. Ask it to extract important information.
+3. Preserve source identifiers.
+4. Generate an intermediate summary.
+5. Do not introduce unsupported claims.
+
+Conceptual structure:
+
+{
+    "group_id": "group_01",
+    "summary": "...",
+    "sources": [
+        "src_001",
+        "src_002"
+    ]
+}
+
+Do not lose source information.
+
+============================================================
+15. REDUCE STAGE
+============================================================
+
+The REDUCE stage receives intermediate summaries.
 
 Example:
 
-First unique source:
-[1]
+Summary 1
+Summary 2
+Summary 3
+Summary 4
 
-Second unique source:
-[2]
+The LLM synthesizes them into a coherent final summary.
 
-Third:
-[3]
+Important:
 
-If the same source appears again, reuse:
+The final synthesis must remain grounded in the original evidence.
 
-[1]
+Do not treat intermediate summaries as authoritative sources.
 
-Do not create a new citation number every time the source is
-mentioned.
-
-============================================================
-12. LLM CONTEXT FORMAT
-============================================================
-
-Modify the context builder so retrieved information includes
-source identifiers.
-
-For example:
-
-SOURCE_ID: src_001
-PAPER: Attention Is All You Need
-PAGE: 3
-
-TEXT:
-"The Transformer is based entirely on attention mechanisms..."
-
-SOURCE_ID: src_002
-PAPER: Attention Is All You Need
-PAGE: 4
-
-TEXT:
-"The model architecture consists of..."
-
-The LLM must be able to identify which source supports which
-information.
+Where possible, retain references to original source IDs.
 
 ============================================================
-13. CITATION-AWARE SYSTEM PROMPT
+16. SOURCE GROUNDING
 ============================================================
 
-Create/update the research agent system prompt.
+Milestone 11 already provides the citation system.
 
-It should communicate:
+Milestone 12 MUST reuse it.
 
-You are an AI Research Assistant.
-
-Answer research questions using the supplied evidence.
-
-For claims based on uploaded research papers, use the provided
-source identifiers.
-
-Do not invent sources.
-
-Do not invent page numbers.
-
-Do not invent paper names.
-
-Do not cite information that was not retrieved.
-
-If the retrieved evidence does not support the requested answer,
-clearly state that sufficient evidence was not found.
-
-When possible, associate factual claims with the source that
-supports them.
-
-Do not reveal hidden chain-of-thought.
-
-============================================================
-14. CITATION FORMAT
-============================================================
-
-Choose a consistent format.
-
-Recommended:
-
-Inline:
-
-"The model uses self-attention mechanisms [1]."
-
-Then:
-
-Sources:
-
-[1] Attention Is All You Need — Page 3
-
-For multiple sources:
-
-"The proposed architecture uses self-attention [1] and achieves
-strong performance on the WMT dataset [2]."
-
-Sources:
-
-[1] Paper A — Page 3
-[2] Paper A — Page 7
-
-Use a consistent format throughout the application.
-
-============================================================
-15. CLAIM-TO-SOURCE MAPPING
-============================================================
-
-Where possible, the system should maintain a relationship between
-answer claims and supporting sources.
-
-Conceptually:
-
-{
-    "claim": "The model uses self-attention.",
-    "citations": ["1"]
-}
-
-Another:
-
-{
-    "claim": "The model achieved 94.2% accuracy.",
-    "citations": ["2"]
-}
-
-This will make future citation evaluation easier.
-
-Do not over-engineer this if the current system cannot support
-fine-grained claim extraction.
-
-Start with reliable source-level attribution.
-
-============================================================
-16. CITATION VALIDATION
-============================================================
-
-Before returning the final answer:
-
-Generated Answer
-      ↓
-Citation Validator
-      ↓
-Check cited source IDs
-      ↓
-Are they valid?
-      │
-      ├── YES → Return answer
-      │
-      └── NO → Remove/fix invalid citations
-
-The validator should ensure:
-
-1. Citation ID exists.
-2. Citation maps to an actual retrieved source.
-3. Source belongs to an authorized document.
-4. Page metadata exists when available.
-5. Citation is not fabricated.
-
-============================================================
-17. DO NOT TRUST LLM CITATIONS
-============================================================
-
-This is a critical requirement.
-
-Bad approach:
-
-LLM generates:
-
-"[1] Paper A, Page 10"
-
-Backend blindly returns it.
-
-Good approach:
-
-LLM references:
-
-"[1]"
-
-Backend checks:
-
-Does citation 1 exist?
-
-What source does citation 1 represent?
-
-What page does that source actually contain?
-
-Then construct the final citation from backend metadata.
-
-The backend owns source truth.
-
-============================================================
-18. SOURCE TRUTH
-============================================================
-
-The authoritative source should be:
-
-Retriever + Database Metadata
-
-NOT:
-
-LLM-generated text.
-
-The architecture should be:
-
-Vector DB
-    ↓
-Retrieved source
-    ↓
-Backend source registry
-    ↓
-Citation ID
-    ↓
-LLM references citation ID
-    ↓
-Backend resolves citation
-    ↓
-Final source display
-
-============================================================
-19. CITATION REGISTRY
-============================================================
-
-Create a per-request source registry.
+Every important factual statement in the final summary should
+have supporting evidence where appropriate.
 
 Example:
 
-{
-    "src_001": {
-        "paper_id": "paper_123",
-        "chunk_id": "chunk_42",
-        "page_start": 5,
-        "page_end": 5
-    },
+"The model achieved 94.2% accuracy [3]."
 
-    "src_002": {
-        "paper_id": "paper_123",
-        "chunk_id": "chunk_45",
-        "page_start": 6,
-        "page_end": 6
-    }
+The citation must resolve to the actual source.
+
+Do NOT allow the LLM to invent:
+
+- paper names
+- page numbers
+- chunk IDs
+- citation IDs
+
+Backend metadata is authoritative.
+
+============================================================
+17. CITATION PIPELINE
+============================================================
+
+The final summary pipeline must be:
+
+Evidence
+ ↓
+Intermediate Summary
+ ↓
+Final Summary
+ ↓
+Citation Resolution
+ ↓
+Citation Validation
+ ↓
+Final Answer
+
+Reuse the existing citation validator.
+
+Do not build another citation system.
+
+============================================================
+18. CLAIM GROUNDING
+============================================================
+
+Where practical, associate claims with source IDs.
+
+Conceptual structure:
+
+{
+    "claim": "The proposed model achieves 94.2% accuracy.",
+    "source_ids": ["src_007"]
 }
 
-This registry should exist only for the relevant request/session
-unless persistent citation history is explicitly required.
+For:
 
-Do not expose internal implementation details to the user.
+"The model improves performance over baseline methods."
 
-============================================================
-20. PAPER INFORMATION
-============================================================
+Use the relevant sources.
 
-Citation display should preferably include human-readable paper
-information.
-
-For example:
-
-[1] Attention Is All You Need — Page 3
-
-rather than:
-
-[1] paper_123 — chunk_42
-
-The internal identifiers can still exist in the API.
+Do not attach every source to every claim.
 
 ============================================================
-21. PDF PAGE VERIFICATION
+19. AVOID CITATION SPAM
 ============================================================
 
-If the current PDF extraction pipeline already stores page numbers,
-reuse them.
+Bad:
 
-If not, inspect Milestone 5.
+"The paper proposes a Transformer [1][2][3][4][5]."
 
-Determine whether PyMuPDF/PDF extraction can preserve page boundaries.
+when only source [2] supports that claim.
 
-Do NOT implement fake page numbering.
+Good:
 
-If page metadata is unavailable:
+"The paper proposes a Transformer architecture [2]."
 
-Display:
-
-[1] Paper Name — Source chunk
-
-instead of inventing a page.
+Use relevant citations.
 
 ============================================================
-22. PAGE RANGE SUPPORT
+20. MISSING INFORMATION
 ============================================================
 
-If a chunk spans multiple pages:
+If information is not present in the paper:
+
+DO NOT guess.
+
+Examples:
+
+"The paper does not explicitly state the optimizer."
+
+"The retrieved content does not provide enough information about
+the training hardware."
+
+"The authors do not explicitly discuss this limitation."
+
+Use these responses instead of hallucinating.
+
+============================================================
+21. SUMMARY STRUCTURE
+============================================================
+
+The final response should be structured.
+
+Recommended detailed format:
+
+# Paper Summary
+
+## 1. Overview
+
+## 2. Research Problem
+
+## 3. Motivation
+
+## 4. Objective
+
+## 5. Proposed Methodology
+
+## 6. Dataset
+
+## 7. Experimental Setup
+
+## 8. Results
+
+## 9. Key Contributions
+
+## 10. Limitations
+
+## 11. Conclusion
+
+## 12. Key Takeaways
+
+## Sources
+
+[1] ...
+[2] ...
+[3] ...
+
+Adapt the structure depending on summary type.
+
+Do not display empty sections unnecessarily.
+
+============================================================
+22. ADAPTIVE OUTPUT
+============================================================
+
+For QUICK summary:
+
+Use:
+
+- Overview
+- Problem
+- Method
+- Result
+- Conclusion
+
+For STANDARD:
+
+Use:
+
+- Overview
+- Problem
+- Method
+- Dataset
+- Results
+- Contributions
+- Conclusion
+
+For DETAILED:
+
+Use all relevant sections.
+
+For TECHNICAL:
+
+Prioritize technical details.
+
+For BEGINNER:
+
+Prioritize simple explanations.
+
+The agent should select the appropriate output structure based
+on user intent.
+
+============================================================
+23. BEGINNER MODE
+============================================================
+
+If user asks:
+
+"Explain this paper like I'm a beginner."
+
+The response should:
+
+1. Explain the problem simply.
+2. Explain why the problem matters.
+3. Explain the proposed solution.
+4. Explain the architecture simply.
+5. Explain the experiments.
+6. Explain the result.
+7. Explain the main takeaway.
+
+Example:
+
+Technical:
+
+"The authors employ a multi-head self-attention mechanism."
+
+Beginner:
+
+"The model looks at different parts of the input at the same
+time so that it can understand which pieces of information are
+important to each other."
+
+Do not distort the original meaning.
+
+============================================================
+24. TECHNICAL MODE
+============================================================
+
+If user asks:
+
+"Give me a technical summary."
+
+Include when available:
+
+- Architecture
+- Model
+- Algorithms
+- Training process
+- Loss function
+- Hyperparameters
+- Dataset
+- Evaluation metrics
+- Baselines
+- Results
+- Ablation studies
+
+Only include information supported by the paper.
+
+============================================================
+25. RESEARCH CONTRIBUTIONS
+============================================================
+
+Extract explicit contributions from the paper.
+
+Prioritize:
+
+- Introduction
+- Contributions section
+- Conclusion
+
+Do not invent contributions.
+
+If the authors explicitly list:
+
+1. New architecture
+2. New dataset
+3. New training method
+
+preserve these accurately.
+
+============================================================
+26. LIMITATIONS
+============================================================
+
+Prioritize explicit statements from:
+
+- Limitations section
+- Discussion
+- Conclusion
+- Future Work
+
+If the user asks:
+
+"What are the limitations?"
+
+First report limitations explicitly acknowledged by the authors.
+
+You may optionally distinguish:
+
+"Author-stated limitations"
+
+from
+
+"Potential limitations inferred from the evidence"
+
+Never present inference as an explicit statement by the authors.
+
+============================================================
+27. RESULTS
+============================================================
+
+Results should be accurately summarized.
+
+Preserve:
+
+- Metrics
+- Values
+- Baselines
+- Dataset
+- Experimental conditions
+
+Example:
+
+"The proposed model achieved 94.2% accuracy on Dataset A,
+compared with 91.8% for the baseline [5]."
+
+Do not change numerical values.
+
+Do not round numbers unnecessarily.
+
+Do not invent missing comparisons.
+
+============================================================
+28. TABLE / EXPERIMENT HANDLING
+============================================================
+
+If PDF extraction already supports tables, reuse that capability.
+
+If tables are represented as text, ensure important numerical
+information is preserved.
+
+Do not create fake table values.
+
+If a result cannot be reliably extracted, state that.
+
+============================================================
+29. MULTI-PAGE CHUNKS
+============================================================
+
+If a chunk spans:
+
+page 4 → page 5
+
+preserve:
 
 page_start = 4
 page_end = 5
 
-Display:
-
-Pages 4–5
-
-If:
-
-page_start = 4
-page_end = 4
-
-Display:
-
-Page 4
+Do not create a fake single page.
 
 ============================================================
-23. CITATION CLICKABILITY
+30. MULTI-PAPER PREPARATION
 ============================================================
 
-Prepare the API for future clickable citations.
+Milestone 12 is primarily focused on single-paper summarization.
 
-The response should contain enough information for the frontend
-to eventually support:
+However, design the summarization service so it can later support
+Milestone 13:
 
-Citation
+Multi-Paper Comparison.
+
+For example, keep the summarization interface modular:
+
+summarize_document()
+summarize_sections()
+summarize_evidence()
+
+Do NOT implement full multi-paper comparison in this milestone.
+
+============================================================
+31. LANGGRAPH DESIGN
+============================================================
+
+Extend the existing LangGraph rather than replacing it.
+
+Conceptual graph:
+
+START
  ↓
-Open PDF
+analyze_request
  ↓
-Jump to page
+plan_summary
+ ↓
+retrieve_evidence
+ ↓
+evaluate_evidence
+ ↓
+ ┌───────────────┐
+ │ sufficient?   │
+ └───────┬───────┘
+     YES │ NO
+         │
+         ├───────────────→ retrieve_more_evidence
+         │                         │
+         │                         └────→ evaluate_evidence
+         │
+         ▼
+summarize_evidence
+         ↓
+synthesize_summary
+         ↓
+validate_citations
+         ↓
+format_response
+         ↓
+END
 
-Conceptually:
+Do not blindly implement every node if the current LangGraph
+architecture can accomplish the same behavior more cleanly.
+
+============================================================
+32. AGENT STATE
+============================================================
+
+Inspect the existing agent state first.
+
+Extend it only if necessary.
+
+Possible state:
 
 {
-    "citation_id": "1",
-    "paper_id": "...",
+    "question": "...",
+    "user_id": "...",
+    "project_id": "...",
     "document_id": "...",
-    "page_start": 5,
-    "page_end": 6
+    "summary_type": "detailed",
+    "focus": "...",
+    "retrieved_chunks": [],
+    "sources": [],
+    "intermediate_summaries": [],
+    "final_summary": "...",
+    "citations": [],
+    "tool_calls": [],
+    "errors": []
 }
 
-If PDF viewer integration is already available, implement the
-click-to-source behavior.
-
-Otherwise expose the metadata through the API and leave the viewer
-integration for a later milestone.
+Adapt to the existing architecture.
 
 ============================================================
-24. API RESPONSE
+33. TOOL DESIGN
 ============================================================
 
-Update the agent API response.
+Reuse existing tools where possible.
 
-Conceptually:
+Potential tools:
 
-{
-    "answer": "The model uses self-attention mechanisms [1].",
+search_paper
+retrieve_chunks
+get_document_sections
+get_document_metadata
+search_within_document
 
-    "citations": [
-        {
-            "citation_id": "1",
-            "paper_id": "paper_123",
-            "document_id": "doc_123",
-            "page_start": 3,
-            "page_end": 3,
-            "chunk_id": "chunk_17",
-            "title": "Attention Is All You Need"
-        }
-    ],
+Do not create unnecessary tools.
 
-    "tools_used": [
-        "search_paper"
-    ],
-
-    "status": "completed"
-}
-
-Adapt the schema to the existing API.
-
-Do not expose internal chain-of-thought.
-
-============================================================
-25. NO-EVIDENCE CASE
-============================================================
-
-If the agent cannot find evidence:
-
-User:
-
-"What optimizer was used?"
-
-Retrieved information:
-
-No relevant chunks.
-
-The final response should be:
-
-"I couldn't find sufficient information about the optimizer in
-the uploaded research paper."
-
-Do NOT generate a citation.
-
-Do NOT invent an answer.
-
-============================================================
-26. PARTIAL-EVIDENCE CASE
-============================================================
-
-Suppose the question asks:
-
-"What dataset and optimizer were used?"
-
-Retrieved evidence:
-
-Dataset found.
-
-Optimizer not found.
-
-The answer should distinguish:
-
-"The paper uses the CIFAR-10 dataset [1]. I could not find
-sufficient information about the optimizer in the retrieved
-content."
-
-This is better than hallucinating the optimizer.
-
-============================================================
-27. MULTI-PAPER CITATIONS
-============================================================
-
-Support answers such as:
-
-"Paper A uses CNNs [1], while Paper B uses a Transformer
-architecture [2]."
-
-Sources:
-
-[1] Paper A — Page 4
-[2] Paper B — Page 6
-
-Make sure the correct citation is attached to the correct paper.
-
-============================================================
-28. MULTI-CHUNK ANSWERS
-============================================================
-
-If an answer requires multiple chunks:
-
-"The model consists of three components [1][2][3]."
-
-The citations should correspond to actual retrieved chunks.
-
-Avoid unnecessary citation spam.
-
-Use only sources that actually contribute to the answer.
-
-============================================================
-29. CITATION RELEVANCE
-============================================================
-
-A citation should support the claim.
-
-Do not attach every retrieved chunk to every sentence.
-
-For example:
-
-Retrieved:
-
-Chunk 1 → methodology
-Chunk 2 → dataset
-Chunk 3 → results
-
-Question:
-
-"What dataset was used?"
-
-Answer:
-
-"The paper uses CIFAR-10 [2]."
-
-Do NOT produce:
-
-"The paper uses CIFAR-10 [1][2][3]."
-
-Use the relevant source.
-
-============================================================
-30. CITATION CONFIDENCE
-============================================================
-
-Use retrieval similarity scores internally.
-
-Example:
-
-source:
-
-similarity_score = 0.91
-
-This can help evaluate retrieval quality.
-
-Do not necessarily expose similarity scores to users.
-
-If the score is below the configured relevance threshold,
-consider the source insufficient.
-
-Use the existing retrieval configuration if available.
-
-Do not arbitrarily invent thresholds without inspecting the
-current retrieval implementation.
-
-============================================================
-31. SOURCE AUTHORIZATION
-============================================================
-
-This is critical.
-
-Every citation must belong to a document the current user is
-authorized to access.
-
-The system must prevent:
-
-User A
- ↓
-Question
- ↓
-Citation
- ↓
-User B's paper
-
-Never expose another user's paper metadata through citations.
-
-Authorization must be enforced server-side.
-
-Never trust citation IDs sent by the frontend.
-
-============================================================
-32. CITATION SECURITY
-============================================================
-
-Citation IDs should not be treated as authorization credentials.
-
-The backend must verify:
-
-authenticated user
-      ↓
-source
-      ↓
-document
-      ↓
-ownership/access permission
-
-A user must not be able to modify:
-
-paper_id
-document_id
-citation_id
-
-in a request and access another user's data.
-
-============================================================
-33. AGENT INTEGRATION
-============================================================
-
-Integrate citations with the Milestone 10 autonomous agent.
-
-The agent should be able to:
-
-1. Call search tool.
-2. Receive chunks + sources.
-3. Preserve sources in state.
-4. Call another tool if needed.
-5. Merge sources.
-6. Deduplicate sources.
-7. Generate answer.
-8. Return citations.
-
-Example:
-
-Agent
- ↓
-search_paper(A)
- ↓
-sources A
-
-Agent
- ↓
-search_paper(B)
- ↓
-sources B
-
-Agent
- ↓
-merge sources
- ↓
-deduplicate
- ↓
-answer + citations
+The agent should select tools based on task requirements.
 
 ============================================================
 34. TOOL RESULT FORMAT
 ============================================================
 
-Standardize research tool results.
+Tool results should preserve source metadata.
 
-For example:
+Conceptually:
 
 {
     "success": true,
-
     "results": [
         {
             "text": "...",
@@ -997,1036 +1101,1118 @@ For example:
                 "document_id": "doc_123",
                 "chunk_id": "chunk_42",
                 "page_start": 5,
-                "page_end": 5
+                "page_end": 5,
+                "section": "Methodology"
             }
         }
     ]
 }
 
-Adapt to the existing project.
-
-The goal is consistency.
+Adapt this to the current implementation.
 
 ============================================================
-35. RAG SERVICE INTEGRATION
+35. PROMPT ENGINEERING
 ============================================================
 
-Do not duplicate retrieval logic.
+Create dedicated prompts for:
 
-If Milestone 9 already has:
+1. Evidence extraction
+2. Intermediate summarization
+3. Final synthesis
+4. Beginner explanation
+5. Technical summary
+6. Citation-aware synthesis
 
-retrieve_relevant_chunks()
+Do not place giant prompts directly inside random Python
+functions.
 
-reuse it.
-
-If it has:
-
-build_context()
-
-reuse or extend it.
-
-If it has:
-
-rag_service()
-
-integrate citation metadata into it.
-
-Avoid:
-
-Old RAG retrieval
-+
-New citation retrieval
-
-There should be one source of truth for retrieval.
+Store prompts in the existing prompt architecture if one exists.
 
 ============================================================
-36. FRONTEND
+36. EVIDENCE EXTRACTION PROMPT
 ============================================================
 
-Update the React interface to display citations clearly.
+The evidence extraction prompt should instruct the model:
+
+- Use only supplied evidence.
+- Extract important factual information.
+- Preserve numerical values.
+- Preserve source IDs.
+- Do not invent facts.
+- Do not infer unsupported information.
+- Distinguish author claims from model inference.
+
+Do not ask the model to provide hidden chain-of-thought.
+
+Ask only for useful structured information.
+
+============================================================
+37. FINAL SYNTHESIS PROMPT
+============================================================
+
+The final synthesis prompt should instruct:
+
+You are summarizing a research paper using evidence retrieved
+from the paper.
+
+Rules:
+
+1. Use only supplied evidence.
+2. Do not invent information.
+3. Preserve numerical values accurately.
+4. Do not invent citations.
+5. Use supplied source IDs.
+6. Clearly indicate missing information.
+7. Maintain the distinction between author claims and inference.
+8. Produce a coherent structured summary.
+9. Avoid unnecessary repetition.
+10. Do not reveal chain-of-thought.
+
+============================================================
+38. STRUCTURED LLM OUTPUT
+============================================================
+
+Where possible, use structured output.
 
 Example:
-
------------------------------------------
-AI RESEARCH ASSISTANT
------------------------------------------
-
-Question:
-
-What methodology does this paper use?
-
------------------------------------------
-
-Answer:
-
-The paper proposes a Transformer-based architecture [1].
-
-Sources:
-
-[1] Attention Is All You Need
-    Page 3
-
------------------------------------------
-
-If possible, make [1] clickable.
-
-When clicked:
-
-Open source document
-or
-Show source details
-
-Do not expose internal IDs unnecessarily.
-
-============================================================
-37. SOURCE PANEL
-============================================================
-
-Consider implementing a simple source panel:
-
-Sources
-────────────────────────────
-
-[1] Attention Is All You Need
-    Page 3
-
-[2] Attention Is All You Need
-    Page 4
-
-────────────────────────────
-
-Keep the UI clean.
-
-Do not show excessive technical metadata unless useful.
-
-============================================================
-38. CITATION HOVER/DETAILS
-============================================================
-
-If feasible, clicking a citation can display:
-
-Paper title
-Authors
-Page
-Relevant excerpt
-
-Example:
-
-[1]
-
-Paper:
-Attention Is All You Need
-
-Page:
-3
-
-Evidence:
-"The Transformer is based entirely on attention..."
-
-This makes the system feel like a real research assistant.
-
-============================================================
-39. TESTING — UNIT TESTS
-============================================================
-
-Create unit tests for:
-
-1. Source object creation
-2. Citation object creation
-3. Citation numbering
-4. Source deduplication
-5. Citation resolution
-6. Citation validation
-7. Page metadata handling
-8. Multi-page source handling
-9. Authorization
-10. Empty source handling
-
-============================================================
-40. TESTING — CITATION VALIDATION
-============================================================
-
-Test:
-
-LLM references [1].
-
-Backend source registry contains [1].
-
-Expected:
-
-Valid.
-
-------------------------------------------------------------
-
-LLM references [99].
-
-Registry does not contain [99].
-
-Expected:
-
-Invalid citation detected.
-
-------------------------------------------------------------
-
-LLM references Page 100.
-
-Actual source page is 5.
-
-Expected:
-
-Do not trust the LLM's page number.
-
-Use backend metadata.
-
-============================================================
-41. TESTING — HALLUCINATED CITATION
-============================================================
-
-Simulate:
-
-LLM response:
-
-"The paper uses Adam optimizer [5]."
-
-But source registry has only:
-
-[1]
-[2]
-[3]
-
-Expected:
-
-[5] must NOT appear in final response.
-
-The system should either:
-
-- remove invalid citation
-- regenerate answer
-- or return a safe response
-
-according to the implementation.
-
-============================================================
-42. TESTING — MULTI-PAPER
-============================================================
-
-Test:
-
-Question:
-
-"Compare Paper A and Paper B."
-
-Expected:
-
-Sources from both papers.
-
-Verify:
-
-Paper A claim → Paper A source.
-
-Paper B claim → Paper B source.
-
-No cross-paper citation errors.
-
-============================================================
-43. TESTING — NO EVIDENCE
-============================================================
-
-Question:
-
-"What optimizer was used?"
-
-No relevant chunk.
-
-Expected:
-
-No fabricated citation.
-
-No fabricated answer.
-
-============================================================
-44. TESTING — DUPLICATES
-============================================================
-
-Retrieve:
-
-chunk_1
-chunk_1
-chunk_2
-
-Expected:
-
-Sources:
-
-[1] chunk_1
-[2] chunk_2
-
-NOT:
-
-[1] chunk_1
-[2] chunk_1
-[3] chunk_2
-
-============================================================
-45. TESTING — AUTHORIZATION
-============================================================
-
-Create:
-
-User A
-Paper A
-
-User B
-Paper B
-
-User A asks a question.
-
-Expected:
-
-Only Paper A can be cited.
-
-User A must never receive:
-
-Paper B title
-Paper B page
-Paper B chunk
-Paper B citation
-
-============================================================
-46. TESTING — PAGE METADATA
-============================================================
-
-Test:
-
-Single page:
-
-page_start = 3
-page_end = 3
-
-Expected:
-
-Page 3
-
-Multiple pages:
-
-page_start = 3
-page_end = 4
-
-Expected:
-
-Pages 3–4
-
-Missing page:
-
-Expected:
-
-No fabricated page number.
-
-============================================================
-47. TESTING — AGENT INTEGRATION
-============================================================
-
-Test:
-
-User question
- ↓
-Autonomous agent
- ↓
-Search tool
- ↓
-Retrieved source
- ↓
-Agent state
- ↓
-LLM
- ↓
-Citation validation
- ↓
-API response
-
-Verify source metadata survives the entire pipeline.
-
-============================================================
-48. CITATION EVALUATION DATASET
-============================================================
-
-Create a small evaluation dataset.
-
-Example:
-
-Question:
-"What dataset was used?"
-
-Expected source:
-Paper A — Page 5
-
-Question:
-"What architecture was proposed?"
-
-Expected source:
-Paper A — Page 3
-
-Question:
-"What accuracy was achieved?"
-
-Expected source:
-Paper A — Page 7
-
-Use real chunks from the existing test documents if available.
-
-============================================================
-49. CITATION QUALITY METRICS
-============================================================
-
-Track at least:
-
-1. Citation validity
-2. Citation source accuracy
-3. Citation completeness
-4. Citation relevance
-5. Citation hallucination rate
-
-Definitions:
-
-Citation Validity:
-Does the citation correspond to a real retrieved source?
-
-Citation Accuracy:
-Does the source actually support the claim?
-
-Citation Completeness:
-Are important research-paper claims supported?
-
-Citation Relevance:
-Is the cited source actually relevant?
-
-Citation Hallucination Rate:
-How often does the model produce unsupported citations?
-
-Implement simple measurable evaluation first.
-
-Do not over-engineer.
-
-============================================================
-50. LOGGING
-============================================================
-
-Log high-level citation events.
-
-Example:
-
-Citation created:
-source_id=src_001
-
-Citation validated:
-citation_id=1
-
-Citation rejected:
-citation_id=5
-
-Do NOT log sensitive document contents unnecessarily.
-
-Do NOT log secrets.
-
-Do NOT expose hidden chain-of-thought.
-
-============================================================
-51. PERFORMANCE
-============================================================
-
-Avoid unnecessary database calls.
-
-Do not retrieve paper metadata repeatedly for the same citation.
-
-Cache or reuse metadata within a request when appropriate.
-
-Avoid duplicate source resolution.
-
-============================================================
-52. ERROR HANDLING
-============================================================
-
-Handle:
-
-- missing paper
-- missing chunk
-- missing page metadata
-- invalid citation ID
-- unauthorized source
-- deleted document
-- vector DB failure
-- database failure
-- malformed LLM response
-- empty retrieval
-- citation parsing failure
-
-The API should return structured errors.
-
-Do not crash the entire application.
-
-============================================================
-53. BACKWARD COMPATIBILITY
-============================================================
-
-Milestone 11 must NOT break:
-
-- authentication
-- PDF upload
-- extraction
-- chunking
-- embeddings
-- vector search
-- RAG
-- autonomous agent
-
-Run the existing tests after implementation.
-
-============================================================
-54. DATABASE CHANGES
-============================================================
-
-FIRST inspect the existing database schema.
-
-Do not create a new citation database table unless there is a real
-requirement.
-
-For the initial implementation, citations can be request-level
-objects derived from retrieved chunks.
-
-Only persist citations if the product actually requires:
-
-- chat history
-- research history
-- answer history
-- citation history
-
-If persistence is needed, design it carefully.
-
-============================================================
-55. API CONTRACT
-============================================================
-
-Update the API documentation.
-
-The response should conceptually look like:
 
 {
-    "answer": "...",
+    "overview": "...",
+    "problem": "...",
+    "motivation": "...",
+    "objective": "...",
+    "methodology": "...",
+    "dataset": "...",
+    "experiments": "...",
+    "results": "...",
+    "contributions": [],
+    "limitations": [],
+    "conclusion": "...",
+    "key_takeaways": [],
+    "source_ids": []
+}
+
+Use Pydantic models if compatible with the current backend.
+
+Do not force all fields to contain information.
+
+Allow null/empty values where the paper does not provide the
+information.
+
+============================================================
+39. API DESIGN
+============================================================
+
+Inspect the existing API architecture.
+
+Implement a summarization endpoint only if the existing design
+requires one.
+
+Possible:
+
+POST /api/research/summarize
+
+Request:
+
+{
+    "document_id": "...",
+    "summary_type": "detailed",
+    "focus": null
+}
+
+or integrate summarization into the existing agent endpoint.
+
+Do not duplicate APIs unnecessarily.
+
+============================================================
+40. API RESPONSE
+============================================================
+
+Conceptually:
+
+{
+    "status": "completed",
+
+    "summary_type": "detailed",
+
+    "summary": {
+        "overview": "...",
+        "problem": "...",
+        "methodology": "...",
+        "dataset": "...",
+        "results": "...",
+        "contributions": [],
+        "limitations": [],
+        "conclusion": "...",
+        "key_takeaways": []
+    },
 
     "citations": [
         {
             "citation_id": "1",
             "title": "...",
-            "paper_id": "...",
             "page_start": 3,
-            "page_end": 3,
-            "excerpt": "..."
+            "page_end": 3
         }
-    ],
-
-    "tools_used": [
-        "search_paper"
-    ],
-
-    "status": "completed"
+    ]
 }
 
-Adapt to the existing API architecture.
+Adapt to the existing API contract.
 
 ============================================================
-56. IMPLEMENTATION PHASES
+41. FRONTEND
 ============================================================
 
-PHASE 1 — INSPECT
+Update the React frontend to allow users to request summaries.
 
-Before modifying code:
+Possible interface:
 
-Inspect:
+--------------------------------------------
 
-- Milestone 5 PDF extraction
-- Milestone 6 chunking
-- Milestone 7 embeddings
-- Milestone 8 vector DB
-- Milestone 9 RAG
-- Milestone 10 LangGraph agent
-- current metadata structure
-- current API response
-- current frontend
+Research Paper
 
-Report what already exists.
+Attention Is All You Need
 
-------------------------------------------------------------
+[ Generate Summary ]
 
-PHASE 2 — DESIGN
+Summary Type:
 
-Design:
+( ) Quick
+( ) Standard
+( ) Detailed
+( ) Technical
+( ) Beginner
 
-1. Source model
-2. Citation model
-3. Source registry
-4. Citation numbering
-5. Agent state integration
-6. Context format
-7. Citation validation
-8. API response
-9. Frontend source display
-10. Testing strategy
+Focus:
 
-------------------------------------------------------------
+[________________________]
 
-PHASE 3 — SOURCE METADATA
+[ Generate ]
 
-Ensure retrieved chunks contain enough metadata.
+--------------------------------------------
 
-------------------------------------------------------------
+After generation:
 
-PHASE 4 — CITATION SYSTEM
+Paper Summary
 
-Implement:
+Overview
+...
 
-- source objects
-- citation objects
-- source registry
-- deduplication
-- citation numbering
-- validation
+Methodology
+...
 
-------------------------------------------------------------
+Results
+...
 
-PHASE 5 — RAG INTEGRATION
+Contributions
+...
 
-Integrate citation metadata into:
+Sources
 
-- retrieval
-- context
-- LLM
-- answer generation
+[1] Page 3
+[2] Page 5
+[3] Page 8
 
-------------------------------------------------------------
+--------------------------------------------
 
-PHASE 6 — AGENT INTEGRATION
+Keep the UI consistent with the existing application.
 
-Integrate citations into LangGraph state and tool results.
-
-------------------------------------------------------------
-
-PHASE 7 — API
-
-Return:
-
-answer
-citations
-sources
-tools_used
-status
-
-------------------------------------------------------------
-
-PHASE 8 — FRONTEND
-
-Display citations and source information.
-
-------------------------------------------------------------
-
-PHASE 9 — TESTING
-
-Run:
-
-unit tests
-integration tests
-citation validation tests
-authorization tests
-agent tests
-regression tests
-
-------------------------------------------------------------
-
-PHASE 10 — DOCUMENTATION
-
-Update:
-
-README
-architecture
-API documentation
-citation behavior
-testing
-environment variables
+Do not redesign the entire frontend.
 
 ============================================================
-57. ACCEPTANCE CRITERIA
+42. CITATION UI
 ============================================================
 
-Milestone 11 is complete ONLY when:
+Reuse Milestone 11 citation components.
 
-[ ] Retrieved chunks contain reliable source metadata.
+Citations should ideally be clickable.
 
-[ ] Every source can be traced to a paper/document.
+Example:
 
-[ ] Page metadata is preserved when available.
+"The proposed model improves performance [1]."
 
-[ ] Citation objects are implemented.
+Click [1]:
 
-[ ] Citation IDs are deterministic per response.
+Paper:
+Research Paper A
 
-[ ] Duplicate sources are deduplicated.
+Page:
+7
 
-[ ] Sources survive multiple agent tool calls.
+Relevant evidence:
+...
 
-[ ] Multi-paper citations work.
+If PDF viewer navigation already exists, open the corresponding
+page.
 
-[ ] Citation-aware context is passed to the LLM.
+If not, expose enough metadata for future implementation.
 
-[ ] LLM cannot invent source metadata.
+============================================================
+43. ERROR HANDLING
+============================================================
 
-[ ] Backend validates citations.
+Handle:
 
-[ ] Invalid citation IDs are rejected.
+- document not found
+- unauthorized document
+- empty document
+- extraction failure
+- no chunks
+- vector DB failure
+- LLM failure
+- timeout
+- malformed structured output
+- citation validation failure
+- insufficient evidence
 
-[ ] Page numbers come from backend metadata.
+Never expose internal stack traces to users.
 
-[ ] Missing page numbers are not fabricated.
+Return safe structured errors.
+
+============================================================
+44. SECURITY
+============================================================
+
+The user must only summarize documents they are authorized to
+access.
+
+Verify:
+
+authenticated user
+       ↓
+document ownership/access
+       ↓
+retrieval
+       ↓
+summary
+
+Never trust document IDs from the frontend.
+
+Do not allow:
+
+User A
+ ↓
+document_id = User B document
+ ↓
+summary
+
+============================================================
+45. PERFORMANCE
+============================================================
+
+Do not retrieve unnecessary chunks.
+
+Avoid duplicate retrieval.
+
+Avoid duplicate LLM calls.
+
+Use batching where appropriate.
+
+Use asynchronous processing if already supported.
+
+Track:
+
+- retrieval latency
+- LLM latency
+- total latency
+- number of LLM calls
+- token usage if available
+
+Do not prematurely optimize without measuring.
+
+============================================================
+46. CACHING
+============================================================
+
+Consider caching generated summaries if appropriate.
+
+Potential cache key:
+
+document_id
++
+summary_type
++
+focus
++
+model/version
+
+However, do not introduce caching if it creates complexity or
+security problems.
+
+If implemented, ensure user authorization is still enforced.
+
+============================================================
+47. TESTING — UNIT TESTS
+============================================================
+
+Create unit tests for:
+
+1. Summary type validation
+2. Summary schema
+3. Evidence grouping
+4. Chunk grouping
+5. Intermediate summary creation
+6. Source propagation
+7. Citation propagation
+8. Citation deduplication
+9. Missing section handling
+10. Missing metadata handling
+11. Empty evidence handling
+12. Structured output parsing
+
+============================================================
+48. TESTING — AGENT
+============================================================
+
+Test the autonomous agent.
+
+Example:
+
+User:
+"Give me a detailed summary."
+
+Expected:
+
+Agent identifies summarization task.
+
+User:
+"Explain the experiments."
+
+Expected:
+
+Agent prioritizes experimental evidence.
+
+User:
+"Explain the paper for a beginner."
+
+Expected:
+
+Agent selects beginner-friendly summary mode.
+
+User:
+"What dataset was used?"
+
+Expected:
+
+Agent performs targeted retrieval rather than generating a
+full-paper summary.
+
+============================================================
+49. TESTING — EVIDENCE SUFFICIENCY
+============================================================
+
+Test:
+
+Initial retrieval contains incomplete information.
+
+Expected:
+
+Agent performs additional retrieval.
+
+If still insufficient:
+
+Agent reports insufficient evidence.
+
+It must NOT hallucinate.
+
+============================================================
+50. TESTING — HALLUCINATION
+============================================================
+
+Create test evidence:
+
+"The paper uses Dataset A."
+
+LLM should not produce:
+
+"The paper uses Dataset A and Dataset B."
+
+unless Dataset B is actually present.
+
+Test numerical claims as well.
+
+Evidence:
+
+"Accuracy = 94.2%."
+
+Expected:
+
+94.2%.
+
+Not:
+
+94.5%.
+
+============================================================
+51. TESTING — CITATIONS
+============================================================
+
+Test:
+
+Summary claim:
+
+"The model achieved 94.2% accuracy [1]."
+
+Source [1]:
+
+Page 7 containing 94.2%.
+
+Expected:
+
+Valid.
+
+Test invalid citation:
+
+"[99]"
+
+Expected:
+
+Rejected.
+
+Reuse Milestone 11 citation validation.
+
+============================================================
+52. TESTING — AUTHORIZATION
+============================================================
+
+User A:
+
+Paper A
+
+User B:
+
+Paper B
+
+User A requests summary.
+
+Expected:
+
+Only Paper A can be accessed.
+
+No Paper B metadata should appear.
+
+============================================================
+53. TESTING — LONG DOCUMENT
+============================================================
+
+Test with a realistic long research paper.
+
+Verify:
+
+- no context overflow
+- summarization completes
+- citations survive
+- important sections are represented
+- latency remains acceptable
+
+============================================================
+54. TESTING — DIFFERENT SUMMARY TYPES
+============================================================
+
+Test:
+
+quick
+standard
+detailed
+technical
+beginner
+
+Verify that each produces appropriately different output.
+
+============================================================
+55. TESTING — MISSING SECTIONS
+============================================================
+
+Use papers that do not have:
+
+- explicit limitations section
+- explicit methodology section
+- explicit dataset section
+
+Expected:
+
+The system should still produce a useful summary.
+
+Do not produce empty fabricated information.
+
+============================================================
+56. SUMMARY QUALITY EVALUATION
+============================================================
+
+Create an evaluation dataset.
+
+Example:
+
+{
+    "question": "What problem does the paper address?",
+    "expected_information": "...",
+    "expected_sources": ["src_001"]
+}
+
+Include questions about:
+
+- problem
+- motivation
+- methodology
+- dataset
+- experiments
+- results
+- contributions
+- limitations
+- conclusion
+
+============================================================
+57. EVALUATION METRICS
+============================================================
+
+Measure:
+
+1. Factual accuracy
+2. Completeness
+3. Relevance
+4. Faithfulness
+5. Citation accuracy
+6. Citation completeness
+7. Citation validity
+8. Hallucination rate
+9. Latency
+10. Token usage
+
+Use automated evaluation where practical and manual evaluation
+for qualitative summary quality.
+
+Do not claim high accuracy without actual evaluation.
+
+============================================================
+58. OBSERVABILITY
+============================================================
+
+Add useful logs.
+
+Example:
+
+summary_requested
+document_id=...
+
+summary_type=detailed
+
+retrieval_started
+
+retrieval_completed
+
+chunks_retrieved=...
+
+map_summary_completed
+
+reduce_summary_completed
+
+citation_validation_completed
+
+summary_completed
+
+Do not log:
+
+- passwords
+- API keys
+- tokens
+- sensitive document contents unnecessarily
+
+============================================================
+59. DOCUMENTATION
+============================================================
+
+Update README with:
+
+Milestone 12
+
+Advanced Paper Summarization
+
+Include:
+
+- architecture
+- workflow
+- supported summary types
+- agent behavior
+- RAG usage
+- map-reduce strategy
+- citation handling
+- API
+- testing
+- evaluation
+
+============================================================
+60. FILE ORGANIZATION
+============================================================
+
+Before creating files, inspect the current project structure.
+
+Follow existing conventions.
+
+Do not create unnecessary folders.
+
+Potential logical components could be:
+
+summarization/
+    service
+    schemas
+    prompts
+    evaluator
+
+But adapt this to the existing architecture.
+
+Do not blindly create these exact files.
+
+============================================================
+61. DEPENDENCY MANAGEMENT
+============================================================
+
+Before adding any package:
+
+Check whether it is already installed.
+
+Do not add duplicate libraries.
+
+Prefer existing:
+
+- LangChain
+- LangGraph
+- Pydantic
+- PyMuPDF
+- Sentence Transformers
+
+Add a dependency only if genuinely necessary.
+
+Update requirements appropriately.
+
+============================================================
+62. BACKWARD COMPATIBILITY
+============================================================
+
+Milestone 12 must NOT break:
+
+- authentication
+- project management
+- PDF upload
+- PDF extraction
+- chunking
+- embeddings
+- vector search
+- RAG
+- autonomous agent
+- citations
+
+Run all existing tests.
+
+============================================================
+63. DO NOT IMPLEMENT FUTURE MILESTONES
+============================================================
+
+Do NOT implement:
+
+❌ Multi-paper comparison
+❌ Literature review generation
+❌ Research gap discovery
+❌ Web research
+❌ Long-term research memory
+❌ Advanced multi-agent architecture
+❌ Production deployment
+❌ CI/CD
+
+These belong to future milestones.
+
+Milestone 12 is specifically:
+
+ADVANCED PAPER SUMMARIZATION
++
+RESEARCH SYNTHESIS
++
+EVIDENCE GROUNDING
++
+CITATIONS
+
+============================================================
+64. ACCEPTANCE CRITERIA
+============================================================
+
+Milestone 12 is complete only when:
+
+[ ] User can summarize an uploaded research paper.
+
+[ ] Quick summary works.
+
+[ ] Standard summary works.
+
+[ ] Detailed summary works.
+
+[ ] Technical summary works.
+
+[ ] Beginner summary works.
+
+[ ] User can specify a focus area.
+
+[ ] Autonomous agent understands summarization intent.
+
+[ ] Agent decides what evidence is needed.
+
+[ ] Agent can perform additional retrieval when evidence is
+    insufficient.
+
+[ ] Long papers can be processed without sending the entire
+    document directly to the LLM.
+
+[ ] Map/Reduce or an equivalent scalable approach is implemented.
+
+[ ] Intermediate summaries preserve source information.
+
+[ ] Final summaries preserve source grounding.
+
+[ ] Citations are generated using the existing citation system.
+
+[ ] Citations are validated.
+
+[ ] Unsupported claims are avoided.
+
+[ ] Numerical results are preserved accurately.
+
+[ ] Missing information is handled safely.
+
+[ ] Section-aware summarization works when metadata is available.
+
+[ ] Different paper structures are handled.
 
 [ ] User authorization is enforced.
 
-[ ] User A cannot receive User B's citations.
-
-[ ] No-evidence cases do not produce fabricated citations.
-
-[ ] Partial evidence is handled correctly.
-
-[ ] Citation relevance is considered.
-
-[ ] API returns citations.
-
-[ ] React displays citations.
+[ ] React UI supports summary generation.
 
 [ ] Existing RAG still works.
 
 [ ] Existing autonomous agent still works.
 
+[ ] Existing citation system still works.
+
 [ ] Unit tests pass.
 
 [ ] Integration tests pass.
 
-[ ] Citation evaluation tests pass.
+[ ] Agent tests pass.
 
 [ ] Authorization tests pass.
+
+[ ] Citation tests pass.
+
+[ ] Summary evaluation is performed.
 
 [ ] Documentation is updated.
 
 ============================================================
-58. FINAL ARCHITECTURE
+65. FINAL ARCHITECTURE
 ============================================================
 
-The final architecture should conceptually be:
+The final architecture should conceptually look like:
 
                          USER
-                          │
-                          ▼
-                   React Frontend
-                          │
-                          ▼
-                       FastAPI
-                          │
-                          ▼
-                Autonomous Agent
-                    LangGraph
-                          │
-                          ▼
-                   Tool Selection
-                          │
-                          ▼
-                    Search Tool
-                          │
-                          ▼
-                    Vector DB
-                          │
-                          ▼
-                 Retrieved Chunks
-                          │
-                  ┌───────┴───────┐
-                  │               │
-                  ▼               ▼
-                Text          Metadata
-                                  │
-                                  ▼
-                            Source Registry
-                                  │
-                                  ▼
-                           Agent State
-                                  │
-                                  ▼
-                              Context
-                                  │
-                                  ▼
-                                LLM
-                                  │
-                                  ▼
-                         Generated Answer
-                                  │
-                                  ▼
-                         Citation Resolver
-                                  │
-                                  ▼
-                         Citation Validator
-                                  │
-                         ┌────────┴────────┐
-                         ▼                 ▼
-                      Valid             Invalid
-                         │                 │
-                         ▼                 ▼
-                 Final Answer       Fix / Remove
-                         │
-                         ▼
-                  React Frontend
-                         │
-                 ┌───────┴────────┐
-                 ▼                ▼
-               Answer          Sources
-                                  │
-                                  ▼
-                             Original PDF
-
+                           │
+                           ▼
+                    React Frontend
+                           │
+                           ▼
+                         FastAPI
+                           │
+                           ▼
+                  Authentication
+                           │
+                           ▼
+                  LangGraph Agent
+                           │
+                           ▼
+                  Analyze Request
+                           │
+                           ▼
+                  Plan Summary Task
+                           │
+                           ▼
+                 Select Required Evidence
+                           │
+                           ▼
+                    Retrieval Tools
+                           │
+                           ▼
+                     Vector Database
+                           │
+                           ▼
+                  Retrieved Evidence
+                           │
+                    ┌──────┴──────┐
+                    ▼             ▼
+                 Metadata       Text
+                    │             │
+                    └──────┬──────┘
+                           ▼
+                     Evidence Groups
+                           │
+                           ▼
+                    MAP Summarization
+                           │
+                           ▼
+                 Intermediate Summaries
+                           │
+                           ▼
+                    REDUCE Synthesis
+                           │
+                           ▼
+                    Final Summary
+                           │
+                           ▼
+                  Citation Resolution
+                           │
+                           ▼
+                  Citation Validation
+                           │
+                           ▼
+                    Structured Output
+                           │
+                           ▼
+                     React Frontend
+                           │
+                  ┌────────┴────────┐
+                  ▼                 ▼
+               Summary           Sources
+                                    │
+                                    ▼
+                                Original PDF
 
 ============================================================
-59. EXAMPLE — FINAL USER EXPERIENCE
+66. EXAMPLE FINAL EXPERIENCE
+============================================================
 
 User:
 
-"What methodology does the paper use?"
+"Give me a detailed summary of this paper focusing on the
+methodology and experimental results."
 
-Agent internally determines that paper retrieval is required.
+Agent:
 
-Search tool retrieves:
+1. Understands request.
+2. Identifies detailed summary + methodology/results focus.
+3. Searches methodology.
+4. Searches experimental setup.
+5. Searches results.
+6. Determines whether evidence is sufficient.
+7. Generates intermediate summaries.
+8. Synthesizes final response.
+9. Resolves citations.
+10. Validates citations.
+11. Returns final answer.
 
-Chunk 17:
+Example response:
 
-"The proposed architecture consists of a Transformer encoder..."
+------------------------------------------------------------
 
-Metadata:
+# Paper Summary
 
-paper_id = paper_123
-page = 4
-chunk_id = chunk_17
+## Overview
 
-LLM generates:
-
-"The paper proposes a Transformer-based architecture [1]."
-
-Backend resolves [1]:
-
-[1] Attention Is All You Need
-Page 4
-
-Frontend displays:
-
-Answer
-
-The paper proposes a Transformer-based architecture [1].
-
-Sources
-
-[1] Attention Is All You Need
-Page 4
-
-If possible, clicking [1] should open the relevant page.
-
-============================================================
-60. IMPORTANT DESIGN PRINCIPLE
-
-The system should follow:
-
-LLM = reasoning and language generation
-
-Retriever = evidence retrieval
-
-Vector DB = similarity search
-
-Backend = source truth
-
-Citation Registry = source mapping
-
-Citation Validator = citation verification
-
-React = source presentation
-
-The LLM should NEVER become the authoritative source of citation
-metadata.
-
-The database and retrieval layer are authoritative.
-
-============================================================
-61. DO NOT IMPLEMENT FUTURE MILESTONES
-
-Do NOT implement:
-
-❌ Full literature review generation
-❌ Advanced paper comparison
-❌ Web research
-❌ Browser agent
-❌ Long-term memory
-❌ Multi-agent system
-❌ Advanced research planning
-❌ Research analytics dashboard
-❌ Production deployment
-
-Those are future milestones.
-
-Milestone 11 is specifically:
-
-CITATION
-+
-SOURCE GROUNDING
-+
-SOURCE VALIDATION
-+
-SOURCE DISPLAY
-
-============================================================
-62. FINAL REPORT
-
-After implementation, provide a detailed report containing:
-
-Existing citation/source architecture before Milestone 11.
-Changes made.
-Source metadata structure.
-Citation schema.
-Source registry design.
-Citation numbering strategy.
-Deduplication strategy.
-Citation validation mechanism.
-Agent integration.
-RAG integration.
-API changes.
-Frontend changes.
-Authorization implementation.
-Error handling.
-Files created.
-Files modified.
-Dependencies added.
-Environment variables.
-Test cases.
-Test results.
-Citation evaluation results.
-Example API response.
-Example user experience.
-Known limitations.
-Future improvements.
-============================================================
-63. CRITICAL REQUIREMENTS
-
-Remember:
-
-NEVER fabricate citations.
-NEVER fabricate page numbers.
-NEVER cite an inaccessible user's paper.
-NEVER trust LLM-generated source metadata.
-ALWAYS preserve source metadata from retrieval.
-ALWAYS validate citations before returning them.
-ALWAYS deduplicate sources.
-ALWAYS support multiple sources.
-ALWAYS handle no-evidence cases.
-ALWAYS preserve citations across multiple agent tool calls.
-DO NOT expose hidden chain-of-thought.
-DO NOT break existing Milestones 1–10.
-============================================================
-START
-
-FIRST inspect the existing repository.
-
-Do NOT immediately modify code.
-
-First provide:
-
-Current retrieval architecture
-Existing chunk metadata
-Existing RAG implementation
-Existing LangGraph state
-Existing tool-result format
-Existing API response format
-Existing frontend response handling
-What citation functionality already exists
-What needs to be changed
-Proposed Milestone 11 architecture
-Files to modify
-Files to create
-Implementation plan
-
-After this analysis, proceed with implementation while preserving
-the existing architecture and functionality.
-
-
-
-## 🔥 The most important idea in Milestone 11
-
-
-Your architecture should **not** be:
-
-
-```text
-PDF → RAG → LLM → "Here is a citation I made up"
-
-It should be:
-
-PDF
- ↓
-Chunks
- ↓
-Metadata
- ↓
-Embeddings
- ↓
-Vector DB
- ↓
-Retrieved Evidence
- ↓
-Source Registry
- ↓
-LLM
- ↓
-Answer + Citation IDs
- ↓
-Backend validates IDs
- ↓
-Real Source Metadata
- ↓
-User
-Example
-
-If the LLM says:
-
-"The model achieved 94.2% accuracy [1]."
-
-The backend should resolve [1] to something that actually exists:
+The paper proposes...
 
 [1]
-Paper: Research Paper A
-Page: 7
-Chunk: chunk_82
 
-If [1] doesn't exist, the backend should not allow the fake citation to reach the user.
+## Research Problem
 
-That's the core principle that makes your citation system reliable.
+The authors address...
 
-Milestone 11 outcome
+[2]
 
-After completing this milestone, your project will have:
+## Methodology
 
-Milestone 9
-RAG
- ↓
-"Answer my question using my papers."
+The proposed architecture consists of...
 
+[3][4]
 
-Milestone 10
-Autonomous Agent
- ↓
-"Decide what actions/tools are needed."
+## Experimental Setup
 
+The model was evaluated on...
 
-Milestone 11
-Citations
- ↓
-"Show me the evidence and where it came from."
+[5]
 
-This gives you a very strong foundation before moving to Milestone 12 — Advanced Paper Summarization / Research Synthesis.
+## Results
+
+The proposed approach achieved 94.2% accuracy compared with
+91.8% for the baseline.
+
+[6]
+
+## Key Contributions
+
+1. ...
+2. ...
+3. ...
+
+## Limitations
+
+The authors report...
+
+[7]
+
+## Key Takeaways
+
+- ...
+- ...
+- ...
+
+## Sources
+
+[1] Paper Name — Page 2
+[2] Paper Name — Page 3
+[3] Paper Name — Page 5
+[4] Paper Name — Page 6
+[5] Paper Name — Page 8
+[6] Paper Name — Page 10
+[7] Paper Name — Page 12
+
+------------------------------------------------------------
+
+============================================================
+67. IMPORTANT ENGINEERING PRINCIPLES
+============================================================
+
+Follow these principles throughout implementation:
+
+1. Reuse existing architecture.
+
+2. Do not duplicate RAG.
+
+3. Do not duplicate citation systems.
+
+4. Do not break Milestones 1–11.
+
+5. The LLM is NOT the source of truth.
+
+6. Retrieved evidence is the source of truth.
+
+7. Backend metadata is authoritative.
+
+8. Never fabricate citations.
+
+9. Never fabricate page numbers.
+
+10. Never fabricate numerical results.
+
+11. Never fabricate missing information.
+
+12. Preserve source metadata through every stage.
+
+13. The autonomous agent should decide the workflow.
+
+14. Do not replace agentic decision-making with hard-coded rules.
+
+15. Do not expose chain-of-thought.
+
+16. Keep components modular.
+
+17. Test before declaring completion.
+
+18. Measure summary quality rather than assuming it works.
+
+============================================================
+68. IMPLEMENTATION PROCESS
+============================================================
+
+Follow this exact development process:
+
+PHASE 1:
+Inspect the existing repository.
+
+PHASE 2:
+Explain the current architecture.
+
+PHASE 3:
+Identify reusable components.
+
+PHASE 4:
+Identify gaps required for Milestone 12.
+
+PHASE 5:
+Design the summarization architecture.
+
+PHASE 6:
+Design LangGraph integration.
+
+PHASE 7:
+Design data schemas.
+
+PHASE 8:
+Implement evidence grouping.
+
+PHASE 9:
+Implement intermediate summarization.
+
+PHASE 10:
+Implement final synthesis.
+
+PHASE 11:
+Integrate citations.
+
+PHASE 12:
+Integrate API.
+
+PHASE 13:
+Integrate React UI.
+
+PHASE 14:
+Write unit tests.
+
+PHASE 15:
+Write integration tests.
+
+PHASE 16:
+Run regression tests for Milestones 1–11.
+
+PHASE 17:
+Run summary evaluation.
+
+PHASE 18:
+Optimize if necessary.
+
+PHASE 19:
+Update documentation.
+
+PHASE 20:
+Provide final implementation report.
+
+============================================================
+69. FIRST RESPONSE REQUIREMENT
+============================================================
+
+Before writing or modifying code, inspect the repository and
+respond with:
+
+1. Current architecture
+2. Current PDF pipeline
+3. Current chunk structure
+4. Current vector search
+5. Current RAG pipeline
+6. Current LangGraph agent
+7. Current agent state
+8. Current tools
+9. Current citation system
+10. Current API
+11. Current React UI
+12. Existing tests
+13. What can be reused
+14. What needs modification
+15. What new components are required
+16. Proposed Milestone 12 architecture
+17. Proposed LangGraph workflow
+18. Proposed API changes
+19. Proposed frontend changes
+20. Proposed testing strategy
+
+DO NOT start by rewriting the project.
+
+First understand the existing implementation.
+
+After presenting the analysis, proceed with implementation.
+
+============================================================
+END OF MILESTONE 12 PROMPT
+============================================================

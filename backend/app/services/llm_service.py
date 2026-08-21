@@ -13,7 +13,6 @@ class LLMService:
         
         if self.provider == "openai":
             import openai
-            from app.core.config import settings
             self.client = openai.AsyncOpenAI(api_key=settings.OPENAI_API_KEY)
         else:
             logger.warning(f"LLM Provider {self.provider} not fully supported yet.")
