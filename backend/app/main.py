@@ -46,6 +46,10 @@ from app.api import chat_routes
 app.include_router(chat_routes.router, tags=["Chat"])
 from app.api import agent_routes
 app.include_router(agent_routes.router, prefix="/research", tags=["Agent"])
+from app.api import comparisons
+app.include_router(comparisons.router, prefix="/api/comparisons", tags=["Comparisons"])
+from app.api import literature_reviews
+app.include_router(literature_reviews.router, prefix="/api/literature-reviews", tags=["Literature Reviews"])
 
 @app.get("/")
 async def root():

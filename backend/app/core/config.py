@@ -39,6 +39,14 @@ class Settings:
     LLM_TEMPERATURE: float = float(os.getenv("LLM_TEMPERATURE", "0.2"))
     MAX_AGENT_ITERATIONS: int = int(os.getenv("MAX_AGENT_ITERATIONS", "8"))
     
+    # Milestone 13: Multi-paper comparison config
+    MAX_COMPARISON_PAPERS: int = int(os.getenv("MAX_COMPARISON_PAPERS", "5"))
+    COMPARISON_TOP_K: int = int(os.getenv("COMPARISON_TOP_K", "10"))
+    
+    # Milestone 14: Automated Literature Review config
+    MAX_LITERATURE_REVIEW_PAPERS: int = int(os.getenv("MAX_LITERATURE_REVIEW_PAPERS", "20"))
+    LITERATURE_REVIEW_TOP_K: int = int(os.getenv("LITERATURE_REVIEW_TOP_K", "10"))
+    
     def __init__(self):
         if self.CHUNK_SIZE <= 0:
             raise ValueError("CHUNK_SIZE must be greater than 0")

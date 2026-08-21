@@ -1,2218 +1,2328 @@
-You are a Senior AI Engineer, LLM Engineer, RAG Architect,
-LangGraph Agent Engineer, Backend Engineer, and AI Evaluation Engineer.
+# MILESTONE 14 — AUTOMATED LITERATURE REVIEW
 
-You are continuing development of an existing project called:
+## AI Research Assistant — Complete Implementation Prompt
 
-============================================================
-AI RESEARCH ASSISTANT
-============================================================
+You are a senior AI/ML engineer, backend engineer, frontend engineer, LangGraph architect, RAG engineer, and production software engineer.
 
-The goal of this project is to build an autonomous AI research
-assistant that can understand research papers, retrieve relevant
-evidence, answer research questions, summarize papers, compare
-papers, generate literature reviews, identify research gaps, and
-provide reliable citations.
+You are working on my existing **AI Research Assistant** project.
 
-The system must behave like an autonomous research assistant,
-not like a collection of hard-coded if/else rules.
+The project is being developed milestone-by-milestone.
 
-============================================================
-CURRENT PROJECT STATUS
-============================================================
+## COMPLETED MILESTONES
 
-The following milestones have already been completed:
+The following milestones are already completed:
 
-Milestone 1:
-Project Setup
+1. Project Setup
+2. Authentication & Authorization
+3. Research Workspace / Projects
+4. PDF Upload
+5. PDF Text Extraction
+6. Intelligent Chunking
+7. Embedding Generation
+8. Vector Database & Semantic Search
+9. RAG Question Answering
+10. Autonomous LangGraph Agent
+11. Citation & Source Grounding
+12. Advanced Paper Summarization
+13. Multi-Paper Comparison
 
-Milestone 2:
-Authentication & Authorization
+Your task is to implement:
 
-Milestone 3:
-Research Project / Workspace Management
+# MILESTONE 14 — AUTOMATED LITERATURE REVIEW
 
-Milestone 4:
-PDF Upload
+Do not rebuild completed milestones.
 
-Milestone 5:
-PDF Text Extraction
+Extend the existing system.
 
-Milestone 6:
-Chunking
+---
 
-Milestone 7:
-Embedding Generation
+# 1. PRIMARY OBJECTIVE
 
-Milestone 8:
-Vector Database + Semantic Search
+Transform the AI Research Assistant from a system that can:
 
-Milestone 9:
-RAG Pipeline
+* answer questions about papers
+* summarize papers
+* compare multiple papers
 
-Milestone 10:
-Autonomous AI Research Agent using LangGraph + Tool Calling
+into a system that can automatically generate a **research-grounded literature review across a collection of papers**.
 
-Milestone 11:
-Citation & Source Grounding System
+The user should be able to provide a research question such as:
 
-============================================================
-CURRENT TASK
-============================================================
+"Review recent research on Retrieval-Augmented Generation for medical question answering."
 
-Implement:
+The system should:
 
-MILESTONE 12 — ADVANCED PAPER SUMMARIZATION
-& RESEARCH SYNTHESIS
+1. Understand the research question.
+2. Identify relevant papers from the workspace.
+3. Rank papers by relevance.
+4. Retrieve evidence from relevant papers.
+5. Extract important findings from each paper.
+6. Discover major research themes.
+7. Group evidence by theme.
+8. Synthesize findings across papers.
+9. Identify agreements.
+10. Identify disagreements and contradictions.
+11. Identify methodological trends.
+12. Identify common limitations.
+13. Identify emerging directions.
+14. Generate an academic-style literature review.
+15. Attach citations to factual claims.
+16. Verify citations.
+17. Perform a quality and grounding check.
+18. Save the literature review.
+19. Allow the user to view previous literature reviews.
 
-============================================================
-1. MAIN OBJECTIVE
-============================================================
+The system must remain grounded in the uploaded research papers.
 
-The goal of Milestone 12 is to allow the AI Research Assistant
-to understand and summarize complete research papers using the
-existing:
+---
 
-- PDF processing pipeline
-- chunking system
-- embeddings
-- vector database
-- semantic retrieval
-- RAG pipeline
-- LangGraph autonomous agent
-- tool calling
-- citation/source grounding system
+# 2. IMPORTANT DEVELOPMENT RULE
 
-The system must be capable of generating structured,
-evidence-grounded summaries of research papers.
+Before implementing anything:
 
-The system must NOT simply send the entire PDF text to the LLM.
-
-It should use an intelligent retrieval and summarization strategy
-that can scale to long research papers.
-
-============================================================
-2. USER EXPERIENCE
-============================================================
-
-After Milestone 12, users should be able to ask:
-
-1.
-"Summarize this paper."
-
-2.
-"Give me a detailed summary of this paper."
-
-3.
-"Give me a beginner-friendly explanation."
-
-4.
-"Explain the methodology."
-
-5.
-"What are the main contributions?"
-
-6.
-"What dataset was used?"
-
-7.
-"What were the experimental results?"
-
-8.
-"What are the limitations?"
-
-9.
-"What are the key takeaways?"
-
-10.
-"Summarize this paper focusing mainly on the experiments."
-
-11.
-"Explain the paper technically."
-
-12.
-"Explain this research paper in simple terms."
-
-The autonomous agent should understand the user's intent and
-decide what information and tools are necessary.
-
-============================================================
-3. VERY IMPORTANT — AUTONOMOUS BEHAVIOR
-============================================================
-
-Do NOT implement the summarization workflow as a simple rule-based
-system such as:
-
-if "summary" in question:
-    summarize()
-
-Instead, use the existing LangGraph autonomous agent.
-
-The agent should:
-
-1. Understand the user request.
-2. Determine the type of summary required.
-3. Determine what evidence is necessary.
-4. Decide which tools should be used.
-5. Retrieve relevant evidence.
-6. Determine whether more retrieval is necessary.
-7. Synthesize the evidence.
-8. Validate citations.
-9. Produce the final response.
-
-The agent should be able to decide whether it needs:
-
-- abstract
-- introduction
-- methodology
-- dataset
-- experiments
-- results
-- discussion
-- conclusion
-- limitations
-- contributions
-
-depending on the user's request.
-
-Do not force the agent to retrieve every section for every query.
-
-============================================================
-4. FIRST STEP — INSPECT THE EXISTING PROJECT
-============================================================
-
-DO NOT immediately modify code.
-
-First inspect the entire repository.
+## INSPECT THE EXISTING CODEBASE.
 
 Understand:
 
-1. Backend architecture
-2. Frontend architecture
-3. Database architecture
-4. Authentication
-5. PDF upload implementation
-6. PDF extraction
-7. Chunking
-8. Embedding generation
-9. Vector database
-10. Retrieval service
-11. RAG implementation
-12. LangGraph agent
-13. Agent state
-14. Existing tools
-15. Tool result format
-16. Citation system
-17. Citation registry
-18. Citation validation
-19. API endpoints
-20. React UI
-21. Existing tests
+* project structure
+* backend architecture
+* frontend architecture
+* database architecture
+* authentication
+* authorization
+* research workspace
+* paper model
+* PDF processing
+* chunking
+* embeddings
+* vector database
+* retrieval
+* RAG
+* LangGraph
+* citation system
+* summarization
+* multi-paper comparison
+* API conventions
+* frontend components
+* state management
+* error handling
+* logging
+* configuration
+* tests
 
-Identify exactly where Milestone 12 should integrate.
+Do not assume the architecture.
 
-DO NOT rewrite working components unnecessarily.
+Read the existing implementation first.
 
-============================================================
-5. EXISTING ARCHITECTURE MUST BE REUSED
-============================================================
+---
 
-Reuse existing implementations wherever possible.
+# 3. REUSE EXISTING COMPONENTS
 
-For example:
+Milestone 14 must build on Milestones 1–13.
 
-If the project already has:
+Reuse:
 
-retrieve_relevant_chunks()
+* existing authentication
+* existing project/workspace system
+* existing paper model
+* existing PDF processing
+* existing chunking
+* existing embeddings
+* existing vector database
+* existing retriever
+* existing RAG pipeline
+* existing LangGraph architecture
+* existing citation system
+* existing paper summarization
+* existing multi-paper comparison
+* existing database patterns
+* existing UI components
+* existing error handling
+* existing configuration
 
-reuse it.
+Do not create duplicate implementations.
 
-If the project already has:
+Do not introduce unnecessary dependencies.
 
-build_context()
+Do not introduce a new vector database.
 
-extend it instead of creating another context builder.
+Do not introduce a second authentication system.
 
-If the project already has:
+Do not introduce another database.
 
-citation_registry
+---
 
-reuse it.
+# 4. DO NOT BREAK MILESTONES 1–13
 
-If the project already has:
+After implementation, the following must continue working:
 
-citation_validator
+* authentication
+* authorization
+* research workspaces
+* PDF upload
+* PDF extraction
+* chunking
+* embeddings
+* vector search
+* RAG QA
+* LangGraph agent
+* citations
+* summarization
+* multi-paper comparison
 
-reuse it.
+Maintain backward compatibility wherever possible.
 
-If the project already has:
+---
 
-LangGraph state
+# 5. WHAT IS AUTOMATED LITERATURE REVIEW?
 
-extend it carefully.
+The system should answer a higher-level question:
 
-Do NOT create duplicate versions of existing functionality.
+"What does the existing research say about this topic?"
 
-============================================================
-6. CORE SUMMARIZATION ARCHITECTURE
-============================================================
+It should not simply summarize each paper individually.
 
-Implement a scalable summarization workflow.
+It must perform:
 
-Recommended conceptual architecture:
-
-Research Paper
-      ↓
-Document Structure
-      ↓
-Chunk Groups
-      ↓
-Evidence Retrieval
-      ↓
-Map Summarization
-      ↓
-Intermediate Summaries
-      ↓
-Reduce / Synthesis
-      ↓
-Citation Validation
-      ↓
-Structured Final Summary
-
-The exact implementation can vary depending on the existing
-architecture.
-
-============================================================
-7. LONG DOCUMENT HANDLING
-============================================================
-
-Do NOT send the entire document directly to the LLM.
-
-Research papers may contain:
-
-- thousands of words
-- tens of thousands of tokens
-- dozens of pages
-
-Use a scalable strategy.
-
-Possible approach:
-
-MAP:
-
-Group related chunks.
-
-For example:
-
-Group 1:
-Chunks 1–5
-
-Group 2:
-Chunks 6–10
-
-Group 3:
-Chunks 11–15
-
-Generate intermediate summaries:
-
-Group 1 → Summary 1
-Group 2 → Summary 2
-Group 3 → Summary 3
-
-Then:
-
-REDUCE:
-
-Summary 1
-Summary 2
-Summary 3
-
+```text
+Research Question
         ↓
-
-Final LLM synthesis
-
+Relevant Papers
         ↓
+Evidence Extraction
+        ↓
+Theme Discovery
+        ↓
+Cross-Paper Synthesis
+        ↓
+Agreement / Disagreement Analysis
+        ↓
+Trend Analysis
+        ↓
+Limitations
+        ↓
+Emerging Directions
+        ↓
+Literature Review
+        ↓
+Citation Verification
+```
 
-Complete summary
+The final output should represent the **research landscape**, not a list of independent paper summaries.
 
-Use LangChain summarization utilities where they genuinely help,
-but do not introduce abstractions that make the existing
-architecture unnecessarily complex.
+---
 
-============================================================
-8. SECTION-AWARE SUMMARIZATION
-============================================================
+# 6. EXAMPLE USER FLOW
 
-The system should understand document structure when possible.
+User opens:
 
-Possible sections:
+Research Workspace
 
-- Abstract
-- Introduction
-- Background
-- Related Work
-- Methodology
-- Proposed Method
-- Dataset
-- Experimental Setup
-- Experiments
-- Results
-- Discussion
-- Limitations
-- Conclusion
-- Future Work
+There are 25 papers.
 
-Do NOT assume that every paper contains all of these sections.
+User selects:
 
-Different papers use different structures.
+"Generate Literature Review"
 
-If section metadata already exists, reuse it.
+User enters:
 
-If it does not exist, inspect the current chunking/extraction
-pipeline and determine whether section metadata can be added
-without breaking existing functionality.
+"What are the current approaches to using RAG for legal question answering?"
 
-Do NOT implement fragile section detection based only on hard-coded
-section names.
+The system should:
 
-============================================================
-9. CHUNK METADATA
-============================================================
-
-Every piece of evidence used in summarization should preserve:
-
-- document_id
-- paper_id
-- chunk_id
-- chunk_index
-- page_start
-- page_end
-- section if available
-- text
-- similarity score when retrieved
-
-Adapt the structure to the existing project.
-
-Do not invent metadata that does not exist.
-
-============================================================
-10. SUMMARY TYPES
-============================================================
-
-Implement support for multiple summary modes.
-
-At minimum:
-
-A. QUICK SUMMARY
-
-Short summary containing the core idea.
-
-Example:
-
-- Problem
-- Method
-- Result
-- Conclusion
-
-------------------------------------------------------------
-
-B. STANDARD SUMMARY
-
-Structured summary with:
-
-- Overview
-- Problem
-- Methodology
-- Dataset
-- Results
-- Contributions
-- Conclusion
-
-------------------------------------------------------------
-
-C. DETAILED SUMMARY
-
-More comprehensive summary containing:
-
-- Research problem
-- Motivation
-- Objectives
-- Related work
-- Methodology
-- Architecture
-- Dataset
-- Experimental setup
-- Results
-- Analysis
-- Contributions
-- Limitations
-- Conclusion
-- Key takeaways
-
-------------------------------------------------------------
-
-D. TECHNICAL SUMMARY
-
-Focus on:
-
-- Architecture
-- Algorithms
-- Models
-- Mathematical methods
-- Training procedure
-- Hyperparameters
-- Dataset
-- Evaluation metrics
-- Results
-
-------------------------------------------------------------
-
-E. BEGINNER SUMMARY
-
-Explain the paper in simple language.
-
-Avoid unnecessary technical jargon.
-
-When technical terms are necessary, explain them.
-
-============================================================
-11. USER-CONTROLLED SUMMARY
-============================================================
-
-The user may ask:
-
-"Summarize this paper focusing on experiments."
-
-The agent should prioritize:
-
-- Experimental Setup
-- Dataset
-- Evaluation Metrics
-- Results
-- Comparisons
-- Ablation Studies
-
-It should not waste most of the context summarizing unrelated
-sections.
-
-Example:
-
-User:
-"Summarize this paper focusing on methodology."
-
-Agent:
-
-Retrieve:
-- Methodology
-- Architecture
-- Related background
-- Relevant experiments
-
-Then synthesize those sections.
-
-============================================================
-12. AGENT DECISION MAKING
-============================================================
-
-The LangGraph agent should reason at a high level about the task.
-
-Example workflow:
-
-START
- ↓
-Understand User Intent
- ↓
-Determine Summary Type
- ↓
-Determine Required Evidence
- ↓
-Select Retrieval/Search Tools
- ↓
+```text
+Understand Question
+        ↓
+Search 25 Papers
+        ↓
+Rank Relevant Papers
+        ↓
+Select Top Relevant Papers
+        ↓
 Retrieve Evidence
- ↓
-Evaluate Evidence Sufficiency
- ↓
-Retrieve More Evidence if Necessary
- ↓
-Generate Intermediate Summaries
- ↓
-Synthesize Final Summary
- ↓
-Validate Citations
- ↓
-Format Response
- ↓
-END
+        ↓
+Analyze Papers
+        ↓
+Discover Themes
+        ↓
+Synthesize Findings
+        ↓
+Generate Review
+        ↓
+Verify Citations
+        ↓
+Display Review
+```
 
-The agent may decide to stop early if sufficient evidence is
-already available.
+---
 
-The agent may retrieve additional evidence when the current
-evidence is insufficient.
+# 7. LITERATURE REVIEW SCOPE
 
-Do NOT implement a fixed sequence that always executes every
-possible step.
+Support two modes.
 
-============================================================
-13. EVIDENCE SUFFICIENCY
-============================================================
+## Mode 1 — All Relevant Papers
 
-The agent should determine whether the retrieved evidence is
-sufficient.
+The system automatically identifies relevant papers from the current project.
 
 Example:
 
-User:
-"What dataset and evaluation metric did the authors use?"
+```text
+Project contains 50 papers.
 
-Retrieved:
-Dataset information found.
+Research question:
+"RAG for healthcare"
 
-Evaluation metric information missing.
+System:
+50 papers
+↓
+relevance ranking
+↓
+18 relevant papers
+```
 
-The agent should retrieve additional evidence instead of
-immediately generating an answer.
+Only the relevant papers are used for the review.
 
-If the information still cannot be found:
+---
 
-"The paper does not provide sufficient information about the
-evaluation metric in the retrieved content."
+## Mode 2 — User Selected Papers
 
-Do NOT hallucinate.
-
-============================================================
-14. MAP STAGE
-============================================================
-
-During the MAP stage:
-
-For each chunk group:
-
-1. Provide the LLM with relevant chunks.
-2. Ask it to extract important information.
-3. Preserve source identifiers.
-4. Generate an intermediate summary.
-5. Do not introduce unsupported claims.
-
-Conceptual structure:
-
-{
-    "group_id": "group_01",
-    "summary": "...",
-    "sources": [
-        "src_001",
-        "src_002"
-    ]
-}
-
-Do not lose source information.
-
-============================================================
-15. REDUCE STAGE
-============================================================
-
-The REDUCE stage receives intermediate summaries.
+The user manually selects papers.
 
 Example:
 
-Summary 1
-Summary 2
-Summary 3
-Summary 4
+```text
+☑ Paper A
+☑ Paper B
+☑ Paper C
+☑ Paper D
+☐ Paper E
+```
 
-The LLM synthesizes them into a coherent final summary.
+The literature review should use the selected papers.
 
-Important:
+Still perform relevance checks where appropriate.
 
-The final synthesis must remain grounded in the original evidence.
+---
 
-Do not treat intermediate summaries as authoritative sources.
+# 8. RESEARCH QUESTION ANALYSIS
 
-Where possible, retain references to original source IDs.
+Create a research-question analysis stage.
 
-============================================================
-16. SOURCE GROUNDING
-============================================================
+Input:
 
-Milestone 11 already provides the citation system.
+"What are the current approaches to using RAG for medical question answering?"
 
-Milestone 12 MUST reuse it.
+Extract:
 
-Every important factual statement in the final summary should
-have supporting evidence where appropriate.
+```text
+topic:
+RAG for medical question answering
+
+research_focus:
+current approaches
+
+potential_dimensions:
+- retrieval methods
+- embedding models
+- LLMs
+- datasets
+- evaluation
+- performance
+- limitations
+```
+
+Do not require the user to manually specify every dimension.
+
+Use the LLM where appropriate to interpret the query.
+
+---
+
+# 9. RELEVANCE RANKING
+
+Use the existing semantic search/vector database.
+
+Candidate flow:
+
+```text
+Research Question
+        ↓
+Embedding
+        ↓
+Semantic Search
+        ↓
+Candidate Papers
+        ↓
+Paper Relevance Score
+        ↓
+Ranked Papers
+```
 
 Example:
 
-"The model achieved 94.2% accuracy [3]."
+```text
+Paper A → 0.94
+Paper B → 0.91
+Paper C → 0.89
+Paper D → 0.55
+Paper E → 0.32
+```
 
-The citation must resolve to the actual source.
+Use configurable thresholds/limits.
 
-Do NOT allow the LLM to invent:
+Do not hard-code arbitrary values unnecessarily.
 
-- paper names
-- page numbers
-- chunk IDs
-- citation IDs
+---
 
-Backend metadata is authoritative.
+# 10. PAPER-LEVEL RELEVANCE
 
-============================================================
-17. CITATION PIPELINE
-============================================================
+Do not rely only on individual chunk relevance.
 
-The final summary pipeline must be:
-
-Evidence
- ↓
-Intermediate Summary
- ↓
-Final Summary
- ↓
-Citation Resolution
- ↓
-Citation Validation
- ↓
-Final Answer
-
-Reuse the existing citation validator.
-
-Do not build another citation system.
-
-============================================================
-18. CLAIM GROUNDING
-============================================================
-
-Where practical, associate claims with source IDs.
-
-Conceptual structure:
-
-{
-    "claim": "The proposed model achieves 94.2% accuracy.",
-    "source_ids": ["src_007"]
-}
-
-For:
-
-"The model improves performance over baseline methods."
-
-Use the relevant sources.
-
-Do not attach every source to every claim.
-
-============================================================
-19. AVOID CITATION SPAM
-============================================================
-
-Bad:
-
-"The paper proposes a Transformer [1][2][3][4][5]."
-
-when only source [2] supports that claim.
-
-Good:
-
-"The paper proposes a Transformer architecture [2]."
-
-Use relevant citations.
-
-============================================================
-20. MISSING INFORMATION
-============================================================
-
-If information is not present in the paper:
-
-DO NOT guess.
-
-Examples:
-
-"The paper does not explicitly state the optimizer."
-
-"The retrieved content does not provide enough information about
-the training hardware."
-
-"The authors do not explicitly discuss this limitation."
-
-Use these responses instead of hallucinating.
-
-============================================================
-21. SUMMARY STRUCTURE
-============================================================
-
-The final response should be structured.
-
-Recommended detailed format:
-
-# Paper Summary
-
-## 1. Overview
-
-## 2. Research Problem
-
-## 3. Motivation
-
-## 4. Objective
-
-## 5. Proposed Methodology
-
-## 6. Dataset
-
-## 7. Experimental Setup
-
-## 8. Results
-
-## 9. Key Contributions
-
-## 10. Limitations
-
-## 11. Conclusion
-
-## 12. Key Takeaways
-
-## Sources
-
-[1] ...
-[2] ...
-[3] ...
-
-Adapt the structure depending on summary type.
-
-Do not display empty sections unnecessarily.
-
-============================================================
-22. ADAPTIVE OUTPUT
-============================================================
-
-For QUICK summary:
-
-Use:
-
-- Overview
-- Problem
-- Method
-- Result
-- Conclusion
-
-For STANDARD:
-
-Use:
-
-- Overview
-- Problem
-- Method
-- Dataset
-- Results
-- Contributions
-- Conclusion
-
-For DETAILED:
-
-Use all relevant sections.
-
-For TECHNICAL:
-
-Prioritize technical details.
-
-For BEGINNER:
-
-Prioritize simple explanations.
-
-The agent should select the appropriate output structure based
-on user intent.
-
-============================================================
-23. BEGINNER MODE
-============================================================
-
-If user asks:
-
-"Explain this paper like I'm a beginner."
-
-The response should:
-
-1. Explain the problem simply.
-2. Explain why the problem matters.
-3. Explain the proposed solution.
-4. Explain the architecture simply.
-5. Explain the experiments.
-6. Explain the result.
-7. Explain the main takeaway.
-
-Example:
-
-Technical:
-
-"The authors employ a multi-head self-attention mechanism."
-
-Beginner:
-
-"The model looks at different parts of the input at the same
-time so that it can understand which pieces of information are
-important to each other."
-
-Do not distort the original meaning.
-
-============================================================
-24. TECHNICAL MODE
-============================================================
-
-If user asks:
-
-"Give me a technical summary."
-
-Include when available:
-
-- Architecture
-- Model
-- Algorithms
-- Training process
-- Loss function
-- Hyperparameters
-- Dataset
-- Evaluation metrics
-- Baselines
-- Results
-- Ablation studies
-
-Only include information supported by the paper.
-
-============================================================
-25. RESEARCH CONTRIBUTIONS
-============================================================
-
-Extract explicit contributions from the paper.
-
-Prioritize:
-
-- Introduction
-- Contributions section
-- Conclusion
-
-Do not invent contributions.
-
-If the authors explicitly list:
-
-1. New architecture
-2. New dataset
-3. New training method
-
-preserve these accurately.
-
-============================================================
-26. LIMITATIONS
-============================================================
-
-Prioritize explicit statements from:
-
-- Limitations section
-- Discussion
-- Conclusion
-- Future Work
-
-If the user asks:
-
-"What are the limitations?"
-
-First report limitations explicitly acknowledged by the authors.
-
-You may optionally distinguish:
-
-"Author-stated limitations"
-
-from
-
-"Potential limitations inferred from the evidence"
-
-Never present inference as an explicit statement by the authors.
-
-============================================================
-27. RESULTS
-============================================================
-
-Results should be accurately summarized.
-
-Preserve:
-
-- Metrics
-- Values
-- Baselines
-- Dataset
-- Experimental conditions
-
-Example:
-
-"The proposed model achieved 94.2% accuracy on Dataset A,
-compared with 91.8% for the baseline [5]."
-
-Do not change numerical values.
-
-Do not round numbers unnecessarily.
-
-Do not invent missing comparisons.
-
-============================================================
-28. TABLE / EXPERIMENT HANDLING
-============================================================
-
-If PDF extraction already supports tables, reuse that capability.
-
-If tables are represented as text, ensure important numerical
-information is preserved.
-
-Do not create fake table values.
-
-If a result cannot be reliably extracted, state that.
-
-============================================================
-29. MULTI-PAGE CHUNKS
-============================================================
-
-If a chunk spans:
-
-page 4 → page 5
-
-preserve:
-
-page_start = 4
-page_end = 5
-
-Do not create a fake single page.
-
-============================================================
-30. MULTI-PAPER PREPARATION
-============================================================
-
-Milestone 12 is primarily focused on single-paper summarization.
-
-However, design the summarization service so it can later support
-Milestone 13:
-
-Multi-Paper Comparison.
-
-For example, keep the summarization interface modular:
-
-summarize_document()
-summarize_sections()
-summarize_evidence()
-
-Do NOT implement full multi-paper comparison in this milestone.
-
-============================================================
-31. LANGGRAPH DESIGN
-============================================================
-
-Extend the existing LangGraph rather than replacing it.
-
-Conceptual graph:
-
-START
- ↓
-analyze_request
- ↓
-plan_summary
- ↓
-retrieve_evidence
- ↓
-evaluate_evidence
- ↓
- ┌───────────────┐
- │ sufficient?   │
- └───────┬───────┘
-     YES │ NO
-         │
-         ├───────────────→ retrieve_more_evidence
-         │                         │
-         │                         └────→ evaluate_evidence
-         │
-         ▼
-summarize_evidence
-         ↓
-synthesize_summary
-         ↓
-validate_citations
-         ↓
-format_response
-         ↓
-END
-
-Do not blindly implement every node if the current LangGraph
-architecture can accomplish the same behavior more cleanly.
-
-============================================================
-32. AGENT STATE
-============================================================
-
-Inspect the existing agent state first.
-
-Extend it only if necessary.
-
-Possible state:
-
-{
-    "question": "...",
-    "user_id": "...",
-    "project_id": "...",
-    "document_id": "...",
-    "summary_type": "detailed",
-    "focus": "...",
-    "retrieved_chunks": [],
-    "sources": [],
-    "intermediate_summaries": [],
-    "final_summary": "...",
-    "citations": [],
-    "tool_calls": [],
-    "errors": []
-}
-
-Adapt to the existing architecture.
-
-============================================================
-33. TOOL DESIGN
-============================================================
-
-Reuse existing tools where possible.
-
-Potential tools:
-
-search_paper
-retrieve_chunks
-get_document_sections
-get_document_metadata
-search_within_document
-
-Do not create unnecessary tools.
-
-The agent should select tools based on task requirements.
-
-============================================================
-34. TOOL RESULT FORMAT
-============================================================
-
-Tool results should preserve source metadata.
+Aggregate chunk-level relevance into a paper-level relevance score.
 
 Conceptually:
 
-{
-    "success": true,
-    "results": [
-        {
-            "text": "...",
-            "source": {
-                "source_id": "src_001",
-                "paper_id": "paper_123",
-                "document_id": "doc_123",
-                "chunk_id": "chunk_42",
-                "page_start": 5,
-                "page_end": 5,
-                "section": "Methodology"
-            }
-        }
-    ]
-}
+```text
+Paper
+ ├── Chunk 1 → relevance
+ ├── Chunk 2 → relevance
+ ├── Chunk 3 → relevance
+ └── Chunk 4 → relevance
 
-Adapt this to the current implementation.
+        ↓
 
-============================================================
-35. PROMPT ENGINEERING
-============================================================
+Paper relevance score
+```
 
-Create dedicated prompts for:
+The exact scoring method should fit the existing retrieval architecture.
 
-1. Evidence extraction
-2. Intermediate summarization
-3. Final synthesis
-4. Beginner explanation
-5. Technical summary
-6. Citation-aware synthesis
+---
 
-Do not place giant prompts directly inside random Python
-functions.
+# 11. CONFIGURABLE PAPER LIMIT
 
-Store prompts in the existing prompt architecture if one exists.
+Support configurable limits such as:
 
-============================================================
-36. EVIDENCE EXTRACTION PROMPT
-============================================================
-
-The evidence extraction prompt should instruct the model:
-
-- Use only supplied evidence.
-- Extract important factual information.
-- Preserve numerical values.
-- Preserve source IDs.
-- Do not invent facts.
-- Do not infer unsupported information.
-- Distinguish author claims from model inference.
-
-Do not ask the model to provide hidden chain-of-thought.
-
-Ask only for useful structured information.
-
-============================================================
-37. FINAL SYNTHESIS PROMPT
-============================================================
-
-The final synthesis prompt should instruct:
-
-You are summarizing a research paper using evidence retrieved
-from the paper.
-
-Rules:
-
-1. Use only supplied evidence.
-2. Do not invent information.
-3. Preserve numerical values accurately.
-4. Do not invent citations.
-5. Use supplied source IDs.
-6. Clearly indicate missing information.
-7. Maintain the distinction between author claims and inference.
-8. Produce a coherent structured summary.
-9. Avoid unnecessary repetition.
-10. Do not reveal chain-of-thought.
-
-============================================================
-38. STRUCTURED LLM OUTPUT
-============================================================
-
-Where possible, use structured output.
+```text
+MAX_LITERATURE_REVIEW_PAPERS
+```
 
 Example:
 
-{
-    "overview": "...",
-    "problem": "...",
-    "motivation": "...",
-    "objective": "...",
-    "methodology": "...",
-    "dataset": "...",
-    "experiments": "...",
-    "results": "...",
-    "contributions": [],
-    "limitations": [],
-    "conclusion": "...",
-    "key_takeaways": [],
-    "source_ids": []
-}
+```text
+10
+20
+30
+50
+```
 
-Use Pydantic models if compatible with the current backend.
+depending on system capacity.
 
-Do not force all fields to contain information.
+Do not send unlimited papers to the LLM.
 
-Allow null/empty values where the paper does not provide the
-information.
+---
 
-============================================================
-39. API DESIGN
-============================================================
+# 12. PAPER-AWARE RETRIEVAL
 
-Inspect the existing API architecture.
+Use the paper-aware retrieval mechanism created in Milestone 13.
 
-Implement a summarization endpoint only if the existing design
-requires one.
+Every evidence item should preserve:
 
-Possible:
-
-POST /api/research/summarize
-
-Request:
-
-{
-    "document_id": "...",
-    "summary_type": "detailed",
-    "focus": null
-}
-
-or integrate summarization into the existing agent endpoint.
-
-Do not duplicate APIs unnecessarily.
-
-============================================================
-40. API RESPONSE
-============================================================
-
-Conceptually:
-
-{
-    "status": "completed",
-
-    "summary_type": "detailed",
-
-    "summary": {
-        "overview": "...",
-        "problem": "...",
-        "methodology": "...",
-        "dataset": "...",
-        "results": "...",
-        "contributions": [],
-        "limitations": [],
-        "conclusion": "...",
-        "key_takeaways": []
-    },
-
-    "citations": [
-        {
-            "citation_id": "1",
-            "title": "...",
-            "page_start": 3,
-            "page_end": 3
-        }
-    ]
-}
-
-Adapt to the existing API contract.
-
-============================================================
-41. FRONTEND
-============================================================
-
-Update the React frontend to allow users to request summaries.
-
-Possible interface:
-
---------------------------------------------
-
-Research Paper
-
-Attention Is All You Need
-
-[ Generate Summary ]
-
-Summary Type:
-
-( ) Quick
-( ) Standard
-( ) Detailed
-( ) Technical
-( ) Beginner
-
-Focus:
-
-[________________________]
-
-[ Generate ]
-
---------------------------------------------
-
-After generation:
-
-Paper Summary
-
-Overview
-...
-
-Methodology
-...
-
-Results
-...
-
-Contributions
-...
-
-Sources
-
-[1] Page 3
-[2] Page 5
-[3] Page 8
-
---------------------------------------------
-
-Keep the UI consistent with the existing application.
-
-Do not redesign the entire frontend.
-
-============================================================
-42. CITATION UI
-============================================================
-
-Reuse Milestone 11 citation components.
-
-Citations should ideally be clickable.
+* paper_id
+* project_id
+* chunk_id
+* page_number
+* section
+* source
+* text
 
 Example:
 
-"The proposed model improves performance [1]."
+```json
+{
+  "paper_id": "paper_001",
+  "chunk_id": "chunk_042",
+  "page_number": 6,
+  "section": "Experiments",
+  "text": "..."
+}
+```
 
-Click [1]:
+Do not lose source metadata during synthesis.
 
-Paper:
-Research Paper A
+---
 
-Page:
-7
+# 13. BALANCED RETRIEVAL
 
-Relevant evidence:
-...
+Avoid allowing one paper to dominate the literature review.
 
-If PDF viewer navigation already exists, open the corresponding
-page.
-
-If not, expose enough metadata for future implementation.
-
-============================================================
-43. ERROR HANDLING
-============================================================
-
-Handle:
-
-- document not found
-- unauthorized document
-- empty document
-- extraction failure
-- no chunks
-- vector DB failure
-- LLM failure
-- timeout
-- malformed structured output
-- citation validation failure
-- insufficient evidence
-
-Never expose internal stack traces to users.
-
-Return safe structured errors.
-
-============================================================
-44. SECURITY
-============================================================
-
-The user must only summarize documents they are authorized to
-access.
-
-Verify:
-
-authenticated user
-       ↓
-document ownership/access
-       ↓
-retrieval
-       ↓
-summary
-
-Never trust document IDs from the frontend.
+For example, if 100 relevant chunks are retrieved:
 
 Do not allow:
 
-User A
- ↓
-document_id = User B document
- ↓
-summary
+```text
+Paper A → 80 chunks
+Paper B → 5
+Paper C → 5
+Paper D → 5
+Paper E → 5
+```
 
-============================================================
-45. PERFORMANCE
-============================================================
+unless this is genuinely justified.
 
-Do not retrieve unnecessary chunks.
+Use appropriate per-paper retrieval limits and evidence selection.
 
-Avoid duplicate retrieval.
+---
 
-Avoid duplicate LLM calls.
+# 14. DIMENSION-AWARE EVIDENCE EXTRACTION
 
-Use batching where appropriate.
+The system should identify important research dimensions.
 
-Use asynchronous processing if already supported.
+Potential dimensions:
 
-Track:
+* Research Problem
+* Research Objective
+* Methodology
+* Architecture
+* Model
+* Dataset
+* Dataset Size
+* Training
+* Retrieval Method
+* Embedding Model
+* Evaluation Metrics
+* Results
+* Contributions
+* Strengths
+* Limitations
+* Future Work
 
-- retrieval latency
-- LLM latency
-- total latency
-- number of LLM calls
-- token usage if available
+The actual dimensions should depend on the research question.
 
-Do not prematurely optimize without measuring.
+---
 
-============================================================
-46. CACHING
-============================================================
+# 15. PAPER INSIGHT EXTRACTION
 
-Consider caching generated summaries if appropriate.
+For each relevant paper, extract structured information.
 
-Potential cache key:
+Conceptual structure:
 
-document_id
-+
-summary_type
-+
-focus
-+
-model/version
+```json
+{
+  "paper_id": "...",
+  "research_problem": "...",
+  "methodology": "...",
+  "dataset": "...",
+  "model": "...",
+  "evaluation": "...",
+  "results": "...",
+  "limitations": "...",
+  "future_work": "...",
+  "citations": []
+}
+```
 
-However, do not introduce caching if it creates complexity or
-security problems.
+Use evidence from the paper only.
 
-If implemented, ensure user authorization is still enforced.
+Do not invent missing fields.
 
-============================================================
-47. TESTING — UNIT TESTS
-============================================================
+If information is unavailable:
 
-Create unit tests for:
+```text
+Not found in the available evidence.
+```
 
-1. Summary type validation
-2. Summary schema
-3. Evidence grouping
-4. Chunk grouping
-5. Intermediate summary creation
-6. Source propagation
-7. Citation propagation
-8. Citation deduplication
-9. Missing section handling
-10. Missing metadata handling
-11. Empty evidence handling
-12. Structured output parsing
+---
 
-============================================================
-48. TESTING — AGENT
-============================================================
+# 16. THEME DISCOVERY
 
-Test the autonomous agent.
+This is a core requirement.
+
+After extracting paper-level evidence, identify recurring research themes.
 
 Example:
 
-User:
-"Give me a detailed summary."
+```text
+Theme 1
+Retrieval Optimization
 
-Expected:
+Theme 2
+Domain-Specific Fine-Tuning
 
-Agent identifies summarization task.
+Theme 3
+Hybrid Retrieval
 
-User:
-"Explain the experiments."
+Theme 4
+Citation Grounding
 
-Expected:
+Theme 5
+Evaluation and Benchmarking
+```
 
-Agent prioritizes experimental evidence.
+Themes must be derived from the evidence.
 
-User:
-"Explain the paper for a beginner."
+Do not hard-code themes for every domain.
 
-Expected:
+---
 
-Agent selects beginner-friendly summary mode.
+# 17. THEME CLUSTERING
 
-User:
-"What dataset was used?"
+Group papers/evidence into themes.
 
-Expected:
+Conceptually:
 
-Agent performs targeted retrieval rather than generating a
-full-paper summary.
+```text
+Theme A
+ ├── Paper 1
+ ├── Paper 4
+ ├── Paper 7
+ └── Paper 10
 
-============================================================
-49. TESTING — EVIDENCE SUFFICIENCY
-============================================================
+Theme B
+ ├── Paper 2
+ ├── Paper 5
+ └── Paper 8
+```
 
-Test:
+A paper may belong to multiple themes if supported by evidence.
 
-Initial retrieval contains incomplete information.
+---
 
-Expected:
+# 18. THEME SUMMARIZATION
 
-Agent performs additional retrieval.
+For every theme, generate a synthesis.
 
-If still insufficient:
+Example:
 
-Agent reports insufficient evidence.
+## Theme: Retrieval Optimization
 
-It must NOT hallucinate.
+Evidence from:
 
-============================================================
-50. TESTING — HALLUCINATION
-============================================================
+* Paper A
+* Paper C
+* Paper F
+* Paper H
 
-Create test evidence:
+Synthesize:
 
-"The paper uses Dataset A."
+* common approaches
+* differences
+* findings
+* limitations
+* evaluation patterns
 
-LLM should not produce:
+Do not simply concatenate paper summaries.
 
-"The paper uses Dataset A and Dataset B."
+---
 
-unless Dataset B is actually present.
+# 19. CROSS-PAPER SYNTHESIS
 
-Test numerical claims as well.
+The system must answer:
 
-Evidence:
+### What do researchers generally agree on?
 
-"Accuracy = 94.2%."
+### What findings are consistent?
 
-Expected:
+### What findings conflict?
 
-94.2%.
+### What methodologies are common?
 
-Not:
+### Which methods appear to perform better?
 
-94.5%.
+### Under what conditions?
 
-============================================================
-51. TESTING — CITATIONS
-============================================================
+### What limitations repeatedly appear?
 
-Test:
+All conclusions must be grounded in evidence.
 
-Summary claim:
+---
 
-"The model achieved 94.2% accuracy [1]."
+# 20. AGREEMENT DETECTION
 
-Source [1]:
+Identify research findings that multiple papers support.
 
-Page 7 containing 94.2%.
+Example:
 
-Expected:
+```text
+Paper A → RAG improves factual grounding
+Paper B → RAG improves factual grounding
+Paper C → RAG improves factual grounding
+```
 
-Valid.
+Possible synthesis:
 
-Test invalid citation:
+"Multiple studies report improvements in factual grounding when retrieval-augmented approaches are used."
 
-"[99]"
+Citations should reference the supporting papers.
 
-Expected:
+---
 
-Rejected.
+# 21. DISAGREEMENT DETECTION
 
-Reuse Milestone 11 citation validation.
+Identify contradictory findings.
 
-============================================================
-52. TESTING — AUTHORIZATION
-============================================================
+Example:
 
-User A:
+```text
+Paper A → improvement
+Paper B → improvement
+Paper C → no significant improvement
+```
 
-Paper A
+The system should report:
 
-User B:
+```text
+Agreement:
+A + B
 
-Paper B
+Contradictory finding:
+C
+```
 
-User A requests summary.
+Then investigate possible evidence-based reasons:
 
-Expected:
+* different datasets
+* different models
+* different evaluation metrics
+* different retrieval strategies
+* different experimental settings
 
-Only Paper A can be accessed.
+Do not assume a reason unless supported by evidence.
 
-No Paper B metadata should appear.
+---
 
-============================================================
-53. TESTING — LONG DOCUMENT
-============================================================
+# 22. TREND ANALYSIS
 
-Test with a realistic long research paper.
+Identify research trends when sufficient evidence exists.
+
+Possible trend dimensions:
+
+* publication year
+* model type
+* methodology
+* datasets
+* evaluation metrics
+* retrieval techniques
+* architectures
+
+Example:
+
+```text
+2021
+Traditional NLP
+
+2022
+Transformer-based systems
+
+2023
+LLM fine-tuning
+
+2024
+RAG systems
+
+2025
+Agentic RAG
+```
+
+Only generate trends when the available papers support them.
+
+Do not fabricate historical trends.
+
+---
+
+# 23. COMMON LIMITATIONS
+
+Identify limitations repeatedly reported across papers.
+
+Example:
+
+```text
+Common Limitations
+
+1. Small datasets
+2. Limited evaluation benchmarks
+3. High computational cost
+4. Retrieval errors
+5. Domain-specific limitations
+```
+
+Each limitation should be supported by citations to relevant papers.
+
+---
+
+# 24. EMERGING DIRECTIONS
+
+Identify directions researchers are beginning to explore.
+
+For example:
+
+```text
+Emerging Directions
+
+- Agentic RAG
+- Multimodal retrieval
+- Domain-specific agents
+- Adaptive retrieval
+```
+
+Only include directions supported by the literature.
+
+This section should help prepare the system for Milestone 15.
+
+---
+
+# 25. IMPORTANT BOUNDARY WITH MILESTONE 15
+
+Milestone 14 should describe:
+
+```text
+What has been studied?
+What approaches exist?
+What findings exist?
+What limitations are reported?
+What trends exist?
+```
+
+Milestone 15 will focus deeply on:
+
+```text
+What is missing?
+What has not been adequately studied?
+What research gaps exist?
+```
+
+Do not prematurely turn Milestone 14 into a full research-gap discovery engine.
+
+However, the output should expose enough structured limitations and contradictions for Milestone 15 to reuse.
+
+---
+
+# 26. HIERARCHICAL SYNTHESIS
+
+This is a critical architectural requirement.
+
+Do NOT send 20–50 entire papers into one LLM context.
+
+Use hierarchical processing:
+
+```text
+Papers
+   ↓
+Relevant Evidence
+   ↓
+Paper-Level Insights
+   ↓
+Theme-Level Groups
+   ↓
+Theme-Level Synthesis
+   ↓
+Cross-Theme Synthesis
+   ↓
+Final Literature Review
+```
+
+This reduces:
+
+* token usage
+* latency
+* hallucination
+* context overflow
+* cost
+
+and improves reasoning quality.
+
+---
+
+# 27. LANGGRAPH WORKFLOW
+
+Extend the existing LangGraph architecture.
+
+Recommended workflow:
+
+```text
+START
+  ↓
+parse_research_question
+  ↓
+determine_review_scope
+  ↓
+validate_project_and_papers
+  ↓
+select_relevant_papers
+  ↓
+retrieve_evidence
+  ↓
+extract_paper_insights
+  ↓
+discover_themes
+  ↓
+cluster_evidence
+  ↓
+synthesize_themes
+  ↓
+detect_agreements
+  ↓
+detect_disagreements
+  ↓
+analyze_trends
+  ↓
+extract_common_limitations
+  ↓
+identify_emerging_directions
+  ↓
+generate_literature_review
+  ↓
+verify_citations
+  ↓
+quality_check
+  ↓
+format_review
+  ↓
+save_review
+  ↓
+END
+```
+
+Reuse existing LangGraph infrastructure from Milestones 10 and 13.
+
+---
+
+# 28. LANGGRAPH STATE
+
+Create or extend an appropriate state model.
+
+Conceptually:
+
+```python
+class LiteratureReviewState:
+
+    project_id
+    user_id
+    query
+
+    selected_paper_ids
+    candidate_papers
+    relevant_papers
+
+    research_scope
+    dimensions
+
+    retrieved_evidence
+    paper_insights
+
+    themes
+    theme_evidence
+    theme_summaries
+
+    agreements
+    disagreements
+    trends
+    limitations
+    emerging_directions
+
+    literature_review
+    citations
+    citation_validation
+
+    quality_check
+    errors
+```
+
+Use the project's existing state architecture where possible.
+
+---
+
+# 29. NODE RESPONSIBILITIES
+
+## parse_research_question
+
+Identify:
+
+* research topic
+* research objective
+* important keywords
+* likely dimensions
+* review scope
+
+---
+
+## determine_review_scope
+
+Determine:
+
+* all relevant papers
+* selected papers
+* maximum paper count
+* relevant research dimensions
+
+---
+
+## validate_project_and_papers
 
 Verify:
 
-- no context overflow
-- summarization completes
-- citations survive
-- important sections are represented
-- latency remains acceptable
+* project exists
+* user has access
+* papers exist
+* papers belong to project
+* selected papers are valid
 
-============================================================
-54. TESTING — DIFFERENT SUMMARY TYPES
-============================================================
+---
+
+## select_relevant_papers
+
+Use semantic search/relevance scoring.
+
+Return ranked relevant papers.
+
+---
+
+## retrieve_evidence
+
+Retrieve evidence from relevant papers.
+
+Preserve metadata.
+
+Use paper-aware filtering.
+
+---
+
+## extract_paper_insights
+
+Create structured evidence-based insights for each paper.
+
+---
+
+## discover_themes
+
+Identify major themes from paper-level evidence.
+
+---
+
+## cluster_evidence
+
+Group evidence by theme.
+
+---
+
+## synthesize_themes
+
+Generate theme-level synthesis.
+
+---
+
+## detect_agreements
+
+Find repeated findings across papers.
+
+---
+
+## detect_disagreements
+
+Find contradictory findings.
+
+---
+
+## analyze_trends
+
+Identify supported trends.
+
+---
+
+## extract_common_limitations
+
+Identify limitations repeated across papers.
+
+---
+
+## identify_emerging_directions
+
+Identify evidence-supported future/emerging directions.
+
+---
+
+## generate_literature_review
+
+Generate the final academic review.
+
+---
+
+## verify_citations
+
+Reuse Milestone 11 citation verification.
+
+Every factual statement should map to evidence.
+
+---
+
+## quality_check
+
+Check:
+
+* grounding
+* completeness
+* citation coverage
+* contradictions
+* unsupported claims
+* redundancy
+* paper diversity
+* logical consistency
+
+---
+
+## format_review
+
+Prepare response for frontend.
+
+---
+
+## save_review
+
+Persist the completed review.
+
+---
+
+# 30. STRUCTURED LLM OUTPUT
+
+Use structured output wherever supported.
+
+Conceptual structure:
+
+```json
+{
+  "research_question": "...",
+  "scope": "...",
+  "relevant_papers": [],
+  "themes": [
+    {
+      "name": "...",
+      "description": "...",
+      "paper_ids": [],
+      "findings": [],
+      "agreements": [],
+      "disagreements": [],
+      "citations": []
+    }
+  ],
+  "trends": [],
+  "common_limitations": [],
+  "emerging_directions": [],
+  "overall_synthesis": "...",
+  "citations": []
+}
+```
+
+Adapt this to the project's existing schemas.
+
+---
+
+# 31. LITERATURE REVIEW OUTPUT STRUCTURE
+
+The final review should follow a research-friendly structure.
+
+Recommended:
+
+# Literature Review
+
+## 1. Research Scope
+
+Explain:
+
+* research question
+* papers analyzed
+* review scope
+
+## 2. Overview of the Literature
+
+High-level synthesis.
+
+## 3. Major Research Themes
+
+### Theme 1
+
+### Theme 2
+
+### Theme 3
+
+## 4. Methodological Trends
+
+Discuss common approaches.
+
+## 5. Cross-Paper Findings
+
+Discuss major findings.
+
+## 6. Agreements
+
+What researchers generally agree on.
+
+## 7. Contradictions and Disagreements
+
+Where findings differ.
+
+## 8. Common Limitations
+
+Repeated limitations.
+
+## 9. Emerging Research Directions
+
+Evidence-supported emerging directions.
+
+## 10. Overall Synthesis
+
+High-level conclusion.
+
+## 11. References / Sources
+
+Provide the project's citation format.
+
+---
+
+# 32. CITATION REQUIREMENTS
+
+Citation grounding is mandatory.
+
+Every factual claim derived from a paper must have a citation.
+
+Citation structure should preserve:
+
+* paper
+* page
+* chunk/source
+* evidence
+
+Reuse the citation system from Milestone 11.
+
+Do not create an incompatible citation system.
+
+---
+
+# 33. CITATION COVERAGE CHECK
+
+Before returning the review:
+
+Calculate/check:
+
+```text
+claims
+supported claims
+unsupported claims
+citation coverage
+```
+
+If unsupported claims exist:
+
+Either:
+
+1. attach correct evidence, or
+2. remove the claim, or
+3. clearly mark the information as uncertain.
+
+Do not silently allow unsupported claims.
+
+---
+
+# 34. ANTI-HALLUCINATION
+
+The system must never invent:
+
+* papers
+* authors
+* publication years
+* datasets
+* results
+* metrics
+* architectures
+* limitations
+* research trends
+* citations
+* consensus
+
+If evidence is insufficient:
+
+"The available papers do not provide sufficient evidence to establish this conclusion."
+
+---
+
+# 35. BALANCED SYNTHESIS
+
+The literature review should not automatically favor the majority finding.
+
+For example:
+
+If:
+
+```text
+8 papers support method A
+2 papers report no improvement
+```
+
+the review should acknowledge both.
+
+Use language such as:
+
+"Most of the reviewed studies report improvements, although two studies report limited or insignificant gains under their evaluation settings."
+
+Cite both sides.
+
+---
+
+# 36. AVOID PAPER-BY-PAPER REPETITION
+
+Do not generate:
+
+```text
+Paper A says...
+Paper B says...
+Paper C says...
+Paper D says...
+```
+
+for the entire review.
+
+Instead synthesize:
+
+```text
+Several studies use...
+Multiple papers report...
+However, some studies find...
+```
+
+Then provide citations.
+
+Paper-level summaries may still be available as supporting information.
+
+---
+
+# 37. DATABASE / PERSISTENCE
+
+Add literature review persistence using the existing database architecture.
+
+Conceptually:
+
+```text
+literature_reviews
+
+review_id
+user_id
+project_id
+query
+paper_ids
+relevant_paper_ids
+scope
+themes
+review_result
+citations
+status
+created_at
+updated_at
+```
+
+Statuses:
+
+```text
+queued
+processing
+completed
+failed
+```
+
+Use existing conventions.
+
+---
+
+# 38. API
+
+Implement an appropriate API.
+
+Recommended:
+
+```text
+POST /api/literature-reviews
+```
+
+Request:
+
+```json
+{
+  "project_id": "...",
+  "query": "...",
+  "paper_ids": [],
+  "max_papers": 20
+}
+```
+
+If `paper_ids` is empty:
+
+Use all relevant papers in the project.
+
+Add:
+
+```text
+GET /api/literature-reviews/{review_id}
+```
+
+and:
+
+```text
+GET /api/projects/{project_id}/literature-reviews
+```
+
+Follow the project's existing route conventions.
+
+---
+
+# 39. AUTHORIZATION
+
+Every literature review operation must respect the existing authorization system.
+
+Users must not access:
+
+* another user's project
+* another user's papers
+* another user's literature reviews
+
+Validate ownership server-side.
+
+Never trust client-provided IDs.
+
+---
+
+# 40. FRONTEND — LITERATURE REVIEW ENTRY
+
+Add Literature Review functionality to the existing workspace.
+
+For example:
+
+```text
+Research Workspace
+
+[Ask Question]
+[Summarize Paper]
+[Compare Papers]
+[Generate Literature Review]
+```
+
+---
+
+# 41. FRONTEND — CONFIGURATION
+
+Create a literature review configuration interface.
+
+Example:
+
+```text
+Research Question
+
+[ What are current approaches to RAG
+  for legal question answering? ]
+
+Paper Scope
+
+○ All Relevant Papers
+○ Selected Papers
+
+Maximum Papers
+
+[ 20 ]
+
+Focus Areas
+
+☑ Methodology
+☑ Findings
+☑ Trends
+☑ Limitations
+☑ Emerging Directions
+
+[Generate Literature Review]
+```
+
+Use existing UI components and design language.
+
+Do not redesign the application.
+
+---
+
+# 42. FRONTEND — PROGRESS
+
+Display progress during long-running reviews.
+
+Example:
+
+```text
+✓ Understanding research question
+✓ Selecting relevant papers
+✓ Retrieving evidence
+✓ Extracting paper insights
+✓ Discovering themes
+⏳ Synthesizing literature
+○ Verifying citations
+○ Quality checking
+```
+
+Reuse existing progress/loading mechanisms where possible.
+
+---
+
+# 43. FRONTEND — RESULT
+
+Display:
+
+```text
+Literature Review
+
+Research Question
+────────────────────────
+
+Scope
+────────────────────────
+
+Papers Analyzed
+────────────────────────
+
+Major Themes
+────────────────────────
+
+Methodological Trends
+────────────────────────
+
+Cross-Paper Findings
+────────────────────────
+
+Agreements
+────────────────────────
+
+Contradictions
+────────────────────────
+
+Common Limitations
+────────────────────────
+
+Emerging Directions
+────────────────────────
+
+Overall Synthesis
+────────────────────────
+
+References
+────────────────────────
+```
+
+Allow citations to remain interactive if the existing citation UI supports it.
+
+---
+
+# 44. LITERATURE REVIEW HISTORY
+
+Add review history.
+
+Example:
+
+```text
+Literature Review History
+
+RAG for Legal QA
+20 papers
+Aug 21, 2026
+
+LLMs for Healthcare
+15 papers
+Aug 20, 2026
+
+Multimodal RAG
+12 papers
+Aug 18, 2026
+```
+
+Selecting a review should display the saved result.
+
+---
+
+# 45. ERROR HANDLING
+
+Handle:
+
+* invalid project
+* unauthorized access
+* invalid papers
+* no relevant papers
+* insufficient evidence
+* vector database failure
+* retrieval failure
+* LLM failure
+* LangGraph failure
+* citation verification failure
+* database failure
+* timeout
+* excessive paper count
+
+User-facing messages must be clear.
+
+Do not expose stack traces.
+
+---
+
+# 46. NO RELEVANT PAPERS
+
+If no relevant papers are found:
+
+Return a clear message:
+
+"No sufficiently relevant papers were found in this research workspace for the requested topic."
+
+Do not generate a fabricated review.
+
+---
+
+# 47. INSUFFICIENT EVIDENCE
+
+If papers are relevant but evidence is insufficient:
+
+"The available papers provide insufficient evidence to confidently synthesize this aspect of the literature."
+
+Do not fill gaps with general LLM knowledge.
+
+---
+
+# 48. PERFORMANCE
+
+Optimize for:
+
+* retrieval efficiency
+* LLM token usage
+* parallel processing
+* paper-level caching
+* theme-level caching where appropriate
+* controlled top-k retrieval
+* evidence compression
+
+Avoid unnecessary repeated LLM calls.
+
+---
+
+# 49. COST CONTROL
+
+The system should not send:
+
+```text
+20 full papers
+```
+
+into every LLM call.
+
+Instead:
+
+```text
+20 papers
+↓
+relevant chunks
+↓
+paper insights
+↓
+theme summaries
+↓
+final synthesis
+```
+
+Use configurable limits.
+
+Potential configuration:
+
+```text
+MAX_LITERATURE_REVIEW_PAPERS
+LITERATURE_REVIEW_TOP_K
+MAX_CHUNKS_PER_PAPER
+MAX_THEMES
+MAX_LLM_CONTEXT
+```
+
+Adapt to the project's configuration system.
+
+---
+
+# 50. LOGGING
+
+Add useful logs for:
+
+* review request
+* project
+* selected papers
+* relevance ranking
+* retrieval
+* evidence count
+* theme discovery
+* synthesis
+* citation verification
+* quality check
+* persistence
+* failures
+
+Do not log sensitive information unnecessarily.
+
+---
+
+# 51. TESTING — UNIT TESTS
+
+Write tests for:
+
+1. Research-question parsing
+2. Scope detection
+3. Paper validation
+4. Paper relevance ranking
+5. Paper-aware retrieval
+6. Evidence grouping
+7. Paper insight extraction
+8. Theme discovery
+9. Theme grouping
+10. Agreement detection
+11. Disagreement detection
+12. Trend detection
+13. Limitation extraction
+14. Citation mapping
+15. Citation verification
+16. Hallucination protection
+17. Literature review persistence
+
+---
+
+# 52. INTEGRATION TEST
 
 Test:
 
-quick
-standard
-detailed
-technical
-beginner
+```text
+Frontend
+↓
+API
+↓
+Authentication
+↓
+Project validation
+↓
+Paper selection
+↓
+Vector database
+↓
+Retriever
+↓
+LangGraph
+↓
+LLM
+↓
+Citation verification
+↓
+Quality check
+↓
+Database
+↓
+API response
+↓
+Frontend
+```
 
-Verify that each produces appropriately different output.
+---
 
-============================================================
-55. TESTING — MISSING SECTIONS
-============================================================
+# 53. END-TO-END TEST
 
-Use papers that do not have:
+Perform this complete scenario:
 
-- explicit limitations section
-- explicit methodology section
-- explicit dataset section
+1. Login.
+2. Open a research workspace.
+3. Ensure at least 5 papers exist.
+4. Open Literature Review.
+5. Enter a research question.
+6. Choose All Relevant Papers.
+7. Start review.
+8. Verify paper relevance ranking.
+9. Verify evidence retrieval.
+10. Verify theme discovery.
+11. Verify synthesis.
+12. Verify citations.
+13. Verify quality check.
+14. Display final review.
+15. Save review.
+16. Refresh the page.
+17. Open Literature Review History.
+18. Open the saved review.
+19. Verify the same result is available.
 
-Expected:
+---
 
-The system should still produce a useful summary.
+# 54. CONTRADICTION TEST
 
-Do not produce empty fabricated information.
+Create/test a scenario where:
 
-============================================================
-56. SUMMARY QUALITY EVALUATION
-============================================================
+Paper A:
+Method improves performance.
 
-Create an evaluation dataset.
+Paper B:
+Method improves performance.
+
+Paper C:
+Method produces no significant improvement.
+
+The system must report the disagreement.
+
+It must not simply state:
+
+"The method improves performance."
+
+without mentioning the contradictory evidence.
+
+---
+
+# 55. IRRELEVANT PAPER TEST
+
+Workspace:
+
+```text
+Paper A → RAG
+Paper B → RAG
+Paper C → Computer Vision
+Paper D → Robotics
+Paper E → RAG
+```
+
+Query:
+
+"Review RAG research."
+
+The review should primarily use:
+
+```text
+A
+B
+E
+```
+
+and exclude/deprioritize irrelevant papers.
+
+---
+
+# 56. LARGE COLLECTION TEST
+
+Test with a larger collection.
 
 Example:
 
-{
-    "question": "What problem does the paper address?",
-    "expected_information": "...",
-    "expected_sources": ["src_001"]
-}
+```text
+50 papers
+```
 
-Include questions about:
+Verify:
 
-- problem
-- motivation
-- methodology
-- dataset
-- experiments
-- results
-- contributions
-- limitations
-- conclusion
+* system does not exceed context limits
+* system does not make uncontrolled LLM calls
+* review remains grounded
+* retrieval remains balanced
+* performance remains reasonable
+
+---
+
+# 57. EXISTING FEATURE REGRESSION TEST
+
+After implementing Milestone 14, verify:
+
+Milestone 9:
+RAG QA works.
+
+Milestone 10:
+LangGraph agent works.
+
+Milestone 11:
+Citations work.
+
+Milestone 12:
+Paper summarization works.
+
+Milestone 13:
+Multi-paper comparison works.
+
+Milestone 14:
+Literature review works.
+
+---
+
+# 58. API DOCUMENTATION
+
+Update OpenAPI/API documentation.
+
+Document:
+
+* literature review creation
+* literature review retrieval
+* review history
+* request schema
+* response schema
+* validation errors
+* authorization requirements
+
+---
+
+# 59. PROJECT DOCUMENTATION
+
+Update README/project documentation.
+
+Document:
+
+## Automated Literature Review
+
+Explain:
+
+* purpose
+* workflow
+* architecture
+* relevance ranking
+* retrieval
+* hierarchical synthesis
+* theme discovery
+* agreement detection
+* disagreement detection
+* citation grounding
+* quality checking
+* API
+* frontend
+* configuration
+* testing
+
+---
+
+# 60. FINAL ARCHITECTURE
+
+The project should conceptually evolve into:
+
+```text
+                        AI RESEARCH ASSISTANT
+                                │
+                                ↓
+                     Research Workspace
+                                │
+             ┌──────────────────┼──────────────────┐
+             ↓                  ↓                  ↓
+          Papers              RAG              Agents
+             │                  │                  │
+             ↓                  ↓                  ↓
+        PDF Processing     QA + Retrieval      LangGraph
+             │
+             ↓
+       Chunking + Embeddings
+             │
+             ↓
+        Vector Database
+             │
+             ├──────────────────────────┐
+             ↓                          ↓
+      Paper Summarization       Multi-Paper Comparison
+                                        │
+                                        ↓
+                             Automated Literature Review
+                                        │
+                                        ↓
+                              Relevant Paper Selection
+                                        │
+                                        ↓
+                                Evidence Extraction
+                                        │
+                                        ↓
+                                  Theme Discovery
+                                        │
+                                        ↓
+                                Theme Synthesis
+                                        │
+                         ┌──────────────┼──────────────┐
+                         ↓              ↓              ↓
+                    Agreements    Disagreements     Trends
+                         │              │              │
+                         └──────────────┼──────────────┘
+                                        ↓
+                               Overall Synthesis
+                                        ↓
+                              Citation Verification
+                                        ↓
+                                  Quality Check
+                                        ↓
+                               Literature Review
+```
+
+---
+
+# 61. DATA FLOW
+
+The complete Milestone 14 data flow should be:
+
+```text
+User Research Question
+        ↓
+Query Understanding
+        ↓
+Research Scope
+        ↓
+Paper Retrieval
+        ↓
+Paper Relevance Ranking
+        ↓
+Relevant Papers
+        ↓
+Paper-Aware Evidence Retrieval
+        ↓
+Paper-Level Insight Extraction
+        ↓
+Theme Discovery
+        ↓
+Evidence Clustering
+        ↓
+Theme-Level Synthesis
+        ↓
+Cross-Paper Analysis
+        ↓
+Agreement / Disagreement
+        ↓
+Trend Analysis
+        ↓
+Limitations
+        ↓
+Emerging Directions
+        ↓
+Literature Review Generation
+        ↓
+Citation Verification
+        ↓
+Quality Check
+        ↓
+Save Review
+        ↓
+Frontend
+```
+
+---
+
+# 62. DEFINITION OF DONE
+
+Milestone 14 is complete only when all of these are working:
+
+* [ ] Research question input
+* [ ] Review scope selection
+* [ ] All-relevant-papers mode
+* [ ] Selected-papers mode
+* [ ] Paper relevance ranking
+* [ ] Paper-aware retrieval
+* [ ] Balanced evidence retrieval
+* [ ] Research dimension extraction
+* [ ] Paper-level insight extraction
+* [ ] Theme discovery
+* [ ] Evidence clustering
+* [ ] Theme-level synthesis
+* [ ] Cross-paper synthesis
+* [ ] Agreement detection
+* [ ] Disagreement detection
+* [ ] Trend analysis
+* [ ] Common limitation extraction
+* [ ] Emerging direction extraction
+* [ ] Hierarchical synthesis
+* [ ] Literature review generation
+* [ ] Citation integration
+* [ ] Citation verification
+* [ ] Anti-hallucination checks
+* [ ] Quality checking
+* [ ] Literature review persistence
+* [ ] Literature review API
+* [ ] Literature review UI
+* [ ] Literature review history
+* [ ] Progress/loading states
+* [ ] Error handling
+* [ ] Authentication
+* [ ] Authorization
+* [ ] Configurable limits
+* [ ] Logging
+* [ ] Unit tests
+* [ ] Integration tests
+* [ ] End-to-end tests
+* [ ] Regression tests for Milestones 1–13
+* [ ] API documentation
+* [ ] README/documentation
+
+---
+
+# 63. IMPLEMENTATION ORDER
+
+Implement Milestone 14 in the following order.
+
+## PHASE 1 — CODEBASE ANALYSIS
+
+Inspect Milestones 1–13.
+
+Do not modify code yet.
 
-============================================================
-57. EVALUATION METRICS
-============================================================
-
-Measure:
-
-1. Factual accuracy
-2. Completeness
-3. Relevance
-4. Faithfulness
-5. Citation accuracy
-6. Citation completeness
-7. Citation validity
-8. Hallucination rate
-9. Latency
-10. Token usage
-
-Use automated evaluation where practical and manual evaluation
-for qualitative summary quality.
-
-Do not claim high accuracy without actual evaluation.
-
-============================================================
-58. OBSERVABILITY
-============================================================
-
-Add useful logs.
-
-Example:
-
-summary_requested
-document_id=...
-
-summary_type=detailed
-
-retrieval_started
-
-retrieval_completed
-
-chunks_retrieved=...
-
-map_summary_completed
-
-reduce_summary_completed
-
-citation_validation_completed
-
-summary_completed
-
-Do not log:
-
-- passwords
-- API keys
-- tokens
-- sensitive document contents unnecessarily
-
-============================================================
-59. DOCUMENTATION
-============================================================
-
-Update README with:
-
-Milestone 12
-
-Advanced Paper Summarization
-
-Include:
-
-- architecture
-- workflow
-- supported summary types
-- agent behavior
-- RAG usage
-- map-reduce strategy
-- citation handling
-- API
-- testing
-- evaluation
-
-============================================================
-60. FILE ORGANIZATION
-============================================================
-
-Before creating files, inspect the current project structure.
-
-Follow existing conventions.
-
-Do not create unnecessary folders.
-
-Potential logical components could be:
-
-summarization/
-    service
-    schemas
-    prompts
-    evaluator
-
-But adapt this to the existing architecture.
-
-Do not blindly create these exact files.
-
-============================================================
-61. DEPENDENCY MANAGEMENT
-============================================================
-
-Before adding any package:
-
-Check whether it is already installed.
-
-Do not add duplicate libraries.
-
-Prefer existing:
-
-- LangChain
-- LangGraph
-- Pydantic
-- PyMuPDF
-- Sentence Transformers
-
-Add a dependency only if genuinely necessary.
-
-Update requirements appropriately.
-
-============================================================
-62. BACKWARD COMPATIBILITY
-============================================================
-
-Milestone 12 must NOT break:
-
-- authentication
-- project management
-- PDF upload
-- PDF extraction
-- chunking
-- embeddings
-- vector search
-- RAG
-- autonomous agent
-- citations
-
-Run all existing tests.
-
-============================================================
-63. DO NOT IMPLEMENT FUTURE MILESTONES
-============================================================
-
-Do NOT implement:
-
-❌ Multi-paper comparison
-❌ Literature review generation
-❌ Research gap discovery
-❌ Web research
-❌ Long-term research memory
-❌ Advanced multi-agent architecture
-❌ Production deployment
-❌ CI/CD
-
-These belong to future milestones.
-
-Milestone 12 is specifically:
-
-ADVANCED PAPER SUMMARIZATION
-+
-RESEARCH SYNTHESIS
-+
-EVIDENCE GROUNDING
-+
-CITATIONS
-
-============================================================
-64. ACCEPTANCE CRITERIA
-============================================================
-
-Milestone 12 is complete only when:
-
-[ ] User can summarize an uploaded research paper.
-
-[ ] Quick summary works.
-
-[ ] Standard summary works.
-
-[ ] Detailed summary works.
-
-[ ] Technical summary works.
-
-[ ] Beginner summary works.
-
-[ ] User can specify a focus area.
-
-[ ] Autonomous agent understands summarization intent.
-
-[ ] Agent decides what evidence is needed.
-
-[ ] Agent can perform additional retrieval when evidence is
-    insufficient.
-
-[ ] Long papers can be processed without sending the entire
-    document directly to the LLM.
-
-[ ] Map/Reduce or an equivalent scalable approach is implemented.
-
-[ ] Intermediate summaries preserve source information.
-
-[ ] Final summaries preserve source grounding.
-
-[ ] Citations are generated using the existing citation system.
-
-[ ] Citations are validated.
-
-[ ] Unsupported claims are avoided.
-
-[ ] Numerical results are preserved accurately.
-
-[ ] Missing information is handled safely.
-
-[ ] Section-aware summarization works when metadata is available.
-
-[ ] Different paper structures are handled.
-
-[ ] User authorization is enforced.
-
-[ ] React UI supports summary generation.
-
-[ ] Existing RAG still works.
-
-[ ] Existing autonomous agent still works.
-
-[ ] Existing citation system still works.
-
-[ ] Unit tests pass.
-
-[ ] Integration tests pass.
-
-[ ] Agent tests pass.
-
-[ ] Authorization tests pass.
-
-[ ] Citation tests pass.
-
-[ ] Summary evaluation is performed.
-
-[ ] Documentation is updated.
-
-============================================================
-65. FINAL ARCHITECTURE
-============================================================
-
-The final architecture should conceptually look like:
-
-                         USER
-                           │
-                           ▼
-                    React Frontend
-                           │
-                           ▼
-                         FastAPI
-                           │
-                           ▼
-                  Authentication
-                           │
-                           ▼
-                  LangGraph Agent
-                           │
-                           ▼
-                  Analyze Request
-                           │
-                           ▼
-                  Plan Summary Task
-                           │
-                           ▼
-                 Select Required Evidence
-                           │
-                           ▼
-                    Retrieval Tools
-                           │
-                           ▼
-                     Vector Database
-                           │
-                           ▼
-                  Retrieved Evidence
-                           │
-                    ┌──────┴──────┐
-                    ▼             ▼
-                 Metadata       Text
-                    │             │
-                    └──────┬──────┘
-                           ▼
-                     Evidence Groups
-                           │
-                           ▼
-                    MAP Summarization
-                           │
-                           ▼
-                 Intermediate Summaries
-                           │
-                           ▼
-                    REDUCE Synthesis
-                           │
-                           ▼
-                    Final Summary
-                           │
-                           ▼
-                  Citation Resolution
-                           │
-                           ▼
-                  Citation Validation
-                           │
-                           ▼
-                    Structured Output
-                           │
-                           ▼
-                     React Frontend
-                           │
-                  ┌────────┴────────┐
-                  ▼                 ▼
-               Summary           Sources
-                                    │
-                                    ▼
-                                Original PDF
-
-============================================================
-66. EXAMPLE FINAL EXPERIENCE
-============================================================
-
-User:
-
-"Give me a detailed summary of this paper focusing on the
-methodology and experimental results."
-
-Agent:
-
-1. Understands request.
-2. Identifies detailed summary + methodology/results focus.
-3. Searches methodology.
-4. Searches experimental setup.
-5. Searches results.
-6. Determines whether evidence is sufficient.
-7. Generates intermediate summaries.
-8. Synthesizes final response.
-9. Resolves citations.
-10. Validates citations.
-11. Returns final answer.
-
-Example response:
-
-------------------------------------------------------------
-
-# Paper Summary
-
-## Overview
-
-The paper proposes...
-
-[1]
-
-## Research Problem
-
-The authors address...
-
-[2]
-
-## Methodology
-
-The proposed architecture consists of...
-
-[3][4]
-
-## Experimental Setup
-
-The model was evaluated on...
-
-[5]
-
-## Results
-
-The proposed approach achieved 94.2% accuracy compared with
-91.8% for the baseline.
-
-[6]
-
-## Key Contributions
-
-1. ...
-2. ...
-3. ...
-
-## Limitations
-
-The authors report...
-
-[7]
-
-## Key Takeaways
-
-- ...
-- ...
-- ...
-
-## Sources
-
-[1] Paper Name — Page 2
-[2] Paper Name — Page 3
-[3] Paper Name — Page 5
-[4] Paper Name — Page 6
-[5] Paper Name — Page 8
-[6] Paper Name — Page 10
-[7] Paper Name — Page 12
-
-------------------------------------------------------------
-
-============================================================
-67. IMPORTANT ENGINEERING PRINCIPLES
-============================================================
-
-Follow these principles throughout implementation:
-
-1. Reuse existing architecture.
-
-2. Do not duplicate RAG.
-
-3. Do not duplicate citation systems.
-
-4. Do not break Milestones 1–11.
-
-5. The LLM is NOT the source of truth.
-
-6. Retrieved evidence is the source of truth.
-
-7. Backend metadata is authoritative.
-
-8. Never fabricate citations.
-
-9. Never fabricate page numbers.
-
-10. Never fabricate numerical results.
-
-11. Never fabricate missing information.
-
-12. Preserve source metadata through every stage.
-
-13. The autonomous agent should decide the workflow.
-
-14. Do not replace agentic decision-making with hard-coded rules.
-
-15. Do not expose chain-of-thought.
-
-16. Keep components modular.
-
-17. Test before declaring completion.
-
-18. Measure summary quality rather than assuming it works.
-
-============================================================
-68. IMPLEMENTATION PROCESS
-============================================================
-
-Follow this exact development process:
-
-PHASE 1:
-Inspect the existing repository.
-
-PHASE 2:
-Explain the current architecture.
-
-PHASE 3:
 Identify reusable components.
 
-PHASE 4:
-Identify gaps required for Milestone 12.
+---
 
-PHASE 5:
-Design the summarization architecture.
+## PHASE 2 — ARCHITECTURE
 
-PHASE 6:
-Design LangGraph integration.
+Design:
 
-PHASE 7:
-Design data schemas.
+* literature review state
+* LangGraph workflow
+* database model
+* API
+* frontend flow
 
-PHASE 8:
-Implement evidence grouping.
+---
 
-PHASE 9:
-Implement intermediate summarization.
+## PHASE 3 — PAPER SELECTION
 
-PHASE 10:
-Implement final synthesis.
+Implement:
 
-PHASE 11:
-Integrate citations.
+* selected papers
+* all relevant papers
+* relevance ranking
+* limits
+* authorization
 
-PHASE 12:
-Integrate API.
+---
 
-PHASE 13:
-Integrate React UI.
+## PHASE 4 — EVIDENCE PIPELINE
 
-PHASE 14:
-Write unit tests.
+Implement:
 
-PHASE 15:
-Write integration tests.
+* paper-aware retrieval
+* balanced retrieval
+* evidence extraction
+* paper insights
 
-PHASE 16:
-Run regression tests for Milestones 1–11.
+---
 
-PHASE 17:
-Run summary evaluation.
+## PHASE 5 — THEME ANALYSIS
 
-PHASE 18:
-Optimize if necessary.
+Implement:
 
-PHASE 19:
-Update documentation.
+* theme discovery
+* clustering
+* theme synthesis
+* agreements
+* disagreements
+* trends
+* limitations
+* emerging directions
 
-PHASE 20:
-Provide final implementation report.
+---
 
-============================================================
-69. FIRST RESPONSE REQUIREMENT
-============================================================
+## PHASE 6 — LANGGRAPH
 
-Before writing or modifying code, inspect the repository and
-respond with:
+Implement the complete literature review graph.
 
-1. Current architecture
-2. Current PDF pipeline
-3. Current chunk structure
-4. Current vector search
-5. Current RAG pipeline
-6. Current LangGraph agent
-7. Current agent state
-8. Current tools
-9. Current citation system
-10. Current API
-11. Current React UI
-12. Existing tests
-13. What can be reused
-14. What needs modification
-15. What new components are required
-16. Proposed Milestone 12 architecture
-17. Proposed LangGraph workflow
-18. Proposed API changes
-19. Proposed frontend changes
-20. Proposed testing strategy
+---
 
-DO NOT start by rewriting the project.
+## PHASE 7 — CITATION
 
-First understand the existing implementation.
+Integrate Milestone 11 citation grounding and verification.
 
-After presenting the analysis, proceed with implementation.
+---
 
-============================================================
-END OF MILESTONE 12 PROMPT
-============================================================
+## PHASE 8 — FINAL REVIEW GENERATION
+
+Generate the structured literature review.
+
+---
+
+## PHASE 9 — DATABASE
+
+Persist:
+
+* review
+* selected papers
+* relevant papers
+* themes
+* citations
+* status
+* timestamps
+
+---
+
+## PHASE 10 — API
+
+Implement and document literature review APIs.
+
+---
+
+## PHASE 11 — FRONTEND
+
+Implement:
+
+* review configuration
+* progress
+* results
+* citations
+* history
+
+---
+
+## PHASE 12 — TESTING
+
+Run:
+
+* unit tests
+* integration tests
+* end-to-end tests
+* contradiction tests
+* irrelevant-paper tests
+* large-collection tests
+* regression tests
+
+---
+
+## PHASE 13 — OPTIMIZATION
+
+Optimize:
+
+* retrieval
+* token usage
+* latency
+* LLM calls
+* memory
+* cost
+
+---
+
+## PHASE 14 — DOCUMENTATION
+
+Update:
+
+* README
+* architecture documentation
+* API documentation
+* milestone documentation
+
+---
+
+# 64. FINAL IMPLEMENTATION REPORT
+
+After completing the implementation, provide a final report containing:
+
+## 1. Files Created
+
+List every new file.
+
+## 2. Files Modified
+
+List every modified file.
+
+## 3. Existing Components Reused
+
+Explain what from Milestones 1–13 was reused.
+
+## 4. Architecture Changes
+
+Explain the new architecture.
+
+## 5. LangGraph Workflow
+
+List every new/modified node.
+
+## 6. Retrieval Changes
+
+Explain relevance ranking and evidence retrieval.
+
+## 7. Theme Discovery
+
+Explain how themes are identified.
+
+## 8. Synthesis
+
+Explain the hierarchical synthesis process.
+
+## 9. Citation System
+
+Explain how citations are preserved and verified.
+
+## 10. Database Changes
+
+Explain literature review persistence.
+
+## 11. API Changes
+
+List endpoints.
+
+## 12. Frontend Changes
+
+Explain the UI.
+
+## 13. Tests
+
+List tests and results.
+
+## 14. Performance
+
+Explain major optimization decisions.
+
+## 15. Security
+
+Explain authorization and validation.
+
+## 16. Documentation
+
+List documentation updated.
+
+## 17. Milestone Status
+
+Only mark:
+
+# MILESTONE 14 — COMPLETED
+
+if every required item in the Definition of Done has been implemented and tested.
+
+Otherwise clearly list remaining work.
+
+---
+
+# FINAL INSTRUCTION
+
+Do not just explain Milestone 14.
+
+Actually inspect the existing AI Research Assistant codebase and implement it.
+
+Do not rebuild Milestones 1–13.
+
+Do not replace working components.
+
+Extend the current system.
+
+The final system should evolve from:
+
+PDF
+→ Extraction
+→ Chunking
+→ Embeddings
+→ Vector Search
+→ RAG
+→ LangGraph
+→ Citations
+→ Summarization
+→ Multi-Paper Comparison
+→ **Automated Literature Review**
+
+The implementation must be:
+
+* modular
+* grounded
+* citation-aware
+* anti-hallucination
+* scalable
+* testable
+* secure
+* cost-conscious
+* compatible with existing milestones
+
+The architecture must also prepare the system for:
+
+# MILESTONE 15 — RESEARCH GAP DISCOVERY
+
+The structured outputs from Milestone 14 should therefore preserve:
+
+* themes
+* findings
+* contradictions
+* limitations
+* methodological trends
+* emerging directions
+* evidence
+* citations
+
+so that Milestone 15 can use them to identify genuine research gaps.
