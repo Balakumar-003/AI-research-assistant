@@ -50,6 +50,8 @@ from app.api import comparisons
 app.include_router(comparisons.router, prefix="/api/comparisons", tags=["Comparisons"])
 from app.api import literature_reviews
 app.include_router(literature_reviews.router, prefix="/api/literature-reviews", tags=["Literature Reviews"])
+from app.api import research_gaps
+app.include_router(research_gaps.router, prefix="/api/research-gaps", tags=["Research Gaps"])
 
 @app.get("/")
 async def root():

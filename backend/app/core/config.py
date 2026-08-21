@@ -47,6 +47,12 @@ class Settings:
     MAX_LITERATURE_REVIEW_PAPERS: int = int(os.getenv("MAX_LITERATURE_REVIEW_PAPERS", "20"))
     LITERATURE_REVIEW_TOP_K: int = int(os.getenv("LITERATURE_REVIEW_TOP_K", "10"))
     
+    # Milestone 15: Research Gap Discovery config
+    MAX_GAP_CANDIDATES: int = int(os.getenv("MAX_GAP_CANDIDATES", "10"))
+    MAX_EVIDENCE_PER_GAP: int = int(os.getenv("MAX_EVIDENCE_PER_GAP", "5"))
+    MAX_COUNTER_EVIDENCE: int = int(os.getenv("MAX_COUNTER_EVIDENCE", "5"))
+    MAX_FINAL_GAPS: int = int(os.getenv("MAX_FINAL_GAPS", "5"))
+    
     def __init__(self):
         if self.CHUNK_SIZE <= 0:
             raise ValueError("CHUNK_SIZE must be greater than 0")
