@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from typing import Dict, Any
 
+# pyrefly: ignore [missing-import]
 from app.schemas.vector_metadata import SearchRequest, SearchResponse, SearchResultItem
 from app.services.vector_service import vector_store
 from app.providers.embedding_provider import embedding_provider

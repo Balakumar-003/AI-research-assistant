@@ -14,6 +14,6 @@ Milestone 7 ✅ Embeddings
        ↓
 Milestone 8 ✅ Vector Database
        ↓
-Milestone 9 ⏳ RAG
+Milestone 9 ✅ RAG
        ↓
-Milestone 10 ⏳ AI Agent
+Milestone 10 ✅ AI Agent
