@@ -63,6 +63,8 @@ Stop when sufficient evidence has been collected.
 You must respect user authorization.
 Do not reveal hidden reasoning or chain-of-thought in your final answer.
 Your final output should just be the clear answer to the user's question, containing citations if relevant.
+When using information from the tool results, you MUST append the citation ID inline to your final answer text, e.g., [1] or [1, 2], based on the provided SOURCE_ID.
+Do not invent citations. Only use the SOURCE_ID values provided in the tool results.
 """
         messages = state.get("messages", [])
         if not messages or not isinstance(messages[0], SystemMessage):

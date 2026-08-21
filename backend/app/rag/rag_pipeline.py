@@ -8,6 +8,7 @@ from app.services.vector_service import vector_store
 from app.rag.prompt_builder import build_rag_prompt
 from app.services.llm_service import llm_service
 from app.services import chat_service
+from app.services.citation_service import CitationManager
 
 logger = logging.getLogger(__name__)
 
@@ -42,13 +43,18 @@ async def run_rag_query(
             chat_service.save_turn(db, user_id, project_id, question, response_data["answer"], response_data["citations"], response_data["usage"])
         return response_data
         
+    # 3b. Setup Citation Manager
+    citation_manager = CitationManager()
+    formatted_chunks = citation_manager.register_chunks(chunks)
+    formatted_context = citation_manager.format_for_llm(formatted_chunks)
+
     # 4. Load history
     chat_history = []
     if db:
         chat_history = chat_service.get_recent_history(db, user_id, project_id, limit=settings.CHAT_HISTORY_TURNS)
         
     # 5. Build prompt
-    messages = build_rag_prompt(question, chunks, chat_history)
+    messages = build_rag_prompt(question, formatted_context, chat_history)
     
     # 6 & 7. Call LLM & Parse
     def _parse_llm_response(text: str) -> dict:
@@ -87,6 +93,11 @@ async def run_rag_query(
                 "citations": []
             }
             
+    # Validate citations
+    raw_answer = parsed_data.get("answer", "")
+    validated_answer, validated_sources = citation_manager.validate_citations(raw_answer)
+    parsed_data["answer"] = validated_answer
+    parsed_data["citations"] = validated_sources
     parsed_data["usage"] = usage
     
     # 8. Save and Return

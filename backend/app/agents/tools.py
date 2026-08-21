@@ -15,7 +15,10 @@ logger = logging.getLogger(__name__)
 # Langchain tools can accept run_manager which has metadata, but to keep it simple, 
 # we'll inject user_id via a context variable.
 import contextvars
+from app.services.citation_service import CitationManager
+
 user_id_ctx: contextvars.ContextVar[str] = contextvars.ContextVar('user_id', default="")
+citation_manager_ctx: contextvars.ContextVar[CitationManager] = contextvars.ContextVar('citation_manager')
 
 @tool
 async def search_paper(query: str, paper_id: str, top_k: int = 5) -> str:
@@ -43,7 +46,11 @@ async def search_paper(query: str, paper_id: str, top_k: int = 5) -> str:
     if not chunks:
         return json.dumps({"success": True, "results": [], "message": "No relevant information was found."})
         
-    return json.dumps({"success": True, "results": chunks})
+    cm = citation_manager_ctx.get()
+    formatted_chunks = cm.register_chunks(chunks)
+    context_text = cm.format_for_llm(formatted_chunks)
+        
+    return json.dumps({"success": True, "results": context_text})
 
 
 @tool
@@ -72,7 +79,11 @@ async def search_multiple_papers(query: str, paper_ids: List[str], top_k: int = 
     if not chunks:
         return json.dumps({"success": True, "results": [], "message": "No relevant information was found."})
         
-    return json.dumps({"success": True, "results": chunks})
+    cm = citation_manager_ctx.get()
+    formatted_chunks = cm.register_chunks(chunks)
+    context_text = cm.format_for_llm(formatted_chunks)
+        
+    return json.dumps({"success": True, "results": context_text})
 
 
 @tool
