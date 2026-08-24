@@ -111,6 +111,8 @@ from app.api import experiments
 app.include_router(experiments.router, prefix="/api", tags=["Experiments"])
 from app.api import reports
 app.include_router(reports.router, prefix="/api", tags=["Reports"])
+from app.api import research_intelligence
+app.include_router(research_intelligence.router, prefix="/api", tags=["Research Intelligence"])
 from app.api import health
 app.include_router(health.router, tags=["Health"])
 

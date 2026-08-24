@@ -1,12 +1,12 @@
-# MILESTONE 20 — PRODUCTIONIZATION, OBSERVABILITY, EVALUATION & DEPLOYMENT
+# MILESTONE 21 — ADVANCED RESEARCH INTELLIGENCE & AUTONOMOUS RESEARCH PLANNING
 
 ## PROJECT CONTEXT
 
 I am building an AI Research Assistant.
 
-Milestones 1–19 have already been completed.
+Milestones 1–20 have already been completed.
 
-The application currently supports the complete research lifecycle:
+The system currently supports the complete research lifecycle:
 
 1. Authentication and Authorization
 2. Research Workspaces
@@ -22,1824 +22,2247 @@ The application currently supports the complete research lifecycle:
 12. Multi-Paper Comparison
 13. Literature Review
 14. Research Gap Detection
-15. Research Question and Hypothesis Generation
+15. Research Questions and Hypotheses
 16. Research Proposal and Methodology Planning
 17. Experiment Planning and Statistical Planning
 18. Experiment Execution, Tracking and Results Analysis
 19. Automated Research Paper and Final Report Generation
+20. Productionization, Observability, Evaluation and Deployment
 
-The system is now functionally complete.
+The system is now production-ready.
 
-Milestone 20 must transform the application into a reliable, observable, secure, testable, scalable and deployable production system.
+Milestone 21 must make the AI Research Assistant capable of performing higher-level research planning and research intelligence.
 
-IMPORTANT:
+The goal is NOT to create an uncontrolled autonomous agent.
 
-Do NOT rebuild functionality from Milestones 1–19.
+The goal is to create a:
 
-First inspect the entire existing repository and understand the architecture.
+    HUMAN-CONTROLLED
+    EVIDENCE-GROUNDED
+    TRACEABLE
+    MULTI-STEP
+    RESEARCH PLANNING SYSTEM
 
-Reuse all existing:
+The system should be capable of taking a broad research objective and converting it into an actionable research plan.
 
-- authentication
-- authorization
-- database
-- vector database
-- LLM clients
-- LangGraph
-- RAG pipeline
-- experiment engine
-- file storage
-- citation system
-- research report generator
-- logging
-- frontend components
-- API conventions
+==================================================
+1. PRIMARY OBJECTIVE
+==================================================
 
-Only introduce new infrastructure where necessary.
+Implement an Advanced Research Intelligence Engine.
 
+The system should accept:
 
-# 1. PRIMARY OBJECTIVE
+    Research Goal
+          ↓
+    Research Context
+          ↓
+    Existing Literature
+          ↓
+    Existing Experiments
+          ↓
+    Existing Findings
+          ↓
+    Research Constraints
 
-Productionize the AI Research Assistant.
+and produce:
 
-The final system should provide:
+    Research Landscape
+          ↓
+    Knowledge Gaps
+          ↓
+    Evidence Gaps
+          ↓
+    Research Questions
+          ↓
+    Hypotheses
+          ↓
+    Candidate Methods
+          ↓
+    Candidate Experiments
+          ↓
+    Evaluation Strategy
+          ↓
+    Research Roadmap
+          ↓
+    Prioritized Next Actions
 
-- Production configuration
-- Environment management
-- Secure secrets handling
-- API hardening
-- Database optimization
-- Background job reliability
-- Caching where appropriate
-- Rate limiting
-- Observability
-- Application logging
-- Metrics
-- Error tracking
-- LLM monitoring
-- RAG evaluation
-- Agent evaluation
-- Citation evaluation
-- Experiment monitoring
-- Performance monitoring
-- Automated testing
-- CI/CD
-- Docker productionization
-- Deployment configuration
-- Health checks
-- Readiness checks
-- Backup/recovery strategy
-- Documentation
-- Production validation
+The researcher must be able to review and approve every important stage.
 
+==================================================
+2. IMPORTANT ARCHITECTURAL RULE
+==================================================
 
-# 2. CURRENT SYSTEM
+Do NOT rebuild the existing LangGraph agent.
 
-Before making changes:
+Extend the existing agent architecture.
 
-1. Inspect the repository.
-2. Identify backend architecture.
-3. Identify frontend architecture.
-4. Identify database.
-5. Identify vector database.
-6. Identify file storage.
-7. Identify LLM providers.
-8. Identify LangGraph architecture.
-9. Identify worker/background-job architecture.
-10. Identify Docker configuration.
-11. Identify CI/CD configuration.
-12. Identify deployment configuration.
-13. Identify environment variables.
-14. Identify existing tests.
-15. Identify existing logging.
-16. Identify existing monitoring.
+Reuse:
 
-Create a short architecture assessment before implementation.
+- existing LangGraph nodes
+- existing tools
+- existing RAG pipeline
+- existing citation system
+- existing experiment engine
+- existing research proposal system
+- existing report generation
+- existing evaluation framework
+- existing observability
+- existing authentication
+- existing workspace isolation
 
-Do not assume technologies that are not present.
+Only introduce new nodes/services where required.
 
+==================================================
+3. RESEARCH INTELLIGENCE ENGINE
+==================================================
 
-# 3. PRODUCTION ARCHITECTURE
-
-Design the production architecture around:
-
-Frontend
-    ↓
-Reverse Proxy / Load Balancer
-    ↓
-Backend API
-    ↓
-Authentication
-    ↓
-Application Services
-    ↓
-LangGraph
-    ↓
-LLM / RAG / Tools
-    ↓
-Database
-    ↓
-Vector Database
-    ↓
-Object/File Storage
-
-Long-running operations:
-
-API
- ↓
-Job Queue
- ↓
-Worker
- ↓
-Experiment / Document Processing / Report Generation
-
-
-# 4. ENVIRONMENT MANAGEMENT
-
-Support at least:
-
-development
-testing
-staging
-production
-
-Configuration must be environment-specific.
-
-Example:
-
-.env.development
-.env.test
-.env.staging
-.env.production
-
-Do not commit real secrets.
-
-Use environment variables or a secure secret-management mechanism.
-
-
-# 5. SECRET MANAGEMENT
-
-Never hardcode:
-
-- API keys
-- database passwords
-- JWT secrets
-- cloud credentials
-- LLM API keys
-- storage credentials
-- encryption keys
-
-Create a secure configuration layer.
-
-Validate required secrets at startup.
-
-Fail safely if required production secrets are missing.
-
-
-# 6. CONFIGURATION MANAGEMENT
-
-Centralize configuration.
+Create a new Research Intelligence layer.
 
 Conceptually:
 
-Settings
---------
-APP_ENV
-DEBUG
-DATABASE_URL
-VECTOR_DB_URL
-LLM_PROVIDER
-LLM_MODEL
-API_TIMEOUT
-MAX_UPLOAD_SIZE
-RATE_LIMIT
-LOG_LEVEL
-CORS_ORIGINS
-JWT_SECRET
-STORAGE_BUCKET
-
-Adapt this to the existing project.
-
-
-# 7. PRODUCTION DEBUG MODE
-
-Ensure:
-
-DEBUG=false
-
-in production.
-
-Never expose:
-
-- stack traces
-- internal paths
-- database errors
-- secret values
-- internal configuration
-
-to users.
-
-
-# 8. SECURITY HARDENING
-
-Review the entire application for:
-
-- authentication vulnerabilities
-- authorization vulnerabilities
-- IDOR
-- insecure file upload
-- prompt injection
-- SQL injection
-- command injection
-- path traversal
-- XSS
-- CSRF where applicable
-- SSRF
-- unsafe deserialization
-- insecure CORS
-- secret exposure
-- excessive permissions
-
-
-# 9. FILE UPLOAD SECURITY
-
-Research papers are uploaded by users.
-
-Implement:
-
-- file type validation
-- MIME validation
-- extension validation
-- maximum file size
-- filename sanitization
-- path sanitization
-- storage isolation
-- malicious file detection where practical
-
-Only allow supported document formats.
-
-Never trust the filename supplied by the client.
-
-
-# 10. PDF PROCESSING SECURITY
-
-PDF processing can be expensive.
-
-Implement:
-
-- file size limits
-- page limits where appropriate
-- processing timeouts
-- resource limits
-- failure handling
-
-Do not allow one uploaded document to exhaust the server.
-
-
-# 11. PROMPT INJECTION DEFENSE
-
-Research papers and retrieved documents are untrusted input.
-
-Treat document text as DATA, not instructions.
-
-The system must distinguish:
-
-SYSTEM INSTRUCTIONS
-
-from
-
-USER INSTRUCTIONS
-
-from
-
-DOCUMENT CONTENT
-
-from
-
-RETRIEVED CONTEXT
-
-A paper containing:
-
-"Ignore previous instructions..."
-
-must not override the system's instructions.
-
-
-# 12. CITATION SAFETY
-
-Never allow retrieved documents to manipulate:
-
-- system instructions
-- tool execution
-- authorization
-- database queries
-- application configuration
-
-Retrieved text must remain untrusted content.
-
-
-# 13. TOOL SECURITY
-
-Review every LangGraph tool.
-
-For each tool define:
-
-- allowed inputs
-- allowed user
-- authorization requirement
-- timeout
-- error handling
-- resource limits
-
-Never allow the LLM to execute arbitrary shell commands.
-
-
-# 14. API SECURITY
-
-Harden APIs with:
-
-- authentication
-- authorization
-- input validation
-- schema validation
-- rate limiting
-- request size limits
-- timeout handling
-- secure error handling
-
-
-# 15. RATE LIMITING
-
-Implement appropriate rate limits for:
-
-- authentication
-- PDF uploads
-- RAG queries
-- LLM calls
-- report generation
-- experiment execution
-- exports
-
-Different endpoints may have different limits.
-
-
-# 16. REQUEST VALIDATION
-
-Validate:
-
-- request body
-- query parameters
-- path parameters
-- uploaded files
-- configuration values
-
-Return consistent validation errors.
-
-
-# 17. API VERSIONING
-
-If the existing application does not already support versioning, introduce a clean API version strategy.
+Research Goal
+     ↓
+Context Analyzer
+     ↓
+Literature Analyzer
+     ↓
+Evidence Analyzer
+     ↓
+Gap Analyzer
+     ↓
+Question Generator
+     ↓
+Hypothesis Generator
+     ↓
+Method Generator
+     ↓
+Experiment Planner
+     ↓
+Priority Engine
+     ↓
+Research Roadmap
+
+The output must be structured and persisted.
+
+==================================================
+4. RESEARCH GOAL
+==================================================
+
+Allow the researcher to provide:
+
+- research topic
+- research objective
+- problem statement
+- domain
+- constraints
+- target outcome
+- available resources
 
 Example:
 
-/api/v1/...
+"Investigate whether hybrid retrieval improves factuality in RAG systems."
 
-Do not break existing functionality.
+The system should understand the goal without immediately generating a final answer.
 
+==================================================
+5. RESEARCH CONTEXT ANALYSIS
+==================================================
 
-# 18. ERROR HANDLING
+Analyze the workspace context.
 
-Implement centralized error handling.
+Retrieve:
 
-Classify errors:
+- relevant uploaded papers
+- previous literature reviews
+- research proposals
+- research questions
+- hypotheses
+- experiments
+- experiment results
+- generated reports
+- previous findings
 
-VALIDATION_ERROR
-AUTHENTICATION_ERROR
-AUTHORIZATION_ERROR
-NOT_FOUND
-RATE_LIMITED
-LLM_ERROR
-RETRIEVAL_ERROR
-DATABASE_ERROR
-FILE_PROCESSING_ERROR
-EXPERIMENT_ERROR
-INTERNAL_ERROR
+Create a structured research context.
 
+==================================================
+6. RESEARCH LANDSCAPE
+==================================================
 
-Return safe user-facing errors.
+Generate a research landscape containing:
 
-Log detailed internal information separately.
+- major research areas
+- major approaches
+- commonly used datasets
+- common evaluation metrics
+- dominant methodologies
+- major findings
+- conflicting findings
+- unresolved problems
 
+Every factual research claim must be grounded in evidence.
 
-# 19. REQUEST IDs
+==================================================
+7. TOPIC DECOMPOSITION
+==================================================
 
-Every request should have a unique request ID.
-
-Example:
-
-X-Request-ID
-
-Use it across logs.
-
-Example:
-
-Request
- ↓
-API
- ↓
-LangGraph
- ↓
-Retriever
- ↓
-LLM
- ↓
-Response
-
-All related logs should contain the same trace/request identifier where possible.
-
-
-# 20. STRUCTURED LOGGING
-
-Use structured logs.
+Break a broad topic into research dimensions.
 
 Example:
 
-{
-    "timestamp": "...",
-    "level": "INFO",
-    "service": "research-api",
-    "request_id": "...",
-    "user_id": "...",
-    "event": "research_query_completed",
-    "duration_ms": 842
-}
-
-Do not log:
-
-- passwords
-- API keys
-- access tokens
-- private document content
-- sensitive user information
-
-
-# 21. LOG LEVELS
-
-Support:
-
-DEBUG
-INFO
-WARNING
-ERROR
-CRITICAL
-
-Production default should normally be INFO or WARNING depending on deployment requirements.
-
-
-# 22. APPLICATION METRICS
-
-Track:
-
-- request count
-- request latency
-- error rate
-- active users
-- document uploads
-- PDF processing time
-- RAG queries
-- LLM calls
-- token usage where available
-- experiment runs
-- failed experiments
-- report generation
-- export jobs
-
-
-# 23. API PERFORMANCE
-
-Track:
-
-P50 latency
-P95 latency
-P99 latency
-
-for important APIs.
-
-Identify slow endpoints.
-
-
-# 24. LLM OBSERVABILITY
-
-Track where available:
-
-- model
-- provider
-- request count
-- input tokens
-- output tokens
-- latency
-- errors
-- retries
-- estimated cost
-
-Never store sensitive prompt data unnecessarily.
-
-Allow configurable prompt/response logging.
-
-Default to safe logging.
-
-
-# 25. LLM COST MONITORING
-
-Calculate estimated cost where provider pricing information is available.
-
-Track:
-
-- per request
-- per user
-- per workspace
-- per research project
-
-If cost cannot be determined:
-
-mark it unavailable.
-
-Never fabricate cost information.
-
-
-# 26. RAG OBSERVABILITY
-
-Track:
-
-- query
-- retrieval latency
-- number of retrieved chunks
-- similarity scores
-- reranking scores where available
-- generation latency
-- citation count
-
-Do not expose private documents to unauthorized users.
-
-
-# 27. RAG EVALUATION
-
-Create a RAG evaluation framework.
-
-Evaluate:
-
-Retrieval:
-
-- Recall@K
-- Precision@K
-- MRR
-- nDCG where applicable
-
-Generation:
-
-- answer relevance
-- faithfulness
-- context relevance
-- citation correctness
-
-
-# 28. RAG GOLDEN DATASET
-
-Create a small evaluation dataset.
-
-Example:
-
-Question
-Expected evidence
-Expected answer characteristics
-
-Use it for regression testing.
-
-
-# 29. RAG REGRESSION TESTING
-
-Whenever retrieval or prompts change:
-
-Run the evaluation suite.
-
-Compare:
-
-current version
-vs
-baseline version
-
-Flag significant degradation.
-
-
-# 30. CITATION EVALUATION
-
-Evaluate:
-
-- citation presence
-- citation correctness
-- source relevance
-- citation completeness
-
-A generated answer must not receive a citation-quality pass merely because it contains a citation.
-
-The citation must support the claim.
-
-
-# 31. AGENT EVALUATION
-
-Evaluate the LangGraph agent.
-
-Measure:
-
-- task completion
-- correct tool selection
-- tool execution success
-- citation correctness
-- final answer quality
-- failure recovery
-
-Create representative evaluation cases.
-
-
-# 32. AGENT FAILURE TESTS
-
-Test:
-
-- missing paper
-- invalid query
-- unavailable LLM
-- vector DB failure
-- tool failure
-- malformed document
-- timeout
-- partial result
-
-
-The agent should fail gracefully.
-
-
-# 33. EXPERIMENT ENGINE MONITORING
-
-Monitor:
-
-- queued jobs
-- running jobs
-- completed jobs
-- failed jobs
-- average execution time
-- worker utilization
-- retries
-- cancellation
-
-
-# 34. BACKGROUND JOB RELIABILITY
-
-Ensure long-running jobs are not lost.
-
-Implement where appropriate:
-
-- retries
-- exponential backoff
-- job timeout
-- dead-letter handling
-- idempotency
-- status persistence
-
-
-# 35. IDEMPOTENCY
-
-Operations such as:
-
-- report generation
-- experiment execution
-- document processing
-- exports
-
-should avoid accidental duplicate execution when the same request is retried.
-
-
-# 36. DATABASE OPTIMIZATION
-
-Review all database queries.
+RAG
+ ├── Retrieval
+ │    ├── Dense Retrieval
+ │    ├── Sparse Retrieval
+ │    └── Hybrid Retrieval
+ │
+ ├── Generation
+ │    ├── LLM
+ │    ├── Prompting
+ │    └── Grounding
+ │
+ ├── Evaluation
+ │    ├── Retrieval Metrics
+ │    ├── Generation Metrics
+ │    └── Faithfulness
+ │
+ └── Applications
+
+The decomposition must be generated dynamically.
+
+==================================================
+8. RESEARCH QUESTION GENERATION
+==================================================
+
+Generate candidate research questions.
+
+Classify them as:
+
+- descriptive
+- comparative
+- causal
+- exploratory
+- predictive
+- methodological
+
+Each question should include:
+
+- rationale
+- evidence
+- expected difficulty
+- required data
+- required experiment
+- expected research value
+
+==================================================
+9. QUESTION QUALITY SCORING
+==================================================
+
+Score candidate research questions using deterministic criteria:
+
+- relevance
+- specificity
+- feasibility
+- novelty evidence
+- measurability
+- available resources
+- expected impact
+
+Do not allow the LLM to arbitrarily assign unexplained scores.
+
+Use a transparent scoring formula.
+
+==================================================
+10. RESEARCH GAP ANALYSIS
+==================================================
+
+Extend the existing research gap engine.
 
 Identify:
 
-- missing indexes
-- N+1 queries
-- unnecessary joins
-- inefficient pagination
-- duplicate queries
+1. Knowledge gaps
+2. Evidence gaps
+3. Methodological gaps
+4. Dataset gaps
+5. Evaluation gaps
+6. Reproducibility gaps
+7. Application gaps
 
-Add indexes for common queries.
+Each gap must include:
 
-Do not optimize blindly.
+- description
+- supporting sources
+- confidence
+- affected research area
+- possible investigation
 
+==================================================
+11. GAP CONFIDENCE
+==================================================
 
-# 37. DATABASE CONNECTION MANAGEMENT
+Every generated gap must have a confidence level:
 
-Ensure:
+HIGH
+MEDIUM
+LOW
 
-- connection pooling
-- connection timeout
-- retry strategy
-- graceful shutdown
+Confidence must be based on available evidence.
 
-are configured appropriately.
+Do NOT interpret:
 
+"No paper found"
 
-# 38. VECTOR DATABASE OPTIMIZATION
+as:
 
-Review:
+"No research exists."
 
-- embedding storage
-- index configuration
-- metadata filtering
-- retrieval latency
-- top-K
-- reranking
+Instead say:
 
-Measure retrieval performance.
+"No relevant source was found within the currently available corpus."
 
-Do not change retrieval behavior without regression testing.
+==================================================
+12. CONTRADICTION DETECTION
+==================================================
 
-
-# 39. CACHING
-
-Identify safe caching opportunities.
-
-Potential candidates:
-
-- embeddings
-- repeated retrieval
-- static metadata
-- expensive deterministic operations
-
-Do not cache private data across users/workspaces.
-
-Ensure cache invalidation is correct.
-
-
-# 40. PAGINATION
-
-Implement pagination for large collections:
-
-- papers
-- experiments
-- runs
-- reports
-- logs
-- citations
-
-Do not return thousands of records in a single API response.
-
-
-# 41. DATABASE MIGRATIONS
-
-Ensure all schema changes are migration-based.
-
-Never manually modify production schema without migration support.
-
-
-# 42. HEALTH CHECK
-
-Implement:
-
-GET /health
-
-Return basic service health.
+Identify conflicting findings between papers.
 
 Example:
 
-{
-    "status": "ok"
-}
+Paper A:
+Method improves Recall@10.
 
+Paper B:
+Method does not improve Recall@10.
 
-# 43. READINESS CHECK
+The system should identify:
 
-Implement a readiness endpoint if not already present.
+- conflicting result
+- possible reason
+- dataset difference
+- methodology difference
+- evaluation difference
+- model difference
 
-Check:
+Do not arbitrarily decide which paper is correct.
 
-- database
-- vector database
-- required dependencies
+==================================================
+13. EVIDENCE MATRIX
+==================================================
 
-Do not expose secrets.
+Create an evidence matrix.
 
+Example:
 
-# 44. LIVENESS CHECK
+| Claim | Source | Evidence | Confidence |
+|------|--------|----------|------------|
+| Hybrid retrieval improves recall | Paper A | Experiment | High |
+| Improvement depends on dataset | Paper B | Analysis | Medium |
 
-Implement a lightweight liveness check that does not perform expensive operations.
+Every row must have traceable evidence.
 
+==================================================
+14. RESEARCH CLAIM GRAPH
+==================================================
 
-# 45. DEPENDENCY HEALTH
+Create a graph:
 
-Where appropriate report:
+Research Claim
+      ↓
+Evidence
+      ↓
+Paper
+      ↓
+Experiment
+      ↓
+Metric
 
-Database: healthy
-Vector DB: healthy
-Storage: healthy
-LLM Provider: reachable
+Allow traversal from:
 
-Do not expose sensitive connection details.
+Claim → Evidence
 
+Evidence → Source
 
-# 46. GRACEFUL SHUTDOWN
+Source → Paper
 
-On application shutdown:
+Claim → Experiment
 
-- stop accepting new requests
-- finish safe operations
-- close database connections
-- stop workers
-- release resources
+This should support auditability.
 
+==================================================
+15. NOVELTY ANALYSIS
+==================================================
 
-# 47. DOCKER PRODUCTIONIZATION
+Create a cautious novelty analysis.
 
-Review Docker configuration.
+Classify ideas as:
 
-Implement:
+KNOWN
+RELATED
+UNDEREXPLORED
+POTENTIALLY_NOVEL
+UNKNOWN
 
-- multi-stage builds where useful
-- minimal production image
-- non-root user
-- dependency caching
-- .dockerignore
-- health check
-- environment configuration
+IMPORTANT:
 
+The system must NEVER claim:
 
-# 48. DOCKER SECURITY
+"This is the first research"
 
-Do not run application containers as root unless absolutely necessary.
+unless the evidence genuinely supports such a statement.
 
-Do not embed secrets in images.
+Use language such as:
 
-Do not copy unnecessary development files into production images.
+"Potentially underexplored within the analyzed literature."
 
+==================================================
+16. METHOD RECOMMENDATION
+==================================================
 
-# 49. DOCKER COMPOSE
+Based on the research question, recommend candidate methods.
 
-If appropriate, provide production-like local infrastructure for:
+Example:
 
-- backend
-- frontend
-- database
-- vector DB
-- worker
-- cache
+Research Question:
+Does hybrid retrieval improve RAG factuality?
 
-Only include services actually required by the application.
+Candidate methods:
 
+- Dense retrieval
+- Sparse retrieval
+- Hybrid retrieval
+- Hybrid + reranking
 
-# 50. FRONTEND PRODUCTIONIZATION
+For each method include:
 
-Optimize frontend:
+- rationale
+- supporting papers
+- complexity
+- required resources
+- expected advantages
+- expected limitations
 
-- production build
-- environment variables
-- API configuration
-- error boundaries
-- loading states
-- retry states
-- empty states
-- authentication handling
+==================================================
+17. BASELINE RECOMMENDATION
+==================================================
 
+Recommend appropriate baselines.
 
-# 51. FRONTEND ERROR HANDLING
+Example:
 
-Users should see meaningful messages for:
+Baseline:
+Dense Retrieval
 
-- API failure
-- network failure
-- authentication expiration
-- rate limiting
-- document processing failure
-- experiment failure
-- report generation failure
+Proposed:
+Hybrid Retrieval
 
+Additional:
+Hybrid + Reranker
 
-# 52. CI PIPELINE
+The system must explain why each baseline is appropriate.
 
-Create/update CI pipeline.
+==================================================
+18. DATASET RECOMMENDATION
+==================================================
 
-On every pull request:
+Based on the research question, recommend:
 
-1. Install dependencies.
-2. Run formatting checks.
-3. Run linting.
-4. Run type checks where applicable.
-5. Run unit tests.
-6. Run integration tests.
-7. Build backend.
-8. Build frontend.
-9. Build Docker image.
+- existing datasets in workspace
+- suitable evaluation datasets
+- data requirements
+- data limitations
 
+Never fabricate dataset availability.
 
-# 53. SECURITY SCANNING
+If external discovery is supported, clearly distinguish:
 
-Add automated checks where practical:
+WORKSPACE DATA
 
-- dependency vulnerabilities
-- secret scanning
-- container scanning
-- static analysis
+from
 
+EXTERNAL DATA
 
-# 54. CD PIPELINE
+==================================================
+19. EXPERIMENT RECOMMENDATION
+==================================================
 
-Create deployment workflow:
+Generate candidate experiments.
 
-Git Push
-   ↓
-CI
-   ↓
-Tests
-   ↓
-Build
-   ↓
-Docker Image
-   ↓
-Container Registry
-   ↓
-Deployment
-   ↓
-Health Check
-   ↓
-Production
+Each experiment should include:
 
+- research question
+- hypothesis
+- independent variable
+- dependent variable
+- control variables
+- baseline
+- proposed method
+- dataset
+- metrics
+- repetitions
+- statistical test
+- expected output
 
-Use the existing cloud/deployment infrastructure if already present.
 
+==================================================
+20. EXPERIMENT DEPENDENCY GRAPH
+==================================================
 
-# 55. DEPLOYMENT ENVIRONMENTS
+Create experiment dependencies.
 
-Support:
+Example:
 
-Development
-Staging
-Production
+Experiment 1
+Baseline evaluation
+       ↓
+Experiment 2
+Proposed method
+       ↓
+Experiment 3
+Ablation
+       ↓
+Experiment 4
+Statistical validation
 
-Never deploy directly to production without validation.
+The system should identify which experiments must happen first.
 
+==================================================
+21. EXPERIMENT PRIORITIZATION
+==================================================
 
-# 56. STAGING VALIDATION
+Rank experiments based on:
 
-Before production deployment:
+- research value
+- feasibility
+- expected information gain
+- cost
+- complexity
+- dependency
+- risk
 
-- run migrations
-- deploy
-- run health checks
-- run smoke tests
-- test authentication
-- test RAG
-- test document upload
-- test experiment execution
-- test report generation
+Use a deterministic prioritization formula.
 
+Example:
 
-# 57. ROLLBACK
+Priority Score =
+    Research Value
+    × Feasibility
+    × Information Gain
+    ÷ Cost
 
-Deployment must have a rollback strategy.
+Document the formula.
 
-If health checks fail:
+==================================================
+22. INFORMATION GAIN
+==================================================
 
-Do not consider deployment successful.
+Introduce the concept of information gain.
 
-Where supported, roll back to the previous stable version.
+Prefer experiments that can distinguish between competing hypotheses.
 
+Example:
 
-# 58. DATABASE BACKUP
+If:
 
-Document and configure a backup strategy.
+H1: Hybrid retrieval improves factuality
 
-Define:
+H2: Hybrid retrieval provides no improvement
 
-- backup frequency
-- retention
-- restore procedure
+An experiment that directly distinguishes H1 vs H2 has high information value.
 
-Do not assume backups exist merely because a managed database is used.
+==================================================
+23. RESEARCH RISK ANALYSIS
+==================================================
 
+Identify risks:
 
-# 59. DISASTER RECOVERY
+- insufficient data
+- weak baseline
+- computational cost
+- unavailable dataset
+- unstable results
+- ambiguous hypothesis
+- citation uncertainty
+- reproducibility issues
 
-Document:
+For each risk provide:
 
-What happens if:
+- probability
+- impact
+- mitigation
 
-- database fails
-- vector DB fails
-- storage fails
-- LLM provider fails
-- worker crashes
-- deployment fails
 
-Define recovery procedures.
+==================================================
+24. RESOURCE ESTIMATION
+==================================================
 
+Estimate research resources.
 
-# 60. DATA RETENTION
+Possible categories:
 
-Define retention policies for:
+- compute
+- storage
+- experiment time
+- number of experiments
+- LLM usage
+- human review
 
-- logs
-- experiment artifacts
-- uploaded papers
-- generated reports
-- temporary files
+Do not fabricate exact costs.
 
-Do not delete research data unexpectedly.
+Where exact values are unavailable, provide:
 
+LOW
+MEDIUM
+HIGH
 
-# 61. PRIVACY
+or an explicitly labeled estimate.
 
-Research documents may contain sensitive information.
 
-Ensure:
+==================================================
+25. RESEARCH ROADMAP
+==================================================
 
-- workspace isolation
-- access control
-- secure storage
-- encrypted transport
-- minimal logging
-- controlled data retention
+Generate a structured roadmap.
 
+Example:
 
-# 62. CORS
+Phase 1:
+Literature validation
 
-Configure CORS securely.
+Phase 2:
+Baseline implementation
 
-Do not use:
+Phase 3:
+Proposed method
 
-Allow-Origin: *
+Phase 4:
+Ablation study
 
-in production unless there is a specific justified reason.
+Phase 5:
+Statistical validation
 
+Phase 6:
+Analysis
 
-# 63. SECURITY HEADERS
+Phase 7:
+Paper generation
 
-Configure appropriate security headers.
+
+==================================================
+26. ROADMAP DEPENDENCIES
+==================================================
+
+Represent dependencies explicitly.
+
+Example:
+
+Literature Review
+      ↓
+Research Question
+      ↓
+Dataset
+      ↓
+Baseline
+      ↓
+Proposed Experiment
+      ↓
+Ablation
+      ↓
+Statistical Analysis
+      ↓
+Research Paper
+
+
+==================================================
+27. NEXT BEST ACTION
+==================================================
+
+Implement a "Next Best Research Action" engine.
+
+After reviewing the current workspace, the system should recommend:
+
+"Your next best action is..."
 
 Examples:
 
-- Content-Security-Policy where appropriate
-- X-Content-Type-Options
-- Referrer-Policy
-- Strict-Transport-Security in HTTPS production
-- frame protections
+- Review 3 papers
+- Run baseline experiment
+- Collect additional evidence
+- Perform ablation study
+- Validate hypothesis
+- Investigate contradictory findings
+
+The recommendation must include the reason.
+
+==================================================
+28. ACTION TYPES
+==================================================
+
+Support:
+
+READ_PAPER
+REVIEW_LITERATURE
+DEFINE_QUESTION
+DEFINE_HYPOTHESIS
+COLLECT_DATA
+RUN_BASELINE
+RUN_EXPERIMENT
+RUN_ABLATION
+PERFORM_STATISTICAL_TEST
+REVIEW_RESULT
+UPDATE_RESEARCH_GAP
+GENERATE_REPORT
 
 
-# 64. HTTPS
+==================================================
+29. ACTION STATE
+==================================================
 
-Production traffic must use HTTPS.
+Research actions should support:
 
-Do not transmit authentication credentials over plain HTTP.
-
-
-# 65. AUTHENTICATION REVIEW
-
-Verify:
-
-- login
-- logout
-- token expiration
-- refresh behavior
-- password handling if applicable
-- unauthorized access
-- session invalidation
+PENDING
+IN_PROGRESS
+BLOCKED
+COMPLETED
+SKIPPED
+FAILED
 
 
-# 66. AUTHORIZATION REVIEW
+==================================================
+30. HUMAN APPROVAL
+==================================================
 
-Test:
+The system must require human approval before:
 
-User A
+- running expensive experiments
+- changing research objectives
+- creating external data collection tasks
+- deleting research artifacts
+- publishing reports
+
+The AI may recommend actions.
+
+The human decides whether to execute them.
+
+
+==================================================
+31. AUTONOMOUS MODE
+==================================================
+
+Support configurable autonomy levels.
+
+LEVEL 0:
+AI only recommends.
+
+LEVEL 1:
+AI prepares actions for approval.
+
+LEVEL 2:
+AI automatically executes safe actions.
+
+LEVEL 3:
+AI executes predefined workflows with human checkpoints.
+
+Do not implement unrestricted autonomy.
+
+
+==================================================
+32. SAFE ACTIONS
+==================================================
+
+Actions that may be automatically executed:
+
+- retrieve papers
+- summarize existing papers
+- organize evidence
+- calculate deterministic statistics
+- generate draft outlines
+- validate citations
+- run read-only analysis
+
+
+==================================================
+33. RESTRICTED ACTIONS
+==================================================
+
+Require approval for:
+
+- expensive experiments
+- external API usage with cost
+- dataset modification
+- deletion
+- publication
+- external communication
+
+
+==================================================
+34. RESEARCH MEMORY
+==================================================
+
+Create persistent research memory.
+
+Store:
+
+- important findings
+- rejected hypotheses
+- validated hypotheses
+- research decisions
+- experiment outcomes
+- literature insights
+- unresolved questions
+
+Memory must belong to the research workspace.
+
+Never leak memory between workspaces.
+
+
+==================================================
+35. DECISION MEMORY
+==================================================
+
+Store decisions such as:
+
+Decision:
+Use hybrid retrieval.
+
+Reason:
+Higher Recall@10 in baseline experiments.
+
+Evidence:
+Experiment R14.
+
+This allows future agents to understand previous decisions.
+
+
+==================================================
+36. RESEARCH STATE
+==================================================
+
+Create a structured research state.
+
+Conceptually:
+
+ResearchState
+
+{
+    goal,
+    context,
+    questions,
+    hypotheses,
+    literature,
+    gaps,
+    methods,
+    experiments,
+    results,
+    findings,
+    decisions,
+    roadmap,
+    next_actions
+}
+
+
+==================================================
+37. LANGGRAPH INTEGRATION
+==================================================
+
+Extend the existing LangGraph architecture.
+
+Possible nodes:
+
+research_intake
+context_analysis
+topic_decomposition
+literature_analysis
+evidence_analysis
+gap_analysis
+contradiction_analysis
+question_generation
+hypothesis_generation
+method_recommendation
+experiment_planning
+priority_analysis
+roadmap_generation
+next_action_selection
+human_approval
+state_update
+
+
+==================================================
+38. LANGGRAPH STATE
+==================================================
+
+Extend the existing state carefully.
+
+Do not duplicate existing state fields.
+
+Use typed state definitions.
+
+The graph should support:
+
+START
  ↓
-Workspace A
+Research Intake
+ ↓
+Context Analysis
+ ↓
+Literature Analysis
+ ↓
+Evidence Analysis
+ ↓
+Gap Analysis
+ ↓
+Question Generation
+ ↓
+Hypothesis Generation
+ ↓
+Method Recommendation
+ ↓
+Experiment Planning
+ ↓
+Priority Analysis
+ ↓
+Roadmap
+ ↓
+Human Approval
+ ↓
+END
 
-User A must NOT access:
 
-Workspace B
-Papers B
-Experiments B
-Reports B
-Artifacts B
+==================================================
+39. CONDITIONAL ROUTING
+==================================================
+
+Implement conditional routing.
+
+Example:
+
+If sufficient literature:
+    continue
+
+If insufficient literature:
+    recommend literature collection
+
+If research question unclear:
+    ask for clarification
+
+If experiment already exists:
+    reuse existing experiment
+
+If evidence conflicts:
+    recommend contradiction analysis
 
 
-# 67. AUDIT LOGGING
+==================================================
+40. LOOP CONTROL
+==================================================
 
-Track important events:
+Prevent infinite agent loops.
 
-- login
-- logout
-- document upload
-- document deletion
-- experiment creation
-- experiment execution
-- report generation
-- report export
-- permission changes
+Implement:
+
+- maximum iterations
+- maximum tool calls
+- timeout
+- state checkpoints
+
+
+==================================================
+41. RESEARCH PLAN ENTITY
+==================================================
+
+Create:
+
+ResearchPlan
+
+Fields conceptually:
+
+id
+workspace_id
+goal
+status
+version
+confidence
+created_at
+updated_at
+
+
+==================================================
+42. RESEARCH GAP ENTITY
+==================================================
+
+Reuse existing gap entity if available.
+
+Otherwise create:
+
+ResearchGap
+
+id
+research_plan_id
+description
+type
+confidence
+evidence_ids
+status
+created_at
+
+
+==================================================
+43. RESEARCH ACTION ENTITY
+==================================================
+
+Create:
+
+ResearchAction
+
+id
+research_plan_id
+type
+title
+description
+priority
+status
+dependencies
+estimated_cost
+estimated_effort
+requires_approval
+created_at
+completed_at
+
+
+==================================================
+44. RESEARCH DECISION ENTITY
+==================================================
+
+Create:
+
+ResearchDecision
+
+id
+workspace_id
+decision
+reason
+evidence_ids
+experiment_ids
+created_at
+
+
+==================================================
+45. RESEARCH MEMORY ENTITY
+==================================================
+
+Create or reuse:
+
+ResearchMemory
+
+id
+workspace_id
+memory_type
+content
+source_type
+source_id
+confidence
+created_at
+
+
+==================================================
+46. API DESIGN
+==================================================
+
+Follow the existing API architecture.
+
+Potential endpoints:
+
+POST
+/research-plans
+
+Create research plan.
+
+GET
+/research-plans/{id}
+
+Get research plan.
+
+POST
+/research-plans/{id}/analyze
+
+Run research intelligence analysis.
+
+GET
+/research-plans/{id}/gaps
+
+Get research gaps.
+
+GET
+/research-plans/{id}/questions
+
+Get research questions.
+
+GET
+/research-plans/{id}/experiments
+
+Get recommended experiments.
+
+GET
+/research-plans/{id}/roadmap
+
+Get research roadmap.
+
+GET
+/research-plans/{id}/actions
+
+Get next actions.
+
+POST
+/research-actions/{id}/approve
+
+Approve action.
+
+POST
+/research-actions/{id}/execute
+
+Execute action.
+
+GET
+/research-plans/{id}/evidence
+
+Get evidence matrix.
+
+GET
+/research-plans/{id}/decisions
+
+Get research decisions.
+
+Adapt endpoint names to the existing API conventions.
+
+
+==================================================
+47. FRONTEND — RESEARCH INTELLIGENCE DASHBOARD
+==================================================
+
+Create a new Research Intelligence dashboard.
+
+Display:
+
+Research Goal
+
+Research Landscape
+
+Research Gaps
+
+Research Questions
+
+Hypotheses
+
+Recommended Methods
+
+Recommended Experiments
+
+Research Risks
+
+Research Roadmap
+
+Next Best Action
+
+
+==================================================
+48. RESEARCH LANDSCAPE UI
+==================================================
+
+Display major research areas.
+
+Example:
+
+Topic
+ ↓
+Subtopics
+ ↓
+Methods
+ ↓
+Datasets
+ ↓
+Metrics
+
+
+==================================================
+49. RESEARCH GAP UI
+==================================================
+
+Display:
+
+Gap
+Evidence
+Confidence
+Research opportunity
+Recommended experiment
+
+
+==================================================
+50. EVIDENCE MATRIX UI
+==================================================
+
+Provide a table:
+
+Claim
+Evidence
+Source
+Confidence
+Research implication
+
+
+==================================================
+51. CONTRADICTION UI
+==================================================
+
+Display conflicting evidence.
+
+Example:
+
+Finding A
+Source A
+vs
+Finding B
+Source B
+
+Then show:
+
+Possible reasons
+
+Recommended validation experiment
+
+
+==================================================
+52. RESEARCH QUESTION UI
+==================================================
+
+For each candidate question display:
+
+Question
+Type
+Relevance
+Feasibility
+Evidence
+Score
+Recommended next step
+
+
+==================================================
+53. EXPERIMENT RECOMMENDATION UI
+==================================================
+
+Display:
+
+Experiment
+Purpose
+Hypothesis
+Baseline
+Dataset
+Metrics
+Estimated cost
+Priority
+Dependencies
+
+
+==================================================
+54. ROADMAP UI
+==================================================
+
+Create a visual research roadmap.
+
+Example:
+
+[Literature]
+      ↓
+[Baseline]
+      ↓
+[Proposed Method]
+      ↓
+[Ablation]
+      ↓
+[Statistical Test]
+      ↓
+[Analysis]
+      ↓
+[Paper]
+
+
+==================================================
+55. NEXT ACTION UI
+==================================================
+
+Create a prominent:
+
+"Recommended Next Action"
+
+card.
+
+Example:
+
+NEXT BEST ACTION
+
+Run baseline experiment.
+
+Why?
+
+The current research plan has a validated hypothesis but no baseline result.
+
+Evidence:
+Research Plan RP-42
+
+Action:
+Run Experiment EXP-12
+
+
+==================================================
+56. APPROVAL UI
+==================================================
+
+For restricted actions display:
+
+Action
+Reason
+Expected cost
+Expected duration
+Dependencies
+Evidence
+
+Buttons:
+
+Approve
+Reject
+Modify
+
+
+==================================================
+57. RESEARCH MEMORY UI
+==================================================
+
+Display:
+
+Important Findings
+Research Decisions
+Rejected Hypotheses
+Validated Hypotheses
+Unresolved Questions
+
+
+==================================================
+58. EVIDENCE GROUNDING
+==================================================
+
+Every recommendation must have evidence where possible.
+
+For example:
+
+Recommendation:
+Run an ablation study.
+
+Reason:
+Existing experiment indicates performance improvement, but contribution of individual components is unknown.
+
+Evidence:
+Experiment EXP-42
+
+Do not generate unsupported recommendations.
+
+
+==================================================
+59. CONFIDENCE
+==================================================
+
+Every AI-generated research recommendation should have:
+
+HIGH
+MEDIUM
+LOW
+
+Confidence.
+
+Confidence must be based on evidence availability and quality.
+
+==================================================
+60. UNCERTAINTY
+==================================================
+
+The system must explicitly represent uncertainty.
+
+Examples:
+
+"Evidence is insufficient."
+
+"Available papers provide conflicting results."
+
+"No experiment currently validates this hypothesis."
+
+Do not force the AI to provide a confident answer.
+
+
+==================================================
+61. EXTERNAL RESEARCH DISCOVERY
+==================================================
+
+If external web/search capabilities already exist:
+
+Allow the research intelligence engine to discover external literature.
+
+Clearly mark:
+
+INTERNAL SOURCE
+
+vs
+
+EXTERNAL SOURCE
+
+
+Do not silently mix them.
+
+
+==================================================
+62. SOURCE PROVENANCE
+==================================================
+
+Every external source should store:
+
+- URL
+- title
+- author
+- publication date
+- source
+- retrieval timestamp
+
+Follow the existing citation/provenance system.
+
+
+==================================================
+63. RESEARCH PLAN VERSIONING
+==================================================
+
+Research plans must be versioned.
+
+Example:
+
+v1:
+Initial plan
+
+v2:
+Added ablation experiment
+
+v3:
+Updated after experiment results
+
+
+==================================================
+64. PLAN UPDATE
+
+When new evidence appears:
+
+Existing Plan
+      ↓
+New Evidence
+      ↓
+Impact Analysis
+      ↓
+Plan Update
+
+
+The system should identify which research actions are affected.
+
+
+==================================================
+65. RESULT-DRIVEN ADAPTATION
+==================================================
+
+If an experiment produces unexpected results:
+
+Example:
+
+Expected:
+Proposed method improves performance.
+
+Actual:
+Proposed method performs worse.
+
+The system should:
+
+1. Record result.
+2. Mark hypothesis status.
+3. Identify affected assumptions.
+4. Recommend follow-up analysis.
+5. Update research roadmap.
+
+Do not hide negative results.
+
+
+==================================================
+66. HYPOTHESIS STATUS
+
+Support:
+
+UNTESTED
+SUPPORTED
+PARTIALLY_SUPPORTED
+NOT_SUPPORTED
+INCONCLUSIVE
+
+
+==================================================
+67. RESEARCH PLAN STATUS
+
+Support:
+
+DRAFT
+ANALYZING
+READY_FOR_REVIEW
+APPROVED
+IN_PROGRESS
+BLOCKED
+COMPLETED
+ARCHIVED
+
+
+==================================================
+68. RESEARCH PLAN QUALITY
+
+Create deterministic quality checks:
+
+- research goal defined
+- evidence available
+- questions measurable
+- hypotheses testable
+- experiments feasible
+- evaluation metrics defined
+- dependencies resolved
+
+
+==================================================
+69. RESEARCH INTELLIGENCE EVALUATION
+
+Create evaluation datasets for:
+
+- gap detection
+- contradiction detection
+- question generation
+- method recommendation
+- experiment recommendation
+- next-action recommendation
+
+
+==================================================
+70. EVALUATION METRICS
+
+Measure:
+
+Gap precision
+Gap relevance
+Question quality
+Experiment relevance
+Recommendation acceptance rate
+Action completion rate
+Citation correctness
+
+
+==================================================
+71. HUMAN FEEDBACK
+
+Allow researchers to rate recommendations:
+
+Helpful
+Not Helpful
+
+and optionally provide feedback.
+
+Store feedback for evaluation.
+
+Do not automatically train a model from feedback.
+
+
+==================================================
+72. RECOMMENDATION FEEDBACK
+
+Track:
+
+Recommendation
+ ↓
+Accepted / Rejected
+ ↓
+Actual outcome
+
+
+This allows later evaluation of recommendation quality.
+
+
+==================================================
+73. COST AWARENESS
+
+When recommending experiments, consider:
+
+- compute cost
+- LLM cost
+- storage cost
+- experiment duration
+
+Use real measurements when available.
+
+Otherwise explicitly label estimates.
+
+
+==================================================
+74. COMPUTE-AWARE PLANNING
+
+If experiment resources are limited:
+
+Prioritize experiments using:
+
+Research Value
++
+Information Gain
++
+Feasibility
+-
+Cost
+-
+Risk
+
+
+==================================================
+75. RESEARCH PORTFOLIO
+
+Allow multiple research plans in one workspace.
+
+Example:
+
+Workspace
+ ├── Research Plan A
+ ├── Research Plan B
+ └── Research Plan C
+
+
+Display:
+
+- status
+- priority
+- progress
+- current next action
+
+
+==================================================
+76. RESEARCH PROGRESS
+
+Calculate deterministic progress.
+
+Example:
+
+Completed Actions / Total Actions × 100
+
+
+Do not let the LLM determine progress.
+
+
+==================================================
+77. BLOCKER DETECTION
+
+Identify blocked actions.
+
+Example:
+
+Experiment requires dataset.
+
+Dataset unavailable.
+
+Status:
+
+BLOCKED
+
+Recommended resolution:
+
+Acquire dataset or select alternative dataset.
+
+
+==================================================
+78. DEPENDENCY MANAGEMENT
+
+When an action is blocked:
+
+Identify dependent actions.
+
+Example:
+
+Dataset
+ ↓
+Baseline
+ ↓
+Proposed Experiment
+ ↓
+Ablation
+
+
+If Dataset is blocked:
+
+Baseline
+Proposed Experiment
+Ablation
+
+should reflect the dependency.
+
+
+==================================================
+79. RESEARCH TIMELINE
+
+Create a timeline showing:
+
+- research decisions
+- experiments
+- results
+- plan updates
+- report versions
+
+
+==================================================
+80. AUDIT TRAIL
+
+Every autonomous planning action must be auditable.
+
+Store:
+
+- timestamp
+- agent run ID
+- node
+- input context identifier
+- output
+- evidence IDs
+- action
+- human approval if required
+
 
 Do not store unnecessary sensitive content.
 
 
-# 68. PERFORMANCE TESTING
+==================================================
+81. SECURITY
+
+Apply all Milestone 20 security requirements.
+
+Especially:
+
+- workspace isolation
+- authentication
+- authorization
+- prompt injection defense
+- rate limiting
+- audit logging
+- safe tool execution
+
+
+==================================================
+82. OBSERVABILITY
+
+Reuse Milestone 20 observability.
+
+Track:
+
+- planning runs
+- node latency
+- LLM calls
+- tool calls
+- failures
+- recommendation count
+- approval rate
+- action execution rate
+
+
+==================================================
+83. ERROR HANDLING
+
+If planning fails:
+
+- preserve previous research plan
+- record failure
+- show safe error
+- allow retry
+
+
+Never destroy the previous valid plan.
+
+
+==================================================
+84. TESTING
+
+Implement unit tests for:
+
+- topic decomposition
+- gap scoring
+- question scoring
+- experiment prioritization
+- dependency resolution
+- progress calculation
+- blocker detection
+- action generation
+
+
+==================================================
+85. INTEGRATION TESTS
 
 Test:
 
-- concurrent API requests
-- RAG queries
-- document processing
-- experiment execution
+Research Goal
+ ↓
+Context
+ ↓
+Literature
+ ↓
+Evidence
+ ↓
+Gap
+ ↓
+Question
+ ↓
+Hypothesis
+ ↓
+Method
+ ↓
+Experiment
+ ↓
+Roadmap
+ ↓
+Next Action
+
+
+==================================================
+86. AGENT TESTING
+
+Test LangGraph behavior for:
+
+- insufficient evidence
+- conflicting evidence
+- missing experiment
+- completed experiment
+- failed experiment
+- invalid research question
+- tool failure
+- LLM failure
+
+
+==================================================
+87. HALLUCINATION TESTS
+
+Create tests where the model attempts to:
+
+- invent research gaps
+- invent papers
+- invent evidence
+- invent experiment results
+- invent dataset availability
+- claim novelty
+- fabricate citations
+
+
+The system must flag or reject unsupported claims.
+
+
+==================================================
+88. REGRESSION TESTING
+
+Ensure Milestones 1–20 continue working.
+
+Especially:
+
+- authentication
+- document upload
+- RAG
+- citations
+- summarization
+- comparison
+- literature review
+- research proposal
+- experiments
+- statistical analysis
 - report generation
+- export
+- production monitoring
+
+
+==================================================
+89. PERFORMANCE
 
 Measure:
 
-- throughput
-- latency
-- error rate
-- resource usage
+- research planning latency
+- retrieval latency
+- number of LLM calls
+- token usage
+- planning cost
+- number of graph iterations
 
 
-# 69. LOAD TESTING
+Avoid unnecessary LLM calls.
 
-Create a small load test suite.
-
-Do not overload production.
-
-Use staging/local infrastructure.
-
-Identify bottlenecks.
+Use deterministic logic where possible.
 
 
-# 70. RESOURCE LIMITS
+==================================================
+90. LLM CALL OPTIMIZATION
 
-Configure:
-
-- maximum upload size
-- maximum document pages
-- maximum RAG context
-- maximum experiment runtime
-- maximum concurrent jobs
-- maximum report generation size
-- API rate limits
-
-
-# 71. AI EVALUATION DASHBOARD
-
-Create an internal evaluation dashboard showing:
-
-RAG score
-Citation score
-Agent success rate
-LLM latency
-LLM error rate
-Token usage
-Estimated cost
-Experiment success rate
-Report generation success rate
-
-
-# 72. MODEL EVALUATION
-
-If multiple LLMs are supported, compare:
-
-- answer quality
-- citation quality
-- latency
-- cost
-- reliability
-
-Do not choose a model solely by qualitative preference.
-
-
-# 73. PROMPT VERSIONING
-
-Every important production prompt should have:
-
-- prompt ID
-- version
-- purpose
-- model
-- created date
-
-Example:
-
-research_summary_v1
-research_summary_v2
-
-This allows regression testing.
-
-
-# 74. MODEL/PROMPT REGRESSION
-
-Before changing:
-
-- system prompts
-- RAG prompts
-- report-generation prompts
-- agent prompts
-
-run evaluation tests.
-
-Compare against the previous version.
-
-
-# 75. FEATURE FLAGS
-
-Where appropriate introduce feature flags for risky features.
+Do not use an LLM for tasks that can be deterministic.
 
 Examples:
 
-ENABLE_NEW_RAG
-ENABLE_NEW_REPORT_GENERATOR
-ENABLE_EXPERIMENT_ENGINE_V2
-
-Do not introduce unnecessary complexity.
-
-
-# 76. OBSERVABILITY DASHBOARD
-
-Create or configure monitoring for:
-
-Application
-    ↓
-API
-    ↓
-Database
-    ↓
-Vector DB
-    ↓
-Worker
-    ↓
-LLM
-    ↓
-Storage
+Progress calculation
+Priority arithmetic
+Dependency resolution
+Status transitions
+Validation
+Sorting
 
 
-Show:
+Use LLMs for:
 
-- health
-- errors
-- latency
-- throughput
-- resource usage
-
-
-# 77. ALERTING
-
-Define alerts for:
-
-- high error rate
-- high latency
-- worker failure
-- database unavailable
-- vector DB unavailable
-- repeated LLM failures
-- storage failures
-- excessive resource usage
+- interpretation
+- synthesis
+- reasoning over evidence
+- research question generation
+- recommendation generation
 
 
-# 78. LOG RETENTION
+==================================================
+91. CACHING
 
-Configure sensible log retention.
+Reuse Milestone 20 caching where safe.
 
-Do not store logs forever by default.
+Potentially cache:
 
-Follow the project's privacy requirements.
+- research landscape
+- paper summaries
+- evidence extraction
+- stable literature analysis
 
-
-# 79. DOCUMENTATION
-
-Update README with:
-
-- architecture
-- local setup
-- environment variables
-- development
-- testing
-- Docker
-- deployment
-- monitoring
-- troubleshooting
+Invalidate when underlying research data changes.
 
 
-# 80. ARCHITECTURE DOCUMENTATION
+==================================================
+92. API AUTHORIZATION
 
-Create architecture documentation covering:
+Every ResearchPlan must belong to a workspace.
 
-Frontend
-Backend
-Database
-Vector DB
-Storage
-LangGraph
-LLM
-Workers
-Experiment Engine
-Report Generator
-Monitoring
+Verify:
+
+User
+ ↓
+Workspace
+ ↓
+ResearchPlan
 
 
-# 81. API DOCUMENTATION
-
-Ensure API documentation is available.
-
-Document:
-
-- authentication
-- request schemas
-- response schemas
-- errors
-- rate limits where appropriate
+Never allow cross-workspace access.
 
 
-# 82. RUNBOOK
+==================================================
+93. DATABASE INDEXING
 
-Create an operational runbook.
+Add indexes for:
+
+- workspace_id
+- research_plan_id
+- status
+- action priority
+- action status
+- created_at
+
+
+Adapt to the existing database.
+
+
+==================================================
+94. FRONTEND UX
+
+The Research Intelligence dashboard should make the AI's reasoning understandable.
+
+Avoid showing opaque:
+
+"AI decided this."
+
+Instead show:
+
+Recommendation
+Reason
+Evidence
+Confidence
+Expected benefit
+Risk
+
+
+==================================================
+95. EXPLAINABILITY
+
+Every major recommendation should answer:
+
+WHY?
+
+WHAT EVIDENCE?
+
+WHAT ACTION?
+
+WHAT HAPPENS NEXT?
+
+
+==================================================
+96. RESEARCH PLAN EXPORT
+
+Allow export of the research plan as:
+
+- Markdown
+- PDF
+- JSON
 
 Include:
 
-How to:
-
-- start application
-- stop application
-- deploy
-- rollback
-- inspect logs
-- inspect health
-- restart workers
-- restore database
-- troubleshoot LLM failures
-- troubleshoot vector DB
-- troubleshoot document processing
+- research goal
+- research questions
+- hypotheses
+- gaps
+- methods
+- experiments
+- roadmap
+- risks
+- evidence
 
 
-# 83. TESTING STRATEGY
+==================================================
+97. REPORT INTEGRATION
 
-Maintain:
+Milestone 21 must integrate with Milestone 19.
 
-Unit tests
-Integration tests
-End-to-end tests
-Security tests
-RAG evaluation
-Agent evaluation
-Performance tests
-Smoke tests
+The research plan should be able to generate/update:
+
+- research proposal
+- experiment plan
+- final report
 
 
-# 84. TEST PYRAMID
+Pipeline:
 
-Prefer:
+Research Intelligence
+        ↓
+Research Plan
+        ↓
+Experiment
+        ↓
+Results
+        ↓
+Research Paper
 
-Many unit tests
+
+==================================================
+98. CONTINUOUS RESEARCH LOOP
+
+Implement the concept:
+
+PLAN
  ↓
-Integration tests
+RESEARCH
  ↓
-Fewer end-to-end tests
-
-
-Do not make every test dependent on external LLM APIs.
-
-
-# 85. MOCK EXTERNAL SERVICES
-
-For tests, mock:
-
-- LLM provider
-- vector DB where appropriate
-- external APIs
-- object storage
-
-Use real integration tests separately.
-
-
-# 86. E2E TEST
-
-Create a full end-to-end test:
-
-Register/Login
+EXPERIMENT
  ↓
-Create Workspace
+ANALYZE
  ↓
-Upload Paper
+LEARN
  ↓
-Process Paper
+UPDATE PLAN
  ↓
-Ask RAG Question
+NEXT ACTION
  ↓
-Generate Summary
+RESEARCH
+
+
+This is the core advanced capability.
+
+
+==================================================
+99. EXAMPLE END-TO-END SCENARIO
+
+User enters:
+
+"Investigate whether hybrid retrieval improves RAG factuality."
+
+System performs:
+
+1. Analyze research context.
+
+2. Retrieve relevant papers.
+
+3. Build research landscape.
+
+4. Identify research gaps.
+
+5. Detect conflicting findings.
+
+6. Generate candidate research questions.
+
+7. Generate hypotheses.
+
+8. Recommend baselines.
+
+9. Recommend experiments.
+
+10. Estimate research risks.
+
+11. Prioritize experiments.
+
+12. Generate roadmap.
+
+13. Recommend next best action.
+
+14. Ask for approval before expensive experiment.
+
+15. Execute approved experiment.
+
+16. Analyze actual result.
+
+17. Update hypothesis status.
+
+18. Update research plan.
+
+19. Recommend next action.
+
+20. Eventually generate research paper.
+
+The complete process must remain traceable.
+
+
+==================================================
+100. FINAL DEFINITION OF DONE
+
+Milestone 21 is complete only when:
+
+[ ] Research Intelligence Engine exists.
+[ ] Research Goal can be created.
+[ ] Research Context can be analyzed.
+[ ] Research Landscape can be generated.
+[ ] Topic decomposition works.
+[ ] Research questions can be generated.
+[ ] Questions receive deterministic quality scores.
+[ ] Research gaps can be identified.
+[ ] Gap confidence exists.
+[ ] Contradictory findings can be detected.
+[ ] Evidence matrix exists.
+[ ] Research claim graph exists.
+[ ] Novelty analysis exists.
+[ ] Candidate methods can be recommended.
+[ ] Baselines can be recommended.
+[ ] Dataset requirements can be identified.
+[ ] Candidate experiments can be generated.
+[ ] Experiment dependencies exist.
+[ ] Experiments can be prioritized.
+[ ] Information gain is considered.
+[ ] Research risks are identified.
+[ ] Resource requirements are represented.
+[ ] Research roadmap can be generated.
+[ ] Next Best Action exists.
+[ ] Research actions exist.
+[ ] Human approval exists.
+[ ] Autonomy levels exist.
+[ ] Safe actions are distinguishable from restricted actions.
+[ ] Research memory exists.
+[ ] Research decisions are stored.
+[ ] Research state exists.
+[ ] LangGraph integration works.
+[ ] Conditional routing works.
+[ ] Loop protection exists.
+[ ] Research plan versioning exists.
+[ ] Research plan updates from new evidence.
+[ ] Negative experiment results are handled correctly.
+[ ] Hypothesis status updates correctly.
+[ ] Research plan status exists.
+[ ] Blocker detection exists.
+[ ] Dependency management works.
+[ ] Research timeline exists.
+[ ] Audit trail exists.
+[ ] Security requirements from Milestone 20 are preserved.
+[ ] Observability from Milestone 20 is preserved.
+[ ] Recommendation evaluation exists.
+[ ] Human feedback exists.
+[ ] Cost awareness exists.
+[ ] Compute-aware prioritization exists.
+[ ] Multiple research plans can exist.
+[ ] Progress calculation is deterministic.
+[ ] Research plan export works.
+[ ] Milestone 19 report generation integrates with the plan.
+[ ] Continuous research loop works.
+[ ] Unit tests pass.
+[ ] Integration tests pass.
+[ ] Agent tests pass.
+[ ] Hallucination tests pass.
+[ ] Regression tests pass.
+[ ] Performance tests pass.
+[ ] Milestones 1–20 remain functional.
+
+
+==================================================
+101. MOST IMPORTANT PRINCIPLE
+==================================================
+
+The system must never behave as:
+
+USER
  ↓
-Generate Research Proposal
+LLM
  ↓
-Create Experiment
- ↓
-Run Experiment
- ↓
-Analyze Results
- ↓
-Generate Research Paper
- ↓
-Export Report
-
-
-# 87. SMOKE TEST
-
-After deployment test:
-
-GET /health
-
-Then verify:
-
-Authentication
-PDF upload
-RAG query
-Experiment execution
-Report generation
-
-
-# 88. PRODUCTION READINESS CHECK
-
-Create a checklist:
-
-Security
-Performance
-Reliability
-Observability
-Testing
-Deployment
-Backup
-Recovery
-Documentation
-
-
-# 89. SECURITY TESTS
-
-Test:
-
-- unauthorized API access
-- workspace isolation
-- malicious upload
-- path traversal
-- prompt injection
-- rate limiting
-- invalid tokens
-- expired tokens
-- oversized requests
-
-
-# 90. PERFORMANCE BASELINE
-
-Record baseline values for important operations:
-
-PDF processing time
-RAG latency
-LLM latency
-Experiment startup
-Experiment completion
-Report generation
-
-Use actual measurements.
-
-Do not invent performance numbers.
-
-
-# 91. MONITORING DATA PRIVACY
-
-Ensure monitoring does not accidentally capture:
-
-- full research papers
-- private prompts
-- private responses
-- API keys
-- access tokens
-- passwords
-
-
-# 92. GRACEFUL EXTERNAL FAILURE
-
-If LLM provider is unavailable:
-
-Return a useful error.
-
-If vector DB is unavailable:
-
-Do not crash the entire application unnecessarily.
-
-If report generation fails:
-
-Preserve previous report versions.
-
-
-# 93. DEGRADED MODE
-
-Where practical support graceful degradation.
-
-Example:
-
-LLM unavailable
-    ↓
-Existing documents still accessible
-
-Vector DB unavailable
-    ↓
-Upload/history functionality remains available
-
-Do not over-engineer this if it conflicts with the current architecture.
-
-
-# 94. DEPLOYMENT ARTIFACT VERSIONING
-
-Every production deployment should identify:
-
-- Git commit
-- application version
-- Docker image version
-- deployment timestamp
-
-Example:
-
-Version:
-v1.20.0
-
-Commit:
-abc123
-
-
-# 95. RELEASE VERSIONING
-
-Introduce semantic versioning where appropriate:
-
-MAJOR.MINOR.PATCH
-
-Milestone 20 can correspond to a production release.
-
-Example:
-
-v1.0.0
-
-
-# 96. PRODUCTION CONFIG VALIDATION
-
-At application startup verify:
-
-- required environment variables
-- database connectivity
-- storage configuration
-- LLM configuration
-- vector DB configuration
-
-Do not expose secret values.
-
-
-# 97. DATABASE MIGRATION SAFETY
-
-Before migration:
-
-- backup where appropriate
-- validate migration
-- test migration in staging
-
-Do not run destructive migration automatically without safeguards.
-
-
-# 98. FINAL PRODUCTION ARCHITECTURE
-
-The final architecture should conceptually become:
-
-                         USERS
-                           ↓
-                      FRONTEND
-                           ↓
-                    HTTPS / PROXY
-                           ↓
-                     BACKEND API
-                           ↓
-             ┌─────────────┴─────────────┐
-             ↓                           ↓
-       Authentication              Rate Limiting
-             ↓
-       Application Services
-             ↓
-        ┌────┴─────┐
-        ↓          ↓
-     LangGraph   Workers
-        ↓          ↓
-       RAG     Experiments
-        ↓          ↓
-       LLM      Results
-        └────┬─────┘
-             ↓
-     ┌───────┼────────┐
-     ↓       ↓        ↓
- Database  Vector DB Storage
-     └───────┼────────┘
-             ↓
-       Observability
-             ↓
-     Logs / Metrics / Alerts
-             ↓
-        CI/CD Pipeline
-             ↓
-         Production
-
-
-# 99. FINAL DEFINITION OF DONE
-
-Milestone 20 is complete only when:
-
-- [ ] Production configuration exists.
-- [ ] Development/staging/production environments are separated.
-- [ ] Secrets are not hardcoded.
-- [ ] API security has been reviewed.
-- [ ] Authentication has been tested.
-- [ ] Authorization has been tested.
-- [ ] Workspace isolation has been tested.
-- [ ] File upload security has been implemented.
-- [ ] Prompt injection protections exist.
-- [ ] Rate limiting exists.
-- [ ] Request validation exists.
-- [ ] Centralized error handling exists.
-- [ ] Structured logging exists.
-- [ ] Request IDs exist.
-- [ ] Application metrics exist.
-- [ ] LLM monitoring exists.
-- [ ] RAG monitoring exists.
-- [ ] Citation evaluation exists.
-- [ ] Agent evaluation exists.
-- [ ] Experiment monitoring exists.
-- [ ] Background jobs are reliable.
-- [ ] Retries exist.
-- [ ] Timeouts exist.
-- [ ] Idempotency is implemented where required.
-- [ ] Database queries are optimized.
-- [ ] Database connection pooling is configured.
-- [ ] Vector DB performance has been reviewed.
-- [ ] Caching is implemented where beneficial.
-- [ ] Pagination exists where needed.
-- [ ] Health endpoint exists.
-- [ ] Readiness checks exist.
-- [ ] Liveness checks exist.
-- [ ] Graceful shutdown exists.
-- [ ] Docker productionization is complete.
-- [ ] Containers do not unnecessarily run as root.
-- [ ] Production Docker images do not contain secrets.
-- [ ] Frontend production build works.
-- [ ] CI pipeline works.
-- [ ] CD pipeline works.
-- [ ] Security scanning exists.
-- [ ] Staging deployment works.
-- [ ] Production deployment works.
-- [ ] Rollback procedure exists.
-- [ ] Backup strategy is documented.
-- [ ] Disaster recovery procedure is documented.
-- [ ] Audit logging exists.
-- [ ] Performance testing exists.
-- [ ] Load testing exists.
-- [ ] AI evaluation dataset exists.
-- [ ] RAG regression evaluation works.
-- [ ] Agent evaluation works.
-- [ ] Prompt versioning exists.
-- [ ] Model/prompt regression testing exists.
-- [ ] Monitoring dashboard exists.
-- [ ] Alerts exist.
-- [ ] README is updated.
-- [ ] Architecture documentation is updated.
-- [ ] API documentation is updated.
-- [ ] Production runbook exists.
-- [ ] Unit tests pass.
-- [ ] Integration tests pass.
-- [ ] E2E tests pass.
-- [ ] Security tests pass.
-- [ ] Smoke tests pass.
-- [ ] Milestones 1–19 continue working.
-
-
-# 100. FINAL END-TO-END VALIDATION
-
-Perform the following complete production test:
-
-1. Start the production-like environment.
-
-2. Verify health.
-
-3. Verify readiness.
-
-4. Create/login as a test user.
-
-5. Create workspace.
-
-6. Upload research paper.
-
-7. Process document.
-
-8. Run RAG query.
-
-9. Verify citations.
-
-10. Generate literature review.
-
-11. Generate research proposal.
-
-12. Create experiment.
-
-13. Execute experiment.
-
-14. Verify experiment tracking.
-
-15. Verify actual results.
-
-16. Generate statistical analysis.
-
-17. Generate research findings.
-
-18. Generate research paper.
-
-19. Validate citations.
-
-20. Validate results.
-
-21. Export report.
-
-22. Inspect application logs.
-
-23. Inspect metrics.
-
-24. Verify no secrets appear in logs.
-
-25. Run security tests.
-
-26. Run regression tests.
-
-27. Build Docker image.
-
-28. Deploy to staging.
-
-29. Run smoke tests.
-
-30. Deploy to production.
-
-31. Run production health check.
-
-32. Verify rollback procedure.
-
-
-# 101. MOST IMPORTANT PRINCIPLE
-
-The system must follow:
-
-                    REAL SYSTEM
-                         ↓
-               ACTUAL APPLICATION DATA
-                         ↓
-                  ACTUAL METRICS
-                         ↓
-                  ACTUAL LOGS
-                         ↓
-                   OBSERVABILITY
-                         ↓
-                    EVALUATION
-                         ↓
-                  AI INTERPRETATION
-
-Never:
-
-                    AI
-                     ↓
-              Fake Monitoring
-                     ↓
-             Fake Performance
-                     ↓
-              Fake Evaluation
-
-
-# 102. FINAL GOAL
-
-Milestone 20 should transform the project from:
-
-"A working AI research assistant"
+RANDOM RESEARCH PLAN
+
+
+Instead:
+
+USER RESEARCH GOAL
+        ↓
+AVAILABLE EVIDENCE
+        ↓
+LITERATURE
+        ↓
+EXPERIMENT HISTORY
+        ↓
+RESEARCH GAPS
+        ↓
+RESEARCH QUESTIONS
+        ↓
+HYPOTHESES
+        ↓
+METHODS
+        ↓
+EXPERIMENTS
+        ↓
+PRIORITIZATION
+        ↓
+RESEARCH ROADMAP
+        ↓
+HUMAN APPROVAL
+        ↓
+EXECUTION
+        ↓
+ACTUAL RESULTS
+        ↓
+UPDATED RESEARCH PLAN
+
+
+==================================================
+102. FINAL GOAL
+
+Milestone 21 should transform the project from:
+
+"A production-ready AI research assistant"
 
 into:
 
-"A production-ready AI research platform that can reliably execute, evaluate, monitor, secure, deploy and operate the complete research workflow."
+"An evidence-grounded AI research planning and intelligence platform capable of continuously analyzing research evidence, identifying gaps, proposing experiments, prioritizing research actions, learning from actual results, and guiding researchers through an auditable research workflow."
 
-The final system should demonstrate strong:
+The researcher remains the final decision-maker.
 
-- Software Engineering
-- AI Engineering
-- RAG Engineering
-- Agent Engineering
-- MLOps
-- DevOps
-- Cloud
-- Security
-- Testing
-- Observability
-- Production Architecture
+The AI recommends.
 
-Do not stop after implementing individual features.
+The evidence supports.
 
-Run the complete system end-to-end and verify that Milestones 1–19 remain functional.
+The experiments validate.
+
+The researcher approves.
+
+The system records everything.
+
+Do not stop after implementing individual components.
+
+Run the complete end-to-end workflow and verify that Milestones 1–20 continue functioning correctly.
