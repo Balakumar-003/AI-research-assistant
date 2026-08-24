@@ -1,1775 +1,2006 @@
-You are a Senior AI/ML Engineer, Software Architect, Backend Engineer, Frontend Engineer, RAG Engineer, LangGraph Engineer, and Research Scientist.
+# MILESTONE 17 — RESEARCH PROPOSAL & EXPERIMENT PLANNING
 
-You are working on my existing project:
+## 1. PROJECT CONTEXT
 
-AI RESEARCH ASSISTANT
+I am building an AI Research Assistant.
 
-The project has already been developed through Milestone 14.
+The project currently supports:
 
-Your task is to implement ONLY:
+* User authentication and authorization
+* Research workspaces
+* PDF upload
+* PDF text extraction
+* Text chunking
+* Embedding generation
+* Vector database
+* RAG-based question answering
+* Autonomous LangGraph agents
+* Citation and source grounding
+* Advanced paper summarization
+* Multi-paper comparison
+* Automated literature review
+* Research gap discovery
+* Research question generation
+* Hypothesis generation
+* Variable identification
+* Research objectives
+* Feasibility analysis
+* Research direction generation
 
-MILESTONE 15 — RESEARCH GAP DISCOVERY
+Milestones 1–16 have already been completed.
 
-Do not rebuild or replace completed milestones.
+The current research workflow is:
 
-==================================================
-PROJECT MILESTONES ALREADY COMPLETED
-==================================================
-
-1. Project Setup                              ✅
-2. Authentication & Authorization             ✅
-3. Research Workspace / Projects              ✅
-4. PDF Upload                                 ✅
-5. PDF Text Extraction                        ✅
-6. Intelligent Chunking                       ✅
-7. Embedding Generation                       ✅
-8. Vector DB & Semantic Search                ✅
-9. RAG Question Answering                     ✅
-10. Autonomous LangGraph Agent                ✅
-11. Citation & Source Grounding               ✅
-12. Advanced Paper Summarization              ✅
-13. Multi-Paper Comparison                    ✅
-14. Automated Literature Review               ✅
+```text
+Research Papers
+      ↓
+RAG
+      ↓
+Paper Summarization
+      ↓
+Multi-Paper Comparison
+      ↓
+Literature Review
+      ↓
+Research Gap Discovery
+      ↓
+Research Questions
+      ↓
+Hypotheses
+      ↓
+Variables
+      ↓
+Research Objectives
+      ↓
+Research Direction
+```
 
 Now implement:
 
-15. Research Gap Discovery
-
-==================================================
-1. PRIMARY OBJECTIVE
-==================================================
-
-The purpose of Milestone 15 is to make the AI Research Assistant capable of identifying WELL-SUPPORTED RESEARCH GAPS from the existing research literature.
-
-The system should answer questions such as:
-
-"What research gaps exist in RAG for healthcare?"
-
-"What areas of medical LLM research remain underexplored?"
-
-"What limitations in current research could become future research opportunities?"
-
-"What aspects of this research topic have not been sufficiently evaluated?"
-
-The system must NOT simply ask an LLM:
-
-"Find research gaps."
-
-Instead, it must use evidence from the existing research papers.
-
-The system should follow:
-
-Research Question
-        ↓
-Existing Literature
-        ↓
-Literature Review
-        ↓
-Themes
-        ↓
-Findings
-        ↓
-Limitations
-        ↓
-Contradictions
-        ↓
-Candidate Gaps
-        ↓
-Evidence Retrieval
-        ↓
-Counter-Evidence Search
-        ↓
-Gap Validation
-        ↓
-Gap Scoring
-        ↓
-Gap Ranking
-        ↓
-Citation Verification
-        ↓
-Quality Check
-        ↓
-Research Gap Report
-
-==================================================
-2. IMPORTANT DEVELOPMENT RULE
-==================================================
-
-Before writing code:
-
-INSPECT THE EXISTING CODEBASE.
-
-Understand the implementation of:
-
-- Authentication
-- Authorization
-- Research workspace
-- Projects
-- Papers
-- PDF processing
-- Text extraction
-- Chunking
-- Embeddings
-- Vector database
-- Semantic search
-- RAG
-- LangGraph
-- Citations
-- Summarization
-- Multi-paper comparison
-- Automated literature review
-- Database models
-- API patterns
-- Frontend architecture
-- State management
-- Error handling
-- Configuration
-- Logging
-- Testing
-
-Do not assume file names or architecture.
-
-Do not create duplicate systems.
-
-Reuse existing implementations wherever possible.
-
-==================================================
-3. DO NOT BREAK MILESTONES 1–14
-==================================================
+# MILESTONE 17 — RESEARCH PROPOSAL & EXPERIMENT PLANNING
+
+The objective is to transform a selected research question from Milestone 16 into a structured, evidence-grounded research proposal and experiment plan.
+
+The system should answer:
+
+> "Given this research question and hypothesis, how can the researcher actually conduct the study?"
+
+---
+
+# 2. CORE OBJECTIVE
+
+The system must allow the user to select a research question generated in Milestone 16 and generate:
+
+1. Research problem
+2. Research motivation
+3. Research objectives
+4. Research question
+5. Hypothesis
+6. Variables
+7. Proposed methodology
+8. Dataset requirements
+9. Dataset recommendations
+10. Data preprocessing plan
+11. Baseline methods
+12. Proposed approach
+13. Experimental design
+14. Experiment matrix
+15. Evaluation metrics
+16. Ablation studies
+17. Statistical analysis plan
+18. Expected outcomes
+19. Potential contributions
+20. Limitations
+21. Reproducibility plan
+22. Research timeline
+23. Complete research proposal
+
+The generated plan must remain grounded in the literature already analyzed.
+
+---
+
+# 3. CRITICAL ARCHITECTURE RULE
+
+Do NOT rebuild the existing research pipeline.
+
+Reuse:
+
+* Milestone 13 multi-paper comparison
+* Milestone 14 literature review
+* Milestone 15 research gaps
+* Milestone 16 research questions
+* Existing LangGraph infrastructure
+* Existing RAG/retrieval
+* Existing embeddings
+* Existing vector database
+* Existing citation system
+* Existing workspace system
+* Existing authentication
+* Existing database infrastructure
+* Existing frontend architecture
+
+The new milestone must extend the current system.
+
+Do not create duplicate RAG/vector/citation/authentication implementations.
+
+---
+
+# 4. USER WORKFLOW
+
+The final workflow should be:
+
+```text
+Workspace
+   ↓
+Research Questions
+   ↓
+Select Research Question
+   ↓
+View Hypothesis
+   ↓
+Generate Research Proposal
+   ↓
+Generate Experiment Plan
+   ↓
+Review/Edit Plan
+   ↓
+Save Proposal
+   ↓
+Export Proposal
+```
+
+The user must explicitly select a research question before generating the proposal.
+
+---
+
+# 5. INPUT
+
+The proposal generator should consume the outputs from Milestone 16.
+
+Conceptually:
 
-After implementing Milestone 15, all previous functionality must continue working.
+```json
+{
+  "workspace_id": "...",
+  "research_question_id": "...",
+  "gap_id": "...",
+  "topic": "...",
+  "research_question": "...",
+  "hypothesis": {},
+  "variables": {},
+  "objectives": [],
+  "supporting_evidence": [],
+  "citations": [],
+  "feasibility": {},
+  "research_directions": []
+}
+```
 
-Verify:
+Use the existing database schema and identifiers.
 
-- Authentication
-- Authorization
-- Project creation
-- Paper upload
-- PDF extraction
-- Chunking
-- Embeddings
-- Vector search
-- RAG QA
-- LangGraph agent
-- Citations
-- Summarization
-- Multi-paper comparison
-- Automated literature review
-
-Do not replace working components unless absolutely necessary.
-
-==================================================
-4. WHAT IS A RESEARCH GAP?
-==================================================
-
-A research gap is an area where the existing literature indicates:
-
-- insufficient research
-- limited evidence
-- inconsistent findings
-- missing evaluation
-- missing datasets
-- limited populations
-- unexplored methodologies
-- insufficient real-world validation
-- contradictory findings
-- outdated approaches
-- unexplored combinations of existing methods
+Do not duplicate information unnecessarily if it already exists in related entities.
 
-The system must distinguish between:
+---
 
-OBSERVATION
+# 6. INPUT VALIDATION
 
-and
+Before generation, verify:
 
-VALIDATED RESEARCH GAP.
+* authenticated user
+* workspace access
+* research question exists
+* research question belongs to workspace
+* associated research gap belongs to workspace
+* supporting papers are accessible
+* research question has sufficient context
+* hypothesis is available where applicable
 
-For example:
+Reject unauthorized requests.
 
-Observation:
-"Most papers use English datasets."
+---
 
-Potential Gap:
-"Multilingual medical RAG is underexplored."
+# 7. HIGH-LEVEL LANGGRAPH WORKFLOW
 
-The second statement must be validated against the available papers.
+Implement a dedicated LangGraph workflow.
 
-==================================================
-5. CRITICAL ANTI-HALLUCINATION REQUIREMENT
-==================================================
+Recommended architecture:
 
-Never allow the LLM to invent a research gap.
-
-Every research gap must have:
-
-- supporting evidence
-- supporting papers
-- source chunks
-- citations
-- evidence explanation
-- counter-evidence analysis
-
-If evidence is insufficient, the system must say:
-
-"Insufficient evidence to establish this as a research gap."
-
-Do NOT fabricate:
-
-- papers
-- authors
-- datasets
-- results
-- research trends
-- limitations
-- citations
-- novelty
-- research gaps
-
-==================================================
-6. USE MILESTONE 14 AS THE PRIMARY INPUT
-==================================================
-
-Milestone 15 must reuse the structured output from Milestone 14.
-
-Use:
-
-- research question
-- relevant papers
-- paper insights
-- themes
-- theme summaries
-- findings
-- agreements
-- disagreements
-- methodological trends
-- limitations
-- emerging directions
-- citations
-
-Do NOT rebuild the literature review pipeline.
-
-The architecture should be:
-
-Milestone 14
-Automated Literature Review
-        ↓
-Structured Literature Knowledge
-        ↓
-Milestone 15
-Research Gap Discovery
-
-==================================================
-7. SUPPORT TWO INPUT MODES
-==================================================
-
-The user should be able to discover research gaps using:
-
-MODE A — Existing Literature Review
-
-User selects an existing literature review.
-
-Example:
-
-Literature Review:
-"RAG for Medical Question Answering"
-
-The system uses that review as the starting point.
-
-MODE B — Direct Research Question
-
-User provides:
-
-"What research gaps exist in RAG for healthcare?"
-
-The system should:
-
-1. identify relevant papers
-2. generate/reuse literature review information
-3. discover research gaps
-
-Reuse Milestone 14 where possible.
-
-==================================================
-8. RESEARCH GAP TYPES
-==================================================
-
-The system should identify different types of research gaps.
-
-At minimum support:
-
-1. Knowledge Gap
-2. Methodological Gap
-3. Dataset Gap
-4. Evaluation Gap
-5. Application Gap
-6. Domain Gap
-7. Population Gap
-8. Temporal Gap
-9. Theoretical Gap
-10. Contradiction Gap
-11. Implementation Gap
-12. Generalization Gap
-
-The LLM may identify additional categories when justified.
-
-Do not force every gap into a predefined category if the evidence suggests another category.
-
-==================================================
-9. KNOWLEDGE GAP
-==================================================
-
-Identify areas that have not been sufficiently studied.
-
-Example:
-
-Most papers study:
-
-- text-based RAG
-
-Very few study:
-
-- multimodal RAG
-
-Potential gap:
-
-"Multimodal RAG remains insufficiently explored in the reviewed healthcare literature."
-
-This must be evidence-supported.
-
-==================================================
-10. METHODOLOGICAL GAP
-==================================================
-
-Identify methodological limitations or missing approaches.
-
-Example:
-
-Most studies use:
-
-- dense retrieval
-
-Very few evaluate:
-
-- hybrid retrieval
-
-Potential gap:
-
-"Hybrid retrieval strategies remain insufficiently evaluated in the reviewed setting."
-
-==================================================
-11. DATASET GAP
-==================================================
-
-Identify missing or limited datasets.
-
-Example:
-
-Most studies use:
-
-- English datasets
-
-Few use:
-
-- multilingual datasets
-
-Potential gap:
-
-"Multilingual evaluation remains limited compared with English-only evaluation."
-
-Do not claim "no multilingual research exists" unless the evidence genuinely supports that.
-
-==================================================
-12. EVALUATION GAP
-==================================================
-
-Identify missing evaluation dimensions.
-
-Example:
-
-Most papers evaluate:
-
-- accuracy
-
-Few evaluate:
-
-- robustness
-- factuality
-- latency
-- human preference
-
-Potential gap:
-
-"Current evaluations place greater emphasis on accuracy than robustness and human-centered evaluation."
-
-==================================================
-13. APPLICATION GAP
-==================================================
-
-Identify missing real-world validation.
-
-Example:
-
-Most research:
-
-- benchmark datasets
-- simulation
-
-Few studies:
-
-- real-world deployment
-
-Potential gap:
-
-"Real-world validation remains limited."
-
-==================================================
-14. DOMAIN GAP
-==================================================
-
-Identify domains that are insufficiently represented.
-
-Example:
-
-Research focuses on:
-
-- general healthcare
-
-Limited:
-
-- emergency medicine
-
-Potential gap:
-
-"Emergency-care applications remain comparatively underexplored."
-
-==================================================
-15. POPULATION GAP
-==================================================
-
-Identify underrepresented populations.
-
-Example:
-
-Research focuses on:
-
-- adults
-
-Limited:
-
-- pediatric populations
-
-The system must only make such claims if the papers contain appropriate population information.
-
-==================================================
-16. TEMPORAL GAP
-==================================================
-
-Identify areas where research may not have kept pace with newer approaches.
-
-Example:
-
-Most papers evaluate older architectures while very recent approaches are not sufficiently evaluated.
-
-Use actual publication dates and paper metadata.
-
-Do not make unsupported claims such as:
-
-"Nobody has studied this since 2023."
-
-==================================================
-17. THEORETICAL GAP
-==================================================
-
-Identify missing conceptual or theoretical understanding.
-
-Example:
-
-Multiple papers report different results, but there is insufficient explanation of why.
-
-Potential gap:
-
-"The factors responsible for differing retrieval effectiveness remain insufficiently understood."
-
-This type of gap must be carefully grounded.
-
-==================================================
-18. CONTRADICTION GAP
-==================================================
-
-This is an important feature.
-
-Suppose:
-
-Paper A:
-Method improves performance.
-
-Paper B:
-Method improves performance.
-
-Paper C:
-Method produces no improvement.
-
-The system should identify:
-
-"Existing studies report inconsistent findings regarding the effectiveness of the method."
-
-Then investigate:
-
-- datasets
-- models
-- retrieval methods
-- evaluation metrics
-- experimental conditions
-
-Do not automatically assume why the results differ.
-
-==================================================
-19. GENERALIZATION GAP
-==================================================
-
-Identify when research works only under narrow conditions.
-
-Example:
-
-Research has been evaluated on:
-
-- one dataset
-- one language
-- one domain
-
-Potential gap:
-
-"Generalization across datasets and domains remains insufficiently evaluated."
-
-==================================================
-20. IMPLEMENTATION GAP
-==================================================
-
-Identify gaps between research prototypes and practical systems.
-
-Example:
-
-Research papers report model performance but provide limited information about:
-
-- latency
-- scalability
-- cost
-- deployment
-- reliability
-
-Potential gap:
-
-"Production-level evaluation remains limited."
-
-==================================================
-21. GAP DISCOVERY PIPELINE
-==================================================
-
-Implement the following logical pipeline:
-
+```text
 START
- ↓
-Load Literature Review
- ↓
-Extract Literature Knowledge
- ↓
+  ↓
+Validate Research Question
+  ↓
+Load Research Context
+  ↓
+Load Gap + Evidence
+  ↓
+Load Hypothesis + Variables
+  ↓
+Analyze Research Problem
+  ↓
+Define Research Objectives
+  ↓
+Design Methodology
+  ↓
+Identify Dataset Requirements
+  ↓
+Recommend Datasets
+  ↓
+Design Preprocessing
+  ↓
+Select Baselines
+  ↓
+Define Proposed Approach
+  ↓
+Design Experiments
+  ↓
+Generate Experiment Matrix
+  ↓
+Select Evaluation Metrics
+  ↓
+Design Ablation Studies
+  ↓
+Design Statistical Analysis
+  ↓
+Generate Expected Outcomes
+  ↓
+Generate Contributions
+  ↓
 Identify Limitations
- ↓
-Identify Contradictions
- ↓
-Identify Underexplored Areas
- ↓
-Generate Candidate Gaps
- ↓
-Retrieve Supporting Evidence
- ↓
-Retrieve Counter-Evidence
- ↓
-Validate Candidates
- ↓
-Classify Gap Type
- ↓
-Score Gap
- ↓
-Rank Gaps
- ↓
-Generate Gap Explanation
- ↓
-Verify Citations
- ↓
-Quality Check
- ↓
-Save Analysis
- ↓
+  ↓
+Generate Reproducibility Plan
+  ↓
+Generate Timeline
+  ↓
+Citation Validation
+  ↓
+Generate Final Proposal
+  ↓
+Validate Proposal
+  ↓
+Store Proposal
+  ↓
 END
+```
 
-==================================================
-22. LANGGRAPH IMPLEMENTATION
-==================================================
+Use parallel branches where appropriate.
 
-Extend the existing LangGraph architecture.
+---
 
-Recommended nodes:
+# 8. LANGGRAPH STATE
 
-1. load_literature_review
-2. extract_literature_knowledge
-3. identify_candidate_areas
-4. generate_candidate_gaps
-5. retrieve_gap_evidence
-6. search_counter_evidence
-7. validate_gap
-8. classify_gap
-9. score_gap
-10. rank_gaps
-11. generate_gap_report
-12. verify_gap_citations
-13. quality_check
-14. save_gap_analysis
-
-Reuse existing LangGraph patterns.
-
-Do not create an unrelated second agent architecture.
-
-==================================================
-23. LANGGRAPH STATE
-==================================================
-
-Create or extend the existing state.
+Extend the existing state architecture.
 
 Conceptually:
 
-class ResearchGapState:
+```python
+class ResearchProposalState:
+    workspace_id: str
+    user_id: str
 
-    user_id
-    project_id
+    research_question_id: str
 
-    query
-    literature_review_id
+    research_question: dict
+    research_gap: dict
+    literature_context: dict
+    supporting_evidence: list
+    citations: list
 
-    paper_ids
-    relevant_papers
+    hypothesis: dict
+    variables: dict
+    objectives: list
 
-    themes
-    findings
-    limitations
-    contradictions
-    trends
+    research_problem: str
+    motivation: str
 
-    candidate_gaps
+    methodology: dict
 
-    supporting_evidence
-    counter_evidence
+    dataset_requirements: dict
+    dataset_recommendations: list
 
-    validated_gaps
-    rejected_gaps
+    preprocessing_plan: list
 
-    gap_scores
-    ranked_gaps
+    baselines: list
+    proposed_approach: dict
 
-    citations
+    experiments: list
+    experiment_matrix: list
 
-    quality_check
+    evaluation_metrics: list
+    ablation_studies: list
+    statistical_analysis: dict
 
-    final_report
+    expected_outcomes: list
+    contributions: list
+    limitations: list
 
-    status
-    errors
+    reproducibility_plan: dict
+    timeline: list
 
-Adapt this to the existing state architecture.
+    proposal_sections: dict
 
-==================================================
-24. LOAD LITERATURE REVIEW
-==================================================
+    validation_results: dict
+    final_proposal: dict
 
-The first stage should load the relevant Milestone 14 result.
+    errors: list
+```
 
-Validate:
+Adapt this to the existing project state model.
 
-- review exists
-- user has access
-- project exists
-- review belongs to project
+---
 
-Never trust project IDs from the frontend.
+# 9. NODE 1 — VALIDATE RESEARCH QUESTION
 
-==================================================
-25. EXTRACT LITERATURE KNOWLEDGE
-==================================================
+Verify that:
 
-Extract structured information:
+* research question exists
+* question belongs to authenticated user's workspace
+* question has an associated research gap
+* question has supporting evidence
+* question is marked as selected/active
 
-- major themes
-- findings
-- agreements
-- disagreements
-- limitations
-- methodologies
-- datasets
-- evaluation methods
-- trends
-- emerging directions
+If not:
 
-This information becomes the basis for gap generation.
-
-==================================================
-26. IDENTIFY CANDIDATE AREAS
-==================================================
-
-Analyze:
-
-- repeated limitations
-- underrepresented dimensions
-- contradictions
-- weak evaluation
-- missing datasets
-- missing populations
-- missing domains
-- missing methodologies
-- narrow experimental settings
-
-Generate candidate areas.
+Return a meaningful error.
 
 Example:
 
-Candidate Area:
+```text
+A valid research question must be selected before generating a research proposal.
+```
 
-"Multilingual evaluation"
+---
 
-Candidate Area:
+# 10. NODE 2 — LOAD RESEARCH CONTEXT
 
-"Real-world deployment"
+Load the complete context associated with the question:
 
-Candidate Area:
+* research topic
+* research gap
+* literature review
+* supporting papers
+* relevant evidence
+* research question
+* hypothesis
+* variables
+* objectives
+* feasibility analysis
+* previous research directions
 
-"Human evaluation"
+Reuse existing stored results.
 
-==================================================
-27. CANDIDATE GAP GENERATION
-==================================================
+Do not regenerate Milestones 13–16.
 
-Generate structured candidates.
+---
 
-Example:
+# 11. NODE 3 — RESEARCH PROBLEM DEFINITION
 
-{
-    "candidate_id": "...",
-    "statement": "...",
-    "type": "evaluation_gap",
-    "reason": "...",
-    "supporting_observations": []
-}
+Generate a concise research problem statement.
 
-Important:
+The problem statement should explain:
 
-These are candidates, NOT final research gaps.
-
-==================================================
-28. EVIDENCE RETRIEVAL
-==================================================
-
-For every candidate gap:
-
-Search the existing vector database and paper evidence.
-
-Retrieve:
-
-- relevant chunks
-- paper IDs
-- page numbers
-- sections
-- source metadata
+1. Current state of the research area
+2. What is missing
+3. Why the missing area matters
+4. What the proposed research intends to investigate
 
 Example:
 
-{
-    "paper_id": "...",
-    "chunk_id": "...",
-    "page_number": 8,
-    "section": "Limitations",
-    "text": "..."
-}
+```text
+Existing RAG systems frequently rely on static knowledge bases.
+However, limited research evaluates how continuously updated
+knowledge affects retrieval and answer quality. This study proposes
+to evaluate the impact of knowledge freshness on RAG performance.
+```
 
-Reuse the existing retrieval system.
+The statement must be grounded in the literature.
 
-==================================================
-29. COUNTER-EVIDENCE SEARCH
-==================================================
+---
 
-For every candidate gap, actively search for evidence that contradicts it.
+# 12. NODE 4 — RESEARCH MOTIVATION
 
-Example:
-
-Candidate:
-
-"Multilingual evaluation is missing."
-
-Counter search finds:
-
-Paper X:
-"We evaluate on English, Spanish, and French datasets."
-
-Therefore:
-
-The original candidate must be weakened or rejected.
-
-Possible final statement:
-
-"Multilingual evaluation exists but remains limited relative to English-only evaluation."
-
-This is mandatory.
-
-==================================================
-30. GAP VALIDATION
-==================================================
-
-Each candidate must pass validation.
-
-Validation should consider:
-
-1. Evidence exists?
-2. Multiple papers support it?
-3. Counter-evidence exists?
-4. How significant is the counter-evidence?
-5. Is the claim too strong?
-6. Can the statement be safely supported?
-7. Is the gap already adequately studied?
-
-Possible results:
-
-VALIDATED
-PARTIALLY VALIDATED
-REJECTED
-INSUFFICIENT EVIDENCE
-
-==================================================
-31. GAP REFINEMENT
-==================================================
-
-If the original candidate is too strong:
-
-Original:
-
-"No research exists on multilingual RAG."
-
-Evidence:
-
-3 multilingual papers exist.
-
-Refine:
-
-"Multilingual RAG remains less extensively evaluated than English-only RAG in the reviewed literature."
-
-The system should prefer accurate weaker claims over unsupported strong claims.
-
-==================================================
-32. GAP CLASSIFICATION
-==================================================
-
-Classify each validated gap.
-
-Example:
-
-{
-    "type": "dataset_gap"
-}
-
-or:
-
-{
-    "type": "evaluation_gap"
-}
-
-or:
-
-{
-    "type": "methodological_gap"
-}
-
-A gap may have multiple types.
-
-Example:
-
-[
-    "dataset_gap",
-    "evaluation_gap"
-]
-
-==================================================
-33. GAP IMPORTANCE
-==================================================
-
-Estimate the research importance.
-
-Use categories:
-
-HIGH
-MEDIUM
-LOW
-
-Explain the reasoning.
-
-Example:
-
-HIGH
-
-Reason:
-The limitation affects evaluation validity across multiple papers.
-
-Do not claim importance merely because the LLM believes it is interesting.
-
-==================================================
-34. GAP EVIDENCE STRENGTH
-==================================================
-
-Use:
-
-HIGH
-MEDIUM
-LOW
-
-Consider:
-
-- number of supporting papers
-- consistency
-- quality of evidence
-- counter-evidence
-- directness of evidence
-
-==================================================
-35. GAP CONFIDENCE
-==================================================
-
-Each final gap should include:
-
-confidence:
-HIGH / MEDIUM / LOW
-
-and:
-
-confidence_reason
-
-Example:
-
-"High confidence because 11 of 15 reviewed papers use English-only datasets, while only two evaluate multilingual settings."
-
-==================================================
-36. GAP SCORING
-==================================================
-
-Create a transparent scoring framework.
-
-Potential dimensions:
-
-Evidence Strength
-Research Scarcity
-Importance
-Consistency
-Novelty
-
-For example:
-
-{
-    "evidence_strength": 0.9,
-    "scarcity": 0.8,
-    "importance": 0.85,
-    "consistency": 0.9,
-    "overall_score": 0.86
-}
-
-Do not create arbitrary scores.
-
-Document the scoring methodology.
-
-If the existing project avoids numerical confidence, use qualitative scoring instead.
-
-==================================================
-37. GAP RANKING
-==================================================
-
-Rank validated gaps by:
-
-- evidence strength
-- importance
-- scarcity
-- consistency
-
-The strongest and best-supported gaps should appear first.
-
-Example:
-
-1. Real-world validation — High
-2. Multilingual evaluation — High
-3. Human evaluation — Medium
-4. Hybrid retrieval — Medium
-
-==================================================
-38. SUPPORTING PAPERS
-==================================================
-
-Each gap must identify supporting papers.
-
-Example:
-
-Gap:
-
-"Real-world deployment is insufficiently evaluated."
-
-Supporting papers:
-
-- Paper A
-- Paper C
-- Paper F
-- Paper H
-
-Use actual paper IDs.
-
-==================================================
-39. COUNTER-EVIDENCE
-==================================================
-
-Each gap should also show relevant counter-evidence.
-
-Example:
-
-Counter Evidence:
-
-"Paper J evaluates the proposed approach in a real-world hospital dataset."
-
-This improves trustworthiness.
-
-==================================================
-40. CITATION GROUNDING
-==================================================
-
-Reuse Milestone 11 citation infrastructure.
-
-Every gap claim must be traceable to:
-
-- paper
-- chunk
-- page
-- section
-
-Do not create fake citations.
-
-==================================================
-41. CITATION COVERAGE
-==================================================
-
-Before final output:
-
-Check:
-
-Total claims
-Supported claims
-Unsupported claims
-
-If unsupported:
-
-- find evidence
-OR
-- weaken the claim
-OR
-- remove it
-
-Never return unsupported claims as facts.
-
-==================================================
-42. FINAL GAP OBJECT
-==================================================
-
-Use a structured object similar to:
-
-{
-    "gap_id": "...",
-    "title": "...",
-    "statement": "...",
-    "type": [
-        "evaluation_gap"
-    ],
-    "importance": "HIGH",
-    "confidence": "HIGH",
-
-    "evidence_summary": "...",
-
-    "supporting_papers": [],
-
-    "supporting_evidence": [],
-
-    "counter_evidence": [],
-
-    "limitations": [],
-
-    "why_it_matters": "...",
-
-    "potential_research_direction": "...",
-
-    "citations": []
-}
-
-Adapt this schema to the existing project.
-
-==================================================
-43. POTENTIAL RESEARCH DIRECTION
-==================================================
-
-The system may provide a high-level possible direction.
-
-Example:
-
-Gap:
-
-"Multilingual evaluation remains limited."
-
-Potential direction:
-
-"Evaluate RAG systems across multiple languages and medical domains."
-
-IMPORTANT:
-
-Do not generate a complete research methodology.
-
-That belongs to Milestone 16.
-
-==================================================
-44. MILESTONE 15 vs MILESTONE 16
-==================================================
-
-Milestone 15:
-
-WHAT IS MISSING?
-
-Milestone 16:
-
-HOW SHOULD WE RESEARCH IT?
-
-Therefore Milestone 15 should NOT automatically generate:
-
-- complete experiment design
-- complete architecture
-- detailed implementation plan
-- full dataset creation plan
-- complete timeline
-- budget
-
-Those belong to Milestone 16.
-
-==================================================
-45. FINAL REPORT STRUCTURE
-==================================================
-
-Generate:
-
-# Research Gap Analysis
-
-## 1. Research Question
-
-Show the user's question.
-
-## 2. Literature Scope
-
-Show:
-
-- number of papers analyzed
-- relevant papers
-- literature review used
-
-## 3. Research Landscape
-
-Brief summary of the existing research.
-
-## 4. Identified Research Gaps
-
-For each gap:
-
-### Gap 1 — Title
-
-Type:
-
-Confidence:
-
-Importance:
-
-Gap Statement:
-
-Evidence:
-
-Supporting Papers:
-
-Counter-Evidence:
-
-Why It Matters:
-
-Potential Direction:
-
-Citations:
-
-Repeat for every validated gap.
-
-## 5. Contradictory Findings
-
-Show important disagreements that may indicate future research opportunities.
-
-## 6. Overall Gap Summary
-
-Rank the most important gaps.
-
-==================================================
-46. FRONTEND
-==================================================
-
-Add:
-
-[Discover Research Gaps]
-
-to the existing Research Workspace.
-
-Do not redesign the application.
-
-Reuse existing UI components.
-
-==================================================
-47. GAP DISCOVERY FORM
-==================================================
-
-Create a form similar to:
-
-Research Gap Discovery
-
-Research Question:
-
-[ What research gaps exist in RAG for healthcare? ]
-
-Source:
-
-○ Existing Literature Review
-○ All Relevant Papers
-
-Literature Review:
-
-[ Select Review ]
-
-Maximum Gaps:
-
-[ 10 ]
-
-[ Discover Research Gaps ]
-
-==================================================
-48. PROGRESS UI
-==================================================
-
-Display progress:
-
-✓ Loading literature review
-✓ Analyzing research findings
-✓ Identifying candidate gaps
-✓ Retrieving supporting evidence
-✓ Searching counter-evidence
-⏳ Validating research gaps
-○ Ranking gaps
-○ Verifying citations
-○ Quality checking
-
-Reuse existing progress infrastructure.
-
-==================================================
-49. GAP RESULT UI
-==================================================
-
-Display cards:
-
-Research Gap #1
-
-Title:
-Multilingual Evaluation
-
-Type:
-Dataset / Evaluation Gap
-
-Confidence:
-HIGH
-
-Importance:
-HIGH
-
-Evidence:
-...
-
-Supporting Papers:
-...
-
-Counter Evidence:
-...
-
-Why It Matters:
-...
-
-Potential Direction:
-...
-
-[View Sources]
-
-==================================================
-50. GAP FILTERING
-==================================================
-
-Allow filtering by:
-
-- gap type
-- confidence
-- importance
-
-Example:
-
-[All]
-[Knowledge]
-[Methodology]
-[Dataset]
-[Evaluation]
-[Application]
-[Contradiction]
-
-==================================================
-51. GAP DETAILS
-==================================================
-
-When the user clicks a gap:
-
-Show:
-
-- gap statement
-- evidence
-- supporting papers
-- counter-evidence
-- citations
-- confidence explanation
-- importance explanation
-- potential research direction
-
-Reuse existing citation/source UI.
-
-==================================================
-52. DATABASE
-==================================================
-
-Add persistence for research gap analyses.
-
-Use the existing database architecture.
-
-Conceptually:
-
-research_gap_analyses
-
-Fields:
-
-id
-user_id
-project_id
-literature_review_id
-query
-paper_ids
-candidate_gaps
-validated_gaps
-rejected_gaps
-status
-created_at
-updated_at
-
-Do not duplicate database infrastructure.
-
-==================================================
-53. API
-==================================================
-
-Implement APIs according to existing project conventions.
-
-Recommended:
-
-POST /api/research-gaps
-
-GET /api/research-gaps/{analysis_id}
-
-GET /api/projects/{project_id}/research-gaps
-
-Request:
-
-{
-    "project_id": "...",
-    "literature_review_id": "...",
-    "query": "What research gaps exist in RAG for healthcare?"
-}
-
-Response:
-
-{
-    "analysis_id": "...",
-    "status": "completed",
-    "gaps": []
-}
-
-Use the existing authentication middleware.
-
-==================================================
-54. AUTHORIZATION
-==================================================
-
-Validate:
-
-- user owns project
-- literature review belongs to project
-- papers belong to project
-- research gap analysis belongs to user/project
-
-Never trust frontend IDs.
-
-==================================================
-55. STATUS MANAGEMENT
-==================================================
-
-Support:
-
-queued
-processing
-completed
-failed
-
-Use existing asynchronous processing patterns if already implemented.
-
-==================================================
-56. ERROR HANDLING
-==================================================
-
-Handle:
-
-- invalid project
-- invalid review
-- unauthorized access
-- no papers
-- no literature review
-- no evidence
-- vector DB failure
-- LLM failure
-- LangGraph failure
-- citation failure
-- database failure
-- timeout
-
-Never expose stack traces to users.
-
-==================================================
-57. NO GAP CASE
-==================================================
-
-If no meaningful research gaps can be established:
-
-Return:
-
-"No sufficiently supported research gaps were identified from the available literature."
-
-Do not invent gaps just to provide an answer.
-
-==================================================
-58. INSUFFICIENT EVIDENCE CASE
-==================================================
-
-If evidence is insufficient:
-
-"Insufficient evidence is available to confidently establish this as a research gap."
-
-==================================================
-59. PERFORMANCE
-==================================================
-
-Optimize:
-
-- retrieval
-- LLM calls
-- token usage
-- evidence processing
-- caching
-- parallel processing
-
-Do not send complete papers into every LLM call.
-
-Use:
-
-Literature Review
- ↓
-Relevant Evidence
- ↓
-Candidate Gaps
- ↓
-Targeted Evidence Retrieval
- ↓
-Validation
-
-==================================================
-60. COST CONTROL
-==================================================
-
-Add configurable values if appropriate:
-
-MAX_GAP_CANDIDATES
-MAX_EVIDENCE_PER_GAP
-MAX_COUNTER_EVIDENCE
-MAX_FINAL_GAPS
-MAX_LLM_CONTEXT
-
-Reuse the existing configuration system.
-
-==================================================
-61. LOGGING
-==================================================
-
-Log:
-
-- analysis started
-- project ID
-- literature review ID
-- paper count
-- candidate gap count
-- validation results
-- rejected gaps
-- final gap count
-- citation validation
-- errors
-- completion time
-
-Do not log unnecessary sensitive information.
-
-==================================================
-62. UNIT TESTS
-==================================================
-
-Create tests for:
-
-1. Literature review loading
-2. Authorization
-3. Candidate gap generation
-4. Gap classification
-5. Evidence retrieval
-6. Counter-evidence retrieval
-7. Gap validation
-8. Gap refinement
-9. Gap scoring
-10. Gap ranking
-11. Citation mapping
-12. Citation verification
-13. False-gap rejection
-14. Persistence
-15. API validation
-
-==================================================
-63. FALSE GAP TEST
-==================================================
-
-Create a test:
-
-Candidate:
-
-"No multilingual research exists."
-
-Evidence:
-
-Multiple papers already use multilingual datasets.
-
-Expected:
-
-Candidate rejected or refined.
-
-The system must NOT return:
-
-"No multilingual research exists."
-
-==================================================
-64. CONTRADICTION TEST
-==================================================
-
-Create:
-
-Paper A:
-Method improves performance.
-
-Paper B:
-Method improves performance.
-
-Paper C:
-Method has no significant improvement.
-
-Expected:
-
-The system identifies a contradiction.
-
-Potential gap:
-
-"The conditions responsible for differing performance outcomes remain insufficiently understood."
-
-==================================================
-65. STRONG GAP TEST
-==================================================
-
-Create a dataset where:
-
-15 papers use English-only evaluation.
-
-2 papers use multilingual evaluation.
-
-Expected:
-
-Potential gap:
-
-"Multilingual evaluation remains limited compared with English-only evaluation."
-
-Confidence:
-
-High.
-
-==================================================
-66. WEAK GAP TEST
-==================================================
-
-Only one paper mentions a possible missing area.
-
-Expected:
-
-Low confidence.
-
-The system must not present it as a confirmed major research gap.
-
-==================================================
-67. NO GAP TEST
-==================================================
-
-Create a literature set where all proposed areas are already sufficiently researched.
-
-Expected:
-
-No major research gap.
-
-Do not hallucinate one.
-
-==================================================
-68. LARGE DATASET TEST
-==================================================
-
-Test with:
-
-50+ papers.
-
-Verify:
-
-- no context overflow
-- reasonable number of LLM calls
-- balanced evidence
-- acceptable latency
-- correct citations
-- stable output
-
-==================================================
-69. REGRESSION TEST
-==================================================
-
-After Milestone 15:
-
-Test Milestones 1–14.
-
-Especially:
-
-Milestone 11:
-Citation grounding
-
-Milestone 12:
-Summarization
-
-Milestone 13:
-Multi-paper comparison
-
-Milestone 14:
-Automated literature review
-
-==================================================
-70. DOCUMENTATION
-==================================================
-
-Update README.
-
-Add:
-
-# Research Gap Discovery
+Generate a research motivation section.
 
 Explain:
 
-- purpose
-- architecture
-- gap types
-- validation
-- counter-evidence
-- scoring
-- citations
-- API
-- frontend
-- configuration
-- testing
+* why the problem matters
+* practical importance
+* scientific importance
+* limitations of existing approaches
+* why the proposed study is worth investigating
 
-==================================================
-71. ARCHITECTURE
-==================================================
+Do not exaggerate importance.
 
-Final architecture should look like:
+Do not claim:
 
-                    AI RESEARCH ASSISTANT
-                            │
-                            ↓
-                    Research Workspace
-                            │
-                            ↓
-                         Papers
-                            │
-                            ↓
-                   PDF Processing
-                            │
-                            ↓
-                   Chunking + Embeddings
-                            │
-                            ↓
-                     Vector Database
-                            │
-            ┌───────────────┼────────────────┐
-            ↓               ↓                ↓
-           RAG         Summarization     Comparison
-            │                                │
-            └───────────────┬────────────────┘
-                            ↓
-                  Literature Review
-                            │
-                            ↓
-                    Research Knowledge
-                            │
-             ┌──────────────┼───────────────┐
-             ↓              ↓               ↓
-        Limitations    Contradictions     Trends
-             │              │               │
-             └──────────────┼───────────────┘
-                            ↓
-                  Candidate Gap Discovery
-                            ↓
-                   Evidence Retrieval
-                            ↓
-                  Counter-Evidence Search
-                            ↓
-                     Gap Validation
-                            ↓
-                     Gap Classification
-                            ↓
-                       Gap Scoring
-                            ↓
-                      Gap Ranking
-                            ↓
-                  Citation Verification
-                            ↓
-                      Quality Check
-                            ↓
-                  Research Gap Report
-                            ↓
-                         Frontend
+> "This is the first study..."
+
+unless the evidence genuinely supports such a claim.
+
+Prefer:
+
+> "The reviewed literature indicates limited evaluation of..."
+
+---
+
+# 13. NODE 5 — RESEARCH OBJECTIVES
+
+Reuse Milestone 16 objectives.
+
+Validate that they are aligned with:
+
+* research question
+* hypothesis
+* methodology
+
+If necessary, refine them.
+
+Generate:
+
+### Primary Objective
+
+One central objective.
+
+### Secondary Objectives
+
+2–5 supporting objectives.
+
+Example:
+
+```text
+Primary Objective:
+Evaluate whether hybrid retrieval improves RAG retrieval performance.
+
+Secondary Objectives:
+1. Compare dense and hybrid retrieval.
+2. Evaluate retrieval performance using Recall@K.
+3. Measure downstream answer factuality.
+4. Analyze performance across query categories.
+```
+
+---
+
+# 14. NODE 6 — METHODOLOGY DESIGN
+
+Design a possible methodology.
+
+The methodology should include:
+
+* research approach
+* experimental approach
+* system architecture
+* data flow
+* model selection
+* training/fine-tuning where appropriate
+* evaluation strategy
+
+Do not force an experimental methodology when the question is qualitative.
+
+The system must determine the appropriate methodology type.
+
+Possible types:
+
+```text
+experimental
+comparative
+observational
+qualitative
+quantitative
+mixed-method
+simulation
+design-and-evaluation
+```
+
+---
+
+# 15. METHODOLOGY JUSTIFICATION
+
+Explain why the proposed methodology fits the research question.
+
+Example:
+
+> A controlled comparative experiment is appropriate because the research question evaluates the performance difference between two retrieval strategies.
+
+This explanation should be evidence-grounded where it relies on established research practices.
+
+---
+
+# 16. NODE 7 — DATASET REQUIREMENTS
+
+Determine what kind of data is required.
+
+Identify:
+
+* domain
+* task
+* input format
+* target/output
+* approximate data scale
+* labels
+* metadata
+* train/validation/test requirements
+
+Example:
+
+```text
+Task:
+RAG evaluation
+
+Required data:
+Question-answer pairs with supporting documents
+
+Evaluation:
+Retrieval relevance + answer factuality
+```
+
+Do not invent exact dataset sizes unless they are supported.
+
+---
+
+# 17. NODE 8 — DATASET RECOMMENDATIONS
+
+Recommend potential datasets where appropriate.
+
+For every recommended dataset, provide:
+
+* name
+* domain
+* purpose
+* relevance
+* approximate characteristics
+* license/access considerations if known
+* why it fits the research question
+
+IMPORTANT:
+
+Do not hallucinate datasets.
+
+If the system is not certain that a dataset exists or is appropriate, state:
+
+> "Dataset candidate requiring manual verification."
+
+Where external/current dataset information is required, use the project's existing web-search capability rather than inventing information.
+
+---
+
+# 18. DATASET SELECTION RANKING
+
+Rank dataset candidates.
+
+Example:
+
+| Dataset   | Relevance | Availability | Fit | Overall |
+| --------- | --------: | -----------: | --: | ------: |
+| Dataset A |         9 |            9 |   9 |     9.0 |
+| Dataset B |         8 |            9 |   8 |     8.3 |
+
+Use deterministic scoring rather than letting the LLM arbitrarily decide the final ranking.
+
+---
+
+# 19. NODE 9 — DATA PREPROCESSING PLAN
+
+Generate a preprocessing pipeline appropriate to the research problem.
+
+Example:
+
+```text
+Raw Data
+   ↓
+Cleaning
+   ↓
+Deduplication
+   ↓
+Normalization
+   ↓
+Train/Test Split
+   ↓
+Validation
+```
+
+For NLP:
+
+* tokenization
+* normalization
+* filtering
+* chunking
+
+For ML:
+
+* missing-value handling
+* normalization
+* encoding
+* class balancing
+
+For images:
+
+* resizing
+* normalization
+* augmentation
+
+Only include relevant preprocessing.
+
+---
+
+# 20. DATA LEAKAGE PREVENTION
+
+Explicitly consider data leakage.
+
+The plan should identify:
+
+* train/test contamination
+* duplicate samples
+* document overlap
+* temporal leakage
+* label leakage
+* preprocessing leakage
+
+Explain how leakage will be prevented.
+
+This is mandatory for experimental plans.
+
+---
+
+# 21. NODE 10 — BASELINE SELECTION
+
+Identify appropriate baseline methods.
+
+A baseline should represent a reasonable existing approach.
+
+For each baseline:
+
+```text
+Name
+Type
+Purpose
+Why selected
+Expected role
+```
+
+Example:
+
+```text
+Baseline:
+Dense Retrieval
+
+Purpose:
+Compare conventional dense retrieval against the proposed hybrid approach.
+
+Reason:
+It represents the existing retrieval strategy used by the reviewed literature.
+```
+
+Do not invent nonexistent methods.
+
+---
+
+# 22. BASELINE FAIRNESS
+
+Ensure comparisons are fair.
+
+Consider:
+
+* same dataset
+* same evaluation split
+* same evaluation metrics
+* same model where appropriate
+* equivalent compute constraints
+* consistent preprocessing
+* identical test conditions
+
+The system should explicitly state assumptions.
+
+---
+
+# 23. NODE 11 — PROPOSED APPROACH
+
+Define the proposed research approach.
+
+This should be derived from:
+
+* research gap
+* research question
+* hypothesis
+* literature
+* research direction
+
+Describe:
+
+* architecture
+* components
+* algorithms
+* data flow
+* training
+* inference
+* evaluation
+
+Example:
+
+```text
+Query
+ ↓
+Dense Retriever ──┐
+                   ├── Hybrid Ranking
+Keyword Retriever ┘
+ ↓
+Top-K Documents
+ ↓
+LLM
+ ↓
+Generated Answer
+```
+
+This should be presented as a proposed design, not as an already validated solution.
+
+---
+
+# 24. NODE 12 — EXPERIMENT DESIGN
+
+Define experiments that directly test the research question.
+
+Each experiment should contain:
+
+```text
+Experiment ID
+Research Objective
+Variables
+Baseline
+Treatment
+Dataset
+Metrics
+Expected Comparison
+```
+
+Example:
+
+```text
+Experiment E1
+
+Objective:
+Compare dense and hybrid retrieval.
+
+Control:
+Dense retrieval
+
+Treatment:
+Hybrid retrieval
+
+Dataset:
+Selected benchmark
+
+Metrics:
+Recall@5
+Recall@10
+MRR
+```
+
+---
+
+# 25. EXPERIMENT MATRIX
+
+Generate a structured experiment matrix.
+
+Example:
+
+| Experiment | Method           | Dataset | Model | Evaluation |
+| ---------- | ---------------- | ------- | ----- | ---------- |
+| E1         | Dense Retrieval  | D1      | LLM-A | Recall@K   |
+| E2         | Hybrid Retrieval | D1      | LLM-A | Recall@K   |
+| E3         | Dense Retrieval  | D1      | LLM-A | Factuality |
+| E4         | Hybrid Retrieval | D1      | LLM-A | Factuality |
+
+Make sure experiments isolate meaningful variables.
+
+---
+
+# 26. CONTROL AND TREATMENT GROUPS
+
+Where applicable, identify:
+
+### Control
+
+Existing/baseline approach.
+
+### Treatment
+
+Proposed approach.
+
+If the research design does not use control/treatment terminology, use appropriate terminology.
+
+Do not force experimental terminology onto qualitative research.
+
+---
+
+# 27. NODE 13 — EVALUATION METRICS
+
+Select metrics based on the actual research question.
+
+Possible metrics:
+
+### Classification
+
+* Accuracy
+* Precision
+* Recall
+* F1
+* AUROC
+
+### Retrieval
+
+* Recall@K
+* Precision@K
+* MRR
+* nDCG
+
+### Generation
+
+* ROUGE
+* BLEU
+* BERTScore
+* factuality
+* human evaluation
+
+### Regression
+
+* MAE
+* MSE
+* RMSE
+* R²
+
+### LLM/RAG
+
+* context relevance
+* faithfulness
+* answer relevance
+* retrieval recall
+* citation accuracy
+
+Do not list every metric.
+
+Explain why each selected metric is appropriate.
+
+---
+
+# 28. METRIC IMPLEMENTATION PLAN
+
+For every metric specify:
+
+```text
+Metric
+What it measures
+Why it matters
+How it will be calculated
+```
+
+Avoid using metrics that do not align with the research objective.
+
+---
+
+# 29. NODE 14 — ABLATION STUDIES
+
+For ML/AI research, identify possible ablation studies.
+
+Example:
+
+```text
+Full Model
+   ↓
+Remove Hybrid Retrieval
+   ↓
+Evaluate
+
+Full Model
+   ↓
+Remove Reranker
+   ↓
+Evaluate
+```
+
+Possible ablations:
+
+* remove component
+* change retrieval method
+* change embedding model
+* change model size
+* remove preprocessing step
+* remove augmentation
+* change context size
+
+Only propose ablations relevant to the methodology.
+
+---
+
+# 30. ABLATION OBJECTIVE
+
+Each ablation must answer:
+
+> "Which component is actually responsible for the observed performance?"
+
+Do not generate arbitrary ablation experiments.
+
+---
+
+# 31. NODE 15 — STATISTICAL ANALYSIS
+
+Where quantitative experiments are appropriate, propose a statistical analysis plan.
+
+Potential elements:
+
+* repeated runs
+* mean
+* standard deviation
+* confidence intervals
+* significance testing
+* effect size
+
+Possible tests:
+
+* t-test
+* paired t-test
+* Wilcoxon signed-rank
+* ANOVA
+
+Do not automatically recommend a statistical test.
+
+Select it based on:
+
+* experimental design
+* number of groups
+* paired/unpaired data
+* distribution assumptions
+
+If statistical testing is not appropriate, explicitly state:
+
+> "Formal statistical testing may not be necessary for this research design."
+
+---
+
+# 32. REPRODUCIBILITY
+
+Generate a reproducibility plan.
+
+Include:
+
+* dataset version
+* code version
+* model version
+* dependency versions
+* configuration
+* random seeds
+* preprocessing parameters
+* hyperparameters
+* evaluation scripts
+* experiment logs
+* hardware
+* environment
+
+Where possible recommend:
+
+```text
+Git
+Docker
+requirements lockfile
+configuration files
+experiment tracking
+```
+
+Do not claim that the project already has these unless they exist.
+
+---
+
+# 33. NODE 16 — EXPECTED OUTCOMES
+
+Generate expected outcomes based on the hypothesis.
+
+IMPORTANT:
+
+These are NOT experimental results.
+
+Use language such as:
+
+> "The study is expected to determine whether..."
+
+Do not generate fake numerical results.
+
+Bad:
+
+> Hybrid retrieval will improve Recall@10 by 15%.
+
+Unless the number is explicitly justified, do not generate it.
+
+Better:
+
+> Hybrid retrieval is expected to improve retrieval performance if lexical and semantic signals provide complementary evidence.
+
+---
+
+# 34. NODE 17 — RESEARCH CONTRIBUTIONS
+
+Generate possible contributions.
+
+Categorize:
+
+### Methodological Contribution
+
+New method or improved methodology.
+
+### Technical Contribution
+
+System/model/algorithm.
+
+### Empirical Contribution
+
+New experimental evidence.
+
+### Dataset Contribution
+
+New dataset or benchmark.
+
+### Practical Contribution
+
+Real-world application.
+
+Do not guarantee that a contribution will be achieved.
+
+Use:
+
+> "Potential contribution"
+
+rather than:
+
+> "This study will definitively contribute..."
+
+---
+
+# 35. NODE 18 — LIMITATIONS
+
+Generate expected limitations.
+
+Use existing literature plus proposed methodology.
+
+Possible categories:
+
+* dataset limitations
+* compute limitations
+* generalization
+* domain limitations
+* evaluation limitations
+* model limitations
+* reproducibility limitations
+
+Clearly distinguish:
+
+```text
+Reported literature limitation
+```
+
+from:
+
+```text
+Potential limitation of proposed study
+```
+
+---
+
+# 36. NODE 19 — THREATS TO VALIDITY
+
+Include:
+
+### Internal validity
+
+Could something besides the proposed method explain the result?
+
+### External validity
+
+Will results generalize?
+
+### Construct validity
+
+Are metrics actually measuring the intended concept?
+
+### Statistical conclusion validity
+
+Are conclusions supported by sufficient statistical evidence?
+
+This makes the research plan academically stronger.
+
+---
+
+# 37. NODE 20 — RESEARCH TIMELINE
+
+Generate a practical research timeline.
+
+Example:
+
+```text
+Week 1
+Literature review refinement
+
+Week 2
+Dataset preparation
+
+Week 3
+Baseline implementation
+
+Week 4
+Proposed method implementation
+
+Week 5
+Experiments
+
+Week 6
+Ablation studies
+
+Week 7
+Analysis
+
+Week 8
+Writing and documentation
+```
+
+The timeline should be configurable.
+
+Do not claim exact completion dates.
+
+---
+
+# 38. NODE 21 — CITATION VALIDATION
+
+Reuse Milestone 11.
+
+Every literature-derived statement in the proposal must have supporting evidence.
+
+Examples:
+
+* methodology justification
+* baseline selection
+* dataset rationale
+* identified limitations
+* motivation
+* research gap
+
+Validate:
+
+```text
+Claim
+ ↓
+Citation
+ ↓
+Paper
+ ↓
+Evidence
+```
+
+Remove unsupported claims.
+
+---
+
+# 39. PROPOSAL STRUCTURE
+
+Generate the final proposal using:
+
+## 1. Title
+
+A precise research title.
+
+## 2. Abstract
+
+Brief summary of:
+
+* problem
+* gap
+* question
+* methodology
+* expected contribution
+
+## 3. Background
+
+Context of the research area.
+
+## 4. Problem Statement
+
+Clearly define the problem.
+
+## 5. Research Gap
+
+Use Milestone 15 output.
+
+## 6. Research Question
+
+Use selected Milestone 16 question.
+
+## 7. Hypothesis
+
+Use validated hypothesis.
+
+## 8. Research Objectives
+
+Primary and secondary objectives.
+
+## 9. Proposed Methodology
+
+Detailed methodology.
+
+## 10. Dataset
+
+Requirements and recommended datasets.
+
+## 11. Data Preprocessing
+
+Detailed preprocessing plan.
+
+## 12. Baselines
+
+Existing approaches used for comparison.
+
+## 13. Proposed Approach
+
+Architecture and methodology.
+
+## 14. Experimental Design
+
+Experiments and controls.
+
+## 15. Evaluation Metrics
+
+Metrics and justification.
+
+## 16. Ablation Studies
+
+Component-level experiments.
+
+## 17. Statistical Analysis
+
+Analysis strategy.
+
+## 18. Expected Outcomes
+
+Expected outcomes, clearly labeled as predictions.
+
+## 19. Potential Contributions
+
+Possible scientific/technical contributions.
+
+## 20. Limitations
+
+Potential limitations.
+
+## 21. Threats to Validity
+
+Internal/external/construct/statistical validity.
+
+## 22. Reproducibility Plan
+
+How the study can be reproduced.
+
+## 23. Timeline
+
+Research schedule.
+
+## 24. References
+
+Grounded references.
+
+---
+
+# 40. DATABASE MODEL
+
+Create a ResearchProposal entity if one does not already exist.
+
+Conceptually:
+
+```text
+ResearchProposal
+----------------
+id
+workspace_id
+user_id
+research_question_id
+research_gap_id
+
+title
+abstract
+problem_statement
+motivation
+
+objectives
+methodology
+
+dataset_requirements
+dataset_recommendations
+preprocessing
+
+baselines
+proposed_approach
+
+experiments
+experiment_matrix
+
+evaluation_metrics
+ablation_studies
+statistical_analysis
+
+expected_outcomes
+contributions
+limitations
+threats_to_validity
+
+reproducibility_plan
+timeline
+
+citations
+validation_results
+
+status
+created_at
+updated_at
+```
+
+Reuse existing models wherever possible.
+
+---
+
+# 41. PROPOSAL STATUS
+
+Support:
+
+```text
+draft
+generating
+completed
+failed
+archived
+```
+
+Allow the user to edit a generated proposal.
+
+---
+
+# 42. API
+
+Follow the existing backend API conventions.
+
+Conceptually:
+
+### Generate Proposal
+
+```http
+POST /workspaces/{workspace_id}/research-proposals
+```
+
+Request:
+
+```json
+{
+  "research_question_id": "rq_123"
+}
+```
+
+### List Proposals
+
+```http
+GET /workspaces/{workspace_id}/research-proposals
+```
+
+### Get Proposal
+
+```http
+GET /research-proposals/{proposal_id}
+```
+
+### Update Proposal
+
+```http
+PATCH /research-proposals/{proposal_id}
+```
+
+### Archive Proposal
+
+```http
+DELETE /research-proposals/{proposal_id}
+```
+
+Adapt these routes to the existing API structure.
+
+---
+
+# 43. FRONTEND
+
+Add:
+
+```text
+Research Proposal
+```
+
+to the workspace.
+
+Flow:
+
+```text
+Research Question
+       ↓
+[Generate Research Proposal]
+       ↓
+Processing
+       ↓
+Proposal Dashboard
+```
+
+---
+
+# 44. PROPOSAL DASHBOARD
+
+Display:
+
+### Research Title
+
+### Research Question
+
+### Hypothesis
+
+### Research Gap
+
+### Methodology
+
+### Dataset
+
+### Baselines
+
+### Proposed Approach
+
+### Experiment Matrix
+
+### Metrics
+
+### Expected Outcomes
+
+### Contributions
+
+### Limitations
+
+### Timeline
+
+### References
+
+---
+
+# 45. METHODOLOGY VISUALIZATION
+
+Where useful, provide a simple architecture/workflow visualization.
+
+Example:
+
+```text
+Dataset
+   ↓
+Preprocessing
+   ↓
+Train / Validation / Test
+   ↓
+Baseline ─────────┐
+                  ├── Evaluation
+Proposed Method ──┘
+```
+
+If the existing frontend supports diagrams, reuse that capability.
+
+---
+
+# 46. EXPERIMENT TABLE UI
+
+Render experiments as an editable table.
+
+Example:
+
+| ID | Objective | Method           | Dataset | Metrics  |
+| -- | --------- | ---------------- | ------- | -------- |
+| E1 | Baseline  | Dense Retrieval  | D1      | Recall@K |
+| E2 | Proposed  | Hybrid Retrieval | D1      | Recall@K |
+| E3 | Ablation  | No Reranker      | D1      | Recall@K |
+
+Allow users to edit generated experiments.
+
+---
+
+# 47. DATASET RECOMMENDATION UI
+
+For each dataset display:
+
+```text
+Dataset Name
+Domain
+Purpose
+Relevance
+Availability
+Potential Issues
+Recommendation Score
+```
+
+Clearly mark recommendations requiring manual verification.
+
+---
+
+# 48. EXPORT
+
+Allow export using the existing document-export system.
+
+Prefer:
+
+* Markdown
+* PDF
+* DOCX
+
+Preserve:
+
+* headings
+* tables
+* citations
+* references
+* experiment matrix
+
+Do not create a separate export architecture if one already exists.
+
+---
+
+# 49. PROMPT ARCHITECTURE
+
+Do NOT use a single giant LLM prompt.
+
+Create separate prompts for:
+
+1. Problem definition
+2. Motivation generation
+3. Methodology design
+4. Dataset requirement analysis
+5. Dataset recommendation
+6. Baseline selection
+7. Proposed approach
+8. Experiment design
+9. Evaluation metric selection
+10. Ablation design
+11. Statistical analysis
+12. Expected outcomes
+13. Contributions
+14. Limitations
+15. Threats to validity
+16. Reproducibility
+17. Timeline
+18. Final proposal generation
+19. Proposal validation
+
+Each prompt must contain:
+
+```text
+ROLE
+TASK
+INPUT
+CONSTRAINTS
+GROUNDING RULES
+OUTPUT FORMAT
+```
+
+Use structured JSON for intermediate stages.
+
+---
+
+# 50. GROUNDING RULES
+
+The LLM must follow:
+
+```text
+Use supplied research evidence as the primary source.
+
+Do not invent papers.
+
+Do not invent citations.
+
+Do not invent experimental results.
+
+Do not claim a method is superior without evidence.
+
+Do not claim novelty with certainty.
+
+Do not fabricate dataset statistics.
+
+Do not fabricate numerical expected improvements.
+
+Clearly distinguish:
+- literature-supported facts
+- AI-generated recommendations
+- proposed methodology
+- expected outcomes
+```
+
+---
+
+# 51. HALLUCINATION VALIDATION
+
+Before storing the proposal:
+
+1. Extract factual claims.
+2. Identify literature-derived claims.
+3. Map them to citations.
+4. Verify citations.
+5. Remove unsupported claims.
+6. Rewrite overconfident statements.
+7. Validate dataset names where external information is used.
+8. Validate experiment recommendations.
+9. Validate structured JSON.
+
+---
+
+# 52. SECURITY
+
+Reuse existing authentication.
+
+Every request must verify:
+
+```text
+Authenticated User
+       ↓
+Workspace Access
+       ↓
+Research Question Access
+       ↓
+Research Gap Access
+       ↓
+Proposal Generation
+```
+
+Prevent cross-workspace data leakage.
+
+---
+
+# 53. ERROR HANDLING
+
+Handle:
+
+### No research question selected
+
+```text
+Please select a research question first.
+```
+
+### Research question missing hypothesis
+
+If hypothesis is applicable:
+
+```text
+The selected research question does not contain a validated hypothesis.
+```
+
+Allow exploratory questions without hypotheses.
+
+### Missing literature context
+
+Warn that proposal grounding may be limited.
+
+### LLM failure
+
+Use existing retry mechanism.
+
+### Invalid structured output
+
+Retry/repair using existing structured-output mechanism.
+
+### Dataset recommendation failure
+
+Return proposal without recommendations and explain that manual dataset selection is required.
+
+---
+
+# 54. TESTING
+
+Implement unit tests for:
+
+* authorization
+* research-question loading
+* gap loading
+* methodology generation
+* dataset parsing
+* baseline selection
+* experiment parsing
+* metric selection
+* score calculations
+* proposal validation
+* database persistence
+
+---
+
+# 55. INTEGRATION TEST
+
+Test the complete workflow:
+
+```text
+Upload Papers
+      ↓
+Generate Literature Review
+      ↓
+Discover Research Gaps
+      ↓
+Generate Research Questions
+      ↓
+Select Research Question
+      ↓
+Generate Proposal
+      ↓
+Generate Methodology
+      ↓
+Generate Dataset Plan
+      ↓
+Generate Baselines
+      ↓
+Generate Experiments
+      ↓
+Generate Metrics
+      ↓
+Generate Ablations
+      ↓
+Generate Expected Outcomes
+      ↓
+Generate Final Proposal
+      ↓
+Validate Citations
+      ↓
+Save Proposal
+      ↓
+Display Proposal
+```
+
+---
+
+# 56. REGRESSION TESTING
+
+Verify that Milestones 1–16 still work.
+
+Especially test:
+
+* authentication
+* workspace
+* PDF upload
+* RAG
+* citations
+* summarization
+* comparison
+* literature review
+* research gaps
+* research questions
+* hypotheses
+
+No regression should be introduced.
+
+---
+
+# 57. EVALUATION
+
+Evaluate proposal quality using:
+
+### Research Question Alignment
+
+Does the proposal answer the selected RQ?
+
+### Gap Alignment
+
+Does methodology address the identified gap?
+
+### Hypothesis Alignment
+
+Do experiments actually test the hypothesis?
+
+### Methodology Quality
+
+Is the methodology appropriate?
+
+### Baseline Quality
+
+Are baselines reasonable?
+
+### Evaluation Quality
+
+Are metrics appropriate?
+
+### Experimental Completeness
+
+Are important comparisons included?
+
+### Grounding
+
+Are literature-derived claims supported?
+
+### Reproducibility
+
+Could another researcher understand how to reproduce the study?
+
+---
+
+# 58. IMPORTANT CONSISTENCY VALIDATION
+
+Create a final validation node that checks:
+
+```text
+Research Gap
+      ↓
+Research Question
+      ↓
+Hypothesis
+      ↓
+Objectives
+      ↓
+Methodology
+      ↓
+Experiments
+      ↓
+Metrics
+      ↓
+Expected Outcomes
+```
+
+The system must identify contradictions.
+
+For example:
+
+If the RQ compares two methods but the experiment contains only one method:
+
+```text
+ERROR:
+Experimental design does not adequately test the research question.
+```
+
+If the hypothesis predicts improved accuracy but the experiment does not measure accuracy:
+
+```text
+WARNING:
+Evaluation metrics do not directly test the hypothesis.
+```
+
+This consistency validation is mandatory.
+
+---
+
+# 59. FINAL DEFINITION OF DONE
+
+Milestone 17 is complete only when:
+
+* [ ] User can select a Milestone 16 research question.
+* [ ] Research gap is automatically loaded.
+* [ ] Supporting evidence is loaded.
+* [ ] Hypothesis is loaded where applicable.
+* [ ] Variables are loaded.
+* [ ] Research objectives are loaded.
+* [ ] Research problem is generated.
+* [ ] Research motivation is generated.
+* [ ] Methodology is generated.
+* [ ] Methodology type is identified.
+* [ ] Dataset requirements are generated.
+* [ ] Dataset recommendations are generated where appropriate.
+* [ ] Data preprocessing plan is generated.
+* [ ] Data leakage risks are considered.
+* [ ] Baselines are selected.
+* [ ] Proposed approach is generated.
+* [ ] Experiments are generated.
+* [ ] Experiment matrix is generated.
+* [ ] Control/treatment design is identified where appropriate.
+* [ ] Evaluation metrics are selected.
+* [ ] Metric justification is generated.
+* [ ] Ablation studies are generated where appropriate.
+* [ ] Statistical analysis is considered.
+* [ ] Expected outcomes are generated without fake results.
+* [ ] Potential contributions are generated.
+* [ ] Limitations are generated.
+* [ ] Threats to validity are generated.
+* [ ] Reproducibility plan is generated.
+* [ ] Timeline is generated.
+* [ ] Citations are grounded.
+* [ ] Proposal consistency is validated.
+* [ ] Proposal is stored.
+* [ ] Proposal can be retrieved.
+* [ ] Proposal can be edited.
+* [ ] Proposal can be archived.
+* [ ] Frontend UI is complete.
+* [ ] Backend APIs are complete.
+* [ ] Authentication is enforced.
+* [ ] Authorization is enforced.
+* [ ] Unit tests pass.
+* [ ] Integration tests pass.
+* [ ] Evaluation is implemented.
+* [ ] Existing Milestones 1–16 continue working.
+
+---
+
+# 60. FINAL END-TO-END DEMONSTRATION
+
+After implementation, demonstrate:
+
+```text
+1. Open a research workspace.
+
+2. Open Research Questions.
+
+3. Select the highest-ranked research question.
+
+4. Verify:
+   - Research gap
+   - Hypothesis
+   - Variables
+   - Objectives
+
+5. Click:
+   "Generate Research Proposal"
+
+6. System generates:
+   - Problem statement
+   - Motivation
+   - Methodology
+   - Dataset plan
+   - Baselines
+   - Proposed approach
+   - Experiments
+   - Metrics
+   - Ablations
+   - Statistical analysis
+   - Expected outcomes
+   - Contributions
+   - Limitations
+   - Reproducibility
+   - Timeline
+
+7. Review the Experiment Matrix.
+
+8. Verify that experiments actually test the research question.
+
+9. Verify that metrics measure the hypothesis.
+
+10. Verify that literature-derived claims have citations.
+
+11. Edit the proposal.
+
+12. Save the proposal.
+
+13. Reopen the saved proposal.
+
+14. Export the proposal.
+
+15. Verify that Milestones 1–16 still work.
+```
+
+---
+
+# 61. FINAL EXPECTED CAPABILITY
+
+After completing Milestone 17, the AI Research Assistant should be able to move from:
+
+```text
+Research Papers
+      ↓
+Literature Review
+      ↓
+Research Gap
+      ↓
+Research Question
+      ↓
+Hypothesis
+      ↓
+🔥 Research Proposal
+      ↓
+Methodology
+      ↓
+Dataset
+      ↓
+Baseline
+      ↓
+Experiment Design
+      ↓
+Evaluation
+      ↓
+Expected Contribution
+```
+
+The key distinction is:
+
+**Milestone 15:** What is missing?
+
+**Milestone 16:** What should I investigate?
+
+**Milestone 17:** How should I investigate it?
+
+Do not claim that the generated proposal is scientifically validated. It is an **AI-assisted research plan** that must be reviewed and refined by the researcher before actual experimentation.

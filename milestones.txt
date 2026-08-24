@@ -17,3 +17,33 @@ Milestone 8 ✅ Vector Database
 Milestone 9 ✅ RAG
        ↓
 Milestone 10 ✅ AI Agent
+        ↓
+Milestone 11 ✅ Citation & Source Grounding
+        ↓
+Milestone 12 ✅ Advanced Paper Summarization
+        ↓
+Milestone 13 ✅ Multi-Paper Comparison
+        ↓
+Milestone 14 ✅ Automated Literature Review
+        ↓
+Milestone 15 ✅ Research Gap Discovery
+        ↓
+Milestone 16 ✅ Research Planning Agent
+        ↓
+Milestone 17 ✅ Web / External Research
+        ↓
+Milestone 18  Advanced Multi-Agent System
+        ↓
+Milestone 19  Evaluation & Quality Framework
+        ↓
+Milestone 20  Performance & Cost Optimization
+        ↓
+Milestone 21  Production Security
+        ↓
+Milestone 22  Dockerization
+        ↓
+Milestone 23  CI/CD
+        ↓
+Milestone 24 Cloud Deployment
+        ↓
+Milestone 25 Complete Research Workspace
