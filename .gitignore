@@ -8,3 +8,4 @@ __pycache__/
 implementation.txt
 milestines.txt
 *.txt
+.env.example
