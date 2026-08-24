@@ -9,3 +9,4 @@ implementation.txt
 milestines.txt
 *.txt
 .env.example
+backend/.env
