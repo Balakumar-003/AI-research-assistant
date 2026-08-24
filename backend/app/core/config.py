@@ -9,9 +9,12 @@ class Settings:
     Application configuration loaded from environment variables using python-dotenv.
     """
     APP_NAME: str = os.getenv("APP_NAME", "AI Research Assistant")
+    APP_ENV: str = os.getenv("APP_ENV", "development")
     DEBUG: bool = os.getenv("DEBUG", "True").lower() in ("true", "1", "t")
     HOST: str = os.getenv("HOST", "127.0.0.1")
     PORT: int = int(os.getenv("PORT", 8000))
+    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
+    CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "http://localhost:3000,*")
     
     MONGODB_URI: str = os.getenv("MONGODB_URI", "mongodb://localhost:27017")
     DATABASE_NAME: str = os.getenv("DATABASE_NAME", "ai_research_db")
