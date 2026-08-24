@@ -56,6 +56,8 @@ from app.api import research_questions
 app.include_router(research_questions.router, prefix="/api", tags=["Research Questions"])
 from app.api import research_proposals
 app.include_router(research_proposals.router, prefix="/api", tags=["Research Proposals"])
+from app.api import experiments
+app.include_router(experiments.router, prefix="/api", tags=["Experiments"])
 
 @app.get("/")
 async def root():

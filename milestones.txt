@@ -32,7 +32,7 @@ Milestone 16 ✅ Research Planning Agent
         ↓
 Milestone 17 ✅ Web / External Research
         ↓
-Milestone 18  Advanced Multi-Agent System
+Milestone 18 ✅ Advanced Multi-Agent System
         ↓
 Milestone 19  Evaluation & Quality Framework
         ↓

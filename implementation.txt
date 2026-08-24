@@ -1,2006 +1,2019 @@
-# MILESTONE 17 — RESEARCH PROPOSAL & EXPERIMENT PLANNING
+# MILESTONE 18 — EXPERIMENT EXECUTION, TRACKING & RESULTS ANALYSIS
 
 ## 1. PROJECT CONTEXT
 
 I am building an AI Research Assistant.
 
-The project currently supports:
+Milestones 1–17 have already been completed.
 
-* User authentication and authorization
-* Research workspaces
-* PDF upload
-* PDF text extraction
-* Text chunking
-* Embedding generation
-* Vector database
-* RAG-based question answering
-* Autonomous LangGraph agents
-* Citation and source grounding
-* Advanced paper summarization
-* Multi-paper comparison
-* Automated literature review
-* Research gap discovery
-* Research question generation
-* Hypothesis generation
-* Variable identification
-* Research objectives
-* Feasibility analysis
-* Research direction generation
+The system currently supports:
 
-Milestones 1–16 have already been completed.
+- Authentication and authorization
+- Research workspaces
+- PDF upload
+- PDF text extraction
+- Chunking
+- Embedding generation
+- Vector database
+- RAG-based question answering
+- Autonomous LangGraph agents
+- Citation and source grounding
+- Advanced paper summarization
+- Multi-paper comparison
+- Literature review generation
+- Research gap discovery
+- Research question generation
+- Hypothesis generation
+- Variable identification
+- Research objectives
+- Feasibility analysis
+- Research proposal generation
+- Methodology planning
+- Dataset planning
+- Baseline selection
+- Experiment design
+- Experiment matrix
+- Evaluation metric selection
+- Ablation planning
+- Statistical analysis planning
+- Reproducibility planning
 
-The current research workflow is:
+The current workflow is:
 
-```text
 Research Papers
-      ↓
-RAG
-      ↓
-Paper Summarization
-      ↓
-Multi-Paper Comparison
-      ↓
+    ↓
 Literature Review
-      ↓
-Research Gap Discovery
-      ↓
+    ↓
+Research Gaps
+    ↓
 Research Questions
-      ↓
+    ↓
 Hypotheses
-      ↓
-Variables
-      ↓
-Research Objectives
-      ↓
-Research Direction
-```
+    ↓
+Research Proposal
+    ↓
+Experiment Plan
+    ↓
+🔥 MILESTONE 18
+Experiment Execution
+    ↓
+Actual Results
+    ↓
+Statistical Analysis
+    ↓
+Results Interpretation
+    ↓
+Research Conclusion
 
-Now implement:
+The objective of Milestone 18 is to allow the researcher to execute experiments defined in Milestone 17, capture REAL experiment results, compare experiments, perform statistical analysis, visualize results, test hypotheses, and generate an evidence-based research conclusion.
 
-# MILESTONE 17 — RESEARCH PROPOSAL & EXPERIMENT PLANNING
+IMPORTANT:
 
-The objective is to transform a selected research question from Milestone 16 into a structured, evidence-grounded research proposal and experiment plan.
+The LLM must NEVER invent experiment results.
 
-The system should answer:
+Actual numerical results must come from executable experiment code, uploaded result files, or explicitly supplied researcher data.
 
-> "Given this research question and hypothesis, how can the researcher actually conduct the study?"
+The LLM may ONLY interpret actual results.
 
----
 
 # 2. CORE OBJECTIVE
 
-The system must allow the user to select a research question generated in Milestone 16 and generate:
+Implement a complete experiment execution and analysis subsystem.
 
-1. Research problem
-2. Research motivation
-3. Research objectives
-4. Research question
-5. Hypothesis
-6. Variables
-7. Proposed methodology
-8. Dataset requirements
-9. Dataset recommendations
-10. Data preprocessing plan
-11. Baseline methods
-12. Proposed approach
-13. Experimental design
-14. Experiment matrix
-15. Evaluation metrics
-16. Ablation studies
-17. Statistical analysis plan
-18. Expected outcomes
-19. Potential contributions
-20. Limitations
-21. Reproducibility plan
-22. Research timeline
-23. Complete research proposal
+The researcher should be able to:
 
-The generated plan must remain grounded in the literature already analyzed.
+1. Select a research proposal.
+2. Select an experiment from the experiment plan.
+3. Configure the experiment.
+4. Run the experiment.
+5. Track execution status.
+6. Capture logs.
+7. Store experiment artifacts.
+8. Store actual metrics.
+9. Compare experiments.
+10. Run statistical analysis.
+11. Perform hypothesis testing.
+12. Analyze ablation studies.
+13. Visualize results.
+14. Ask the AI to interpret the results.
+15. Generate research findings.
+16. Generate a research conclusion.
+17. Save the results.
+18. Reproduce the experiment.
+19. Export the experiment report.
 
----
 
-# 3. CRITICAL ARCHITECTURE RULE
+# 3. CRITICAL IMPLEMENTATION PRINCIPLE
 
-Do NOT rebuild the existing research pipeline.
+DO NOT rebuild any functionality from Milestones 1–17.
 
 Reuse:
 
-* Milestone 13 multi-paper comparison
-* Milestone 14 literature review
-* Milestone 15 research gaps
-* Milestone 16 research questions
-* Existing LangGraph infrastructure
-* Existing RAG/retrieval
-* Existing embeddings
-* Existing vector database
-* Existing citation system
-* Existing workspace system
-* Existing authentication
-* Existing database infrastructure
-* Existing frontend architecture
+- Existing authentication
+- Existing authorization
+- Existing workspace system
+- Existing database
+- Existing LangGraph
+- Existing RAG
+- Existing vector database
+- Existing citation system
+- Existing research question system
+- Existing research proposal system
+- Existing experiment definitions
+- Existing evaluation metrics
+- Existing export functionality
+- Existing frontend components
+- Existing logging infrastructure
 
-The new milestone must extend the current system.
+Inspect the entire repository before implementing anything.
 
-Do not create duplicate RAG/vector/citation/authentication implementations.
+Understand the existing architecture first.
 
----
+Do not create duplicate:
 
-# 4. USER WORKFLOW
+- database systems
+- experiment tracking systems
+- job systems
+- LLM clients
+- vector stores
+- authentication
+- citation systems
+- logging systems
 
-The final workflow should be:
 
-```text
+# 4. IMPORTANT DISTINCTION
+
+Milestone 17 generated:
+
+"WHAT SHOULD BE DONE?"
+
+Milestone 18 implements:
+
+"WHAT ACTUALLY HAPPENED WHEN WE DID IT?"
+
+Therefore:
+
+Milestone 17:
+Expected Results
+
+Milestone 18:
+Actual Results
+
+Never confuse these two.
+
+
+# 5. USER WORKFLOW
+
+Implement this workflow:
+
 Workspace
-   ↓
-Research Questions
-   ↓
-Select Research Question
-   ↓
-View Hypothesis
-   ↓
-Generate Research Proposal
-   ↓
-Generate Experiment Plan
-   ↓
-Review/Edit Plan
-   ↓
-Save Proposal
-   ↓
-Export Proposal
-```
+    ↓
+Research Proposal
+    ↓
+Experiment Plan
+    ↓
+Select Experiment
+    ↓
+Configure Experiment
+    ↓
+Run Experiment
+    ↓
+Execution Tracking
+    ↓
+Actual Results
+    ↓
+Statistical Analysis
+    ↓
+Visualization
+    ↓
+AI Results Interpretation
+    ↓
+Hypothesis Testing
+    ↓
+Research Findings
+    ↓
+Research Conclusion
 
-The user must explicitly select a research question before generating the proposal.
 
----
+# 6. EXPERIMENT ENTITY
 
-# 5. INPUT
-
-The proposal generator should consume the outputs from Milestone 16.
-
-Conceptually:
-
-```json
-{
-  "workspace_id": "...",
-  "research_question_id": "...",
-  "gap_id": "...",
-  "topic": "...",
-  "research_question": "...",
-  "hypothesis": {},
-  "variables": {},
-  "objectives": [],
-  "supporting_evidence": [],
-  "citations": [],
-  "feasibility": {},
-  "research_directions": []
-}
-```
-
-Use the existing database schema and identifiers.
-
-Do not duplicate information unnecessarily if it already exists in related entities.
-
----
-
-# 6. INPUT VALIDATION
-
-Before generation, verify:
-
-* authenticated user
-* workspace access
-* research question exists
-* research question belongs to workspace
-* associated research gap belongs to workspace
-* supporting papers are accessible
-* research question has sufficient context
-* hypothesis is available where applicable
-
-Reject unauthorized requests.
-
----
-
-# 7. HIGH-LEVEL LANGGRAPH WORKFLOW
-
-Implement a dedicated LangGraph workflow.
-
-Recommended architecture:
-
-```text
-START
-  ↓
-Validate Research Question
-  ↓
-Load Research Context
-  ↓
-Load Gap + Evidence
-  ↓
-Load Hypothesis + Variables
-  ↓
-Analyze Research Problem
-  ↓
-Define Research Objectives
-  ↓
-Design Methodology
-  ↓
-Identify Dataset Requirements
-  ↓
-Recommend Datasets
-  ↓
-Design Preprocessing
-  ↓
-Select Baselines
-  ↓
-Define Proposed Approach
-  ↓
-Design Experiments
-  ↓
-Generate Experiment Matrix
-  ↓
-Select Evaluation Metrics
-  ↓
-Design Ablation Studies
-  ↓
-Design Statistical Analysis
-  ↓
-Generate Expected Outcomes
-  ↓
-Generate Contributions
-  ↓
-Identify Limitations
-  ↓
-Generate Reproducibility Plan
-  ↓
-Generate Timeline
-  ↓
-Citation Validation
-  ↓
-Generate Final Proposal
-  ↓
-Validate Proposal
-  ↓
-Store Proposal
-  ↓
-END
-```
-
-Use parallel branches where appropriate.
-
----
-
-# 8. LANGGRAPH STATE
-
-Extend the existing state architecture.
+Create an Experiment entity if one does not already exist.
 
 Conceptually:
 
-```python
-class ResearchProposalState:
-    workspace_id: str
-    user_id: str
-
-    research_question_id: str
-
-    research_question: dict
-    research_gap: dict
-    literature_context: dict
-    supporting_evidence: list
-    citations: list
-
-    hypothesis: dict
-    variables: dict
-    objectives: list
-
-    research_problem: str
-    motivation: str
-
-    methodology: dict
-
-    dataset_requirements: dict
-    dataset_recommendations: list
-
-    preprocessing_plan: list
-
-    baselines: list
-    proposed_approach: dict
-
-    experiments: list
-    experiment_matrix: list
-
-    evaluation_metrics: list
-    ablation_studies: list
-    statistical_analysis: dict
-
-    expected_outcomes: list
-    contributions: list
-    limitations: list
-
-    reproducibility_plan: dict
-    timeline: list
-
-    proposal_sections: dict
-
-    validation_results: dict
-    final_proposal: dict
-
-    errors: list
-```
-
-Adapt this to the existing project state model.
-
----
-
-# 9. NODE 1 — VALIDATE RESEARCH QUESTION
-
-Verify that:
-
-* research question exists
-* question belongs to authenticated user's workspace
-* question has an associated research gap
-* question has supporting evidence
-* question is marked as selected/active
-
-If not:
-
-Return a meaningful error.
-
-Example:
-
-```text
-A valid research question must be selected before generating a research proposal.
-```
-
----
-
-# 10. NODE 2 — LOAD RESEARCH CONTEXT
-
-Load the complete context associated with the question:
-
-* research topic
-* research gap
-* literature review
-* supporting papers
-* relevant evidence
-* research question
-* hypothesis
-* variables
-* objectives
-* feasibility analysis
-* previous research directions
-
-Reuse existing stored results.
-
-Do not regenerate Milestones 13–16.
-
----
-
-# 11. NODE 3 — RESEARCH PROBLEM DEFINITION
-
-Generate a concise research problem statement.
-
-The problem statement should explain:
-
-1. Current state of the research area
-2. What is missing
-3. Why the missing area matters
-4. What the proposed research intends to investigate
-
-Example:
-
-```text
-Existing RAG systems frequently rely on static knowledge bases.
-However, limited research evaluates how continuously updated
-knowledge affects retrieval and answer quality. This study proposes
-to evaluate the impact of knowledge freshness on RAG performance.
-```
-
-The statement must be grounded in the literature.
-
----
-
-# 12. NODE 4 — RESEARCH MOTIVATION
-
-Generate a research motivation section.
-
-Explain:
-
-* why the problem matters
-* practical importance
-* scientific importance
-* limitations of existing approaches
-* why the proposed study is worth investigating
-
-Do not exaggerate importance.
-
-Do not claim:
-
-> "This is the first study..."
-
-unless the evidence genuinely supports such a claim.
-
-Prefer:
-
-> "The reviewed literature indicates limited evaluation of..."
-
----
-
-# 13. NODE 5 — RESEARCH OBJECTIVES
-
-Reuse Milestone 16 objectives.
-
-Validate that they are aligned with:
-
-* research question
-* hypothesis
-* methodology
-
-If necessary, refine them.
-
-Generate:
-
-### Primary Objective
-
-One central objective.
-
-### Secondary Objectives
-
-2–5 supporting objectives.
-
-Example:
-
-```text
-Primary Objective:
-Evaluate whether hybrid retrieval improves RAG retrieval performance.
-
-Secondary Objectives:
-1. Compare dense and hybrid retrieval.
-2. Evaluate retrieval performance using Recall@K.
-3. Measure downstream answer factuality.
-4. Analyze performance across query categories.
-```
-
----
-
-# 14. NODE 6 — METHODOLOGY DESIGN
-
-Design a possible methodology.
-
-The methodology should include:
-
-* research approach
-* experimental approach
-* system architecture
-* data flow
-* model selection
-* training/fine-tuning where appropriate
-* evaluation strategy
-
-Do not force an experimental methodology when the question is qualitative.
-
-The system must determine the appropriate methodology type.
-
-Possible types:
-
-```text
-experimental
-comparative
-observational
-qualitative
-quantitative
-mixed-method
-simulation
-design-and-evaluation
-```
-
----
-
-# 15. METHODOLOGY JUSTIFICATION
-
-Explain why the proposed methodology fits the research question.
-
-Example:
-
-> A controlled comparative experiment is appropriate because the research question evaluates the performance difference between two retrieval strategies.
-
-This explanation should be evidence-grounded where it relies on established research practices.
-
----
-
-# 16. NODE 7 — DATASET REQUIREMENTS
-
-Determine what kind of data is required.
-
-Identify:
-
-* domain
-* task
-* input format
-* target/output
-* approximate data scale
-* labels
-* metadata
-* train/validation/test requirements
-
-Example:
-
-```text
-Task:
-RAG evaluation
-
-Required data:
-Question-answer pairs with supporting documents
-
-Evaluation:
-Retrieval relevance + answer factuality
-```
-
-Do not invent exact dataset sizes unless they are supported.
-
----
-
-# 17. NODE 8 — DATASET RECOMMENDATIONS
-
-Recommend potential datasets where appropriate.
-
-For every recommended dataset, provide:
-
-* name
-* domain
-* purpose
-* relevance
-* approximate characteristics
-* license/access considerations if known
-* why it fits the research question
-
-IMPORTANT:
-
-Do not hallucinate datasets.
-
-If the system is not certain that a dataset exists or is appropriate, state:
-
-> "Dataset candidate requiring manual verification."
-
-Where external/current dataset information is required, use the project's existing web-search capability rather than inventing information.
-
----
-
-# 18. DATASET SELECTION RANKING
-
-Rank dataset candidates.
-
-Example:
-
-| Dataset   | Relevance | Availability | Fit | Overall |
-| --------- | --------: | -----------: | --: | ------: |
-| Dataset A |         9 |            9 |   9 |     9.0 |
-| Dataset B |         8 |            9 |   8 |     8.3 |
-
-Use deterministic scoring rather than letting the LLM arbitrarily decide the final ranking.
-
----
-
-# 19. NODE 9 — DATA PREPROCESSING PLAN
-
-Generate a preprocessing pipeline appropriate to the research problem.
-
-Example:
-
-```text
-Raw Data
-   ↓
-Cleaning
-   ↓
-Deduplication
-   ↓
-Normalization
-   ↓
-Train/Test Split
-   ↓
-Validation
-```
-
-For NLP:
-
-* tokenization
-* normalization
-* filtering
-* chunking
-
-For ML:
-
-* missing-value handling
-* normalization
-* encoding
-* class balancing
-
-For images:
-
-* resizing
-* normalization
-* augmentation
-
-Only include relevant preprocessing.
-
----
-
-# 20. DATA LEAKAGE PREVENTION
-
-Explicitly consider data leakage.
-
-The plan should identify:
-
-* train/test contamination
-* duplicate samples
-* document overlap
-* temporal leakage
-* label leakage
-* preprocessing leakage
-
-Explain how leakage will be prevented.
-
-This is mandatory for experimental plans.
-
----
-
-# 21. NODE 10 — BASELINE SELECTION
-
-Identify appropriate baseline methods.
-
-A baseline should represent a reasonable existing approach.
-
-For each baseline:
-
-```text
-Name
-Type
-Purpose
-Why selected
-Expected role
-```
-
-Example:
-
-```text
-Baseline:
-Dense Retrieval
-
-Purpose:
-Compare conventional dense retrieval against the proposed hybrid approach.
-
-Reason:
-It represents the existing retrieval strategy used by the reviewed literature.
-```
-
-Do not invent nonexistent methods.
-
----
-
-# 22. BASELINE FAIRNESS
-
-Ensure comparisons are fair.
-
-Consider:
-
-* same dataset
-* same evaluation split
-* same evaluation metrics
-* same model where appropriate
-* equivalent compute constraints
-* consistent preprocessing
-* identical test conditions
-
-The system should explicitly state assumptions.
-
----
-
-# 23. NODE 11 — PROPOSED APPROACH
-
-Define the proposed research approach.
-
-This should be derived from:
-
-* research gap
-* research question
-* hypothesis
-* literature
-* research direction
-
-Describe:
-
-* architecture
-* components
-* algorithms
-* data flow
-* training
-* inference
-* evaluation
-
-Example:
-
-```text
-Query
- ↓
-Dense Retriever ──┐
-                   ├── Hybrid Ranking
-Keyword Retriever ┘
- ↓
-Top-K Documents
- ↓
-LLM
- ↓
-Generated Answer
-```
-
-This should be presented as a proposed design, not as an already validated solution.
-
----
-
-# 24. NODE 12 — EXPERIMENT DESIGN
-
-Define experiments that directly test the research question.
-
-Each experiment should contain:
-
-```text
-Experiment ID
-Research Objective
-Variables
-Baseline
-Treatment
-Dataset
-Metrics
-Expected Comparison
-```
-
-Example:
-
-```text
-Experiment E1
-
-Objective:
-Compare dense and hybrid retrieval.
-
-Control:
-Dense retrieval
-
-Treatment:
-Hybrid retrieval
-
-Dataset:
-Selected benchmark
-
-Metrics:
-Recall@5
-Recall@10
-MRR
-```
-
----
-
-# 25. EXPERIMENT MATRIX
-
-Generate a structured experiment matrix.
-
-Example:
-
-| Experiment | Method           | Dataset | Model | Evaluation |
-| ---------- | ---------------- | ------- | ----- | ---------- |
-| E1         | Dense Retrieval  | D1      | LLM-A | Recall@K   |
-| E2         | Hybrid Retrieval | D1      | LLM-A | Recall@K   |
-| E3         | Dense Retrieval  | D1      | LLM-A | Factuality |
-| E4         | Hybrid Retrieval | D1      | LLM-A | Factuality |
-
-Make sure experiments isolate meaningful variables.
-
----
-
-# 26. CONTROL AND TREATMENT GROUPS
-
-Where applicable, identify:
-
-### Control
-
-Existing/baseline approach.
-
-### Treatment
-
-Proposed approach.
-
-If the research design does not use control/treatment terminology, use appropriate terminology.
-
-Do not force experimental terminology onto qualitative research.
-
----
-
-# 27. NODE 13 — EVALUATION METRICS
-
-Select metrics based on the actual research question.
-
-Possible metrics:
-
-### Classification
-
-* Accuracy
-* Precision
-* Recall
-* F1
-* AUROC
-
-### Retrieval
-
-* Recall@K
-* Precision@K
-* MRR
-* nDCG
-
-### Generation
-
-* ROUGE
-* BLEU
-* BERTScore
-* factuality
-* human evaluation
-
-### Regression
-
-* MAE
-* MSE
-* RMSE
-* R²
-
-### LLM/RAG
-
-* context relevance
-* faithfulness
-* answer relevance
-* retrieval recall
-* citation accuracy
-
-Do not list every metric.
-
-Explain why each selected metric is appropriate.
-
----
-
-# 28. METRIC IMPLEMENTATION PLAN
-
-For every metric specify:
-
-```text
-Metric
-What it measures
-Why it matters
-How it will be calculated
-```
-
-Avoid using metrics that do not align with the research objective.
-
----
-
-# 29. NODE 14 — ABLATION STUDIES
-
-For ML/AI research, identify possible ablation studies.
-
-Example:
-
-```text
-Full Model
-   ↓
-Remove Hybrid Retrieval
-   ↓
-Evaluate
-
-Full Model
-   ↓
-Remove Reranker
-   ↓
-Evaluate
-```
-
-Possible ablations:
-
-* remove component
-* change retrieval method
-* change embedding model
-* change model size
-* remove preprocessing step
-* remove augmentation
-* change context size
-
-Only propose ablations relevant to the methodology.
-
----
-
-# 30. ABLATION OBJECTIVE
-
-Each ablation must answer:
-
-> "Which component is actually responsible for the observed performance?"
-
-Do not generate arbitrary ablation experiments.
-
----
-
-# 31. NODE 15 — STATISTICAL ANALYSIS
-
-Where quantitative experiments are appropriate, propose a statistical analysis plan.
-
-Potential elements:
-
-* repeated runs
-* mean
-* standard deviation
-* confidence intervals
-* significance testing
-* effect size
-
-Possible tests:
-
-* t-test
-* paired t-test
-* Wilcoxon signed-rank
-* ANOVA
-
-Do not automatically recommend a statistical test.
-
-Select it based on:
-
-* experimental design
-* number of groups
-* paired/unpaired data
-* distribution assumptions
-
-If statistical testing is not appropriate, explicitly state:
-
-> "Formal statistical testing may not be necessary for this research design."
-
----
-
-# 32. REPRODUCIBILITY
-
-Generate a reproducibility plan.
-
-Include:
-
-* dataset version
-* code version
-* model version
-* dependency versions
-* configuration
-* random seeds
-* preprocessing parameters
-* hyperparameters
-* evaluation scripts
-* experiment logs
-* hardware
-* environment
-
-Where possible recommend:
-
-```text
-Git
-Docker
-requirements lockfile
-configuration files
-experiment tracking
-```
-
-Do not claim that the project already has these unless they exist.
-
----
-
-# 33. NODE 16 — EXPECTED OUTCOMES
-
-Generate expected outcomes based on the hypothesis.
-
-IMPORTANT:
-
-These are NOT experimental results.
-
-Use language such as:
-
-> "The study is expected to determine whether..."
-
-Do not generate fake numerical results.
-
-Bad:
-
-> Hybrid retrieval will improve Recall@10 by 15%.
-
-Unless the number is explicitly justified, do not generate it.
-
-Better:
-
-> Hybrid retrieval is expected to improve retrieval performance if lexical and semantic signals provide complementary evidence.
-
----
-
-# 34. NODE 17 — RESEARCH CONTRIBUTIONS
-
-Generate possible contributions.
-
-Categorize:
-
-### Methodological Contribution
-
-New method or improved methodology.
-
-### Technical Contribution
-
-System/model/algorithm.
-
-### Empirical Contribution
-
-New experimental evidence.
-
-### Dataset Contribution
-
-New dataset or benchmark.
-
-### Practical Contribution
-
-Real-world application.
-
-Do not guarantee that a contribution will be achieved.
-
-Use:
-
-> "Potential contribution"
-
-rather than:
-
-> "This study will definitively contribute..."
-
----
-
-# 35. NODE 18 — LIMITATIONS
-
-Generate expected limitations.
-
-Use existing literature plus proposed methodology.
-
-Possible categories:
-
-* dataset limitations
-* compute limitations
-* generalization
-* domain limitations
-* evaluation limitations
-* model limitations
-* reproducibility limitations
-
-Clearly distinguish:
-
-```text
-Reported literature limitation
-```
-
-from:
-
-```text
-Potential limitation of proposed study
-```
-
----
-
-# 36. NODE 19 — THREATS TO VALIDITY
-
-Include:
-
-### Internal validity
-
-Could something besides the proposed method explain the result?
-
-### External validity
-
-Will results generalize?
-
-### Construct validity
-
-Are metrics actually measuring the intended concept?
-
-### Statistical conclusion validity
-
-Are conclusions supported by sufficient statistical evidence?
-
-This makes the research plan academically stronger.
-
----
-
-# 37. NODE 20 — RESEARCH TIMELINE
-
-Generate a practical research timeline.
-
-Example:
-
-```text
-Week 1
-Literature review refinement
-
-Week 2
-Dataset preparation
-
-Week 3
-Baseline implementation
-
-Week 4
-Proposed method implementation
-
-Week 5
-Experiments
-
-Week 6
-Ablation studies
-
-Week 7
-Analysis
-
-Week 8
-Writing and documentation
-```
-
-The timeline should be configurable.
-
-Do not claim exact completion dates.
-
----
-
-# 38. NODE 21 — CITATION VALIDATION
-
-Reuse Milestone 11.
-
-Every literature-derived statement in the proposal must have supporting evidence.
-
-Examples:
-
-* methodology justification
-* baseline selection
-* dataset rationale
-* identified limitations
-* motivation
-* research gap
-
-Validate:
-
-```text
-Claim
- ↓
-Citation
- ↓
-Paper
- ↓
-Evidence
-```
-
-Remove unsupported claims.
-
----
-
-# 39. PROPOSAL STRUCTURE
-
-Generate the final proposal using:
-
-## 1. Title
-
-A precise research title.
-
-## 2. Abstract
-
-Brief summary of:
-
-* problem
-* gap
-* question
-* methodology
-* expected contribution
-
-## 3. Background
-
-Context of the research area.
-
-## 4. Problem Statement
-
-Clearly define the problem.
-
-## 5. Research Gap
-
-Use Milestone 15 output.
-
-## 6. Research Question
-
-Use selected Milestone 16 question.
-
-## 7. Hypothesis
-
-Use validated hypothesis.
-
-## 8. Research Objectives
-
-Primary and secondary objectives.
-
-## 9. Proposed Methodology
-
-Detailed methodology.
-
-## 10. Dataset
-
-Requirements and recommended datasets.
-
-## 11. Data Preprocessing
-
-Detailed preprocessing plan.
-
-## 12. Baselines
-
-Existing approaches used for comparison.
-
-## 13. Proposed Approach
-
-Architecture and methodology.
-
-## 14. Experimental Design
-
-Experiments and controls.
-
-## 15. Evaluation Metrics
-
-Metrics and justification.
-
-## 16. Ablation Studies
-
-Component-level experiments.
-
-## 17. Statistical Analysis
-
-Analysis strategy.
-
-## 18. Expected Outcomes
-
-Expected outcomes, clearly labeled as predictions.
-
-## 19. Potential Contributions
-
-Possible scientific/technical contributions.
-
-## 20. Limitations
-
-Potential limitations.
-
-## 21. Threats to Validity
-
-Internal/external/construct/statistical validity.
-
-## 22. Reproducibility Plan
-
-How the study can be reproduced.
-
-## 23. Timeline
-
-Research schedule.
-
-## 24. References
-
-Grounded references.
-
----
-
-# 40. DATABASE MODEL
-
-Create a ResearchProposal entity if one does not already exist.
-
-Conceptually:
-
-```text
-ResearchProposal
-----------------
+Experiment
+----------
 id
 workspace_id
-user_id
+proposal_id
 research_question_id
-research_gap_id
+user_id
 
-title
-abstract
-problem_statement
-motivation
+experiment_name
+experiment_description
+objective
 
-objectives
-methodology
+experiment_type
 
-dataset_requirements
-dataset_recommendations
-preprocessing
+baseline
+treatment
+dataset
+model
 
-baselines
-proposed_approach
-
-experiments
-experiment_matrix
-
-evaluation_metrics
-ablation_studies
-statistical_analysis
-
-expected_outcomes
-contributions
-limitations
-threats_to_validity
-
-reproducibility_plan
-timeline
-
-citations
-validation_results
+configuration
+hyperparameters
 
 status
+
+started_at
+completed_at
+
+execution_environment
+random_seed
+
+metrics
+results
+
+logs
+artifacts
+
+error_message
+
 created_at
 updated_at
-```
 
-Reuse existing models wherever possible.
+Do not blindly copy this schema.
 
----
+Adapt it to the existing database architecture.
 
-# 41. PROPOSAL STATUS
+
+# 7. EXPERIMENT TYPES
+
+Support appropriate experiment types such as:
+
+- Baseline comparison
+- Model comparison
+- Retrieval comparison
+- Classification
+- Regression
+- Ranking
+- Generation
+- RAG evaluation
+- Ablation
+- Hyperparameter experiment
+- Dataset comparison
+- Statistical experiment
+
+Do not force every experiment into one execution model.
+
+The system should allow experiment-specific execution strategies.
+
+
+# 8. EXPERIMENT CONFIGURATION
+
+Before execution, display:
+
+Research Question
+
+Hypothesis
+
+Experiment Objective
+
+Dataset
+
+Model
+
+Baseline
+
+Proposed Method
+
+Parameters
+
+Evaluation Metrics
+
+Random Seed
+
+Number of Runs
+
+Hardware
+
+Environment
+
+
+Example:
+
+{
+    "dataset": "dataset_1",
+    "model": "model_a",
+    "method": "hybrid_retrieval",
+    "top_k": 10,
+    "reranker": true,
+    "seed": 42,
+    "runs": 5,
+    "metrics": [
+        "recall@5",
+        "recall@10",
+        "mrr"
+    ]
+}
+
+
+# 9. CONFIGURATION VALIDATION
+
+Before execution validate:
+
+- Dataset exists
+- Model exists
+- Configuration is valid
+- Metrics are supported
+- Required parameters are present
+- Random seed is valid
+- Experiment belongs to the selected proposal
+- User has access to the workspace
+
+If configuration is invalid:
+
+Do NOT start the experiment.
+
+Return a clear validation error.
+
+
+# 10. EXPERIMENT EXECUTION ARCHITECTURE
+
+Do not execute long-running experiments directly inside a normal HTTP request.
+
+Use the project's existing background-job/worker architecture if available.
+
+If no suitable architecture exists, implement a clean asynchronous execution layer.
+
+Conceptually:
+
+API
+ ↓
+Create Experiment Run
+ ↓
+Queue Job
+ ↓
+Worker
+ ↓
+Execute Experiment
+ ↓
+Store Logs
+ ↓
+Store Metrics
+ ↓
+Store Artifacts
+ ↓
+Update Status
+
+
+# 11. EXPERIMENT STATUS
 
 Support:
 
-```text
-draft
-generating
-completed
-failed
-archived
-```
+QUEUED
 
-Allow the user to edit a generated proposal.
+RUNNING
 
----
+COMPLETED
 
-# 42. API
+FAILED
 
-Follow the existing backend API conventions.
+CANCELLED
+
+PAUSED
+
+The frontend should display the current status.
+
+
+# 12. EXPERIMENT RUN ENTITY
+
+Separate experiment definition from experiment execution.
+
+Create an ExperimentRun entity if necessary.
 
 Conceptually:
 
-### Generate Proposal
+ExperimentRun
+-------------
+id
+experiment_id
 
-```http
-POST /workspaces/{workspace_id}/research-proposals
-```
+run_number
+status
 
-Request:
+configuration
+random_seed
 
-```json
+started_at
+completed_at
+
+metrics
+logs
+artifacts
+
+error_message
+
+created_at
+
+
+This allows:
+
+Experiment
+    ↓
+Run 1
+Run 2
+Run 3
+Run 4
+Run 5
+
+
+# 13. MULTIPLE RUNS
+
+Support repeated runs.
+
+Example:
+
+Experiment E1
+
+Run 1 → seed 42
+Run 2 → seed 43
+Run 3 → seed 44
+Run 4 → seed 45
+Run 5 → seed 46
+
+Store every run separately.
+
+Calculate:
+
+- mean
+- standard deviation
+- minimum
+- maximum
+- confidence interval where appropriate
+
+
+# 14. RANDOM SEEDS
+
+Store the random seed used for every run.
+
+Example:
+
 {
-  "research_question_id": "rq_123"
+    "run_id": "run_001",
+    "random_seed": 42
 }
-```
 
-### List Proposals
+The experiment must be reproducible using the same configuration and seed where the underlying software supports deterministic execution.
 
-```http
-GET /workspaces/{workspace_id}/research-proposals
-```
 
-### Get Proposal
+# 15. EXECUTION ENVIRONMENT
 
-```http
-GET /research-proposals/{proposal_id}
-```
+Capture:
 
-### Update Proposal
+- Python version
+- package versions
+- operating system
+- hardware
+- CPU
+- GPU where available
+- memory
+- model version
+- dataset version
+- Git commit/version if available
+- configuration
 
-```http
-PATCH /research-proposals/{proposal_id}
-```
+Do not claim hardware that was not actually used.
 
-### Archive Proposal
+Use environment introspection where possible.
 
-```http
-DELETE /research-proposals/{proposal_id}
-```
 
-Adapt these routes to the existing API structure.
+# 16. DATASET VERSIONING
 
----
+Record:
 
-# 43. FRONTEND
+- Dataset name
+- Dataset version
+- Dataset source
+- Dataset hash/checksum where practical
+- Number of samples
+- Split information
 
-Add:
+Example:
 
-```text
-Research Proposal
-```
+{
+    "dataset": "D1",
+    "version": "1.2",
+    "train_samples": 8000,
+    "validation_samples": 1000,
+    "test_samples": 1000
+}
 
-to the workspace.
+If metadata is unavailable, mark it as unavailable instead of inventing it.
 
-Flow:
 
-```text
+# 17. MODEL VERSIONING
+
+Record:
+
+- Model name
+- Model version
+- Provider
+- Model configuration
+- Parameters where applicable
+
+For local models record:
+
+- checkpoint
+- hash/version
+- architecture
+
+For API models record:
+
+- model identifier
+- provider
+- relevant configuration
+
+Do not fabricate model versions.
+
+
+# 18. EXPERIMENT LOGGING
+
+Capture structured logs.
+
+Example:
+
+[INFO] Experiment queued
+[INFO] Dataset loaded
+[INFO] Preprocessing started
+[INFO] Preprocessing completed
+[INFO] Model initialized
+[INFO] Evaluation started
+[INFO] Recall@5 calculated
+[INFO] Recall@10 calculated
+[INFO] MRR calculated
+[INFO] Experiment completed
+
+
+Do not log sensitive information.
+
+Do not dump complete research papers into logs.
+
+
+# 19. PROGRESS TRACKING
+
+Where possible report:
+
+- current stage
+- percentage complete
+- samples processed
+- current metric
+- estimated status
+
+Example:
+
+{
+    "status": "RUNNING",
+    "stage": "evaluation",
+    "progress": 72
+}
+
+Do not generate fake progress.
+
+Only report actual execution progress.
+
+
+# 20. CANCELLATION
+
+Allow users to cancel running experiments.
+
+The worker should safely stop where possible.
+
+Update status:
+
+CANCELLED
+
+Clean up temporary resources.
+
+Do not mark cancelled experiments as completed.
+
+
+# 21. FAILURE HANDLING
+
+If an experiment fails:
+
+Store:
+
+- status
+- error type
+- error message
+- stack trace internally
+- execution stage
+- timestamp
+
+Display a safe user-facing message.
+
+Example:
+
+Experiment failed during model initialization.
+
+Do not expose sensitive infrastructure information unnecessarily.
+
+
+# 22. RETRY
+
+Allow failed experiments to be retried.
+
+A retry should:
+
+- create a new ExperimentRun
+- preserve the original failed run
+- preserve configuration
+- allow configuration modification
+- use a new run ID
+
+Do not overwrite historical runs.
+
+
+# 23. ARTIFACT MANAGEMENT
+
+Store experiment artifacts.
+
+Possible artifacts:
+
+- model checkpoints
+- prediction files
+- evaluation JSON
+- CSV results
+- plots
+- confusion matrices
+- logs
+- configuration files
+- generated reports
+
+Use the existing file/storage architecture.
+
+Do not create a second storage system if one already exists.
+
+
+# 24. RESULTS STORAGE
+
+Store actual results in structured form.
+
+Example:
+
+{
+    "experiment_id": "E1",
+    "run_id": "R1",
+
+    "metrics": {
+        "accuracy": 0.91,
+        "precision": 0.89,
+        "recall": 0.93,
+        "f1": 0.91
+    }
+}
+
+The numbers must come from the execution engine.
+
+
+# 25. METRIC VALIDATION
+
+Every result metric must correspond to a metric defined in Milestone 17.
+
+If an experiment produces an unexpected metric:
+
+- mark it as additional metric
+- do not silently replace existing metrics
+
+If a required metric is missing:
+
+mark the experiment result as incomplete.
+
+
+# 26. RESULT NORMALIZATION
+
+Normalize result structure across experiments.
+
+Example:
+
+{
+    "metric_name": "recall@10",
+    "value": 0.91,
+    "higher_is_better": true,
+    "unit": "score"
+}
+
+For metrics where lower is better:
+
+{
+    "metric_name": "rmse",
+    "value": 0.21,
+    "higher_is_better": false
+}
+
+
+# 27. BASELINE VS PROPOSED COMPARISON
+
+Compare experiments according to the actual metrics.
+
+Example:
+
+Dense:
+Recall@10 = 0.86
+
+Hybrid:
+Recall@10 = 0.91
+
+Absolute improvement:
+
+0.05
+
+Relative improvement:
+
+(0.91 - 0.86) / 0.86 × 100
+
+Do this calculation deterministically.
+
+Do not ask the LLM to calculate basic numerical differences.
+
+
+# 28. RESULTS COMPARISON ENGINE
+
+Implement deterministic comparison.
+
+For each metric calculate:
+
+- best value
+- worst value
+- absolute difference
+- relative difference
+- ranking
+
+Respect metric direction:
+
+Higher is better:
+
+- accuracy
+- F1
+- Recall
+- MRR
+
+Lower is better:
+
+- MAE
+- MSE
+- RMSE
+- latency
+
+
+# 29. EXPERIMENT RANKING
+
+Rank experiments based on selected evaluation metrics.
+
+The ranking logic must be deterministic and documented.
+
+Do not let an LLM arbitrarily select the winner.
+
+
+# 30. STATISTICAL ANALYSIS
+
+Implement the statistical analysis plan from Milestone 17.
+
+Where applicable calculate:
+
+- Mean
+- Standard deviation
+- Variance
+- Confidence interval
+- Effect size
+- Statistical significance
+
+Use appropriate statistical methods.
+
+
+# 31. STATISTICAL TEST SELECTION
+
+Select tests according to experimental design.
+
+Examples:
+
+Paired comparisons:
+- paired t-test
+- Wilcoxon signed-rank test
+
+Independent comparisons:
+- independent t-test
+- Mann-Whitney U
+
+Multiple groups:
+- ANOVA
+- Kruskal-Wallis
+
+Do not automatically use one statistical test for every experiment.
+
+Document assumptions.
+
+
+# 32. ASSUMPTION CHECKING
+
+Where applicable check:
+
+- independence
+- normality
+- variance assumptions
+
+If assumptions are violated, consider a suitable non-parametric alternative.
+
+Do not blindly apply statistical tests.
+
+
+# 33. EFFECT SIZE
+
+Where appropriate calculate effect size.
+
+Examples:
+
+- Cohen's d
+- rank-biserial correlation
+- eta squared
+
+Explain what the effect size means.
+
+Do not rely only on p-values.
+
+
+# 34. HYPOTHESIS TESTING
+
+Connect actual results to Milestone 16 hypotheses.
+
+Example:
+
+Research Question:
+
+Does hybrid retrieval improve retrieval performance?
+
+H0:
+Hybrid retrieval does not improve performance.
+
+H1:
+Hybrid retrieval improves performance.
+
+Actual results:
+Hybrid = 0.91
+Dense = 0.86
+
+Statistical analysis:
+p < selected significance threshold
+
+Conclusion:
+
+Reject H0 under the selected statistical procedure.
+
+IMPORTANT:
+
+The system must not conclude that H1 is true merely because one value is larger.
+
+Statistical evidence and experimental design must support the conclusion.
+
+
+# 35. SIGNIFICANCE THRESHOLD
+
+Allow configurable alpha.
+
+Default:
+
+alpha = 0.05
+
+Store the selected alpha with the experiment.
+
+Do not hide the threshold.
+
+
+# 36. ABLATION EXECUTION
+
+Execute ablation experiments defined in Milestone 17.
+
+Example:
+
+Full model
+    ↓
+91%
+
+Remove reranker
+    ↓
+87%
+
+Remove hybrid retrieval
+    ↓
+84%
+
+Remove dense component
+    ↓
+79%
+
+
+# 37. ABLATION ANALYSIS
+
+Calculate:
+
+- performance difference
+- relative performance change
+- component contribution
+
+Generate a deterministic summary.
+
+Example:
+
+Removing the reranker reduced Recall@10 by 4 percentage points.
+
+The AI may then interpret why this could have happened, but must distinguish interpretation from observed fact.
+
+
+# 38. TRAINING EXPERIMENTS
+
+If the research proposal includes model training, support:
+
+- training loss
+- validation loss
+- training metrics
+- validation metrics
+- epochs
+- learning rate
+- batch size
+- checkpoint
+- early stopping
+
+Store training history.
+
+
+# 39. TRAINING VISUALIZATION
+
+Generate charts for:
+
+- training loss
+- validation loss
+- training metric
+- validation metric
+
+Store charts as artifacts.
+
+Do not hardcode chart colors or styles unnecessarily.
+
+
+# 40. INFERENCE EXPERIMENTS
+
+For inference-based experiments capture:
+
+- inference time
+- throughput
+- latency
+- memory usage where available
+- output metrics
+
+For LLM/RAG experiments capture relevant evaluation metrics.
+
+
+# 41. RAG-SPECIFIC EXPERIMENTS
+
+If the research proposal concerns RAG, support metrics such as:
+
+Retrieval:
+
+- Recall@K
+- Precision@K
+- MRR
+- nDCG
+
+Generation:
+
+- answer relevance
+- faithfulness
+- context relevance
+- citation correctness
+
+System:
+
+- latency
+- token usage where available
+- cost where available
+
+Do not force RAG metrics onto unrelated research.
+
+
+# 42. AI RESULTS INTERPRETATION
+
+After actual results are available, send ONLY verified results to the LLM.
+
+Input:
+
 Research Question
-       ↓
-[Generate Research Proposal]
-       ↓
-Processing
-       ↓
-Proposal Dashboard
-```
 
----
+Research Gap
 
-# 44. PROPOSAL DASHBOARD
+Hypothesis
 
-Display:
+Experiment Configuration
 
-### Research Title
+Actual Metrics
 
-### Research Question
+Statistical Analysis
 
-### Hypothesis
+Ablation Results
 
-### Research Gap
+Limitations
 
-### Methodology
 
-### Dataset
+The LLM should generate:
 
-### Baselines
+## Findings
 
-### Proposed Approach
+What actually happened?
 
-### Experiment Matrix
+## Interpretation
 
-### Metrics
+What could explain the results?
 
-### Expected Outcomes
+## Hypothesis Assessment
 
-### Contributions
+What do the results imply?
 
-### Limitations
+## Research Implications
 
-### Timeline
+What does this mean?
 
-### References
+## Limitations
 
----
+What prevents stronger conclusions?
 
-# 45. METHODOLOGY VISUALIZATION
+## Future Experiments
 
-Where useful, provide a simple architecture/workflow visualization.
+What should be investigated next?
 
-Example:
 
-```text
-Dataset
-   ↓
-Preprocessing
-   ↓
-Train / Validation / Test
-   ↓
-Baseline ─────────┐
-                  ├── Evaluation
-Proposed Method ──┘
-```
-
-If the existing frontend supports diagrams, reuse that capability.
-
----
-
-# 46. EXPERIMENT TABLE UI
-
-Render experiments as an editable table.
-
-Example:
-
-| ID | Objective | Method           | Dataset | Metrics  |
-| -- | --------- | ---------------- | ------- | -------- |
-| E1 | Baseline  | Dense Retrieval  | D1      | Recall@K |
-| E2 | Proposed  | Hybrid Retrieval | D1      | Recall@K |
-| E3 | Ablation  | No Reranker      | D1      | Recall@K |
-
-Allow users to edit generated experiments.
-
----
-
-# 47. DATASET RECOMMENDATION UI
-
-For each dataset display:
-
-```text
-Dataset Name
-Domain
-Purpose
-Relevance
-Availability
-Potential Issues
-Recommendation Score
-```
-
-Clearly mark recommendations requiring manual verification.
-
----
-
-# 48. EXPORT
-
-Allow export using the existing document-export system.
-
-Prefer:
-
-* Markdown
-* PDF
-* DOCX
-
-Preserve:
-
-* headings
-* tables
-* citations
-* references
-* experiment matrix
-
-Do not create a separate export architecture if one already exists.
-
----
-
-# 49. PROMPT ARCHITECTURE
-
-Do NOT use a single giant LLM prompt.
-
-Create separate prompts for:
-
-1. Problem definition
-2. Motivation generation
-3. Methodology design
-4. Dataset requirement analysis
-5. Dataset recommendation
-6. Baseline selection
-7. Proposed approach
-8. Experiment design
-9. Evaluation metric selection
-10. Ablation design
-11. Statistical analysis
-12. Expected outcomes
-13. Contributions
-14. Limitations
-15. Threats to validity
-16. Reproducibility
-17. Timeline
-18. Final proposal generation
-19. Proposal validation
-
-Each prompt must contain:
-
-```text
-ROLE
-TASK
-INPUT
-CONSTRAINTS
-GROUNDING RULES
-OUTPUT FORMAT
-```
-
-Use structured JSON for intermediate stages.
-
----
-
-# 50. GROUNDING RULES
+# 43. AI INTERPRETATION RULES
 
 The LLM must follow:
 
-```text
-Use supplied research evidence as the primary source.
+- Never invent metrics
+- Never invent experiments
+- Never invent statistical results
+- Never invent p-values
+- Never invent confidence intervals
+- Never claim causality without appropriate design
+- Never claim universal superiority
+- Never claim absolute novelty
+- Distinguish observed results from interpretation
+- State uncertainty explicitly
 
-Do not invent papers.
 
-Do not invent citations.
+# 44. FINDINGS GENERATION
 
-Do not invent experimental results.
+Generate structured findings.
 
-Do not claim a method is superior without evidence.
+Example:
 
-Do not claim novelty with certainty.
+Finding 1:
 
-Do not fabricate dataset statistics.
+Hybrid retrieval achieved higher Recall@10 than dense retrieval.
 
-Do not fabricate numerical expected improvements.
+Evidence:
 
-Clearly distinguish:
-- literature-supported facts
-- AI-generated recommendations
-- proposed methodology
-- expected outcomes
-```
+Actual experiment result.
 
----
+Finding 2:
 
-# 51. HALLUCINATION VALIDATION
+The improvement remained consistent across repeated runs.
 
-Before storing the proposal:
+Evidence:
 
-1. Extract factual claims.
-2. Identify literature-derived claims.
-3. Map them to citations.
-4. Verify citations.
-5. Remove unsupported claims.
-6. Rewrite overconfident statements.
-7. Validate dataset names where external information is used.
-8. Validate experiment recommendations.
-9. Validate structured JSON.
+Run-level statistics.
 
----
+Finding 3:
 
-# 52. SECURITY
+Removing reranking reduced retrieval performance.
 
-Reuse existing authentication.
+Evidence:
 
-Every request must verify:
+Ablation experiment.
 
-```text
-Authenticated User
-       ↓
-Workspace Access
-       ↓
-Research Question Access
-       ↓
-Research Gap Access
-       ↓
-Proposal Generation
-```
 
-Prevent cross-workspace data leakage.
+# 45. RESEARCH CONCLUSION
 
----
+Generate a research conclusion based ONLY on actual results.
 
-# 53. ERROR HANDLING
+Structure:
 
-Handle:
+1. Research question
+2. Main observed result
+3. Statistical evidence
+4. Hypothesis assessment
+5. Practical/scientific implication
+6. Limitation
+7. Recommended future work
 
-### No research question selected
 
-```text
-Please select a research question first.
-```
+# 46. CAUSALITY SAFETY
 
-### Research question missing hypothesis
+The system must distinguish:
 
-If hypothesis is applicable:
+Correlation:
 
-```text
-The selected research question does not contain a validated hypothesis.
-```
+"X was associated with Y."
 
-Allow exploratory questions without hypotheses.
+Causal evidence:
 
-### Missing literature context
+"X caused Y."
 
-Warn that proposal grounding may be limited.
+Only use causal language when the experiment design justifies causal inference.
 
-### LLM failure
+Otherwise use:
 
-Use existing retry mechanism.
+- associated with
+- correlated with
+- observed alongside
+- resulted in under the experimental setup
 
-### Invalid structured output
+Do not overstate conclusions.
 
-Retry/repair using existing structured-output mechanism.
 
-### Dataset recommendation failure
+# 47. RESULTS DASHBOARD
 
-Return proposal without recommendations and explain that manual dataset selection is required.
+Create a frontend dashboard.
 
----
+Display:
 
-# 54. TESTING
+Research Question
+
+Hypothesis
+
+Experiment Status
+
+Experiment Runs
+
+Best Performing Method
+
+Metrics
+
+Statistical Analysis
+
+Ablation Results
+
+Charts
+
+Findings
+
+AI Interpretation
+
+Conclusion
+
+
+# 48. EXPERIMENT LIST
+
+Display:
+
+| Experiment | Method | Status | Best Metric | Runs |
+|---|---|---|---|---|
+| E1 | Dense | Completed | 0.86 | 5 |
+| E2 | Hybrid | Completed | 0.91 | 5 |
+| E3 | Hybrid + Reranker | Running | - | 3/5 |
+
+
+# 49. EXPERIMENT DETAIL PAGE
+
+Create:
+
+## Overview
+
+Experiment description.
+
+## Configuration
+
+All parameters.
+
+## Execution
+
+Status and progress.
+
+## Logs
+
+Execution logs.
+
+## Metrics
+
+Actual results.
+
+## Runs
+
+Individual runs.
+
+## Artifacts
+
+Generated files.
+
+## Statistical Analysis
+
+Tests and results.
+
+## Ablation
+
+Component analysis.
+
+## AI Analysis
+
+Findings and interpretation.
+
+## Conclusion
+
+Evidence-based conclusion.
+
+
+# 50. RESULTS COMPARISON UI
+
+Allow the researcher to select multiple experiments.
+
+Example:
+
+[✓] Dense
+[✓] Hybrid
+[✓] Hybrid + Reranker
+
+Then show:
+
+- metric comparison table
+- charts
+- statistical comparison
+- ranking
+- best method
+
+
+# 51. VISUALIZATIONS
+
+Implement appropriate charts.
+
+Examples:
+
+### Bar Chart
+
+Method vs metric
+
+### Line Chart
+
+Training epoch vs loss
+
+### Box Plot
+
+Run-level performance distribution
+
+### Confusion Matrix
+
+Classification tasks
+
+### Ablation Chart
+
+Component vs performance
+
+### Scatter Plot
+
+Parameter vs performance where appropriate
+
+Do not create irrelevant charts.
+
+
+# 52. RESULT TABLE
+
+Provide downloadable/tabular results.
+
+Example:
+
+| Experiment | Run | Accuracy | F1 | Latency |
+|---|---:|---:|---:|---:|
+| Dense | 1 | 0.89 | 0.87 | 120ms |
+| Dense | 2 | 0.90 | 0.88 | 118ms |
+| Hybrid | 1 | 0.93 | 0.91 | 135ms |
+| Hybrid | 2 | 0.92 | 0.90 | 137ms |
+
+
+# 53. REPRODUCIBILITY
+
+Provide:
+
+"Reproduce Experiment"
+
+The system should load:
+
+- dataset version
+- model version
+- configuration
+- seed
+- dependencies
+- experiment code version
+
+Then create a new run.
+
+Never overwrite historical results.
+
+
+# 54. EXPERIMENT REPORT
+
+Generate an experiment report containing:
+
+## Experiment
+
+## Research Question
+
+## Hypothesis
+
+## Methodology
+
+## Dataset
+
+## Configuration
+
+## Baselines
+
+## Results
+
+## Statistical Analysis
+
+## Ablation Results
+
+## Findings
+
+## Interpretation
+
+## Conclusion
+
+## Limitations
+
+## Reproducibility Information
+
+
+# 55. EXPORT
+
+Reuse existing export infrastructure.
+
+Support:
+
+- PDF
+- DOCX
+- Markdown
+- CSV results
+
+Exports must contain actual results.
+
+Do not include generated placeholder numbers.
+
+
+# 56. API
+
+Follow existing API conventions.
+
+Conceptually implement:
+
+POST
+/workspaces/{workspace_id}/experiments
+
+Create experiment.
+
+POST
+/experiments/{experiment_id}/runs
+
+Start a run.
+
+GET
+/experiments/{experiment_id}
+
+Get experiment.
+
+GET
+/experiments/{experiment_id}/runs
+
+Get runs.
+
+GET
+/experiments/{experiment_id}/results
+
+Get results.
+
+POST
+/experiments/{experiment_id}/analyze
+
+Generate AI analysis.
+
+POST
+/experiments/{experiment_id}/compare
+
+Compare experiments.
+
+POST
+/experiments/{experiment_id}/cancel
+
+Cancel running run.
+
+POST
+/experiments/{experiment_id}/retry
+
+Retry failed run.
+
+GET
+/experiments/{experiment_id}/artifacts
+
+List artifacts.
+
+POST
+/experiments/{experiment_id}/export
+
+Export report.
+
+Adapt route names to the existing architecture.
+
+
+# 57. DATABASE DESIGN
+
+Potential entities:
+
+Experiment
+
+ExperimentRun
+
+ExperimentMetric
+
+ExperimentArtifact
+
+ExperimentLog
+
+ExperimentAnalysis
+
+Use normalized structures where appropriate.
+
+Do not duplicate existing entities.
+
+
+# 58. EXPERIMENT METRIC MODEL
+
+Conceptually:
+
+ExperimentMetric
+---------------
+id
+experiment_run_id
+
+metric_name
+metric_value
+
+higher_is_better
+unit
+
+created_at
+
+
+# 59. ARTIFACT MODEL
+
+Conceptually:
+
+ExperimentArtifact
+------------------
+id
+experiment_run_id
+
+artifact_name
+artifact_type
+storage_path
+metadata
+
+created_at
+
+
+# 60. LOG MODEL
+
+Conceptually:
+
+ExperimentLog
+-------------
+id
+experiment_run_id
+
+level
+message
+timestamp
+
+
+# 61. ANALYSIS MODEL
+
+Conceptually:
+
+ExperimentAnalysis
+------------------
+id
+experiment_id
+
+summary
+findings
+interpretation
+hypothesis_assessment
+limitations
+future_work
+
+model
+prompt_version
+
+created_at
+
+
+# 62. VERSION AI PROMPTS
+
+Store:
+
+- prompt version
+- model
+- generation timestamp
+
+This ensures AI analysis can be reproduced.
+
+
+# 63. SECURITY
+
+Reuse existing authorization.
+
+Verify:
+
+User
+ ↓
+Workspace
+ ↓
+Research Proposal
+ ↓
+Research Question
+ ↓
+Experiment
+ ↓
+Experiment Run
+ ↓
+Results
+
+A user must never access another user's experiment results.
+
+
+# 64. RESOURCE LIMITS
+
+Long-running experiments can consume significant resources.
+
+Implement safeguards:
+
+- timeout
+- maximum execution time
+- maximum dataset size
+- maximum concurrent experiments
+- cancellation
+- retry limits
+
+Use configuration rather than hardcoding where possible.
+
+
+# 65. COST CONTROL
+
+If experiments use paid APIs:
+
+Track where possible:
+
+- API calls
+- tokens
+- estimated cost
+
+Do not fabricate cost data.
+
+If provider does not expose cost information:
+
+mark it unavailable.
+
+
+# 66. OBSERVABILITY
+
+Add structured logs for:
+
+Experiment created
+
+Run queued
+
+Run started
+
+Dataset loaded
+
+Model loaded
+
+Experiment stage changed
+
+Metric calculated
+
+Artifact generated
+
+Run completed
+
+Run failed
+
+Analysis generated
+
+Report generated
+
+
+# 67. TESTING
 
 Implement unit tests for:
 
-* authorization
-* research-question loading
-* gap loading
-* methodology generation
-* dataset parsing
-* baseline selection
-* experiment parsing
-* metric selection
-* score calculations
-* proposal validation
-* database persistence
+- experiment creation
+- authorization
+- configuration validation
+- metric calculation
+- comparison
+- ranking
+- statistical calculations
+- hypothesis testing
+- artifact storage
+- status transitions
+- cancellation
+- retry
+- result validation
 
----
 
-# 55. INTEGRATION TEST
+# 68. TEST STATUS TRANSITIONS
 
-Test the complete workflow:
+Validate:
 
-```text
-Upload Papers
-      ↓
-Generate Literature Review
-      ↓
-Discover Research Gaps
-      ↓
-Generate Research Questions
-      ↓
-Select Research Question
-      ↓
-Generate Proposal
-      ↓
-Generate Methodology
-      ↓
-Generate Dataset Plan
-      ↓
-Generate Baselines
-      ↓
-Generate Experiments
-      ↓
-Generate Metrics
-      ↓
-Generate Ablations
-      ↓
-Generate Expected Outcomes
-      ↓
-Generate Final Proposal
-      ↓
-Validate Citations
-      ↓
-Save Proposal
-      ↓
-Display Proposal
-```
+QUEUED → RUNNING
 
----
+RUNNING → COMPLETED
 
-# 56. REGRESSION TESTING
+RUNNING → FAILED
 
-Verify that Milestones 1–16 still work.
+RUNNING → CANCELLED
 
-Especially test:
+FAILED → QUEUED
 
-* authentication
-* workspace
-* PDF upload
-* RAG
-* citations
-* summarization
-* comparison
-* literature review
-* research gaps
-* research questions
-* hypotheses
+Do not allow invalid transitions such as:
 
-No regression should be introduced.
+COMPLETED → RUNNING
 
----
 
-# 57. EVALUATION
+# 69. NUMERICAL TESTS
 
-Evaluate proposal quality using:
+Create deterministic tests.
 
-### Research Question Alignment
+Example:
 
-Does the proposal answer the selected RQ?
+Dense:
 
-### Gap Alignment
+0.80
 
-Does methodology address the identified gap?
+Hybrid:
 
-### Hypothesis Alignment
+0.90
 
-Do experiments actually test the hypothesis?
+Expected improvement:
 
-### Methodology Quality
+0.10
 
-Is the methodology appropriate?
+Expected relative improvement:
 
-### Baseline Quality
+12.5%
 
-Are baselines reasonable?
 
-### Evaluation Quality
+Test metric direction correctly.
 
-Are metrics appropriate?
+For RMSE:
 
-### Experimental Completeness
+0.40 vs 0.30
 
-Are important comparisons included?
+The lower value should rank higher.
 
-### Grounding
 
-Are literature-derived claims supported?
+# 70. STATISTICAL TESTS
 
-### Reproducibility
+Create test fixtures where the expected statistical result is known.
 
-Could another researcher understand how to reproduce the study?
+Verify:
 
----
+- mean
+- standard deviation
+- confidence interval
+- p-value
+- effect size
 
-# 58. IMPORTANT CONSISTENCY VALIDATION
+Do not use LLMs for these calculations.
 
-Create a final validation node that checks:
 
-```text
-Research Gap
-      ↓
+# 71. INTEGRATION TEST
+
+Test:
+
+Create Proposal
+ ↓
+Create Experiment
+ ↓
+Configure Experiment
+ ↓
+Start Run
+ ↓
+Worker Executes
+ ↓
+Store Metrics
+ ↓
+Store Artifacts
+ ↓
+Complete Run
+ ↓
+Compare Runs
+ ↓
+Statistical Analysis
+ ↓
+AI Interpretation
+ ↓
+Conclusion
+ ↓
+Export Report
+
+
+# 72. MOCK EXPERIMENT
+
+Create a lightweight mock experiment for testing.
+
+Example:
+
+Input:
+
+[1,2,3,4,5]
+
+Mock method A
+
+Mock method B
+
+Return deterministic results.
+
+Use this to test the entire pipeline without requiring expensive model execution.
+
+
+# 73. REGRESSION TESTING
+
+After implementation verify Milestones 1–17.
+
+Especially:
+
+- Authentication
+- Workspace
+- PDF upload
+- RAG
+- Citations
+- Summarization
+- Comparison
+- Literature review
+- Research gaps
+- Research questions
+- Hypotheses
+- Research proposal
+- Experiment planning
+
+No existing functionality should break.
+
+
+# 74. IMPORTANT AI BOUNDARY
+
+The system must clearly separate:
+
+ACTUAL COMPUTED DATA
+
+from
+
+AI INTERPRETATION
+
+Example:
+
+Actual:
+
+Recall@10 = 0.91
+
+AI interpretation:
+
+"The hybrid method appears to outperform the dense baseline."
+
+Never:
+
+AI-generated:
+
+Recall@10 = 0.91
+
+This is strictly prohibited.
+
+
+# 75. FINAL VALIDATION GRAPH
+
+Before generating the final conclusion, validate:
+
 Research Question
-      ↓
+        ↓
 Hypothesis
-      ↓
-Objectives
-      ↓
-Methodology
-      ↓
-Experiments
-      ↓
-Metrics
-      ↓
-Expected Outcomes
-```
+        ↓
+Experiment
+        ↓
+Actual Results
+        ↓
+Evaluation Metrics
+        ↓
+Statistical Analysis
+        ↓
+Hypothesis Assessment
+        ↓
+Conclusion
 
-The system must identify contradictions.
 
-For example:
+If any link is missing, mark the conclusion as incomplete.
 
-If the RQ compares two methods but the experiment contains only one method:
 
-```text
-ERROR:
-Experimental design does not adequately test the research question.
-```
+# 76. FINAL DEFINITION OF DONE
 
-If the hypothesis predicts improved accuracy but the experiment does not measure accuracy:
+Milestone 18 is complete only when:
 
-```text
-WARNING:
-Evaluation metrics do not directly test the hypothesis.
-```
+- [ ] User can select a research proposal.
+- [ ] User can select an experiment.
+- [ ] Experiment configuration is displayed.
+- [ ] Configuration is validated.
+- [ ] Experiments can execute asynchronously.
+- [ ] Experiment status is tracked.
+- [ ] Experiment logs are stored.
+- [ ] Multiple runs are supported.
+- [ ] Random seeds are stored.
+- [ ] Dataset version is stored.
+- [ ] Model version is stored.
+- [ ] Environment information is stored.
+- [ ] Actual metrics are stored.
+- [ ] Artifacts are stored.
+- [ ] Failed experiments are handled.
+- [ ] Experiments can be retried.
+- [ ] Running experiments can be cancelled.
+- [ ] Experiment comparison works.
+- [ ] Metric direction is handled correctly.
+- [ ] Statistical analysis works.
+- [ ] Effect sizes are calculated where appropriate.
+- [ ] Hypothesis testing works.
+- [ ] Ablation experiments are supported.
+- [ ] Training experiments are supported where applicable.
+- [ ] RAG experiments are supported where applicable.
+- [ ] Results visualization is implemented.
+- [ ] AI result interpretation is implemented.
+- [ ] AI never invents actual results.
+- [ ] Findings are generated from actual results.
+- [ ] Research conclusions are generated from actual results.
+- [ ] Causality is not overstated.
+- [ ] Reproducibility information is stored.
+- [ ] Experiment reports can be exported.
+- [ ] Authentication is enforced.
+- [ ] Authorization is enforced.
+- [ ] Resource limits are implemented.
+- [ ] Logging and observability are implemented.
+- [ ] Unit tests pass.
+- [ ] Integration tests pass.
+- [ ] Regression tests pass.
+- [ ] Milestones 1–17 remain functional.
 
-This consistency validation is mandatory.
 
----
+# 77. FINAL END-TO-END DEMONSTRATION
 
-# 59. FINAL DEFINITION OF DONE
+After implementation demonstrate this exact flow:
 
-Milestone 17 is complete only when:
-
-* [ ] User can select a Milestone 16 research question.
-* [ ] Research gap is automatically loaded.
-* [ ] Supporting evidence is loaded.
-* [ ] Hypothesis is loaded where applicable.
-* [ ] Variables are loaded.
-* [ ] Research objectives are loaded.
-* [ ] Research problem is generated.
-* [ ] Research motivation is generated.
-* [ ] Methodology is generated.
-* [ ] Methodology type is identified.
-* [ ] Dataset requirements are generated.
-* [ ] Dataset recommendations are generated where appropriate.
-* [ ] Data preprocessing plan is generated.
-* [ ] Data leakage risks are considered.
-* [ ] Baselines are selected.
-* [ ] Proposed approach is generated.
-* [ ] Experiments are generated.
-* [ ] Experiment matrix is generated.
-* [ ] Control/treatment design is identified where appropriate.
-* [ ] Evaluation metrics are selected.
-* [ ] Metric justification is generated.
-* [ ] Ablation studies are generated where appropriate.
-* [ ] Statistical analysis is considered.
-* [ ] Expected outcomes are generated without fake results.
-* [ ] Potential contributions are generated.
-* [ ] Limitations are generated.
-* [ ] Threats to validity are generated.
-* [ ] Reproducibility plan is generated.
-* [ ] Timeline is generated.
-* [ ] Citations are grounded.
-* [ ] Proposal consistency is validated.
-* [ ] Proposal is stored.
-* [ ] Proposal can be retrieved.
-* [ ] Proposal can be edited.
-* [ ] Proposal can be archived.
-* [ ] Frontend UI is complete.
-* [ ] Backend APIs are complete.
-* [ ] Authentication is enforced.
-* [ ] Authorization is enforced.
-* [ ] Unit tests pass.
-* [ ] Integration tests pass.
-* [ ] Evaluation is implemented.
-* [ ] Existing Milestones 1–16 continue working.
-
----
-
-# 60. FINAL END-TO-END DEMONSTRATION
-
-After implementation, demonstrate:
-
-```text
 1. Open a research workspace.
 
-2. Open Research Questions.
+2. Open the selected research proposal.
 
-3. Select the highest-ranked research question.
+3. Open the experiment plan.
 
-4. Verify:
-   - Research gap
-   - Hypothesis
-   - Variables
-   - Objectives
+4. Select Experiment E1.
 
-5. Click:
-   "Generate Research Proposal"
-
-6. System generates:
-   - Problem statement
-   - Motivation
-   - Methodology
-   - Dataset plan
-   - Baselines
-   - Proposed approach
-   - Experiments
+5. Review:
+   - Dataset
+   - Model
+   - Baseline
+   - Configuration
    - Metrics
-   - Ablations
-   - Statistical analysis
-   - Expected outcomes
-   - Contributions
-   - Limitations
-   - Reproducibility
-   - Timeline
 
-7. Review the Experiment Matrix.
+6. Start the experiment.
 
-8. Verify that experiments actually test the research question.
+7. Verify:
+   QUEUED → RUNNING → COMPLETED
 
-9. Verify that metrics measure the hypothesis.
+8. Open execution logs.
 
-10. Verify that literature-derived claims have citations.
+9. Open actual metrics.
 
-11. Edit the proposal.
+10. Run multiple seeds.
 
-12. Save the proposal.
+11. Compare baseline vs proposed method.
 
-13. Reopen the saved proposal.
+12. Generate statistical analysis.
 
-14. Export the proposal.
+13. Run ablation experiments.
 
-15. Verify that Milestones 1–16 still work.
-```
+14. View charts.
 
----
+15. Open AI Results Analysis.
 
-# 61. FINAL EXPECTED CAPABILITY
+16. Verify that the AI uses ONLY actual experiment results.
 
-After completing Milestone 17, the AI Research Assistant should be able to move from:
+17. Generate hypothesis assessment.
 
-```text
-Research Papers
-      ↓
-Literature Review
-      ↓
+18. Generate research findings.
+
+19. Generate research conclusion.
+
+20. Export the experiment report.
+
+21. Re-run the experiment using the stored configuration.
+
+22. Verify reproducibility.
+
+23. Verify that Milestones 1–17 still work.
+
+
+# 78. FINAL ARCHITECTURE AFTER MILESTONE 18
+
+The system should now provide:
+
+                    AI RESEARCH ASSISTANT
+
+                         Research Papers
+                               ↓
+                         RAG / Retrieval
+                               ↓
+                       Literature Review
+                               ↓
+                        Research Gaps
+                               ↓
+                    Research Questions
+                               ↓
+                         Hypotheses
+                               ↓
+                    Research Proposal
+                               ↓
+                    Experiment Planning
+                               ↓
+                 ┌──────────────────────┐
+                 │ MILESTONE 18         │
+                 │                      │
+                 │ Experiment Execution │
+                 │ Experiment Tracking  │
+                 │ Actual Results       │
+                 │ Statistics           │
+                 │ Ablations            │
+                 │ Visualization        │
+                 │ AI Analysis          │
+                 │ Hypothesis Testing   │
+                 │ Conclusion           │
+                 └──────────────────────┘
+                               ↓
+                     Evidence-Based
+                     Research Findings
+
+
+# 79. MOST IMPORTANT REQUIREMENT
+
+The entire milestone must preserve this principle:
+
+             COMPUTATION
+                  ↓
+            ACTUAL RESULTS
+                  ↓
+         STATISTICAL ANALYSIS
+                  ↓
+          AI INTERPRETATION
+                  ↓
+             CONCLUSION
+
+NOT:
+
+             LLM
+              ↓
+        Invented Results
+              ↓
+           Conclusion
+
+The AI Research Assistant must never fabricate experimental evidence.
+
+The final system should demonstrate a complete connection between:
+
+Literature
+    ↓
 Research Gap
-      ↓
+    ↓
 Research Question
-      ↓
+    ↓
 Hypothesis
-      ↓
-🔥 Research Proposal
-      ↓
-Methodology
-      ↓
-Dataset
-      ↓
-Baseline
-      ↓
-Experiment Design
-      ↓
-Evaluation
-      ↓
-Expected Contribution
-```
+    ↓
+Research Proposal
+    ↓
+Experiment
+    ↓
+REAL Results
+    ↓
+Statistical Evidence
+    ↓
+Research Conclusion
 
-The key distinction is:
-
-**Milestone 15:** What is missing?
-
-**Milestone 16:** What should I investigate?
-
-**Milestone 17:** How should I investigate it?
-
-Do not claim that the generated proposal is scientifically validated. It is an **AI-assisted research plan** that must be reviewed and refined by the researcher before actual experimentation.
+This is the primary goal of Milestone 18.
