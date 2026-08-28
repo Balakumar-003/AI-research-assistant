@@ -1,2268 +1,1008 @@
-# MILESTONE 21 — ADVANCED RESEARCH INTELLIGENCE & AUTONOMOUS RESEARCH PLANNING
-
-## PROJECT CONTEXT
-
-I am building an AI Research Assistant.
-
-Milestones 1–20 have already been completed.
-
-The system currently supports the complete research lifecycle:
-
-1. Authentication and Authorization
-2. Research Workspaces
-3. PDF Upload
-4. PDF Text Extraction
-5. Document Chunking
-6. Embedding Generation
-7. Vector Database
-8. RAG Question Answering
-9. LangGraph Autonomous Research Agent
-10. Citation and Source Grounding
-11. Advanced Paper Summarization
-12. Multi-Paper Comparison
-13. Literature Review
-14. Research Gap Detection
-15. Research Questions and Hypotheses
-16. Research Proposal and Methodology Planning
-17. Experiment Planning and Statistical Planning
-18. Experiment Execution, Tracking and Results Analysis
-19. Automated Research Paper and Final Report Generation
-20. Productionization, Observability, Evaluation and Deployment
-
-The system is now production-ready.
-
-Milestone 21 must make the AI Research Assistant capable of performing higher-level research planning and research intelligence.
-
-The goal is NOT to create an uncontrolled autonomous agent.
-
-The goal is to create a:
-
-    HUMAN-CONTROLLED
-    EVIDENCE-GROUNDED
-    TRACEABLE
-    MULTI-STEP
-    RESEARCH PLANNING SYSTEM
-
-The system should be capable of taking a broad research objective and converting it into an actionable research plan.
-
-==================================================
-1. PRIMARY OBJECTIVE
-==================================================
-
-Implement an Advanced Research Intelligence Engine.
-
-The system should accept:
-
-    Research Goal
-          ↓
-    Research Context
-          ↓
-    Existing Literature
-          ↓
-    Existing Experiments
-          ↓
-    Existing Findings
-          ↓
-    Research Constraints
-
-and produce:
-
-    Research Landscape
-          ↓
-    Knowledge Gaps
-          ↓
-    Evidence Gaps
-          ↓
-    Research Questions
-          ↓
-    Hypotheses
-          ↓
-    Candidate Methods
-          ↓
-    Candidate Experiments
-          ↓
-    Evaluation Strategy
-          ↓
-    Research Roadmap
-          ↓
-    Prioritized Next Actions
-
-The researcher must be able to review and approve every important stage.
-
-==================================================
-2. IMPORTANT ARCHITECTURAL RULE
-==================================================
-
-Do NOT rebuild the existing LangGraph agent.
-
-Extend the existing agent architecture.
-
-Reuse:
-
-- existing LangGraph nodes
-- existing tools
-- existing RAG pipeline
-- existing citation system
-- existing experiment engine
-- existing research proposal system
-- existing report generation
-- existing evaluation framework
-- existing observability
-- existing authentication
-- existing workspace isolation
-
-Only introduce new nodes/services where required.
-
-==================================================
-3. RESEARCH INTELLIGENCE ENGINE
-==================================================
-
-Create a new Research Intelligence layer.
-
-Conceptually:
-
-Research Goal
-     ↓
-Context Analyzer
-     ↓
-Literature Analyzer
-     ↓
-Evidence Analyzer
-     ↓
-Gap Analyzer
-     ↓
-Question Generator
-     ↓
-Hypothesis Generator
-     ↓
-Method Generator
-     ↓
-Experiment Planner
-     ↓
-Priority Engine
-     ↓
-Research Roadmap
-
-The output must be structured and persisted.
-
-==================================================
-4. RESEARCH GOAL
-==================================================
-
-Allow the researcher to provide:
-
-- research topic
-- research objective
-- problem statement
-- domain
-- constraints
-- target outcome
-- available resources
-
-Example:
-
-"Investigate whether hybrid retrieval improves factuality in RAG systems."
-
-The system should understand the goal without immediately generating a final answer.
-
-==================================================
-5. RESEARCH CONTEXT ANALYSIS
-==================================================
-
-Analyze the workspace context.
-
-Retrieve:
-
-- relevant uploaded papers
-- previous literature reviews
-- research proposals
-- research questions
-- hypotheses
-- experiments
-- experiment results
-- generated reports
-- previous findings
-
-Create a structured research context.
-
-==================================================
-6. RESEARCH LANDSCAPE
-==================================================
-
-Generate a research landscape containing:
-
-- major research areas
-- major approaches
-- commonly used datasets
-- common evaluation metrics
-- dominant methodologies
-- major findings
-- conflicting findings
-- unresolved problems
-
-Every factual research claim must be grounded in evidence.
-
-==================================================
-7. TOPIC DECOMPOSITION
-==================================================
-
-Break a broad topic into research dimensions.
-
-Example:
-
-RAG
- ├── Retrieval
- │    ├── Dense Retrieval
- │    ├── Sparse Retrieval
- │    └── Hybrid Retrieval
- │
- ├── Generation
- │    ├── LLM
- │    ├── Prompting
- │    └── Grounding
- │
- ├── Evaluation
- │    ├── Retrieval Metrics
- │    ├── Generation Metrics
- │    └── Faithfulness
- │
- └── Applications
-
-The decomposition must be generated dynamically.
+# Milestone 22 — Frontend Foundation
 
-==================================================
-8. RESEARCH QUESTION GENERATION
-==================================================
+## Project Context
 
-Generate candidate research questions.
-
-Classify them as:
-
-- descriptive
-- comparative
-- causal
-- exploratory
-- predictive
-- methodological
-
-Each question should include:
-
-- rationale
-- evidence
-- expected difficulty
-- required data
-- required experiment
-- expected research value
-
-==================================================
-9. QUESTION QUALITY SCORING
-==================================================
-
-Score candidate research questions using deterministic criteria:
-
-- relevance
-- specificity
-- feasibility
-- novelty evidence
-- measurability
-- available resources
-- expected impact
-
-Do not allow the LLM to arbitrarily assign unexplained scores.
-
-Use a transparent scoring formula.
-
-==================================================
-10. RESEARCH GAP ANALYSIS
-==================================================
-
-Extend the existing research gap engine.
-
-Identify:
-
-1. Knowledge gaps
-2. Evidence gaps
-3. Methodological gaps
-4. Dataset gaps
-5. Evaluation gaps
-6. Reproducibility gaps
-7. Application gaps
-
-Each gap must include:
-
-- description
-- supporting sources
-- confidence
-- affected research area
-- possible investigation
-
-==================================================
-11. GAP CONFIDENCE
-==================================================
-
-Every generated gap must have a confidence level:
-
-HIGH
-MEDIUM
-LOW
-
-Confidence must be based on available evidence.
-
-Do NOT interpret:
-
-"No paper found"
-
-as:
-
-"No research exists."
-
-Instead say:
-
-"No relevant source was found within the currently available corpus."
-
-==================================================
-12. CONTRADICTION DETECTION
-==================================================
-
-Identify conflicting findings between papers.
-
-Example:
-
-Paper A:
-Method improves Recall@10.
-
-Paper B:
-Method does not improve Recall@10.
-
-The system should identify:
-
-- conflicting result
-- possible reason
-- dataset difference
-- methodology difference
-- evaluation difference
-- model difference
-
-Do not arbitrarily decide which paper is correct.
-
-==================================================
-13. EVIDENCE MATRIX
-==================================================
-
-Create an evidence matrix.
-
-Example:
-
-| Claim | Source | Evidence | Confidence |
-|------|--------|----------|------------|
-| Hybrid retrieval improves recall | Paper A | Experiment | High |
-| Improvement depends on dataset | Paper B | Analysis | Medium |
-
-Every row must have traceable evidence.
-
-==================================================
-14. RESEARCH CLAIM GRAPH
-==================================================
-
-Create a graph:
-
-Research Claim
-      ↓
-Evidence
-      ↓
-Paper
-      ↓
-Experiment
-      ↓
-Metric
-
-Allow traversal from:
-
-Claim → Evidence
-
-Evidence → Source
-
-Source → Paper
-
-Claim → Experiment
-
-This should support auditability.
-
-==================================================
-15. NOVELTY ANALYSIS
-==================================================
-
-Create a cautious novelty analysis.
-
-Classify ideas as:
-
-KNOWN
-RELATED
-UNDEREXPLORED
-POTENTIALLY_NOVEL
-UNKNOWN
-
-IMPORTANT:
-
-The system must NEVER claim:
-
-"This is the first research"
-
-unless the evidence genuinely supports such a statement.
-
-Use language such as:
-
-"Potentially underexplored within the analyzed literature."
-
-==================================================
-16. METHOD RECOMMENDATION
-==================================================
-
-Based on the research question, recommend candidate methods.
-
-Example:
-
-Research Question:
-Does hybrid retrieval improve RAG factuality?
-
-Candidate methods:
-
-- Dense retrieval
-- Sparse retrieval
-- Hybrid retrieval
-- Hybrid + reranking
-
-For each method include:
-
-- rationale
-- supporting papers
-- complexity
-- required resources
-- expected advantages
-- expected limitations
-
-==================================================
-17. BASELINE RECOMMENDATION
-==================================================
-
-Recommend appropriate baselines.
-
-Example:
-
-Baseline:
-Dense Retrieval
-
-Proposed:
-Hybrid Retrieval
-
-Additional:
-Hybrid + Reranker
-
-The system must explain why each baseline is appropriate.
-
-==================================================
-18. DATASET RECOMMENDATION
-==================================================
-
-Based on the research question, recommend:
-
-- existing datasets in workspace
-- suitable evaluation datasets
-- data requirements
-- data limitations
-
-Never fabricate dataset availability.
-
-If external discovery is supported, clearly distinguish:
-
-WORKSPACE DATA
-
-from
-
-EXTERNAL DATA
-
-==================================================
-19. EXPERIMENT RECOMMENDATION
-==================================================
-
-Generate candidate experiments.
-
-Each experiment should include:
-
-- research question
-- hypothesis
-- independent variable
-- dependent variable
-- control variables
-- baseline
-- proposed method
-- dataset
-- metrics
-- repetitions
-- statistical test
-- expected output
-
-
-==================================================
-20. EXPERIMENT DEPENDENCY GRAPH
-==================================================
-
-Create experiment dependencies.
-
-Example:
-
-Experiment 1
-Baseline evaluation
-       ↓
-Experiment 2
-Proposed method
-       ↓
-Experiment 3
-Ablation
-       ↓
-Experiment 4
-Statistical validation
-
-The system should identify which experiments must happen first.
-
-==================================================
-21. EXPERIMENT PRIORITIZATION
-==================================================
-
-Rank experiments based on:
-
-- research value
-- feasibility
-- expected information gain
-- cost
-- complexity
-- dependency
-- risk
-
-Use a deterministic prioritization formula.
-
-Example:
-
-Priority Score =
-    Research Value
-    × Feasibility
-    × Information Gain
-    ÷ Cost
-
-Document the formula.
-
-==================================================
-22. INFORMATION GAIN
-==================================================
-
-Introduce the concept of information gain.
-
-Prefer experiments that can distinguish between competing hypotheses.
-
-Example:
-
-If:
-
-H1: Hybrid retrieval improves factuality
-
-H2: Hybrid retrieval provides no improvement
-
-An experiment that directly distinguishes H1 vs H2 has high information value.
-
-==================================================
-23. RESEARCH RISK ANALYSIS
-==================================================
-
-Identify risks:
-
-- insufficient data
-- weak baseline
-- computational cost
-- unavailable dataset
-- unstable results
-- ambiguous hypothesis
-- citation uncertainty
-- reproducibility issues
-
-For each risk provide:
-
-- probability
-- impact
-- mitigation
-
-
-==================================================
-24. RESOURCE ESTIMATION
-==================================================
-
-Estimate research resources.
-
-Possible categories:
-
-- compute
-- storage
-- experiment time
-- number of experiments
-- LLM usage
-- human review
-
-Do not fabricate exact costs.
-
-Where exact values are unavailable, provide:
-
-LOW
-MEDIUM
-HIGH
-
-or an explicitly labeled estimate.
-
-
-==================================================
-25. RESEARCH ROADMAP
-==================================================
-
-Generate a structured roadmap.
-
-Example:
-
-Phase 1:
-Literature validation
-
-Phase 2:
-Baseline implementation
-
-Phase 3:
-Proposed method
-
-Phase 4:
-Ablation study
-
-Phase 5:
-Statistical validation
-
-Phase 6:
-Analysis
-
-Phase 7:
-Paper generation
-
-
-==================================================
-26. ROADMAP DEPENDENCIES
-==================================================
-
-Represent dependencies explicitly.
-
-Example:
-
-Literature Review
-      ↓
-Research Question
-      ↓
-Dataset
-      ↓
-Baseline
-      ↓
-Proposed Experiment
-      ↓
-Ablation
-      ↓
-Statistical Analysis
-      ↓
-Research Paper
-
-
-==================================================
-27. NEXT BEST ACTION
-==================================================
-
-Implement a "Next Best Research Action" engine.
-
-After reviewing the current workspace, the system should recommend:
-
-"Your next best action is..."
-
-Examples:
-
-- Review 3 papers
-- Run baseline experiment
-- Collect additional evidence
-- Perform ablation study
-- Validate hypothesis
-- Investigate contradictory findings
-
-The recommendation must include the reason.
-
-==================================================
-28. ACTION TYPES
-==================================================
-
-Support:
-
-READ_PAPER
-REVIEW_LITERATURE
-DEFINE_QUESTION
-DEFINE_HYPOTHESIS
-COLLECT_DATA
-RUN_BASELINE
-RUN_EXPERIMENT
-RUN_ABLATION
-PERFORM_STATISTICAL_TEST
-REVIEW_RESULT
-UPDATE_RESEARCH_GAP
-GENERATE_REPORT
-
-
-==================================================
-29. ACTION STATE
-==================================================
-
-Research actions should support:
-
-PENDING
-IN_PROGRESS
-BLOCKED
-COMPLETED
-SKIPPED
-FAILED
-
-
-==================================================
-30. HUMAN APPROVAL
-==================================================
-
-The system must require human approval before:
-
-- running expensive experiments
-- changing research objectives
-- creating external data collection tasks
-- deleting research artifacts
-- publishing reports
-
-The AI may recommend actions.
-
-The human decides whether to execute them.
-
-
-==================================================
-31. AUTONOMOUS MODE
-==================================================
-
-Support configurable autonomy levels.
-
-LEVEL 0:
-AI only recommends.
-
-LEVEL 1:
-AI prepares actions for approval.
-
-LEVEL 2:
-AI automatically executes safe actions.
-
-LEVEL 3:
-AI executes predefined workflows with human checkpoints.
-
-Do not implement unrestricted autonomy.
-
-
-==================================================
-32. SAFE ACTIONS
-==================================================
-
-Actions that may be automatically executed:
-
-- retrieve papers
-- summarize existing papers
-- organize evidence
-- calculate deterministic statistics
-- generate draft outlines
-- validate citations
-- run read-only analysis
-
-
-==================================================
-33. RESTRICTED ACTIONS
-==================================================
-
-Require approval for:
-
-- expensive experiments
-- external API usage with cost
-- dataset modification
-- deletion
-- publication
-- external communication
-
-
-==================================================
-34. RESEARCH MEMORY
-==================================================
-
-Create persistent research memory.
-
-Store:
-
-- important findings
-- rejected hypotheses
-- validated hypotheses
-- research decisions
-- experiment outcomes
-- literature insights
-- unresolved questions
-
-Memory must belong to the research workspace.
-
-Never leak memory between workspaces.
-
-
-==================================================
-35. DECISION MEMORY
-==================================================
-
-Store decisions such as:
-
-Decision:
-Use hybrid retrieval.
-
-Reason:
-Higher Recall@10 in baseline experiments.
-
-Evidence:
-Experiment R14.
-
-This allows future agents to understand previous decisions.
-
-
-==================================================
-36. RESEARCH STATE
-==================================================
-
-Create a structured research state.
-
-Conceptually:
-
-ResearchState
-
-{
-    goal,
-    context,
-    questions,
-    hypotheses,
-    literature,
-    gaps,
-    methods,
-    experiments,
-    results,
-    findings,
-    decisions,
-    roadmap,
-    next_actions
-}
-
-
-==================================================
-37. LANGGRAPH INTEGRATION
-==================================================
-
-Extend the existing LangGraph architecture.
-
-Possible nodes:
-
-research_intake
-context_analysis
-topic_decomposition
-literature_analysis
-evidence_analysis
-gap_analysis
-contradiction_analysis
-question_generation
-hypothesis_generation
-method_recommendation
-experiment_planning
-priority_analysis
-roadmap_generation
-next_action_selection
-human_approval
-state_update
-
-
-==================================================
-38. LANGGRAPH STATE
-==================================================
-
-Extend the existing state carefully.
-
-Do not duplicate existing state fields.
-
-Use typed state definitions.
-
-The graph should support:
-
-START
- ↓
-Research Intake
- ↓
-Context Analysis
- ↓
-Literature Analysis
- ↓
-Evidence Analysis
- ↓
-Gap Analysis
- ↓
-Question Generation
- ↓
-Hypothesis Generation
- ↓
-Method Recommendation
- ↓
-Experiment Planning
- ↓
-Priority Analysis
- ↓
-Roadmap
- ↓
-Human Approval
- ↓
-END
-
-
-==================================================
-39. CONDITIONAL ROUTING
-==================================================
-
-Implement conditional routing.
-
-Example:
-
-If sufficient literature:
-    continue
-
-If insufficient literature:
-    recommend literature collection
-
-If research question unclear:
-    ask for clarification
-
-If experiment already exists:
-    reuse existing experiment
-
-If evidence conflicts:
-    recommend contradiction analysis
-
-
-==================================================
-40. LOOP CONTROL
-==================================================
-
-Prevent infinite agent loops.
-
-Implement:
-
-- maximum iterations
-- maximum tool calls
-- timeout
-- state checkpoints
-
-
-==================================================
-41. RESEARCH PLAN ENTITY
-==================================================
-
-Create:
-
-ResearchPlan
-
-Fields conceptually:
-
-id
-workspace_id
-goal
-status
-version
-confidence
-created_at
-updated_at
-
-
-==================================================
-42. RESEARCH GAP ENTITY
-==================================================
-
-Reuse existing gap entity if available.
-
-Otherwise create:
-
-ResearchGap
-
-id
-research_plan_id
-description
-type
-confidence
-evidence_ids
-status
-created_at
-
-
-==================================================
-43. RESEARCH ACTION ENTITY
-==================================================
-
-Create:
-
-ResearchAction
-
-id
-research_plan_id
-type
-title
-description
-priority
-status
-dependencies
-estimated_cost
-estimated_effort
-requires_approval
-created_at
-completed_at
-
-
-==================================================
-44. RESEARCH DECISION ENTITY
-==================================================
-
-Create:
-
-ResearchDecision
-
-id
-workspace_id
-decision
-reason
-evidence_ids
-experiment_ids
-created_at
-
-
-==================================================
-45. RESEARCH MEMORY ENTITY
-==================================================
-
-Create or reuse:
-
-ResearchMemory
-
-id
-workspace_id
-memory_type
-content
-source_type
-source_id
-confidence
-created_at
-
-
-==================================================
-46. API DESIGN
-==================================================
-
-Follow the existing API architecture.
-
-Potential endpoints:
-
-POST
-/research-plans
-
-Create research plan.
-
-GET
-/research-plans/{id}
-
-Get research plan.
-
-POST
-/research-plans/{id}/analyze
-
-Run research intelligence analysis.
-
-GET
-/research-plans/{id}/gaps
-
-Get research gaps.
-
-GET
-/research-plans/{id}/questions
-
-Get research questions.
-
-GET
-/research-plans/{id}/experiments
-
-Get recommended experiments.
-
-GET
-/research-plans/{id}/roadmap
-
-Get research roadmap.
-
-GET
-/research-plans/{id}/actions
-
-Get next actions.
-
-POST
-/research-actions/{id}/approve
-
-Approve action.
-
-POST
-/research-actions/{id}/execute
-
-Execute action.
-
-GET
-/research-plans/{id}/evidence
-
-Get evidence matrix.
-
-GET
-/research-plans/{id}/decisions
-
-Get research decisions.
-
-Adapt endpoint names to the existing API conventions.
-
-
-==================================================
-47. FRONTEND — RESEARCH INTELLIGENCE DASHBOARD
-==================================================
-
-Create a new Research Intelligence dashboard.
-
-Display:
-
-Research Goal
-
-Research Landscape
-
-Research Gaps
-
-Research Questions
-
-Hypotheses
-
-Recommended Methods
-
-Recommended Experiments
-
-Research Risks
-
-Research Roadmap
-
-Next Best Action
-
-
-==================================================
-48. RESEARCH LANDSCAPE UI
-==================================================
-
-Display major research areas.
-
-Example:
-
-Topic
- ↓
-Subtopics
- ↓
-Methods
- ↓
-Datasets
- ↓
-Metrics
-
-
-==================================================
-49. RESEARCH GAP UI
-==================================================
-
-Display:
-
-Gap
-Evidence
-Confidence
-Research opportunity
-Recommended experiment
-
-
-==================================================
-50. EVIDENCE MATRIX UI
-==================================================
-
-Provide a table:
-
-Claim
-Evidence
-Source
-Confidence
-Research implication
-
-
-==================================================
-51. CONTRADICTION UI
-==================================================
-
-Display conflicting evidence.
-
-Example:
-
-Finding A
-Source A
-vs
-Finding B
-Source B
-
-Then show:
-
-Possible reasons
-
-Recommended validation experiment
-
-
-==================================================
-52. RESEARCH QUESTION UI
-==================================================
-
-For each candidate question display:
-
-Question
-Type
-Relevance
-Feasibility
-Evidence
-Score
-Recommended next step
-
-
-==================================================
-53. EXPERIMENT RECOMMENDATION UI
-==================================================
-
-Display:
-
-Experiment
-Purpose
-Hypothesis
-Baseline
-Dataset
-Metrics
-Estimated cost
-Priority
-Dependencies
-
-
-==================================================
-54. ROADMAP UI
-==================================================
-
-Create a visual research roadmap.
-
-Example:
-
-[Literature]
-      ↓
-[Baseline]
-      ↓
-[Proposed Method]
-      ↓
-[Ablation]
-      ↓
-[Statistical Test]
-      ↓
-[Analysis]
-      ↓
-[Paper]
-
-
-==================================================
-55. NEXT ACTION UI
-==================================================
-
-Create a prominent:
-
-"Recommended Next Action"
-
-card.
-
-Example:
-
-NEXT BEST ACTION
-
-Run baseline experiment.
-
-Why?
-
-The current research plan has a validated hypothesis but no baseline result.
-
-Evidence:
-Research Plan RP-42
-
-Action:
-Run Experiment EXP-12
-
-
-==================================================
-56. APPROVAL UI
-==================================================
-
-For restricted actions display:
-
-Action
-Reason
-Expected cost
-Expected duration
-Dependencies
-Evidence
-
-Buttons:
-
-Approve
-Reject
-Modify
-
-
-==================================================
-57. RESEARCH MEMORY UI
-==================================================
-
-Display:
-
-Important Findings
-Research Decisions
-Rejected Hypotheses
-Validated Hypotheses
-Unresolved Questions
-
-
-==================================================
-58. EVIDENCE GROUNDING
-==================================================
-
-Every recommendation must have evidence where possible.
+You are working on an **AI Research Assistant** full-stack application.
+
+The project already has the backend and AI/research infrastructure implemented through **Milestone 21**.
+
+Completed milestones include:
+
+* Project setup
+* Backend foundation
+* Authentication & authorization
+* Research workspace
+* PDF upload and document management
+* PDF text extraction
+* Document chunking
+* Embedding generation
+* Vector database
+* RAG question answering
+* LangGraph autonomous research agent
+* Citation and source grounding
+* Multi-paper comparison
+* Literature review
+* Research gap discovery
+* Research planning
+* Web/external research integration
+* Multi-agent research system
+* Evaluation framework
+* Performance/cost optimization
+* Production security
+
+The next milestone is:
+
+# Milestone 22 — Frontend Foundation
+
+The goal of this milestone is to create the **complete frontend foundation** using **React + TypeScript** without yet implementing all advanced research features.
+
+The frontend must be designed so that Milestones 23–25 can build on it without requiring a major rewrite.
+
+---
+
+# 1. First: Inspect the Existing Project
+
+Before modifying anything:
+
+1. Inspect the entire repository structure.
+2. Identify:
+
+   * Backend framework
+   * Backend entry point
+   * Existing API routes
+   * Authentication endpoints
+   * User/workspace endpoints
+   * PDF/document endpoints
+   * RAG endpoints
+   * Database models
+   * Existing environment variables
+   * Docker configuration
+   * Existing tests
+   * Existing documentation
+3. Understand the existing authentication mechanism.
+4. Understand the API request/response formats.
+5. Identify whether a frontend directory already exists.
+6. Reuse existing project conventions wherever possible.
+
+Do **not** rewrite or unnecessarily modify the working backend.
+
+If the repository already contains partial frontend code, improve it instead of creating a duplicate frontend.
+
+---
+
+# 2. Frontend Technology Stack
+
+Use:
+
+* React
+* TypeScript
+* Vite
+* React Router
+* Axios or a clean fetch-based API client
+* Modern CSS approach already used by the project; otherwise use a maintainable CSS architecture
+* ESLint
+* Prettier if already configured
+* Lucide React or another lightweight icon library if needed
+
+Do not introduce unnecessary libraries.
+
+Prefer simple, maintainable architecture over excessive dependencies.
+
+---
+
+# 3. Frontend Folder Structure
+
+Create a clean scalable structure similar to:
+
+frontend/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   │   ├── common/
+│   │   ├── layout/
+│   │   ├── ui/
+│   │   └── feedback/
+│   │
+│   ├── pages/
+│   │   ├── auth/
+│   │   ├── dashboard/
+│   │   ├── papers/
+│   │   └── settings/
+│   │
+│   ├── layouts/
+│   │   ├── AuthLayout.tsx
+│   │   └── DashboardLayout.tsx
+│   │
+│   ├── services/
+│   │   ├── api.ts
+│   │   ├── authService.ts
+│   │   └── paperService.ts
+│   │
+│   ├── hooks/
+│   ├── context/
+│   ├── types/
+│   ├── utils/
+│   ├── routes/
+│   ├── config/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── .env.example
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
+
+Adapt this structure to the existing repository instead of blindly following it.
+
+---
+
+# 4. Application Routing
+
+Implement frontend routing using React Router.
+
+Create routes for:
+
+## Public routes
+
+* `/`
+* `/login`
+* `/register`
+
+## Protected routes
+
+* `/dashboard`
+* `/papers`
+* `/papers/:paperId`
+* `/research`
+* `/settings`
+
+The advanced functionality can initially contain placeholder states where appropriate.
 
 For example:
 
-Recommendation:
-Run an ablation study.
+* `/research` → research workspace placeholder
+* `/papers/:paperId` → paper details placeholder
 
-Reason:
-Existing experiment indicates performance improvement, but contribution of individual components is unknown.
+Do not implement the complete research functionality in this milestone.
 
-Evidence:
-Experiment EXP-42
+That belongs to Milestones 23 and 24.
 
-Do not generate unsupported recommendations.
+---
 
+# 5. Landing Page
 
-==================================================
-59. CONFIDENCE
-==================================================
+Create a professional landing page for the AI Research Assistant.
 
-Every AI-generated research recommendation should have:
+It should contain:
 
-HIGH
-MEDIUM
-LOW
+### Hero section
 
-Confidence.
+Title:
 
-Confidence must be based on evidence availability and quality.
+> AI Research Assistant
 
-==================================================
-60. UNCERTAINTY
-==================================================
+Subtitle explaining that the platform helps researchers:
 
-The system must explicitly represent uncertainty.
+* Read papers
+* Search academic content
+* Ask questions
+* Summarize papers
+* Compare research
+* Generate literature reviews
+* Discover research insights
 
-Examples:
+Add CTA buttons:
 
-"Evidence is insufficient."
+* Get Started
+* Sign In
 
-"Available papers provide conflicting results."
+### Feature section
 
-"No experiment currently validates this hypothesis."
+Show cards for:
 
-Do not force the AI to provide a confident answer.
+* AI-Powered Research
+* RAG-Based Question Answering
+* Paper Summarization
+* Multi-Paper Comparison
+* Citation-Grounded Answers
+* Literature Review
 
-
-==================================================
-61. EXTERNAL RESEARCH DISCOVERY
-==================================================
-
-If external web/search capabilities already exist:
-
-Allow the research intelligence engine to discover external literature.
-
-Clearly mark:
-
-INTERNAL SOURCE
-
-vs
-
-EXTERNAL SOURCE
-
-
-Do not silently mix them.
-
-
-==================================================
-62. SOURCE PROVENANCE
-==================================================
-
-Every external source should store:
-
-- URL
-- title
-- author
-- publication date
-- source
-- retrieval timestamp
-
-Follow the existing citation/provenance system.
-
-
-==================================================
-63. RESEARCH PLAN VERSIONING
-==================================================
-
-Research plans must be versioned.
-
-Example:
-
-v1:
-Initial plan
-
-v2:
-Added ablation experiment
-
-v3:
-Updated after experiment results
-
-
-==================================================
-64. PLAN UPDATE
-
-When new evidence appears:
-
-Existing Plan
-      ↓
-New Evidence
-      ↓
-Impact Analysis
-      ↓
-Plan Update
-
-
-The system should identify which research actions are affected.
-
-
-==================================================
-65. RESULT-DRIVEN ADAPTATION
-==================================================
-
-If an experiment produces unexpected results:
-
-Example:
-
-Expected:
-Proposed method improves performance.
-
-Actual:
-Proposed method performs worse.
-
-The system should:
-
-1. Record result.
-2. Mark hypothesis status.
-3. Identify affected assumptions.
-4. Recommend follow-up analysis.
-5. Update research roadmap.
-
-Do not hide negative results.
-
-
-==================================================
-66. HYPOTHESIS STATUS
-
-Support:
-
-UNTESTED
-SUPPORTED
-PARTIALLY_SUPPORTED
-NOT_SUPPORTED
-INCONCLUSIVE
-
-
-==================================================
-67. RESEARCH PLAN STATUS
-
-Support:
-
-DRAFT
-ANALYZING
-READY_FOR_REVIEW
-APPROVED
-IN_PROGRESS
-BLOCKED
-COMPLETED
-ARCHIVED
-
-
-==================================================
-68. RESEARCH PLAN QUALITY
-
-Create deterministic quality checks:
-
-- research goal defined
-- evidence available
-- questions measurable
-- hypotheses testable
-- experiments feasible
-- evaluation metrics defined
-- dependencies resolved
-
-
-==================================================
-69. RESEARCH INTELLIGENCE EVALUATION
-
-Create evaluation datasets for:
-
-- gap detection
-- contradiction detection
-- question generation
-- method recommendation
-- experiment recommendation
-- next-action recommendation
-
-
-==================================================
-70. EVALUATION METRICS
-
-Measure:
-
-Gap precision
-Gap relevance
-Question quality
-Experiment relevance
-Recommendation acceptance rate
-Action completion rate
-Citation correctness
-
-
-==================================================
-71. HUMAN FEEDBACK
-
-Allow researchers to rate recommendations:
-
-Helpful
-Not Helpful
-
-and optionally provide feedback.
-
-Store feedback for evaluation.
-
-Do not automatically train a model from feedback.
-
-
-==================================================
-72. RECOMMENDATION FEEDBACK
-
-Track:
-
-Recommendation
- ↓
-Accepted / Rejected
- ↓
-Actual outcome
-
-
-This allows later evaluation of recommendation quality.
-
-
-==================================================
-73. COST AWARENESS
-
-When recommending experiments, consider:
-
-- compute cost
-- LLM cost
-- storage cost
-- experiment duration
-
-Use real measurements when available.
-
-Otherwise explicitly label estimates.
-
-
-==================================================
-74. COMPUTE-AWARE PLANNING
-
-If experiment resources are limited:
-
-Prioritize experiments using:
-
-Research Value
-+
-Information Gain
-+
-Feasibility
--
-Cost
--
-Risk
-
-
-==================================================
-75. RESEARCH PORTFOLIO
-
-Allow multiple research plans in one workspace.
-
-Example:
-
-Workspace
- ├── Research Plan A
- ├── Research Plan B
- └── Research Plan C
-
-
-Display:
-
-- status
-- priority
-- progress
-- current next action
-
-
-==================================================
-76. RESEARCH PROGRESS
-
-Calculate deterministic progress.
-
-Example:
-
-Completed Actions / Total Actions × 100
-
-
-Do not let the LLM determine progress.
-
-
-==================================================
-77. BLOCKER DETECTION
-
-Identify blocked actions.
-
-Example:
-
-Experiment requires dataset.
-
-Dataset unavailable.
-
-Status:
-
-BLOCKED
-
-Recommended resolution:
-
-Acquire dataset or select alternative dataset.
-
-
-==================================================
-78. DEPENDENCY MANAGEMENT
-
-When an action is blocked:
-
-Identify dependent actions.
-
-Example:
-
-Dataset
- ↓
-Baseline
- ↓
-Proposed Experiment
- ↓
-Ablation
-
-
-If Dataset is blocked:
-
-Baseline
-Proposed Experiment
-Ablation
-
-should reflect the dependency.
-
-
-==================================================
-79. RESEARCH TIMELINE
-
-Create a timeline showing:
-
-- research decisions
-- experiments
-- results
-- plan updates
-- report versions
-
-
-==================================================
-80. AUDIT TRAIL
-
-Every autonomous planning action must be auditable.
-
-Store:
-
-- timestamp
-- agent run ID
-- node
-- input context identifier
-- output
-- evidence IDs
-- action
-- human approval if required
-
-
-Do not store unnecessary sensitive content.
-
-
-==================================================
-81. SECURITY
-
-Apply all Milestone 20 security requirements.
-
-Especially:
-
-- workspace isolation
-- authentication
-- authorization
-- prompt injection defense
-- rate limiting
-- audit logging
-- safe tool execution
-
-
-==================================================
-82. OBSERVABILITY
-
-Reuse Milestone 20 observability.
-
-Track:
-
-- planning runs
-- node latency
-- LLM calls
-- tool calls
-- failures
-- recommendation count
-- approval rate
-- action execution rate
-
-
-==================================================
-83. ERROR HANDLING
-
-If planning fails:
-
-- preserve previous research plan
-- record failure
-- show safe error
-- allow retry
-
-
-Never destroy the previous valid plan.
-
-
-==================================================
-84. TESTING
-
-Implement unit tests for:
-
-- topic decomposition
-- gap scoring
-- question scoring
-- experiment prioritization
-- dependency resolution
-- progress calculation
-- blocker detection
-- action generation
-
-
-==================================================
-85. INTEGRATION TESTS
-
-Test:
-
-Research Goal
- ↓
-Context
- ↓
-Literature
- ↓
-Evidence
- ↓
-Gap
- ↓
-Question
- ↓
-Hypothesis
- ↓
-Method
- ↓
-Experiment
- ↓
-Roadmap
- ↓
-Next Action
-
-
-==================================================
-86. AGENT TESTING
-
-Test LangGraph behavior for:
-
-- insufficient evidence
-- conflicting evidence
-- missing experiment
-- completed experiment
-- failed experiment
-- invalid research question
-- tool failure
-- LLM failure
-
-
-==================================================
-87. HALLUCINATION TESTS
-
-Create tests where the model attempts to:
-
-- invent research gaps
-- invent papers
-- invent evidence
-- invent experiment results
-- invent dataset availability
-- claim novelty
-- fabricate citations
-
-
-The system must flag or reject unsupported claims.
-
-
-==================================================
-88. REGRESSION TESTING
-
-Ensure Milestones 1–20 continue working.
-
-Especially:
-
-- authentication
-- document upload
-- RAG
-- citations
-- summarization
-- comparison
-- literature review
-- research proposal
-- experiments
-- statistical analysis
-- report generation
-- export
-- production monitoring
-
-
-==================================================
-89. PERFORMANCE
-
-Measure:
-
-- research planning latency
-- retrieval latency
-- number of LLM calls
-- token usage
-- planning cost
-- number of graph iterations
-
-
-Avoid unnecessary LLM calls.
-
-Use deterministic logic where possible.
-
-
-==================================================
-90. LLM CALL OPTIMIZATION
-
-Do not use an LLM for tasks that can be deterministic.
-
-Examples:
-
-Progress calculation
-Priority arithmetic
-Dependency resolution
-Status transitions
-Validation
-Sorting
-
-
-Use LLMs for:
-
-- interpretation
-- synthesis
-- reasoning over evidence
-- research question generation
-- recommendation generation
-
-
-==================================================
-91. CACHING
-
-Reuse Milestone 20 caching where safe.
-
-Potentially cache:
-
-- research landscape
-- paper summaries
-- evidence extraction
-- stable literature analysis
-
-Invalidate when underlying research data changes.
-
-
-==================================================
-92. API AUTHORIZATION
-
-Every ResearchPlan must belong to a workspace.
-
-Verify:
-
-User
- ↓
-Workspace
- ↓
-ResearchPlan
-
-
-Never allow cross-workspace access.
-
-
-==================================================
-93. DATABASE INDEXING
-
-Add indexes for:
-
-- workspace_id
-- research_plan_id
-- status
-- action priority
-- action status
-- created_at
-
-
-Adapt to the existing database.
-
-
-==================================================
-94. FRONTEND UX
-
-The Research Intelligence dashboard should make the AI's reasoning understandable.
-
-Avoid showing opaque:
-
-"AI decided this."
-
-Instead show:
-
-Recommendation
-Reason
-Evidence
-Confidence
-Expected benefit
-Risk
-
-
-==================================================
-95. EXPLAINABILITY
-
-Every major recommendation should answer:
-
-WHY?
-
-WHAT EVIDENCE?
-
-WHAT ACTION?
-
-WHAT HAPPENS NEXT?
-
-
-==================================================
-96. RESEARCH PLAN EXPORT
-
-Allow export of the research plan as:
-
-- Markdown
-- PDF
-- JSON
+### Footer
 
 Include:
 
-- research goal
-- research questions
-- hypotheses
-- gaps
-- methods
-- experiments
-- roadmap
-- risks
-- evidence
+* Project name
+* Copyright
+* GitHub/project links if already available
 
+Keep the design professional and suitable for a final-year engineering project portfolio.
 
-==================================================
-97. REPORT INTEGRATION
+---
 
-Milestone 21 must integrate with Milestone 19.
+# 6. Authentication UI
 
-The research plan should be able to generate/update:
+Create:
 
-- research proposal
-- experiment plan
-- final report
+## Login page
 
+Fields:
 
-Pipeline:
+* Email/username according to existing backend API
+* Password
 
-Research Intelligence
+Actions:
+
+* Login
+* Navigate to registration
+* Display validation errors
+* Display API errors
+* Loading state during login
+
+## Register page
+
+Fields according to the existing backend API.
+
+At minimum, support:
+
+* Name if required
+* Email
+* Password
+* Confirm password
+
+Actions:
+
+* Register
+* Navigate to login
+* Validation
+* API error handling
+* Loading state
+
+IMPORTANT:
+
+Do not invent backend authentication fields.
+
+Inspect the existing backend API and use its actual request schema.
+
+---
+
+# 7. Authentication State
+
+Implement a clean authentication state system.
+
+The frontend should know:
+
+```text
+authenticated
+unauthenticated
+loading
+```
+
+Create an appropriate authentication context/provider or state solution.
+
+It should support:
+
+* Login
+* Logout
+* Persisting authentication state
+* Getting current user
+* Protected routes
+* Redirecting unauthenticated users
+* Redirecting authenticated users away from login/register when appropriate
+
+If the backend uses JWT:
+
+* Store tokens securely according to the project's architecture.
+* Attach the access token to protected API requests.
+* Handle expired/invalid tokens.
+* Automatically clear authentication state when the backend returns an authentication failure.
+
+Do not expose secrets in frontend code.
+
+---
+
+# 8. Protected Route
+
+Create a reusable protected route mechanism.
+
+Example behavior:
+
+```text
+User opens /dashboard
         ↓
-Research Plan
-        ↓
-Experiment
-        ↓
-Results
-        ↓
-Research Paper
+Is authenticated?
+   ┌────┴────┐
+   │         │
+  YES       NO
+   │         │
+   ▼         ▼
+Dashboard   /login
+```
 
+While authentication status is being determined, show a loading state rather than incorrectly redirecting the user.
 
-==================================================
-98. CONTINUOUS RESEARCH LOOP
+---
 
-Implement the concept:
+# 9. Main Application Layout
 
-PLAN
- ↓
-RESEARCH
- ↓
-EXPERIMENT
- ↓
-ANALYZE
- ↓
-LEARN
- ↓
-UPDATE PLAN
- ↓
-NEXT ACTION
- ↓
-RESEARCH
+Create a professional dashboard layout.
 
+Structure:
 
-This is the core advanced capability.
+```text
+┌──────────────────────────────────────────────┐
+│                  Top Navbar                  │
+├──────────────┬───────────────────────────────┤
+│              │                               │
+│   Sidebar    │         Main Content          │
+│              │                               │
+│ Dashboard    │                               │
+│ Papers       │                               │
+│ Research     │                               │
+│ Settings     │                               │
+│              │                               │
+│              │                               │
+│ Logout       │                               │
+└──────────────┴───────────────────────────────┘
+```
 
+Sidebar should contain:
 
-==================================================
-99. EXAMPLE END-TO-END SCENARIO
+* Dashboard
+* My Papers
+* Research
+* Settings
+* Logout
 
-User enters:
+Top navigation should contain:
 
-"Investigate whether hybrid retrieval improves RAG factuality."
+* Application name/logo
+* User information
+* Optional profile menu
+* Responsive navigation
 
-System performs:
+---
 
-1. Analyze research context.
+# 10. Dashboard Page
 
-2. Retrieve relevant papers.
+Create the initial dashboard.
 
-3. Build research landscape.
+Show:
 
-4. Identify research gaps.
+### Welcome section
 
-5. Detect conflicting findings.
+Example:
 
-6. Generate candidate research questions.
+> Welcome back, Researcher
 
-7. Generate hypotheses.
+Use the actual authenticated user's name if available.
 
-8. Recommend baselines.
+### Statistics cards
 
-9. Recommend experiments.
+Prepare reusable cards for:
 
-10. Estimate research risks.
+* Total Papers
+* Research Sessions
+* Questions Asked
+* Saved Research
 
-11. Prioritize experiments.
+If the corresponding backend APIs already exist, fetch the real values.
 
-12. Generate roadmap.
+If they don't exist yet, use clearly marked placeholder values rather than inventing backend endpoints.
 
-13. Recommend next best action.
+### Quick actions
 
-14. Ask for approval before expensive experiment.
+Add buttons/cards:
 
-15. Execute approved experiment.
+* Upload Paper
+* Ask Research Question
+* Compare Papers
+* Generate Literature Review
 
-16. Analyze actual result.
+For this milestone, these actions can navigate to the appropriate pages/placeholders.
 
-17. Update hypothesis status.
+---
 
-18. Update research plan.
+# 11. Papers Page
 
-19. Recommend next action.
+Create the basic paper library UI.
 
-20. Eventually generate research paper.
+The page should support the frontend structure for:
 
-The complete process must remain traceable.
+* Paper list
+* Search field
+* Filter area
+* Upload button
+* Empty state
+* Loading state
+* Error state
 
+Each paper card/list item should be designed to eventually display:
 
-==================================================
-100. FINAL DEFINITION OF DONE
+* Title
+* Authors
+* Upload date
+* Processing status
+* Number of pages/chunks if available
+* Actions
 
-Milestone 21 is complete only when:
+Connect to the existing backend paper/document API if it is already available.
 
-[ ] Research Intelligence Engine exists.
-[ ] Research Goal can be created.
-[ ] Research Context can be analyzed.
-[ ] Research Landscape can be generated.
-[ ] Topic decomposition works.
-[ ] Research questions can be generated.
-[ ] Questions receive deterministic quality scores.
-[ ] Research gaps can be identified.
-[ ] Gap confidence exists.
-[ ] Contradictory findings can be detected.
-[ ] Evidence matrix exists.
-[ ] Research claim graph exists.
-[ ] Novelty analysis exists.
-[ ] Candidate methods can be recommended.
-[ ] Baselines can be recommended.
-[ ] Dataset requirements can be identified.
-[ ] Candidate experiments can be generated.
-[ ] Experiment dependencies exist.
-[ ] Experiments can be prioritized.
-[ ] Information gain is considered.
-[ ] Research risks are identified.
-[ ] Resource requirements are represented.
-[ ] Research roadmap can be generated.
-[ ] Next Best Action exists.
-[ ] Research actions exist.
-[ ] Human approval exists.
-[ ] Autonomy levels exist.
-[ ] Safe actions are distinguishable from restricted actions.
-[ ] Research memory exists.
-[ ] Research decisions are stored.
-[ ] Research state exists.
-[ ] LangGraph integration works.
-[ ] Conditional routing works.
-[ ] Loop protection exists.
-[ ] Research plan versioning exists.
-[ ] Research plan updates from new evidence.
-[ ] Negative experiment results are handled correctly.
-[ ] Hypothesis status updates correctly.
-[ ] Research plan status exists.
-[ ] Blocker detection exists.
-[ ] Dependency management works.
-[ ] Research timeline exists.
-[ ] Audit trail exists.
-[ ] Security requirements from Milestone 20 are preserved.
-[ ] Observability from Milestone 20 is preserved.
-[ ] Recommendation evaluation exists.
-[ ] Human feedback exists.
-[ ] Cost awareness exists.
-[ ] Compute-aware prioritization exists.
-[ ] Multiple research plans can exist.
-[ ] Progress calculation is deterministic.
-[ ] Research plan export works.
-[ ] Milestone 19 report generation integrates with the plan.
-[ ] Continuous research loop works.
-[ ] Unit tests pass.
-[ ] Integration tests pass.
-[ ] Agent tests pass.
-[ ] Hallucination tests pass.
-[ ] Regression tests pass.
-[ ] Performance tests pass.
-[ ] Milestones 1–20 remain functional.
+Do not create fake backend APIs.
 
+---
 
-==================================================
-101. MOST IMPORTANT PRINCIPLE
-==================================================
+# 12. Upload Paper UI Foundation
 
-The system must never behave as:
+Create a reusable upload component.
 
-USER
- ↓
-LLM
- ↓
-RANDOM RESEARCH PLAN
+Support:
 
+* Drag and drop
+* File selection
+* File type validation
+* File size validation according to backend limits
+* Upload progress UI
+* Success state
+* Error state
+* Cancel/reset UI
+
+The upload component should be reusable later in Milestone 23.
+
+If the backend upload API is already ready, integrate it.
+
+If not, create the frontend service/interface without pretending that the API works.
+
+---
+
+# 13. Reusable UI Components
+
+Create reusable components instead of duplicating UI code.
+
+At minimum:
+
+* Button
+* Input
+* PasswordInput
+* Card
+* Modal/Dialog
+* Dropdown
+* Badge
+* Spinner
+* LoadingState
+* ErrorState
+* EmptyState
+* Toast/notification
+* FileUpload
+* PaperCard
+* StatCard
+* Sidebar
+* Navbar
+
+Keep components modular.
+
+---
+
+# 14. API Service Layer
+
+Do NOT call APIs directly from every component.
+
+Create a centralized API client.
+
+For example:
+
+```text
+services/
+    api.ts
+    authService.ts
+    paperService.ts
+```
+
+The API client should handle:
+
+* Base URL
+* Headers
+* Authentication
+* JSON requests
+* Error handling
+* Timeouts where appropriate
+
+Use environment variables.
+
+Example:
+
+```text
+VITE_API_BASE_URL=
+```
+
+Create:
+
+```text
+.env.example
+```
+
+Never commit real secrets.
+
+---
+
+# 15. TypeScript Types
+
+Create reusable types/interfaces for API data.
+
+For example:
+
+```text
+User
+AuthResponse
+Paper
+PaperMetadata
+UploadResponse
+ApiError
+ResearchSession
+```
+
+The exact fields must match the backend wherever possible.
+
+Avoid:
+
+```typescript
+any
+```
+
+unless genuinely unavoidable.
+
+Use proper TypeScript types.
+
+---
+
+# 16. Loading, Error and Empty States
+
+Every API-driven page should properly handle:
+
+### Loading
+
+```text
+Loading papers...
+```
+
+### Error
+
+```text
+Unable to load papers.
+Try again.
+```
+
+### Empty
+
+```text
+No research papers yet.
+Upload your first paper to get started.
+```
+
+Do not leave blank screens when API requests fail.
+
+---
+
+# 17. Responsive Design
+
+The frontend must work on:
+
+* Desktop
+* Laptop
+* Tablet
+* Mobile
+
+The sidebar should adapt appropriately on smaller screens.
+
+Ensure:
+
+* No horizontal overflow
+* Buttons remain usable
+* Forms work on mobile
+* Cards resize correctly
+* Navigation remains accessible
+
+---
+
+# 18. UI/UX Requirements
+
+The application should look like a real SaaS research platform.
+
+Design principles:
+
+* Clean
+* Minimal
+* Professional
+* Consistent spacing
+* Consistent typography
+* Clear hierarchy
+* Accessible forms
+* Meaningful empty states
+* Proper hover/focus states
+* Proper loading feedback
+
+Avoid:
+
+* Excessive animations
+* Overly colorful UI
+* Unnecessary gradients
+* Cluttered dashboards
+* Huge components
+* Hardcoded repeated styles
+
+The UI should be suitable for demonstrating the project during an SDE interview/project review.
+
+---
+
+# 19. Accessibility
+
+Implement basic accessibility:
+
+* Semantic HTML
+* Proper labels for inputs
+* Keyboard navigation
+* Visible focus states
+* Accessible buttons
+* Meaningful alt text
+* Proper form error messages
+* ARIA attributes where required
+
+Do not rely only on color to communicate state.
+
+---
+
+# 20. Environment Configuration
+
+Create frontend environment configuration.
+
+Example:
+
+```text
+VITE_API_BASE_URL=http://localhost:8000
+```
+
+Use environment variables rather than hardcoding:
+
+```text
+http://localhost:8000
+```
+
+throughout the application.
+
+Create:
+
+```text
+.env.example
+```
+
+with safe placeholder values.
+
+Do not commit:
+
+```text
+.env
+```
+
+if it contains secrets or environment-specific values.
+
+---
+
+# 21. Error Handling
+
+Implement centralized frontend error handling.
+
+Handle:
+
+* 400
+* 401
+* 403
+* 404
+* 409
+* 422
+* 429
+* 500
+* Network errors
+* Timeout errors
+
+Display user-friendly messages.
+
+Do not expose raw backend stack traces to users.
+
+---
+
+# 22. Frontend Security
+
+Follow basic security practices:
+
+* Never hardcode API keys
+* Never commit secrets
+* Validate uploaded files
+* Do not trust client-side validation alone
+* Avoid unsafe HTML rendering
+* Do not use `dangerouslySetInnerHTML` unless absolutely necessary
+* Handle authentication failures correctly
+* Do not expose internal backend information
+
+Remember that frontend validation is only a UX feature; backend validation remains authoritative.
+
+---
+
+# 23. Code Quality
+
+Follow:
+
+* TypeScript strict mode
+* ESLint
+* Clean component architecture
+* Reusable components
+* Meaningful variable names
+* Small functions
+* Separation of concerns
+* No unnecessary duplication
+
+Avoid giant components such as:
+
+```text
+Dashboard.tsx
+```
+
+containing hundreds of lines.
+
+Break functionality into reusable components.
+
+---
+
+# 24. Testing
+
+Add frontend tests for the most important foundation functionality.
+
+At minimum test:
+
+### Authentication
+
+* Login form renders
+* Validation works
+* Successful login behavior
+* Failed login behavior
+
+### Routing
+
+* Protected route redirects unauthenticated users
+* Authenticated users can access dashboard
+
+### Components
+
+* Button
+* Input
+* File upload
+* Paper card
+
+Use the testing framework already present in the project if one exists.
+
+If no frontend testing framework exists, introduce a lightweight standard solution appropriate for the React/Vite stack.
+
+---
+
+# 25. Build Verification
+
+After implementation, run:
+
+```text
+npm install
+npm run lint
+npm run build
+npm test
+```
+
+Use the actual scripts defined in `package.json`.
+
+Fix all TypeScript errors.
+
+Fix all lint errors.
+
+Fix all build errors.
+
+Do not mark the milestone complete while the frontend does not build successfully.
+
+---
+
+# 26. Backend Compatibility
+
+This is extremely important.
+
+Do not modify existing backend behavior just to make the frontend easier.
 
 Instead:
 
-USER RESEARCH GOAL
-        ↓
-AVAILABLE EVIDENCE
-        ↓
-LITERATURE
-        ↓
-EXPERIMENT HISTORY
-        ↓
-RESEARCH GAPS
-        ↓
-RESEARCH QUESTIONS
-        ↓
-HYPOTHESES
-        ↓
-METHODS
-        ↓
-EXPERIMENTS
-        ↓
-PRIORITIZATION
-        ↓
-RESEARCH ROADMAP
-        ↓
-HUMAN APPROVAL
-        ↓
-EXECUTION
-        ↓
-ACTUAL RESULTS
-        ↓
-UPDATED RESEARCH PLAN
+1. Inspect backend APIs.
+2. Match frontend request formats to backend schemas.
+3. Match frontend types to backend response formats.
+4. Identify missing endpoints.
+5. Document missing endpoints for future milestones.
 
+If a backend change is absolutely required, make the smallest backward-compatible change possible and explain why.
 
-==================================================
-102. FINAL GOAL
+---
 
-Milestone 21 should transform the project from:
+# 27. Docker Compatibility
 
-"A production-ready AI research assistant"
+If the repository already has Docker configuration:
 
-into:
+* Do not break the existing backend Docker setup.
+* Prepare the frontend so it can later be containerized.
+* If appropriate, create a frontend Dockerfile.
+* Do not perform the complete production deployment yet.
 
-"An evidence-grounded AI research planning and intelligence platform capable of continuously analyzing research evidence, identifying gaps, proposing experiments, prioritizing research actions, learning from actual results, and guiding researchers through an auditable research workflow."
+Deployment belongs to Milestones 27–29.
 
-The researcher remains the final decision-maker.
+---
 
-The AI recommends.
+# 28. Documentation
 
-The evidence supports.
+Update the README with:
 
-The experiments validate.
+## Frontend
 
-The researcher approves.
+Explain:
 
-The system records everything.
+* Frontend technology
+* Directory structure
+* Local setup
+* Environment variables
+* Development command
+* Build command
 
-Do not stop after implementing individual components.
+Example:
 
-Run the complete end-to-end workflow and verify that Milestones 1–20 continue functioning correctly.
+```text
+cd frontend
+npm install
+npm run dev
+```
+
+Document the expected backend URL.
+
+Also document any API endpoints already integrated.
+
+---
+
+# 29. Definition of Done
+
+Milestone 22 is complete only when all of the following are true:
+
+* [ ] React + TypeScript frontend exists
+* [ ] Vite configured
+* [ ] React Router configured
+* [ ] Landing page implemented
+* [ ] Login page implemented
+* [ ] Registration page implemented
+* [ ] Authentication state implemented
+* [ ] Protected routes implemented
+* [ ] Dashboard layout implemented
+* [ ] Sidebar implemented
+* [ ] Navbar implemented
+* [ ] Dashboard page implemented
+* [ ] Papers page foundation implemented
+* [ ] Upload component implemented
+* [ ] API service layer implemented
+* [ ] TypeScript types implemented
+* [ ] Loading states implemented
+* [ ] Error states implemented
+* [ ] Empty states implemented
+* [ ] Responsive design implemented
+* [ ] Basic accessibility implemented
+* [ ] Environment configuration implemented
+* [ ] Frontend security basics implemented
+* [ ] Tests added
+* [ ] Lint passes
+* [ ] TypeScript compilation passes
+* [ ] Production build passes
+* [ ] Existing backend remains functional
+* [ ] README updated
+
+---
+
+# 30. Important Scope Boundary
+
+Do NOT fully implement these in Milestone 22:
+
+* Advanced RAG chat
+* Streaming AI responses
+* Multi-paper comparison workflow
+* Literature review generation
+* Research gap analysis UI
+* Research planning UI
+* Web research UI
+* Advanced agent visualization
+* Production cloud deployment
+* CI/CD
+* Monitoring
+
+These belong to later milestones.
+
+Milestone 22 is specifically about creating a **strong, scalable frontend foundation**.
+
+---
+
+# 31. Final Verification
+
+Before finishing:
+
+1. Start the backend.
+2. Start the frontend.
+3. Verify frontend can communicate with backend.
+4. Test registration.
+5. Test login.
+6. Test logout.
+7. Test protected routes.
+8. Test dashboard.
+9. Test paper API integration if available.
+10. Test upload foundation if backend endpoint exists.
+11. Test invalid authentication.
+12. Test API failure states.
+13. Test mobile responsiveness.
+14. Run lint.
+15. Run tests.
+16. Run production build.
+
+Then inspect the entire Git diff.
+
+Remove:
+
+* Debug logs
+* Temporary code
+* Unused imports
+* Unused dependencies
+* Hardcoded secrets
+* Duplicate components
+* Fake API calls
+* Unnecessary files
+
+---
+
+# 32. Final Report
+
+After completing the implementation, provide a concise report containing:
+
+### 1. What was implemented
+
+List all major frontend features.
+
+### 2. Files created/modified
+
+Give the important files and their purpose.
+
+### 3. Backend integration
+
+Explain which existing backend APIs were connected.
+
+### 4. Tests performed
+
+List the commands and results.
+
+### 5. Build status
+
+Confirm whether:
+
+```text
+TypeScript
+Lint
+Tests
+Production Build
+```
+
+all pass.
+
+### 6. Known limitations
+
+Clearly identify anything intentionally postponed to Milestones 23–24.
+
+### 7. Recommended next step
+
+The next milestone after this is:
+
+**Milestone 23 — Research Assistant UI**
+
+Do not start Milestone 23 automatically. Complete and verify Milestone 22 first.

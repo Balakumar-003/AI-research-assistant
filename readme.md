@@ -102,3 +102,52 @@ python test_projects.py
 - PDF Upload and Parsing
 - Text Chunking
 - Frontend Integration (React Dashboard for Projects)
+
+## Frontend
+
+The application features a modern frontend built using React and TypeScript.
+
+### Technologies
+- React 18
+- TypeScript
+- Vite
+- React Router
+- Axios for API requests
+- Vanilla CSS with CSS Variables for theme
+
+### Directory Structure
+- `frontend/src/components`: Reusable UI elements (Button, Input, Card) and Layouts.
+- `frontend/src/context`: React Context for Authentication State.
+- `frontend/src/pages`: Application views (Landing, Auth, Dashboard, Papers).
+- `frontend/src/services`: API handlers and endpoints.
+- `frontend/src/types`: TypeScript schemas matching backend validation.
+
+### Setup and Running
+
+1. Enter the frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Setup environment variables by copying the example file:
+   ```bash
+   cp .env.example .env
+   ```
+   Ensure `VITE_API_BASE_URL` points to your backend URL (e.g. `http://localhost:8000`).
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+### Build Command
+To create a production build, run:
+```bash
+npm run build
+```
+This generates optimized static files in the `frontend/dist` directory.
