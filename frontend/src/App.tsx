@@ -10,6 +10,10 @@ import { DashboardLayout } from './layouts/DashboardLayout';
 import { DashboardPage } from './pages/dashboard/DashboardPage';
 import { PapersPage } from './pages/papers/PapersPage';
 
+import { ResearchWorkspace } from './pages/research/ResearchWorkspace';
+
+import { PaperDetailsPage } from './pages/papers/PaperDetailsPage';
+
 const PlaceholderPage = ({ title }: { title: string }) => (
   <div className="p-8 animate-fade-in">
     <h1 className="text-2xl font-bold mb-4">{title}</h1>
@@ -31,8 +35,8 @@ function App() {
           <Route element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/papers" element={<PapersPage />} />
-            <Route path="/papers/:paperId" element={<PlaceholderPage title="Paper Details" />} />
-            <Route path="/research" element={<PlaceholderPage title="Research Workspace" />} />
+            <Route path="/papers/:paperId" element={<PaperDetailsPage />} />
+            <Route path="/research" element={<ResearchWorkspace />} />
             <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
           </Route>
         </Routes>

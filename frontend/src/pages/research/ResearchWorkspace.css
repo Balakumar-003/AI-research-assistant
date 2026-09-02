@@ -1,0 +1,4 @@
+.research-workspace {
+  height: calc(100vh - 64px); /* Adjust if there's a fixed header */
+  overflow: hidden;
+}

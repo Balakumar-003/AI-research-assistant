@@ -1,1008 +1,1111 @@
-# Milestone 22 — Frontend Foundation
+# Milestone 23 — Research Assistant UI
 
 ## Project Context
 
-You are working on an **AI Research Assistant** full-stack application.
+I am building an **AI Research Assistant** application.
 
-The project already has the backend and AI/research infrastructure implemented through **Milestone 21**.
+The project is an AI-powered research platform where users can:
 
-Completed milestones include:
+* Upload research papers/PDFs
+* Store and manage papers
+* Extract and process paper content
+* Generate embeddings
+* Perform RAG-based question answering
+* Ask questions about research papers
+* Receive grounded answers
+* View citations and source sections
+* Summarize research papers
+* Compare multiple papers
+* Maintain research conversations/history
 
-* Project setup
-* Backend foundation
-* Authentication & authorization
-* Research workspace
-* PDF upload and document management
-* PDF text extraction
-* Document chunking
-* Embedding generation
-* Vector database
-* RAG question answering
-* LangGraph autonomous research agent
-* Citation and source grounding
-* Multi-paper comparison
-* Literature review
-* Research gap discovery
-* Research planning
-* Web/external research integration
-* Multi-agent research system
-* Evaluation framework
-* Performance/cost optimization
-* Production security
+The project already has a working backend and frontend foundation.
 
-The next milestone is:
+### Completed Milestones
 
-# Milestone 22 — Frontend Foundation
+Milestones 1–21 have already been completed.
 
-The goal of this milestone is to create the **complete frontend foundation** using **React + TypeScript** without yet implementing all advanced research features.
+Important completed functionality includes:
 
-The frontend must be designed so that Milestones 23–25 can build on it without requiring a major rewrite.
+1. Project setup
+2. Authentication
+3. Workspace
+4. PDF upload
+5. Text extraction
+6. Text chunking
+7. Embedding generation
+8. Vector database
+9. RAG question answering
+10. Autonomous LangGraph agent
+11. Citation and source grounding
+12. Advanced paper summarization
+13. Multi-paper comparison
+14. Advanced research functionality
+15. Additional research-agent functionality
+    16–21: backend/research workflow improvements and preparation for frontend/deployment
+
+### Milestone 22
+
+Milestone 22 established the **Frontend Foundation**.
+
+The existing frontend architecture, routing, authentication handling, API layer, components, styling system, and layout must be inspected and reused.
+
+Do NOT unnecessarily rewrite the existing frontend architecture.
 
 ---
 
-# 1. First: Inspect the Existing Project
+# OBJECTIVE
+
+Implement **Milestone 23 — Research Assistant UI**.
+
+The objective is to create the first complete usable research workflow in the frontend.
+
+The user should be able to:
+
+1. Open the research workspace
+2. View their uploaded research papers
+3. Upload a new paper
+4. See paper processing status
+5. Select/open a paper
+6. View paper details
+7. Ask research questions
+8. Receive answers from the existing RAG backend
+9. View citations/source references
+10. Continue a research conversation
+11. View previous conversation/history
+12. Handle loading, empty, and error states properly
+
+This milestone should make the application feel like a real working AI Research Assistant rather than only a frontend shell.
+
+---
+
+# IMPORTANT RULES
+
+## 1. Inspect the Existing Project First
 
 Before modifying anything:
 
-1. Inspect the entire repository structure.
-2. Identify:
+* Inspect the complete frontend directory structure.
+* Inspect the backend directory structure.
+* Inspect existing API routes.
+* Inspect request/response schemas.
+* Inspect authentication implementation.
+* Inspect existing frontend API utilities.
+* Inspect existing components.
+* Inspect existing routing.
+* Inspect existing state management.
+* Inspect existing styling/theme system.
+* Inspect database models if necessary.
+* Inspect the implementation completed in Milestone 22.
 
-   * Backend framework
-   * Backend entry point
-   * Existing API routes
-   * Authentication endpoints
-   * User/workspace endpoints
-   * PDF/document endpoints
-   * RAG endpoints
-   * Database models
-   * Existing environment variables
-   * Docker configuration
-   * Existing tests
-   * Existing documentation
-3. Understand the existing authentication mechanism.
-4. Understand the API request/response formats.
-5. Identify whether a frontend directory already exists.
-6. Reuse existing project conventions wherever possible.
+Do not assume API endpoint names.
 
-Do **not** rewrite or unnecessarily modify the working backend.
-
-If the repository already contains partial frontend code, improve it instead of creating a duplicate frontend.
+Use the actual APIs already implemented in the project.
 
 ---
 
-# 2. Frontend Technology Stack
+# 2. NO MOCK DATA
 
-Use:
+Do NOT create:
 
-* React
-* TypeScript
-* Vite
-* React Router
-* Axios or a clean fetch-based API client
-* Modern CSS approach already used by the project; otherwise use a maintainable CSS architecture
-* ESLint
-* Prettier if already configured
-* Lucide React or another lightweight icon library if needed
+* Fake papers
+* Fake answers
+* Fake citations
+* Fake conversation history
+* Fake API responses
+* Hardcoded research results
+* Dummy backend endpoints
 
-Do not introduce unnecessary libraries.
+Every dynamic piece of information must come from the real backend.
 
-Prefer simple, maintainable architecture over excessive dependencies.
+If an API already exists, use it.
 
----
-
-# 3. Frontend Folder Structure
-
-Create a clean scalable structure similar to:
-
-frontend/
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   │   ├── common/
-│   │   ├── layout/
-│   │   ├── ui/
-│   │   └── feedback/
-│   │
-│   ├── pages/
-│   │   ├── auth/
-│   │   ├── dashboard/
-│   │   ├── papers/
-│   │   └── settings/
-│   │
-│   ├── layouts/
-│   │   ├── AuthLayout.tsx
-│   │   └── DashboardLayout.tsx
-│   │
-│   ├── services/
-│   │   ├── api.ts
-│   │   ├── authService.ts
-│   │   └── paperService.ts
-│   │
-│   ├── hooks/
-│   ├── context/
-│   ├── types/
-│   ├── utils/
-│   ├── routes/
-│   ├── config/
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── index.css
-│
-├── .env.example
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── README.md
-
-Adapt this structure to the existing repository instead of blindly following it.
+If the API response structure differs from your assumption, adapt the frontend to the actual backend schema.
 
 ---
 
-# 4. Application Routing
+# 3. DO NOT BREAK EXISTING FUNCTIONALITY
 
-Implement frontend routing using React Router.
+All existing functionality must continue working.
 
-Create routes for:
+Do not:
 
-## Public routes
+* Rewrite working backend functionality
+* Replace the existing authentication system
+* Remove existing routes
+* Delete existing components without reason
+* Change database schemas unnecessarily
+* Introduce duplicate APIs
+* Replace the project's existing architecture unnecessarily
 
-* `/`
-* `/login`
-* `/register`
-
-## Protected routes
-
-* `/dashboard`
-* `/papers`
-* `/papers/:paperId`
-* `/research`
-* `/settings`
-
-The advanced functionality can initially contain placeholder states where appropriate.
-
-For example:
-
-* `/research` → research workspace placeholder
-* `/papers/:paperId` → paper details placeholder
-
-Do not implement the complete research functionality in this milestone.
-
-That belongs to Milestones 23 and 24.
+Make incremental changes.
 
 ---
 
-# 5. Landing Page
+# MAIN FEATURES
 
-Create a professional landing page for the AI Research Assistant.
+## Feature 1 — Research Workspace
 
-It should contain:
+Create the main research workspace page.
 
-### Hero section
+The workspace should contain:
 
-Title:
+### Sidebar / Paper Library
 
-> AI Research Assistant
+Display:
 
-Subtitle explaining that the platform helps researchers:
-
-* Read papers
-* Search academic content
-* Ask questions
-* Summarize papers
-* Compare research
-* Generate literature reviews
-* Discover research insights
-
-Add CTA buttons:
-
-* Get Started
-* Sign In
-
-### Feature section
-
-Show cards for:
-
-* AI-Powered Research
-* RAG-Based Question Answering
-* Paper Summarization
-* Multi-Paper Comparison
-* Citation-Grounded Answers
-* Literature Review
-
-### Footer
-
-Include:
-
-* Project name
-* Copyright
-* GitHub/project links if already available
-
-Keep the design professional and suitable for a final-year engineering project portfolio.
-
----
-
-# 6. Authentication UI
-
-Create:
-
-## Login page
-
-Fields:
-
-* Email/username according to existing backend API
-* Password
-
-Actions:
-
-* Login
-* Navigate to registration
-* Display validation errors
-* Display API errors
-* Loading state during login
-
-## Register page
-
-Fields according to the existing backend API.
-
-At minimum, support:
-
-* Name if required
-* Email
-* Password
-* Confirm password
-
-Actions:
-
-* Register
-* Navigate to login
-* Validation
-* API error handling
-* Loading state
-
-IMPORTANT:
-
-Do not invent backend authentication fields.
-
-Inspect the existing backend API and use its actual request schema.
-
----
-
-# 7. Authentication State
-
-Implement a clean authentication state system.
-
-The frontend should know:
-
-```text
-authenticated
-unauthenticated
-loading
-```
-
-Create an appropriate authentication context/provider or state solution.
-
-It should support:
-
-* Login
-* Logout
-* Persisting authentication state
-* Getting current user
-* Protected routes
-* Redirecting unauthenticated users
-* Redirecting authenticated users away from login/register when appropriate
-
-If the backend uses JWT:
-
-* Store tokens securely according to the project's architecture.
-* Attach the access token to protected API requests.
-* Handle expired/invalid tokens.
-* Automatically clear authentication state when the backend returns an authentication failure.
-
-Do not expose secrets in frontend code.
-
----
-
-# 8. Protected Route
-
-Create a reusable protected route mechanism.
-
-Example behavior:
-
-```text
-User opens /dashboard
-        ↓
-Is authenticated?
-   ┌────┴────┐
-   │         │
-  YES       NO
-   │         │
-   ▼         ▼
-Dashboard   /login
-```
-
-While authentication status is being determined, show a loading state rather than incorrectly redirecting the user.
-
----
-
-# 9. Main Application Layout
-
-Create a professional dashboard layout.
-
-Structure:
-
-```text
-┌──────────────────────────────────────────────┐
-│                  Top Navbar                  │
-├──────────────┬───────────────────────────────┤
-│              │                               │
-│   Sidebar    │         Main Content          │
-│              │                               │
-│ Dashboard    │                               │
-│ Papers       │                               │
-│ Research     │                               │
-│ Settings     │                               │
-│              │                               │
-│              │                               │
-│ Logout       │                               │
-└──────────────┴───────────────────────────────┘
-```
-
-Sidebar should contain:
-
-* Dashboard
-* My Papers
-* Research
-* Settings
-* Logout
-
-Top navigation should contain:
-
-* Application name/logo
-* User information
-* Optional profile menu
-* Responsive navigation
-
----
-
-# 10. Dashboard Page
-
-Create the initial dashboard.
-
-Show:
-
-### Welcome section
-
-Example:
-
-> Welcome back, Researcher
-
-Use the actual authenticated user's name if available.
-
-### Statistics cards
-
-Prepare reusable cards for:
-
-* Total Papers
-* Research Sessions
-* Questions Asked
-* Saved Research
-
-If the corresponding backend APIs already exist, fetch the real values.
-
-If they don't exist yet, use clearly marked placeholder values rather than inventing backend endpoints.
-
-### Quick actions
-
-Add buttons/cards:
-
-* Upload Paper
-* Ask Research Question
-* Compare Papers
-* Generate Literature Review
-
-For this milestone, these actions can navigate to the appropriate pages/placeholders.
-
----
-
-# 11. Papers Page
-
-Create the basic paper library UI.
-
-The page should support the frontend structure for:
-
-* Paper list
-* Search field
-* Filter area
-* Upload button
-* Empty state
-* Loading state
-* Error state
-
-Each paper card/list item should be designed to eventually display:
-
-* Title
-* Authors
+* Research papers
+* Paper title
 * Upload date
 * Processing status
-* Number of pages/chunks if available
-* Actions
+* Optional file type/page count if available
+* Search/filter capability if already supported by backend
 
-Connect to the existing backend paper/document API if it is already available.
-
-Do not create fake backend APIs.
-
----
-
-# 12. Upload Paper UI Foundation
-
-Create a reusable upload component.
-
-Support:
-
-* Drag and drop
-* File selection
-* File type validation
-* File size validation according to backend limits
-* Upload progress UI
-* Success state
-* Error state
-* Cancel/reset UI
-
-The upload component should be reusable later in Milestone 23.
-
-If the backend upload API is already ready, integrate it.
-
-If not, create the frontend service/interface without pretending that the API works.
-
----
-
-# 13. Reusable UI Components
-
-Create reusable components instead of duplicating UI code.
-
-At minimum:
-
-* Button
-* Input
-* PasswordInput
-* Card
-* Modal/Dialog
-* Dropdown
-* Badge
-* Spinner
-* LoadingState
-* ErrorState
-* EmptyState
-* Toast/notification
-* FileUpload
-* PaperCard
-* StatCard
-* Sidebar
-* Navbar
-
-Keep components modular.
-
----
-
-# 14. API Service Layer
-
-Do NOT call APIs directly from every component.
-
-Create a centralized API client.
-
-For example:
-
-```text
-services/
-    api.ts
-    authService.ts
-    paperService.ts
-```
-
-The API client should handle:
-
-* Base URL
-* Headers
-* Authentication
-* JSON requests
-* Error handling
-* Timeouts where appropriate
-
-Use environment variables.
-
-Example:
-
-```text
-VITE_API_BASE_URL=
-```
-
-Create:
-
-```text
-.env.example
-```
-
-Never commit real secrets.
-
----
-
-# 15. TypeScript Types
-
-Create reusable types/interfaces for API data.
-
-For example:
-
-```text
-User
-AuthResponse
-Paper
-PaperMetadata
-UploadResponse
-ApiError
-ResearchSession
-```
-
-The exact fields must match the backend wherever possible.
-
-Avoid:
-
-```typescript
-any
-```
-
-unless genuinely unavoidable.
-
-Use proper TypeScript types.
-
----
-
-# 16. Loading, Error and Empty States
-
-Every API-driven page should properly handle:
+Possible states:
 
 ### Loading
 
-```text
-Loading papers...
-```
-
-### Error
-
-```text
-Unable to load papers.
-Try again.
-```
+Display a proper loading state while papers are being fetched.
 
 ### Empty
 
-```text
-No research papers yet.
-Upload your first paper to get started.
-```
+If the user has no papers:
 
-Do not leave blank screens when API requests fail.
+Display a helpful message such as:
+
+"No research papers yet"
+
+and provide:
+
+"Upload Paper"
+
+button.
+
+### Error
+
+If the API fails:
+
+Display a user-friendly error message and retry option.
 
 ---
 
-# 17. Responsive Design
+# Feature 2 — Upload Research Paper
 
-The frontend must work on:
+Implement the frontend upload workflow using the existing backend upload API.
+
+Requirements:
+
+* File picker
+* PDF validation
+* Upload progress/loading state
+* Disable duplicate submissions while uploading
+* Display success/error feedback
+* Refresh paper library after successful upload
+
+Do not create a new backend upload endpoint if one already exists.
+
+Use the existing authentication mechanism.
+
+---
+
+# Feature 3 — Paper Processing Status
+
+Research papers may go through multiple processing stages.
+
+Use the actual status returned by the backend.
+
+For example, if the backend already provides statuses such as:
+
+* uploaded
+* processing
+* embedding
+* ready
+* failed
+
+display those appropriately.
+
+Do NOT invent statuses that do not exist in the backend.
+
+The UI should clearly communicate when a paper is:
+
+* Still processing
+* Ready for research
+* Failed
+
+If polling is already supported/appropriate, implement polling carefully.
+
+Avoid unnecessary API requests.
+
+---
+
+# Feature 4 — Paper Details
+
+When a user selects a paper, display a paper details view.
+
+Include information available from the backend, such as:
+
+* Paper title
+* Metadata
+* Upload date
+* Processing status
+* Authors
+* Abstract
+* Page count
+* Other available metadata
+
+Only display fields that actually exist.
+
+Do not fabricate missing metadata.
+
+---
+
+# Feature 5 — Research Q&A
+
+Implement the main research question-answering interface.
+
+The user should be able to type a question such as:
+
+"What methodology does this paper use?"
+
+or:
+
+"What are the main limitations discussed by the authors?"
+
+or:
+
+"What datasets were used?"
+
+The question should be sent to the existing RAG/research API.
+
+The response should be displayed clearly.
+
+---
+
+# Feature 6 — Chat Interface
+
+Create a clean research conversation interface.
+
+Messages should visually distinguish:
+
+### User message
+
+The question asked by the user.
+
+### Assistant message
+
+The answer generated by the research backend.
+
+Each conversation should preserve message order.
+
+The UI should automatically scroll to the latest message when appropriate.
+
+---
+
+# Feature 7 — Citations and Sources
+
+This is a critical feature.
+
+The AI Research Assistant must show the sources used to generate the answer whenever the backend provides them.
+
+For each citation/source, display available information such as:
+
+* Source number
+* Paper name
+* Relevant text/chunk
+* Page number
+* Section
+* Citation metadata
+
+Example UI:
+
+> Answer generated from sources
+
+**[1] Page 4 — Methodology**
+
+Relevant source excerpt...
+
+**[2] Page 7 — Experiments**
+
+Relevant source excerpt...
+
+Do not create fake citations.
+
+If the backend does not return a particular field, do not display an invented value.
+
+---
+
+# Feature 8 — Source Interaction
+
+Make citations interactive where possible.
+
+For example:
+
+Clicking a citation/source should:
+
+* Expand the source
+* Show the relevant excerpt
+* Display page/section information if available
+
+Keep the implementation compatible with the existing backend response.
+
+Do not implement PDF highlighting unless the existing backend/frontend architecture already supports it.
+
+That functionality can be expanded in a later milestone.
+
+---
+
+# Feature 9 — Conversation History
+
+Use the existing conversation/history APIs.
+
+Users should be able to view previous research conversations.
+
+Display available information such as:
+
+* Conversation title
+* First question
+* Last updated time
+* Associated paper/workspace
+* Number of messages if available
+
+Clicking a conversation should load its messages.
+
+Do not create fake conversation records.
+
+---
+
+# Feature 10 — New Conversation
+
+Provide a clear action for:
+
+"New Research Session"
+
+or equivalent.
+
+Starting a new session should:
+
+* Clear the current conversation state
+* Preserve the selected paper
+* Allow the user to ask a new question
+* Create/use the backend conversation according to the existing API design
+
+Do not create a separate frontend-only conversation system.
+
+---
+
+# Feature 11 — Loading States
+
+Every asynchronous operation should have a proper loading state.
+
+Examples:
+
+* Loading papers
+* Uploading paper
+* Processing paper
+* Loading paper details
+* Sending question
+* Loading conversation
+* Loading citations
+
+Avoid freezing the entire application unnecessarily.
+
+Use localized loading indicators wherever possible.
+
+---
+
+# Feature 12 — Error Handling
+
+Handle API failures gracefully.
+
+Examples:
+
+* Upload failure
+* Unauthorized request
+* Paper not found
+* RAG failure
+* Conversation loading failure
+* Network failure
+* Backend unavailable
+
+Display human-readable errors.
+
+Do not expose raw stack traces to users.
+
+Provide retry actions where appropriate.
+
+---
+
+# Feature 13 — Authentication
+
+Use the authentication mechanism implemented in previous milestones.
+
+Every protected API request must correctly include the required authentication credentials/token.
+
+Handle:
+
+* Expired authentication
+* Unauthorized API response
+* Redirect to login if that is how the existing application works
+
+Do not introduce another authentication mechanism.
+
+---
+
+# RESPONSIVE DESIGN
+
+The Research Assistant UI must work on:
 
 * Desktop
 * Laptop
 * Tablet
 * Mobile
 
-The sidebar should adapt appropriately on smaller screens.
+Desktop layout can use:
 
-Ensure:
+```text
+-----------------------------------------------------
+| Paper Library | Research Conversation             |
+|               |                                   |
+| Paper 1       | User question                     |
+| Paper 2       |                                   |
+| Paper 3       | AI answer                         |
+|               |                                   |
+|               | Sources                           |
+|               |                                   |
+|               | [ Ask your research question... ] |
+-----------------------------------------------------
+```
 
-* No horizontal overflow
-* Buttons remain usable
-* Forms work on mobile
-* Cards resize correctly
-* Navigation remains accessible
-
----
-
-# 18. UI/UX Requirements
-
-The application should look like a real SaaS research platform.
-
-Design principles:
-
-* Clean
-* Minimal
-* Professional
-* Consistent spacing
-* Consistent typography
-* Clear hierarchy
-* Accessible forms
-* Meaningful empty states
-* Proper hover/focus states
-* Proper loading feedback
-
-Avoid:
-
-* Excessive animations
-* Overly colorful UI
-* Unnecessary gradients
-* Cluttered dashboards
-* Huge components
-* Hardcoded repeated styles
-
-The UI should be suitable for demonstrating the project during an SDE interview/project review.
+On smaller screens, the paper library should become collapsible or otherwise adapt to the available width.
 
 ---
 
-# 19. Accessibility
+# UI/UX REQUIREMENTS
+
+The UI should look like a professional AI research product.
+
+Prioritize:
+
+* Clean layout
+* Good spacing
+* Clear typography
+* Strong visual hierarchy
+* Accessible buttons
+* Clear states
+* Consistent components
+* Responsive design
+* Smooth interactions
+
+Do not over-design the interface.
+
+Milestone 23 is the core research workflow.
+
+Advanced dashboards, analytics, visualizations, advanced filters, paper comparison UI, and other sophisticated research features belong to later milestones.
+
+---
+
+# COMPONENT ARCHITECTURE
+
+Create reusable components where appropriate.
+
+Possible structure:
+
+```text
+ResearchWorkspace
+├── PaperLibrary
+│   ├── PaperList
+│   ├── PaperCard
+│   ├── UploadPaper
+│   └── ProcessingStatus
+│
+├── PaperDetails
+│
+├── ResearchChat
+│   ├── ChatHeader
+│   ├── MessageList
+│   ├── UserMessage
+│   ├── AssistantMessage
+│   ├── CitationList
+│   └── QuestionInput
+│
+└── ConversationHistory
+```
+
+Use the project's existing component architecture if it differs.
+
+Do not force this exact structure if the existing codebase already has a better architecture.
+
+---
+
+# API INTEGRATION
+
+First identify all relevant backend endpoints.
+
+Document:
+
+```text
+Endpoint
+HTTP Method
+Authentication
+Request body
+Response body
+Error response
+```
+
+Relevant functionality should include, where already available:
+
+### Papers
+
+* List papers
+* Upload paper
+* Get paper
+* Get processing status
+
+### Research
+
+* Ask question
+* Retrieve answer
+* Retrieve sources/citations
+
+### Conversations
+
+* Create conversation
+* Get conversations
+* Get conversation messages
+* Continue conversation
+
+Use the actual project endpoints.
+
+---
+
+# STATE MANAGEMENT
+
+Use the project's existing state-management approach.
+
+If the project already uses:
+
+* React state
+* Context
+* Redux
+* Zustand
+* React Query/TanStack Query
+* another existing approach
+
+follow that architecture.
+
+Do not introduce another state-management library unless absolutely necessary.
+
+Separate:
+
+### Server state
+
+* Papers
+* Paper details
+* Conversations
+* Messages
+* RAG responses
+
+from:
+
+### UI state
+
+* Selected paper
+* Current input
+* Open/closed panels
+* Loading indicators
+* Temporary UI states
+
+---
+
+# DATA FLOW
+
+Implement the following flow:
+
+```text
+User Login
+     ↓
+Research Workspace
+     ↓
+Fetch Papers
+     ↓
+Paper Library
+     ↓
+Select Paper
+     ↓
+Load Paper Details
+     ↓
+Start Research Session
+     ↓
+User asks question
+     ↓
+Frontend API request
+     ↓
+Backend RAG / LangGraph Agent
+     ↓
+Answer + Sources
+     ↓
+Display Answer
+     ↓
+Display Citations
+     ↓
+Save/continue Conversation
+```
+
+---
+
+# IMPORTANT BACKEND INTEGRATION RULE
+
+Do not modify backend behavior simply to make the frontend easier.
+
+If an API response looks like:
+
+```json
+{
+  "answer": "...",
+  "sources": [...]
+}
+```
+
+use that structure.
+
+If the actual backend returns:
+
+```json
+{
+  "response": "...",
+  "citations": [...]
+}
+```
+
+adapt the frontend accordingly.
+
+The backend is the source of truth.
+
+---
+
+# UX DETAILS
+
+## Question Input
+
+The input should support:
+
+* Enter to submit
+* Shift + Enter for newline if multiline input is used
+* Disabled state while request is processing
+* Clear loading indicator
+* Empty-input validation
+
+Example placeholder:
+
+"Ask a question about this research paper..."
+
+---
+
+## AI Response
+
+The answer should support readable formatting.
+
+If the backend returns Markdown, render Markdown safely using the project's existing approach or an appropriate existing dependency.
+
+Support:
+
+* Paragraphs
+* Lists
+* Headings
+* Code blocks if returned
+* Citations
+
+Avoid unsafe HTML rendering.
+
+---
+
+# EMPTY STATES
+
+Implement useful empty states.
+
+### No papers
+
+"No research papers yet."
+
+### No conversation
+
+"Start your research by asking a question."
+
+### No sources
+
+"Sources were not returned for this response."
+
+Do not treat an empty source list as an error.
+
+---
+
+# ERROR STATES
+
+Examples:
+
+### Paper upload failed
+
+"Unable to upload the paper. Please try again."
+
+### Question failed
+
+"I couldn't generate an answer right now. Please try again."
+
+### Paper processing failed
+
+"Paper processing failed. Please check the file and try again."
+
+### Backend unavailable
+
+"Research service is temporarily unavailable."
+
+Use the actual backend error information where useful, but never expose sensitive/internal details.
+
+---
+
+# PERFORMANCE
+
+Avoid unnecessary API calls.
+
+Requirements:
+
+* Do not fetch the same data repeatedly without reason.
+* Avoid excessive polling.
+* Cancel/ignore stale requests where appropriate.
+* Prevent duplicate question submissions.
+* Keep UI responsive during RAG generation.
+* Reuse cached server state if the existing architecture supports it.
+
+---
+
+# ACCESSIBILITY
 
 Implement basic accessibility:
 
-* Semantic HTML
-* Proper labels for inputs
+* Proper button labels
+* Form labels
 * Keyboard navigation
-* Visible focus states
-* Accessible buttons
-* Meaningful alt text
-* Proper form error messages
-* ARIA attributes where required
+* Focus states
+* Accessible loading indicators
+* Semantic HTML
+* Meaningful error messages
 
-Do not rely only on color to communicate state.
-
----
-
-# 20. Environment Configuration
-
-Create frontend environment configuration.
-
-Example:
-
-```text
-VITE_API_BASE_URL=http://localhost:8000
-```
-
-Use environment variables rather than hardcoding:
-
-```text
-http://localhost:8000
-```
-
-throughout the application.
-
-Create:
-
-```text
-.env.example
-```
-
-with safe placeholder values.
-
-Do not commit:
-
-```text
-.env
-```
-
-if it contains secrets or environment-specific values.
+Do not rely only on color to communicate status.
 
 ---
 
-# 21. Error Handling
+# SECURITY
 
-Implement centralized frontend error handling.
+Never expose:
 
-Handle:
+* API keys
+* Secret keys
+* Database credentials
+* JWT secrets
+* Environment secrets
 
-* 400
-* 401
-* 403
-* 404
-* 409
-* 422
-* 429
-* 500
-* Network errors
-* Timeout errors
+Do not hardcode credentials.
 
-Display user-friendly messages.
+Use the existing environment configuration.
 
-Do not expose raw backend stack traces to users.
+Do not store sensitive authentication information in insecure places if the existing architecture provides a safer mechanism.
 
 ---
 
-# 22. Frontend Security
+# CODE QUALITY
 
-Follow basic security practices:
+Follow the project's existing coding conventions.
 
-* Never hardcode API keys
-* Never commit secrets
-* Validate uploaded files
-* Do not trust client-side validation alone
-* Avoid unsafe HTML rendering
-* Do not use `dangerouslySetInnerHTML` unless absolutely necessary
-* Handle authentication failures correctly
-* Do not expose internal backend information
+Requirements:
 
-Remember that frontend validation is only a UX feature; backend validation remains authoritative.
-
----
-
-# 23. Code Quality
-
-Follow:
-
-* TypeScript strict mode
-* ESLint
-* Clean component architecture
-* Reusable components
-* Meaningful variable names
-* Small functions
-* Separation of concerns
+* Clean components
+* Reusable logic
 * No unnecessary duplication
-
-Avoid giant components such as:
-
-```text
-Dashboard.tsx
-```
-
-containing hundreds of lines.
-
-Break functionality into reusable components.
+* Meaningful variable names
+* Proper error handling
+* Type safety if TypeScript is used
+* No unused imports
+* No console debugging left in production code
+* No dead code
+* No commented-out experimental code
 
 ---
 
-# 24. Testing
+# TESTING
 
-Add frontend tests for the most important foundation functionality.
+After implementation, test:
 
-At minimum test:
+## Authentication
 
-### Authentication
+* Login
+* Access protected research workspace
+* Unauthorized access
 
-* Login form renders
-* Validation works
-* Successful login behavior
-* Failed login behavior
+## Paper workflow
 
-### Routing
+* Open research workspace
+* Load papers
+* Upload PDF
+* Handle invalid file
+* Handle upload failure
+* Select paper
+* View paper details
 
-* Protected route redirects unauthenticated users
-* Authenticated users can access dashboard
+## RAG
 
-### Components
+* Ask question
+* Receive answer
+* Display sources
+* Handle RAG failure
+* Prevent duplicate requests
 
-* Button
-* Input
-* File upload
-* Paper card
+## Conversations
 
-Use the testing framework already present in the project if one exists.
+* Start new conversation
+* Continue conversation
+* Load previous conversation
+* Handle empty history
 
-If no frontend testing framework exists, introduce a lightweight standard solution appropriate for the React/Vite stack.
+## UI
 
----
-
-# 25. Build Verification
-
-After implementation, run:
-
-```text
-npm install
-npm run lint
-npm run build
-npm test
-```
-
-Use the actual scripts defined in `package.json`.
-
-Fix all TypeScript errors.
-
-Fix all lint errors.
-
-Fix all build errors.
-
-Do not mark the milestone complete while the frontend does not build successfully.
+* Loading states
+* Empty states
+* Error states
+* Responsive layout
+* Mobile layout
 
 ---
 
-# 26. Backend Compatibility
+# DO NOT IMPLEMENT IN MILESTONE 23
 
-This is extremely important.
+Do NOT move into advanced features planned for later milestones.
 
-Do not modify existing backend behavior just to make the frontend easier.
+Specifically avoid implementing:
 
-Instead:
-
-1. Inspect backend APIs.
-2. Match frontend request formats to backend schemas.
-3. Match frontend types to backend response formats.
-4. Identify missing endpoints.
-5. Document missing endpoints for future milestones.
-
-If a backend change is absolutely required, make the smallest backward-compatible change possible and explain why.
-
----
-
-# 27. Docker Compatibility
-
-If the repository already has Docker configuration:
-
-* Do not break the existing backend Docker setup.
-* Prepare the frontend so it can later be containerized.
-* If appropriate, create a frontend Dockerfile.
-* Do not perform the complete production deployment yet.
-
-Deployment belongs to Milestones 27–29.
-
----
-
-# 28. Documentation
-
-Update the README with:
-
-## Frontend
-
-Explain:
-
-* Frontend technology
-* Directory structure
-* Local setup
-* Environment variables
-* Development command
-* Build command
-
-Example:
-
-```text
-cd frontend
-npm install
-npm run dev
-```
-
-Document the expected backend URL.
-
-Also document any API endpoints already integrated.
-
----
-
-# 29. Definition of Done
-
-Milestone 22 is complete only when all of the following are true:
-
-* [ ] React + TypeScript frontend exists
-* [ ] Vite configured
-* [ ] React Router configured
-* [ ] Landing page implemented
-* [ ] Login page implemented
-* [ ] Registration page implemented
-* [ ] Authentication state implemented
-* [ ] Protected routes implemented
-* [ ] Dashboard layout implemented
-* [ ] Sidebar implemented
-* [ ] Navbar implemented
-* [ ] Dashboard page implemented
-* [ ] Papers page foundation implemented
-* [ ] Upload component implemented
-* [ ] API service layer implemented
-* [ ] TypeScript types implemented
-* [ ] Loading states implemented
-* [ ] Error states implemented
-* [ ] Empty states implemented
-* [ ] Responsive design implemented
-* [ ] Basic accessibility implemented
-* [ ] Environment configuration implemented
-* [ ] Frontend security basics implemented
-* [ ] Tests added
-* [ ] Lint passes
-* [ ] TypeScript compilation passes
-* [ ] Production build passes
-* [ ] Existing backend remains functional
-* [ ] README updated
-
----
-
-# 30. Important Scope Boundary
-
-Do NOT fully implement these in Milestone 22:
-
-* Advanced RAG chat
-* Streaming AI responses
-* Multi-paper comparison workflow
-* Literature review generation
-* Research gap analysis UI
-* Research planning UI
-* Web research UI
-* Advanced agent visualization
-* Production cloud deployment
+* Advanced research dashboard
+* Research analytics
+* Complex visualizations
+* Advanced paper comparison interface
+* Literature review dashboard
+* Advanced search
+* Recommendation engine
+* Collaboration features
+* Deployment
+* Dockerization
 * CI/CD
 * Monitoring
+* Portfolio optimization
 
-These belong to later milestones.
+Those belong to later milestones.
 
-Milestone 22 is specifically about creating a **strong, scalable frontend foundation**.
-
----
-
-# 31. Final Verification
-
-Before finishing:
-
-1. Start the backend.
-2. Start the frontend.
-3. Verify frontend can communicate with backend.
-4. Test registration.
-5. Test login.
-6. Test logout.
-7. Test protected routes.
-8. Test dashboard.
-9. Test paper API integration if available.
-10. Test upload foundation if backend endpoint exists.
-11. Test invalid authentication.
-12. Test API failure states.
-13. Test mobile responsiveness.
-14. Run lint.
-15. Run tests.
-16. Run production build.
-
-Then inspect the entire Git diff.
-
-Remove:
-
-* Debug logs
-* Temporary code
-* Unused imports
-* Unused dependencies
-* Hardcoded secrets
-* Duplicate components
-* Fake API calls
-* Unnecessary files
+Keep Milestone 23 focused on the **core Research Assistant UI and real backend integration**.
 
 ---
 
-# 32. Final Report
+# FINAL ACCEPTANCE CRITERIA
+
+Milestone 23 is complete only when:
+
+### 1. Research workspace works
+
+The user can open the Research Assistant workspace.
+
+### 2. Real papers appear
+
+Papers are loaded from the real backend.
+
+### 3. Upload works
+
+The user can upload a PDF using the real API.
+
+### 4. Processing status works
+
+The frontend reflects the real paper processing state.
+
+### 5. Paper selection works
+
+The user can select a paper and view its details.
+
+### 6. RAG Q&A works
+
+The user can ask a question and receive a real backend-generated answer.
+
+### 7. Citations work
+
+Returned sources/citations are displayed correctly.
+
+### 8. Conversation works
+
+The user can continue a research conversation and load previous conversations.
+
+### 9. Error handling works
+
+Backend failures do not crash the UI.
+
+### 10. Loading states work
+
+Async operations provide clear feedback.
+
+### 11. Responsive design works
+
+The core workflow works on desktop, tablet, and mobile.
+
+### 12. Existing functionality is preserved
+
+Milestones 1–22 continue to work.
+
+---
+
+# IMPLEMENTATION PROCESS
+
+Follow this exact sequence:
+
+## Step 1
+
+Inspect the complete existing project.
+
+## Step 2
+
+Identify the frontend architecture from Milestone 22.
+
+## Step 3
+
+Identify all existing backend APIs required for the research workflow.
+
+## Step 4
+
+Map backend schemas to frontend types/interfaces.
+
+## Step 5
+
+Implement the Research Workspace.
+
+## Step 6
+
+Implement Paper Library.
+
+## Step 7
+
+Implement Upload workflow.
+
+## Step 8
+
+Implement Paper Details.
+
+## Step 9
+
+Implement Research Chat.
+
+## Step 10
+
+Implement RAG question submission.
+
+## Step 11
+
+Implement answer rendering.
+
+## Step 12
+
+Implement citations/source rendering.
+
+## Step 13
+
+Implement conversation history.
+
+## Step 14
+
+Implement loading/empty/error states.
+
+## Step 15
+
+Make the interface responsive.
+
+## Step 16
+
+Run linting/type checking/build.
+
+## Step 17
+
+Run the application locally.
+
+## Step 18
+
+Test the complete user flow.
+
+---
+
+# REQUIRED FINAL REPORT
 
 After completing the implementation, provide a concise report containing:
 
-### 1. What was implemented
+### 1. Files Created
 
-List all major frontend features.
+List every new file.
 
-### 2. Files created/modified
+### 2. Files Modified
 
-Give the important files and their purpose.
+List every modified file and explain what changed.
 
-### 3. Backend integration
+### 3. API Integration
 
-Explain which existing backend APIs were connected.
+List the backend endpoints actually used.
 
-### 4. Tests performed
+### 4. Components Added
 
-List the commands and results.
+List the important frontend components.
 
-### 5. Build status
+### 5. State Management
 
-Confirm whether:
+Explain how research/paper/conversation state is handled.
+
+### 6. Testing
+
+Report:
+
+* Build status
+* Lint/type-check status
+* API integration status
+* UI testing status
+
+### 7. Issues
+
+Clearly identify anything that could not be completed.
+
+Do NOT claim something works if it was not actually tested.
+
+### 8. Milestone Status
+
+Finish with:
 
 ```text
-TypeScript
-Lint
-Tests
-Production Build
+Milestone 23: COMPLETE
 ```
 
-all pass.
+only if all acceptance criteria are genuinely satisfied.
 
-### 6. Known limitations
+Otherwise report:
 
-Clearly identify anything intentionally postponed to Milestones 23–24.
+```text
+Milestone 23: PARTIALLY COMPLETE
+```
 
-### 7. Recommended next step
+and list the remaining work.
 
-The next milestone after this is:
+---
 
-**Milestone 23 — Research Assistant UI**
+## FINAL PRINCIPLE
 
-Do not start Milestone 23 automatically. Complete and verify Milestone 22 first.
+Build this milestone as a **real production-style Research Assistant workflow**, not a static demo.
+
+Reuse everything already built.
+
+Use the real backend.
+
+Use real API responses.
+
+Do not introduce mock data.
+
+Do not duplicate existing architecture.
+
+Do not break Milestones 1–22.
+
+Focus specifically on making the **core AI Research Assistant usable from the frontend**.

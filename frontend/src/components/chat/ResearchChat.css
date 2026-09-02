@@ -1,0 +1,35 @@
+.research-chat {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.message-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-container.user {
+  align-items: flex-end;
+}
+
+.message-container.assistant {
+  align-items: flex-start;
+}
+
+.message-container.user .message-bubble {
+  background-color: #dbeafe;
+}
+
+.message-container.assistant .message-bubble {
+  background-color: #f3f4f6;
+}
+
+.source-item summary::-webkit-details-marker {
+  display: none;
+}
