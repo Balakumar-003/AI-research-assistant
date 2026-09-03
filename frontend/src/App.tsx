@@ -10,8 +10,11 @@ import { DashboardLayout } from './layouts/DashboardLayout';
 import { DashboardPage } from './pages/dashboard/DashboardPage';
 import { PapersPage } from './pages/papers/PapersPage';
 
-import { ResearchWorkspace } from './pages/research/ResearchWorkspace';
-
+import { ResearchLayout } from './layouts/ResearchLayout';
+import { ResearchDashboard } from './pages/research/ResearchDashboard';
+import { AdvancedPaperLibrary } from './components/papers/AdvancedPaperLibrary';
+import { PaperComparison } from './components/research/PaperComparison';
+import { ResearchChat } from './components/chat/ResearchChat';
 import { PaperDetailsPage } from './pages/papers/PaperDetailsPage';
 
 const PlaceholderPage = ({ title }: { title: string }) => (
@@ -36,7 +39,14 @@ function App() {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/papers" element={<PapersPage />} />
             <Route path="/papers/:paperId" element={<PaperDetailsPage />} />
-            <Route path="/research" element={<ResearchWorkspace />} />
+            
+            <Route path="/research" element={<ResearchLayout />}>
+              <Route index element={<ResearchDashboard />} />
+              <Route path="papers" element={<AdvancedPaperLibrary />} />
+              <Route path="compare" element={<PaperComparison />} />
+              <Route path="chat" element={<ResearchChat projectId="default_project" />} />
+            </Route>
+            
             <Route path="/settings" element={<PlaceholderPage title="Settings" />} />
           </Route>
         </Routes>
